@@ -1,0 +1,54 @@
+/* 두루누리 지원 뱃지 */
+
+.duru-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+/* 신규 가입자 — 80% 지원, 시스템 블루 톤 강조 */
+.duru-badge--new {
+  background: rgba(0, 122, 255, 0.10);
+  color: #0061D6;
+  border-color: rgba(0, 122, 255, 0.30);
+}
+
+/* 기존 가입자 — 40% 지원, 옅은 그린 톤 */
+.duru-badge--exist {
+  background: #ECFDF5;
+  color: #047857;
+  border-color: #A7F3D0;
+}
+
+/* 대상 외 — 회색 톤 (참고용) */
+.duru-badge--off {
+  background: #F3F4F6;
+  color: #6B7280;
+  border-color: #E5E7EB;
+  font-weight: 600;
+}
+
+/* 컴팩트 모드 — 표 안에 들어갈 때 */
+.duru-badge--compact {
+  height: 17px;
+  padding: 0 6px;
+  font-size: 10px;
+  gap: 2px;
+}
+
+.duru-badge__icon {
+  font-size: 9px;
+  line-height: 1;
+}
+
+.duru-badge--compact .duru-badge__icon {
+  font-size: 8px;
+}

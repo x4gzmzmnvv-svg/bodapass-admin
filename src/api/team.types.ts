@@ -102,6 +102,23 @@ export interface TeamMember {
    *  T4: 별도 출입기록만 (시스템 외부)   → 본 인터페이스엔 등장 X
    */
   trustTier?: 1 | 2 | 3;
+
+  /**
+   * 비과세 소득 항목 — 월 단위 (원). 보험료·소득세 산정에서 제외.
+   *  · meal      : 식대 (월 20만원 한도)
+   *  · vehicle   : 자가운전보조금 (월 20만원 한도)
+   *  · travel    : 출장비·차량유지비 (조건부)
+   *  · childcare : 출산·보육수당 (월 10만원 한도)
+   *  · other     : 기타 비과세
+   * 「과세 보수」 = 월 지급액 - 비과세 합계 → 보험료/세금 산정 기준
+   */
+  nontaxable?: {
+    meal?: number;
+    vehicle?: number;
+    travel?: number;
+    childcare?: number;
+    other?: number;
+  };
 }
 
 // ───────── Employment (채용 관계) ─────────
