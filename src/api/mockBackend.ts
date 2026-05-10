@@ -104,7 +104,7 @@ type Handler = (req: MockReq) => MockResult | Promise<MockResult>;
 const STORAGE_KEY = 'ilgampack_admin:mockdb';
 const SEED_VERSION_KEY = 'ilgampack_admin:mockdb:version';
 /** 시드를 변경할 때 이 버전을 올리면 사용자 브라우저의 캐시가 자동으로 갱신됩니다. */
-const SEED_VERSION = '2026-05-10-v40-test-clean2sites5workers';
+const SEED_VERSION = '2026-05-11-v41-test-busan20workers-deploy';
 const DELAY_MS = 300;
 const wait = (ms = DELAY_MS) => new Promise((r) => setTimeout(r, ms));
 
@@ -319,23 +319,42 @@ function buildSeed() {
   }
   // (v40 — 부산 현장 외에 다른 현장 없음. 임시반장 시드 제거)
 
-  // ───────── 5명 근로자 (v40: 모두 부산 현장, 2 반장 분담) ─────────
-  // 등록일 2026-04-01 → 4월 출역부터 시드 생성 가능
-  const seedJoinDate = '2026-04-01';
+  // ───────── 20명 근로자 (v41: 부산 현장, 데모 풍부화) ─────────
+  // joinedAt 분포:
+  //  · 17명: 2026-04-01 (1년 미만 — 공제회 부금 대상)
+  //  · 1명 :  2025-06-15 (1년 임박 — D-30 이내, 노란 경고 발생)
+  //  · 2명 :  2025-04-01 / 2024-12-01 (1년 이상 — 법정퇴직금 대상)
+  // 한 명은 외국인(idType=2) 으로 다양성 확보.
   const busanSite = sites[0];  // S-2026-1043 부산 IN_PROGRESS
-  // M-001~M-003 → FACE 인증, M-004~M-005 → MANUAL 입력 (seedAttendance 에서 활용)
+  // FACE/MANUAL 분류는 seedAttendance 의 \"M-NNN 번호 % 5 != 0\" 규칙으로 처리됨 (대부분 FACE).
   const MEMBER_DEFS: Array<{
     id: string; name: string; role: string; dailyWage: number; foremanIdx: number;
+    joinedAt: string; isForeign?: boolean;
   }> = [
-    { id: 'M-001', name: '한동현', role: '형틀공',     dailyWage: 200_000, foremanIdx: 0 },
-    { id: 'M-002', name: '오성준', role: '철근공',     dailyWage: 220_000, foremanIdx: 0 },
-    { id: 'M-003', name: '서동현', role: '콘크리트공', dailyWage: 240_000, foremanIdx: 1 },
-    { id: 'M-004', name: '신성준', role: '미장공',     dailyWage: 260_000, foremanIdx: 0 },
-    { id: 'M-005', name: '권동현', role: '도장공',     dailyWage: 280_000, foremanIdx: 1 },
+    { id: 'M-001', name: '한동현',       role: '형틀공',     dailyWage: 200_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-002', name: '오성준',       role: '철근공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-003', name: '서동현',       role: '콘크리트공', dailyWage: 240_000, foremanIdx: 1, joinedAt: '2026-04-01' },
+    { id: 'M-004', name: '신성준',       role: '미장공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-005', name: '권동현',       role: '도장공',     dailyWage: 280_000, foremanIdx: 1, joinedAt: '2026-04-01' },
+    { id: 'M-006', name: 'Rajesh Kumar', role: '타일공',     dailyWage: 230_000, foremanIdx: 0, joinedAt: '2026-04-01', isForeign: true },
+    { id: 'M-007', name: '전도현',       role: '용접공',     dailyWage: 270_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-008', name: '문동현',       role: '형틀공',     dailyWage: 200_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-009', name: '배민호',       role: '미장공',     dailyWage: 250_000, foremanIdx: 1, joinedAt: '2026-04-01' },
+    { id: 'M-010', name: '유동현',       role: '타일공',     dailyWage: 230_000, foremanIdx: 1, joinedAt: '2026-04-01' },
+    { id: 'M-011', name: '송도현',       role: '전기공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-012', name: '홍동현',       role: '도배공',     dailyWage: 220_000, foremanIdx: 1, joinedAt: '2026-04-01' },
+    { id: 'M-013', name: '양민호',       role: '철근공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-014', name: '백동현',       role: '도장공',     dailyWage: 280_000, foremanIdx: 1, joinedAt: '2026-04-01' },
+    { id: 'M-015', name: '남태우',       role: '전기공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-016', name: '황도현',       role: '방수공',     dailyWage: 240_000, foremanIdx: 1, joinedAt: '2025-04-01' }, // 1년 이상 — LEGAL
+    { id: 'M-017', name: '류동현',       role: '설비공',     dailyWage: 230_000, foremanIdx: 0, joinedAt: '2024-12-01' }, // 1년 이상 — LEGAL
+    { id: 'M-018', name: '고도현',       role: '보조',       dailyWage: 180_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    { id: 'M-019', name: '손동현',       role: '콘크리트공', dailyWage: 240_000, foremanIdx: 1, joinedAt: '2025-06-15' }, // 1년 임박 — D-30 이내 경고
+    { id: 'M-020', name: '허민호',       role: '방수공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01' },
   ];
   const members: TeamMember[] = MEMBER_DEFS.map((m, idx) => {
     const acct = accountOf(idx);
-    const idPair = idOf(idx);
+    const idPair = idOf(idx, m.isForeign);
     const assignedForeman = foremen[m.foremanIdx];
     return {
       id: m.id,
@@ -347,7 +366,7 @@ function buildSeed() {
       foremanId: assignedForeman?.id,
       assignedToSiteManager: false,
       dailyWage: m.dailyWage,
-      idType: 1,
+      idType: m.isForeign ? 2 : 1,
       idNumberMasked: idPair.mask,
       idNumberRaw: idPair.raw,
       bankName: acct.bank,
@@ -355,11 +374,11 @@ function buildSeed() {
       accountNumberRaw: acct.raw,
       registrationMode: 'IN_PERSON' as any,
       status: 'ACTIVE',
-      joinedAt: seedJoinDate,
+      joinedAt: m.joinedAt,
       insurance: { pension: true, health: true, employment: true, accident: true },
       safetyEduCompleted: true,
       contractSigned: true,
-      contractSignedAt: seedJoinDate,
+      contractSignedAt: m.joinedAt,
       faceVerified: true,
       workerCode: workerCodeOf(m.id),
       trustTier: 1,
@@ -1449,7 +1468,8 @@ route('get', /^\/severance\/month$/, async (req) => {
     const paid = 0;
     return {
       memberId: m.id, memberName: m.name, idNumberMasked: m.idNumberMasked, role: m.role,
-      joinedAt: m.joinedAt, totalWorkDays: totalDays, accruedTotal, paidTotal: paid,
+      joinedAt: m.joinedAt, dailyWage: m.dailyWage,
+      totalWorkDays: totalDays, accruedTotal, paidTotal: paid,
       balance: accruedTotal - paid, lastPaidAt: undefined,
     };
   });
@@ -1644,7 +1664,12 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
   const [yStr, mStr] = yearMonth.split('-');
   const year = Number(yStr); const month = Number(mStr);
   // v40 — 출역 시드는 2026-04 / 2026-05 만 생성. 그 외 월은 빈 캘린더.
-  const SEED_ALLOWED_MONTHS = new Set(['2026-04', '2026-05']);
+  // v41 — 2024-12 ~ 2026-05 출역 시드 허용 (1년 이상 근로자 데이터 표시)
+  const SEED_ALLOWED_MONTHS = new Set([
+    '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06',
+    '2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12',
+    '2026-01', '2026-02', '2026-03', '2026-04', '2026-05',
+  ]);
   if (!SEED_ALLOWED_MONTHS.has(yearMonth)) {
     return { records: {}, audit: [], yearMonth, siteId };
   }
@@ -1714,10 +1739,10 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
       const outH = Math.floor(outBase / 60);
       const outM = outBase % 60;
       const checkOutAt = new Date(year, month - 1, d, outH, outM).toISOString();
-      // v40 — 멤버별 인증 방식 고정: M-001~M-003 → FACE, M-004~M-005 → MANUAL
+      // v41 — 멤버 번호 5의 배수만 MANUAL (M-005, M-010, M-015, M-020) — 나머지 16명은 FACE
       const memNumMatch = m.id.match(/M-(\d+)/);
       const memNum = memNumMatch ? Number(memNumMatch[1]) : 0;
-      const manual = memNum >= 4;  // M-004 / M-005 → MANUAL, 그 외 → FACE
+      const manual = memNum > 0 && memNum % 5 === 0;
       const inMethod = manual ? 'MANUAL' : 'FACE';
       const outMethod = manual ? 'MANUAL' : 'FACE';
       const reason = manual ? '카메라 일시 장애로 반장이 직접 처리' : undefined;

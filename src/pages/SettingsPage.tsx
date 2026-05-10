@@ -15,6 +15,11 @@ import {
   type AccountPermissions,
   type PermissionLevel,
 } from './settings/AccountPermissionDialog';
+import {
+  loadFundDaily,
+  saveFundDaily,
+  DEFAULT_FUND_DAILY,
+} from '../utils/severance';
 import './SettingsPage.css';
 
 import { MacSelect } from '../components/MacSelect';
@@ -79,7 +84,12 @@ export function SettingsPage() {
 
       <div className="settings__panel">
         {tab === 'attendance' && <AttendanceShiftPanel />}
-        {tab === 'tax' && <TaxRatePanel />}
+        {tab === 'tax' && (
+          <>
+            <TaxRatePanel />
+            <MutualAidFundPanel />
+          </>
+        )}
         {tab === 'account' && <AccountPanel />}
         {tab === 'company' && <CompanyInfoPanel />}
       </div>
@@ -316,7 +326,6 @@ function loadTax(): TaxRow[] {
     { id: 'TAX-5', label: '장기요양보험',    rate: 0.4591, basis: '건강보험료의 12.95%', description: '근로자 부담분' },
     { id: 'TAX-6', label: '고용보험',        rate: 0.9, basis: '월 평균보수',            description: '근로자 부담분' },
     { id: 'TAX-7', label: '40H 공단 분담금', rate: 0.5, basis: '도급금액',               description: '건설근로자공제회 적립' },
-    { id: 'TAX-8', label: '퇴직금 적립',     rate: 8.33, basis: '월 평균임금',           description: '연 1개월분 = 1/12' },
   ];
 }
 function saveTax(rows: TaxRow[]) {
@@ -413,6 +422,111 @@ function TaxRatePanel() {
             ))}
           </tbody>
         </table>
+      </div>
+    </section>
+  );
+}
+
+/* ───────── ②-2 퇴직공제부금 일액 ───────── */
+
+function MutualAidFundPanel() {
+  const [value, setValue] = useState<number>(() => loadFundDaily());
+  const [draft, setDraft] = useState<string>(() => String(loadFundDaily()));
+  const [editing, setEditing] = useState(false);
+
+  function start() {
+    setDraft(String(value));
+    setEditing(true);
+  }
+  function cancel() {
+    setDraft(String(value));
+    setEditing(false);
+  }
+  function save() {
+    const n = Number(String(draft).replace(/[^0-9]/g, ''));
+    if (!isFinite(n) || n <= 0) {
+      window.alert('1원 이상 정수 금액을 입력해주세요.');
+      return;
+    }
+    saveFundDaily(n);
+    setValue(n);
+    setEditing(false);
+    window.alert('부금 일액이 저장되었습니다.');
+  }
+  function resetDefault() {
+    if (!window.confirm(`기본값(${DEFAULT_FUND_DAILY.toLocaleString()}원)으로 되돌릴까요?`)) return;
+    saveFundDaily(DEFAULT_FUND_DAILY);
+    setValue(DEFAULT_FUND_DAILY);
+    setDraft(String(DEFAULT_FUND_DAILY));
+    setEditing(false);
+  }
+
+  return (
+    <section className="set-card" style={{ marginTop: 20 }}>
+      <header className="set-card__head">
+        <div className="set-card__head-left">
+          <h3>퇴직공제부금 일액</h3>
+          <p>
+            건설근로자공제회에 신고·납부하는 일용근로자 퇴직공제부금의 「출역 1일당 금액」입니다.
+            계속근로 1년 미만 근로자에게만 적용되며, 1년 도래 시점부터 신고가 중단되고 법정퇴직금으로 전환됩니다.
+          </p>
+        </div>
+        <div className="set-card__head-right">
+          {!editing ? (
+            <>
+              <button type="button" className="set-card__btn set-card__btn--edit" onClick={start}>✎ 수정</button>
+              <button type="button" className="set-card__btn" onClick={resetDefault}>기본값으로</button>
+            </>
+          ) : (
+            <>
+              <button type="button" className="set-card__btn set-card__btn--primary" onClick={save}>💾 저장</button>
+              <button type="button" className="set-card__btn" onClick={cancel}>취소</button>
+            </>
+          )}
+        </div>
+      </header>
+
+      <div style={{ padding: '12px 18px 18px', display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontSize: 13, color: '#6b6b73', fontWeight: 600 }}>현재 적용 일액</span>
+          {editing ? (
+            <input
+              type="text"
+              inputMode="numeric"
+              value={draft ? Number(draft.replace(/[^0-9]/g, '') || '0').toLocaleString() : ''}
+              onChange={(e) => setDraft(e.target.value)}
+              placeholder="6,500"
+              style={{
+                width: 140,
+                height: 36,
+                padding: '0 12px',
+                border: '1px solid #d2d2d7',
+                borderRadius: 8,
+                fontSize: 14,
+                textAlign: 'right',
+                fontVariantNumeric: 'tabular-nums',
+              }}
+            />
+          ) : (
+            <strong style={{ fontSize: 22, color: '#007aff', fontVariantNumeric: 'tabular-nums' }}>
+              {value.toLocaleString()}
+            </strong>
+          )}
+          <span style={{ fontSize: 14, color: '#1c1c1e' }}>원 / 출역일</span>
+        </div>
+        <div
+          style={{
+            fontSize: 12,
+            color: '#8e8e93',
+            background: '#f5f5f7',
+            padding: '6px 10px',
+            borderRadius: 8,
+            border: '1px solid #e5e5ea',
+          }}
+        >
+          예: 한 달 22일 출역 시 → {(value * 22).toLocaleString()}원
+          <span style={{ marginLeft: 8 }}>· 정책 변경 시 본 화면에서 수정</span>
+        </div>
       </div>
     </section>
   );

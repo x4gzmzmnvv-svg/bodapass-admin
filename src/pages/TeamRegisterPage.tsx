@@ -85,9 +85,11 @@ interface TeamRegisterPageProps {
   embedded?: boolean;
   onClose?: () => void;
   onCreated?: () => void | Promise<void>;
+  /** 임베드 모달에서 초기 선택할 현장 — 출퇴근 풀 모달 등에서 컨텍스트로 전달 */
+  defaultSiteId?: string;
 }
 
-export function TeamRegisterPage({ embedded = false, onClose, onCreated }: TeamRegisterPageProps = {}) {
+export function TeamRegisterPage({ embedded = false, onClose, onCreated, defaultSiteId }: TeamRegisterPageProps = {}) {
   const navigate = useNavigate();
   const closeOrNav = () => {
     if (embedded) onClose?.();
@@ -111,7 +113,7 @@ export function TeamRegisterPage({ embedded = false, onClose, onCreated }: TeamR
     name: '',
     phone: '',
     role: '',
-    siteId: '',
+    siteId: defaultSiteId ?? '',
     foremanId: '',
     dailyWage: '250000',
     idType: 1,

@@ -5,6 +5,7 @@ import { PageHeader } from '../components/PageHeader';
 import { WorkCloseHeader } from '../components/WorkCloseHeader';
 import { computeWorkCloseProgress } from '../utils/workCloseProgress';
 import { Modal } from '../components/Modal';
+import { TeamRegisterPage } from './TeamRegisterPage';
 import { Tooltip } from '../components/Tooltip';
 import { siteApi } from '../api/site';
 import { attendanceApi } from '../api/attendance';
@@ -219,6 +220,8 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
   const [siteAttStages, setSiteAttStages] = useState<Map<string, 'OPEN' | 'SITE_CLOSED' | 'HQ_CONFIRMED'>>(new Map());
   /** 빠른 팀원 추가 다이얼로그 */
   const [quickAddOpen, setQuickAddOpen] = useState(false);
+  /** 신규 근로자를 등록할 현장 — 풀 모달에서 클릭 시 selected.siteId 가, 그 외엔 outer siteId 가 들어간다 */
+  const [quickAddSiteId, setQuickAddSiteId] = useState<string | null>(null);
   /** 관리 인원 풀 — 전체 회사 등록 인원 (미출근 인력 풀 사이드 패널) */
   const [allMembers, setAllMembers] = useState<TeamMember[]>([]);
   /** ALL 모드 — 현장별 출퇴근 요약 (전체 N개 클릭 시 드롭다운으로 노출) */
@@ -2405,7 +2408,13 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
                       <div className="att-monthly-pool">
                         <div className="att-monthly-pool__actions">
                           <button type="button" className="auth-btn auth-btn--ok"
-                            onClick={() => { setDailyPoolOpen(false); setQuickAddOpen(true); }}>＋ 신규 근로자 등록</button>
+                            onClick={() => {
+                              const target = selected?.siteId ?? (siteId !== 'ALL' ? siteId : null);
+                              if (!target) { window.alert('현장을 먼저 선택해 주세요.'); return; }
+                              setDailyPoolOpen(false);
+                              setQuickAddSiteId(target);
+                              setQuickAddOpen(true);
+                            }}>＋ 신규 근로자 등록</button>
                           <button type="button" className="auth-btn"
                             onClick={() => { setDailyPoolOpen(false); setUploadOpen(true); }}>엑셀 업로드</button>
                           <button type="button" className="auth-btn"
@@ -3496,7 +3505,13 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
                   <div className="att-monthly-pool">
                     <div className="att-monthly-pool__actions">
                       <button type="button" className="auth-btn auth-btn--ok"
-                        onClick={() => { setMonthlyPoolOpen(false); setQuickAddOpen(true); }}>＋ 신규 근로자 등록</button>
+                        onClick={() => {
+                          const target = selectedM?.siteId ?? (siteId !== 'ALL' ? siteId : null);
+                          if (!target) { window.alert('현장을 먼저 선택해 주세요.'); return; }
+                          setMonthlyPoolOpen(false);
+                          setQuickAddSiteId(target);
+                          setQuickAddOpen(true);
+                        }}>＋ 신규 근로자 등록</button>
                       <button type="button" className="auth-btn"
                         onClick={() => { setMonthlyPoolOpen(false); setUploadOpen(true); }}>엑셀 업로드</button>
                       <button type="button" className="auth-btn"
@@ -3938,6 +3953,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
                     window.alert('현장을 먼저 선택해 주세요.');
                     return;
                   }
+                  setQuickAddSiteId(siteId);
                   setQuickAddOpen(true);
                 }}
                 title="이 현장의 팀원을 새로 등록"
@@ -3958,7 +3974,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
               onAddMember={
                 siteId === 'ALL'
                   ? undefined
-                  : () => setQuickAddOpen(true)
+                  : () => { setQuickAddSiteId(siteId); setQuickAddOpen(true); }
               }
               onPickMember={(id) => {
                 const r = month.rows.find((x) => x.memberId === id);
@@ -4156,7 +4172,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
               }
               return set;
             })()}
-            onOpenAdd={() => setQuickAddOpen(true)}
+            onOpenAdd={() => { if (siteId !== 'ALL') { setQuickAddSiteId(siteId); setQuickAddOpen(true); } else { window.alert('현장을 먼저 선택해 주세요.'); } }}
             onAssignToSite={async (memberId: string) => {
               if (siteId === 'ALL') {
                 window.alert('현장을 먼저 선택해 주세요.');
@@ -4258,14 +4274,15 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
           }}
         />
       )}
-      {quickAddOpen && siteId !== 'ALL' && (
+      {quickAddOpen && quickAddSiteId && quickAddSiteId !== 'ALL' && (
         <QuickAddMemberDialog
           open={quickAddOpen}
-          siteId={siteId}
-          siteName={sites.find((s) => s.id === siteId)?.name ?? ''}
-          onClose={() => setQuickAddOpen(false)}
+          siteId={quickAddSiteId}
+          siteName={sites.find((s) => s.id === quickAddSiteId)?.name ?? ''}
+          onClose={() => { setQuickAddOpen(false); setQuickAddSiteId(null); }}
           onDone={() => {
             setQuickAddOpen(false);
+            setQuickAddSiteId(null);
             load();
           }}
         />
@@ -7056,27 +7073,23 @@ function QuickAddMemberDialog({
   onClose: () => void;
   onDone: () => void;
 }) {
-  void siteId;
+  if (!open) return null;
   return (
     <Modal
-      open={open}
+      open
       onClose={onClose}
       title="신규 근로자 등록"
-      subtitle={siteName + ' · 빠른 등록'}
-      width={420}
-      footer={
-        <>
-          <button type="button" className="att__btn att__btn--ghost" onClick={onClose}>취소</button>
-          <button type="button" className="att__btn att__btn--primary" onClick={onDone}>완료</button>
-        </>
-      }
+      subtitle={siteName + ' · 신분증·계좌·얼굴 사진까지 한 번에 등록합니다.'}
+      width={1080}
     >
-      <div className="att-quick-add">
-        <p className="att-quick-add__hint">
-          신분증·동의·계좌 등 정식 등록은 「팀원 관리」 화면에서 진행해주세요.
-          시연 모드에선 빠른 등록 폼이 비활성화되어 있습니다.
-        </p>
-      </div>
+      <TeamRegisterPage
+        embedded
+        defaultSiteId={siteId}
+        onClose={onClose}
+        onCreated={async () => {
+          await Promise.resolve(onDone());
+        }}
+      />
     </Modal>
   );
 }

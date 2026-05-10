@@ -64,6 +64,8 @@ export interface SeveranceRow {
   role: WorkerRole;
   /** 입사일 */
   joinedAt: string;
+  /** 일당 (원) — 평균임금 추정의 베이스 */
+  dailyWage: number;
   /** 누적 근무일 */
   totalWorkDays: number;
   /** 총 누적 적립 */

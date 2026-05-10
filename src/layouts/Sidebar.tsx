@@ -63,10 +63,10 @@ const NAV_ITEMS_HQ: NavItem[] = [
   {
     key: 'workclose', label: '출역·노무마감', icon: <ClockIcon />, color: '#007AFF',
     children: [
-      { to: '/auth-mgmt',     label: '인증관리',     icon: <ClockIcon />, color: '#007AFF' },
-      { to: '/daily-confirm', label: '일일 출역확정', icon: <ClockIcon />, color: '#007AFF' },
-      { to: '/gongsu-close',  label: '월 공수마감',   icon: <WageIcon />,  color: '#007AFF' },
-      { to: '/wage-close',    label: '노무비 마감',   icon: <WageIcon />,  color: '#007AFF' },
+      { to: '/auth-mgmt',      label: '인증관리',      icon: <ClockIcon />, color: '#007AFF' },
+      { to: '/daily-confirm',  label: '일일 출역확정', icon: <ClockIcon />, color: '#007AFF' },
+      { to: '/gongsu-close',   label: '월 공수마감',   icon: <WageIcon />,  color: '#007AFF' },
+      { to: '/wage-close',     label: '노무비 마감',   icon: <WageIcon />,  color: '#007AFF' },
     ],
   },
   {
@@ -97,10 +97,10 @@ const NAV_ITEMS_SITE: NavItem[] = [
   {
     key: 'workclose', label: '출역·노무마감', icon: <ClockIcon />, color: '#007AFF',
     children: [
-      { to: '/auth-mgmt',     label: '인증관리',     icon: <ClockIcon />, color: '#007AFF' },
-      { to: '/daily-confirm', label: '일일 출역확정', icon: <ClockIcon />, color: '#007AFF' },
-      { to: '/gongsu-close',  label: '월 공수마감',   icon: <WageIcon />,  color: '#007AFF' },
-      { to: '/wage-close',    label: '노무비 마감',   icon: <WageIcon />,  color: '#007AFF' },
+      { to: '/auth-mgmt',      label: '인증관리',      icon: <ClockIcon />, color: '#007AFF' },
+      { to: '/daily-confirm',  label: '일일 출역확정', icon: <ClockIcon />, color: '#007AFF' },
+      { to: '/gongsu-close',   label: '월 공수마감',   icon: <WageIcon />,  color: '#007AFF' },
+      { to: '/wage-close',     label: '노무비 마감',   icon: <WageIcon />,  color: '#007AFF' },
     ],
   },
   {
