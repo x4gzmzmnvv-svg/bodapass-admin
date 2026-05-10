@@ -1,0 +1,257 @@
+/* 출역·노무마감 공통 헤더 — 박스 없는 가로형 진행 스텝퍼
+ *
+ *      ━━●━━━━━━━━○━━━━━━━━○━━━━━━━━○━━
+ *       인증관리  일일출역확정  월공수마감  노무비마감
+ *
+ *  · 박스 / 카드 / 배경 모두 제거 — 선과 점만으로 표현
+ *  · 라벨은 점 아래
+ *  · 연결선은 진행률에 따라 회색 → 파랑으로 부분 채움
+ *  · 애니메이션 없음
+ *  · 본문과 시각적으로 구분되는 「제목 → 진행선 → 본문」 흐름
+ */
+
+.wch {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+/* 4페이지 PageHeader 정렬 통일 */
+.att > .page-header,
+.gc-page > .page-header,
+.wage > .page-header {
+  align-items: flex-end;
+  margin-bottom: 16px;
+  min-height: 0;
+}
+
+/* 스텝퍼 컨테이너 — 박스 없음, 좌(스텝)/우(액션) 2단 정렬 */
+.wch__progress {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 8px 12px 12px;
+  background: transparent;
+  border: none;
+  position: relative;
+  flex-wrap: nowrap;
+}
+
+/* 스텝 묶음 — 점 + 라벨 + 연결선 4단계 */
+.wch__progress-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* 컨테이너 하단에 옅은 회색 구분선 — 본문과 분리 */
+.wch__progress::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 단계 + 그 다음 연결선 한 묶음 */
+.wch__progress-row {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.wch__progress-row:last-of-type {
+  flex: 0 0 auto;
+}
+
+/* 단계 (동그라미 위, 라벨 아래) */
+.wch__progress-step {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  flex-shrink: 0;
+  min-width: 88px;
+}
+.wch__progress-step:hover .wch__progress-label {
+  color: #111827;
+}
+
+/* 동그라미 */
+.wch__progress-dot {
+  width: 22px; height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+  border: 2px solid #d1d5db;
+  background: white;
+  color: #9ca3af;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  position: relative;
+  z-index: 2;
+}
+
+/* 라벨 — 점 아래 */
+.wch__progress-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #9ca3af;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-align: center;
+  transition: color 0.2s;
+  line-height: 1.3;
+}
+
+/* 완료 단계 — 진한 파랑 채움 + ✓ */
+.wch__progress-step.is-completed .wch__progress-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.wch__progress-step.is-completed .wch__progress-label {
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+/* 미완료 단계 — 옅은 파랑 외곽선 (숨쉬기 X) */
+.wch__progress-step.is-pending .wch__progress-dot,
+.wch__progress-step.is-active-pending .wch__progress-dot {
+  background: white;
+  border-color: rgba(0, 122, 255, 0.40);
+  color: var(--accent);
+}
+.wch__progress-step.is-pending .wch__progress-label,
+.wch__progress-step.is-active-pending .wch__progress-label {
+  color: #6b7280;
+}
+/* (제거됨) 「숨쉬기」 펄스 애니메이션 — 사용자 요청으로 화면 움직임 없도록 함.
+ *  진행 상태는 단계 사이 연결선 채움 + dot 색만으로 정적 표현.
+ */
+.wch__progress-step.is-active-pending .wch__progress-dot {
+  animation: none;
+}
+
+/* (제거됨) 현재 페이지 인디케이터 라인 — 동그라미 위 파란줄.
+ *  사용자 요청으로 active 페이지 강조 제거. 어떤 단계가 active 인지는
+ *  연결선 채움률과 단계 텍스트 가중치로 충분히 식별 가능.
+ */
+.wch__progress-step.is-active-page::before,
+.wch__progress-step.is-active-page::after {
+  content: none;
+  display: none;
+}
+
+/* 활성 단계 라벨 아래 노출하는 진행 텍스트 (예: 「6/30일 확정 · 인증 82%」) */
+.wch__progress-pct {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 2px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(0, 122, 255, 0.05);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 미진행 — 기본 (회색) */
+
+/* 연결선 — 두 단계 사이의 가로 막대.
+   단계의 동그라미 (22px) 와 같은 줄에 위치하도록 marginTop 으로 점 중앙에 맞춤 */
+.wch__progress-line {
+  flex: 1 1 0;
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 0;
+  margin-top: 9px;        /* (22 - 3) / 2 → 점 중앙 정렬 */
+  align-self: flex-start;
+  min-width: 32px;
+}
+.wch__progress-line-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(to right, #60a5fa, var(--accent));
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+/* 완전히 채워진 연결선·부분 채움 모두 동일 파랑 그라디언트 (단색 통일) */
+.wch__progress-line.is-full .wch__progress-line-fill,
+.wch__progress-line.is-partial .wch__progress-line-fill {
+  background: linear-gradient(to right, #60a5fa, var(--accent));
+}
+
+/* 우측 액션 슬롯 — 항상 오른쪽 끝, 점 중앙(top:9px)에 맞춰 정렬 */
+.wch__progress-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-top: 0;
+  padding-top: 0;
+  align-self: center;
+  border-left: 1px solid #e5e7eb;
+  padding-left: 14px;
+}
+
+/* 반응형 */
+@media (max-width: 1080px) {
+  .wch__progress-label { font-size: 12px; }
+  .wch__progress-step { min-width: 72px; }
+}
+@media (max-width: 720px) {
+  .wch__progress {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wch__progress-steps {
+    width: 100%;
+  }
+  .wch__progress-row {
+    flex: 1 1 auto;
+  }
+  .wch__progress-actions {
+    border-left: none;
+    border-top: 1px solid #e5e7eb;
+    padding-left: 0;
+    padding-top: 8px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* 페이지 액션 바 (대체 노출 — /wage 일반 라우트 등) */
+.att__actions--bar,
+.wage__actions--bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 14px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  min-height: 56px;
+  box-sizing: border-box;
+}

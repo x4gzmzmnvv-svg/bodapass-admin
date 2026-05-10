@@ -1,0 +1,39 @@
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-2);
+}
+
+.page-header__text {
+  min-width: 0;
+}
+
+.page-header__title {
+  font-size: var(--fs-24);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.page-header__subtitle {
+  margin-top: 4px;
+  font-size: var(--fs-14);
+  color: var(--color-text-muted);
+}
+
+.page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+  min-width: 0;
+  max-width: 70%;
+}
+
+/* WorkCloseHeader 가 actions slot 안에 들어갈 때 — 컬럼 자체의 margin 무력화 */
+.page-header__actions > .wch {
+  margin: 0;
+  width: 100%;
+}

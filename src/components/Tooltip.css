@@ -1,0 +1,171 @@
+/* Tooltip — 공용 호버 라벨 디자인
+ *  light style: 흰 배경 + 옅은 hairline + 가벼운 그림자 + 다크 텍스트
+ *  tone (default/danger/warning/info/success) 은 텍스트 색으로 구분
+ */
+
+.tlp {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  isolation: isolate;
+}
+.tlp__trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+}
+
+/* 본체 — 절대 위치 */
+.tlp__bubble {
+  position: absolute;
+  z-index: 9999;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 80px;
+  max-width: 280px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: normal;
+  word-break: keep-all;
+  pointer-events: none;
+  animation: tlp-fadein 0.12s ease-out;
+  background: rgba(246, 246, 246, 0.60);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #1A1A1A;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* tone — 텍스트 색만 살짝 변형 (배경은 모두 흰색) */
+.tlp__bubble--default { color: #1A1A1A; }
+.tlp__bubble--danger  { color: #B91C1C; }
+.tlp__bubble--warning { color: #B45309; }
+.tlp__bubble--info    { color: var(--accent); }
+.tlp__bubble--success { color: var(--accent-hover); }
+
+/* 헤더(title) + 본문(body) + 보조(hint) */
+.tlp__title {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+}
+.tlp__body { font-weight: 500; }
+.tlp__hint {
+  margin-top: 2px;
+  padding-top: 4px;
+  font-size: 10.5px;
+  color: #6B7280;
+  border-top: 1px solid #F0F0F2;
+}
+
+/* 화살표 — 라이트 톤이라 흰색 + 옅은 보더 색 두 겹 */
+.tlp__arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+}
+.tlp__arrow::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  z-index: -1;
+}
+
+/* placement: top */
+.tlp__bubble--top {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tlp__arrow--top {
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: #FFFFFF;
+}
+.tlp__arrow--top::before {
+  bottom: -6px;
+  left: -7px;
+  border-top-color: #E5E5E8;
+}
+
+/* placement: bottom */
+.tlp__bubble--bottom {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tlp__arrow--bottom {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: #FFFFFF;
+}
+.tlp__arrow--bottom::before {
+  top: -6px;
+  left: -7px;
+  border-bottom-color: #E5E5E8;
+}
+
+/* placement: left */
+.tlp__bubble--left {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.tlp__arrow--left {
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: #FFFFFF;
+}
+.tlp__arrow--left::before {
+  right: -6px;
+  top: -7px;
+  border-left-color: #E5E5E8;
+}
+
+/* placement: right */
+.tlp__bubble--right {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.tlp__arrow--right {
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: #FFFFFF;
+}
+.tlp__arrow--right::before {
+  left: -6px;
+  top: -7px;
+  border-right-color: #E5E5E8;
+}
+
+/* 페이드인 */
+@keyframes tlp-fadein {
+  from { opacity: 0; transform: translateX(-50%) translateY(-2px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.tlp__bubble--bottom { animation-name: tlp-fadein-down; }
+@keyframes tlp-fadein-down {
+  from { opacity: 0; transform: translateX(-50%) translateY(2px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.tlp__bubble--left,
+.tlp__bubble--right { animation-name: tlp-fadein-side; }
+@keyframes tlp-fadein-side {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+

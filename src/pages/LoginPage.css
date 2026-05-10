@@ -1,0 +1,243 @@
+/* =========================================================================
+   로그인 페이지
+   ========================================================================= */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(320px, 480px) 1fr;
+  background: var(--color-bg-soft);
+}
+
+/* 좌측 브랜드 패널 */
+.login-page__brand {
+  position: relative;
+  background: var(--sidebar-bg);
+  color: white;
+  padding: var(--sp-12) var(--sp-10);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.login-page__brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 50% at 90% 10%, rgba(21, 160, 159, 0.18), transparent 70%),
+    radial-gradient(60% 50% at 10% 95%, rgba(238, 58, 58, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.login-page__logo {
+  position: relative;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-brand-red);
+  letter-spacing: -0.04em;
+}
+
+.login-page__brand-copy {
+  position: relative;
+}
+
+.login-page__brand-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--sp-4);
+}
+
+.login-page__brand-sub {
+  font-size: var(--fs-15);
+  color: #c8cdd4;
+  line-height: 1.7;
+}
+
+.login-page__brand-foot {
+  position: relative;
+  font-size: var(--fs-12);
+  color: #6b7280;
+}
+
+/* 우측 폼 영역 */
+.login-page__form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-10);
+}
+
+.login-page__form {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-page__title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--sp-3);
+}
+
+.login-page__sub {
+  font-size: var(--fs-14);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--sp-8);
+}
+
+/* 폼 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.login-form__label {
+  font-size: var(--fs-13);
+  color: var(--color-text);
+  font-weight: 600;
+  margin-top: var(--sp-2);
+}
+
+.login-form__remember {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  font-size: var(--fs-14);
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.login-form__remember input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+.login-form__error {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-13);
+  color: var(--color-error);
+}
+
+.login-form__submit {
+  margin-top: var(--sp-4);
+  height: 48px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: var(--color-primary);
+  color: white;
+  font-size: var(--fs-15);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.login-form__submit:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.login-form__submit:disabled {
+  background: var(--color-border-strong);
+  cursor: not-allowed;
+}
+
+.login-form__divider {
+  position: relative;
+  text-align: center;
+  margin: var(--sp-5) 0;
+  color: var(--color-text-muted);
+  font-size: var(--fs-13);
+}
+
+.login-form__divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.login-form__divider span {
+  position: relative;
+  background: var(--color-bg-soft);
+  padding: 0 var(--sp-3);
+}
+
+.login-form__alt {
+  height: 48px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  color: var(--color-text);
+  font-size: var(--fs-14);
+  font-weight: 500;
+}
+
+.login-form__alt:hover {
+  background: var(--color-bg-input);
+}
+
+.login-form__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.login-form__link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+}
+
+.login-form__link:hover {
+  color: var(--color-text);
+}
+
+.login-form__link--strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.login-form__sep {
+  width: 1px;
+  height: 12px;
+  background: var(--color-border-strong);
+}
+
+.login-form__demo {
+  margin-top: var(--sp-8);
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.login-form__demo code {
+  background: var(--color-bg-input);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  font-size: 11px;
+}
+
+/* ── 모바일 → 좌측 패널 숨김 ── */
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+  .login-page__brand {
+    display: none;
+  }
+}

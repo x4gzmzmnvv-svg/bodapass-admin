@@ -1,0 +1,122 @@
+/* 숫자 인풋 + 스테퍼 — macOS Sequoia Stepper Button (단일 그레이 pill + 우측 ∧∨ 통합) */
+.num-stepper {
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: background-color 0.12s, box-shadow 0.15s;
+  box-sizing: border-box;
+  font-family: var(--font-sans, system-ui);
+}
+.num-stepper:hover:not(.is-disabled) {
+  background: rgba(0, 0, 0, 0.07);
+}
+.num-stepper:focus-within {
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.20);
+}
+.num-stepper.is-disabled {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* native spinner 완전 제거 */
+.num-stepper__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 0 6px 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1A1A1A;
+  font-family: inherit;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  letter-spacing: -0.01em;
+}
+.num-stepper__input::-webkit-outer-spin-button,
+.num-stepper__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.num-stepper__input:disabled {
+  color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+/* 우측 ∧/∨ 버튼 컬럼 — 단일 ↕ 아이콘처럼 보이도록 좁고 타이트하게 */
+.num-stepper__btns {
+  display: inline-flex;
+  flex-direction: column;
+  width: 18px;
+  margin-right: 6px;
+  background: transparent;
+  flex-shrink: 0;
+  align-self: center;
+  height: 22px;
+  gap: 0;
+}
+.num-stepper__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #1A1A1A;
+  transition: color 0.1s;
+  min-height: 0;
+  height: 11px;
+}
+.num-stepper__btn:hover {
+  background: transparent;
+  color: var(--accent);
+}
+.num-stepper__btn:active {
+  color: var(--accent);
+}
+.num-stepper__btn:disabled {
+  cursor: not-allowed;
+  color: #C1C1C6;
+  background: transparent;
+}
+/* up 화살표는 하단에 살짝 붙어서 ↕ 단일 아이콘처럼 보임 */
+.num-stepper__btn--up svg {
+  margin-bottom: -1px;
+}
+.num-stepper__btn--down svg {
+  margin-top: -1px;
+}
+
+/* 인라인 작은 변형 — 테이블 셀 안에서 */
+.num-stepper--sm {
+  height: 28px;
+}
+.num-stepper--sm .num-stepper__input {
+  font-size: 12px;
+  padding: 0 8px;
+}
+.num-stepper--sm .num-stepper__btns {
+  width: 20px;
+}
+
+/* ─────────────────────────────────────────────
+ * 전역 fallback — NumberStepper 로 감싸지 않은 input[type=number] 도
+ * 적어도 native spinner 만은 동일하게 숨김 (시각 통일)
+ * ───────────────────────────────────────────── */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

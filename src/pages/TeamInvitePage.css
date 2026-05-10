@@ -1,0 +1,392 @@
+.tip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.tip__hint {
+  padding: var(--sp-4) var(--sp-5);
+  background: #fffbeb;
+  border-color: #fde68a;
+  font-size: var(--fs-13);
+  line-height: 1.7;
+  color: #92400e;
+}
+
+.tip__hint strong {
+  color: #78350f;
+}
+
+.tip__hint ol {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+/* ─────────────────────────────────────────
+   흐름 인포그래픽 (4단계) — 인라인 horizontal stepper
+   점 + 연결선 + 라벨 (외곽 카드 없음, SiteRegisterDialog 패턴 재사용)
+   ───────────────────────────────────────── */
+.tip-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 8px 4px 12px;
+  margin: 0;
+  list-style: none;
+  background: transparent;
+  border: 0;
+}
+.tip-steps__row {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.tip-steps__row:last-of-type {
+  flex: 0 0 auto;
+}
+.tip-steps__step {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  flex-shrink: 0;
+  min-width: 88px;
+}
+.tip-steps__dot {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid #d1d5db;
+  background: white;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+.tip-steps__label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.3;
+}
+.tip-steps__sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.3;
+}
+/* 미완료(=현재 모두 회색) */
+.tip-steps__step.is-pending .tip-steps__dot {
+  background: white;
+  border-color: #d1d5db;
+  color: #9ca3af;
+}
+.tip-steps__step.is-pending .tip-steps__label {
+  color: #6b7280;
+}
+/* 활성 단계 — 시스템 블루 (필요 시 is-active 추가) */
+.tip-steps__step.is-active .tip-steps__dot {
+  background: var(--accent, #007AFF);
+  border-color: var(--accent, #007AFF);
+  color: white;
+}
+.tip-steps__step.is-active .tip-steps__label {
+  color: var(--accent, #007AFF);
+  font-weight: 700;
+}
+/* 완료 단계 — 시스템 블루 채움 */
+.tip-steps__step.is-completed .tip-steps__dot {
+  background: var(--accent, #007AFF);
+  border-color: var(--accent, #007AFF);
+  color: white;
+}
+.tip-steps__step.is-completed .tip-steps__label {
+  color: var(--accent, #007AFF);
+  font-weight: 700;
+}
+/* 연결선 */
+.tip-steps__line {
+  flex: 1 1 0;
+  height: 2px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  margin-top: 10px;
+  align-self: flex-start;
+  min-width: 24px;
+}
+
+@media (max-width: 720px) {
+  .tip-steps {
+    flex-wrap: wrap;
+  }
+  .tip-steps__step {
+    min-width: 72px;
+  }
+  .tip-steps__sub {
+    display: none;
+  }
+}
+
+.tip__form {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 12px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* 상단 select 행 — 배정 현장 + 관리 반장 두 컬럼 동등 분할 */
+.tip__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 720px) {
+  .tip__top {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tip__select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tip__select label {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* 모든 input·select 32px / 13px / 12px radius 통일 */
+.tip__form .tip__select .mac-select__trigger,
+.tip__form .tip__select [role="combobox"],
+.tip__form .tip__select [role="button"],
+.tip__form .tip__select > button {
+  height: 32px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  border-radius: 12px !important;
+  box-sizing: border-box;
+}
+
+.tip__form .field__input {
+  height: 32px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  border-radius: 12px !important;
+  box-sizing: border-box;
+}
+
+/* 직종 RoleSelect — TeamRegisterPage 와 동일 패턴 */
+.tip__form .rsel__btn,
+.tip__form .trp__select-wrap > button,
+.tip__form .trp__select-wrap .mac-select__trigger,
+.tip__form .trp__select-wrap [role="combobox"],
+.tip__form .trp__select-wrap [role="button"] {
+  height: 32px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  border-radius: 12px !important;
+  box-sizing: border-box;
+}
+
+.tip__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: var(--sp-2);
+}
+
+/*
+ * tip-row: 이름 + 휴대폰 + 직종(RoleSelect) + 삭제(28px)
+ */
+.tip-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(140px, 1fr) minmax(180px, 1.4fr) 28px;
+  gap: 8px;
+  align-items: end;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .tip-row {
+    grid-template-columns: 1fr 1fr 1fr 28px;
+    gap: var(--sp-2);
+  }
+}
+
+@media (max-width: 720px) {
+  .tip-row {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2) var(--sp-3);
+  }
+  .tip-row__remove {
+    grid-column: span 2;
+    justify-self: flex-end;
+  }
+}
+
+
+.tip-row__remove {
+  align-self: end;
+  width: 28px;
+  height: 32px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1;
+  margin: 0;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.tip-row__remove:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-error, #d33);
+}
+
+.tip-row__remove:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.tip__add {
+  /* 행추가 — 첫 입력(이름) 좌측에 정렬되는 인라인 텍스트 링크 */
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  background: transparent;
+  border: 0;
+  padding: 6px 0;
+  margin-top: 4px;
+  color: var(--accent, #007AFF);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tip__add:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.tip__add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tip__err {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: var(--color-error);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: var(--fs-13);
+}
+
+.tip__ok {
+  background: rgba(0, 122, 255, 0.10);
+  border: 1px solid rgba(0, 122, 255, 0.30);
+  color: var(--accent, #007AFF);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: var(--fs-13);
+}
+
+/* ─────────────────────────────────────────
+   하단 액션 바 — sticky bottom + 투명 배경
+   (TeamRegisterPage .trp__embed-bar--bottom 패턴)
+   ───────────────────────────────────────── */
+.tip__cta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0 4px;
+  margin-top: 12px;
+  border-top: 1px solid var(--color-border, rgba(0,0,0,0.06));
+  background: transparent;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  box-sizing: border-box;
+  width: 100%;
+}
+.tip__cta .trp__btn--primary {
+  background: var(--accent, #007AFF);
+  border-color: var(--accent, #007AFF);
+}
+@media (max-width: 900px) {
+  .tip__cta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0 4px;
+  margin-top: 12px;
+  border-top: 1px solid var(--color-border, rgba(0,0,0,0.06));
+  background: transparent;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  box-sizing: border-box;
+  width: 100%;
+}
+}
+@media (max-width: 720px) {
+  .tip__cta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0 4px;
+  margin-top: 12px;
+  border-top: 1px solid var(--color-border, rgba(0,0,0,0.06));
+  background: transparent;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  box-sizing: border-box;
+  width: 100%;
+}
+}
+
+
+/* ── Embedded(모달 안에 임베드된) 모드 전용 ──────────────────────────────
+   TeamListPage 의 「온라인 등록 요청」 팝업에서 본 페이지를 모달 안에
+   임베드해 사용한다. */
+.tip--embedded { padding: 0; background: transparent; }
+/* 임베드(모달) 컨텍스트에서도 폼 내부 좌우 여유를 유지해서 입력이 모달 가장자리에 붙지 않게 한다 */
+.tip--embedded .tip__form { padding: 16px 20px; box-sizing: border-box;   border: 0;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+}

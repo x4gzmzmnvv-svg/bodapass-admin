@@ -1,0 +1,2625 @@
+.wage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* ─────────── ① 정산 요약 헤더 (6 KPI) — 미니멀 ─────────── */
+/* 외곽 타일 제거 — 헤더와 KPI 그리드만 flat 으로 표시 */
+.wage-overview {
+  padding: 4px 0 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+ * 노무비 KPI 6타일 — 인력관리 히어로와 동일한 입체감 + 톤별 색감
+ * ───────────────────────────────────────────── */
+.wage-overview .att-hero__tile {
+  display: grid !important;
+  grid-template-columns: 36px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  column-gap: 10px !important;
+  background: #FFFFFF !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  padding: 10px 12px !important;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  /* 둥근 모서리 + 입체감 (3-tier 그림자 + inset white highlight) */
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 3px 6px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+  transition: transform 0.15s, box-shadow 0.2s, background-color 0.18s;
+  min-height: 56px;
+  min-width: 0;
+}
+.wage-overview .att-hero__tile:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.09),
+    0 5px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+.wage-overview .att-hero__tile:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 톤별 색감 — 살짝 tint 되어 의미 구분 */
+.wage-overview .att-hero__tile--info {
+  background: #FFF8E6 !important;          /* 옅은 앰버 — 공제액 */
+}
+.wage-overview .att-hero__tile--ok {
+  background: #ECFDF5 !important;          /* 옅은 민트 — 실지급액 */
+}
+.wage-overview .att-hero__tile--danger {
+  background: #FEF2F2 !important;          /* 옅은 코랄 — 검토 필요 */
+}
+.wage-overview .att-hero__tile--plain {
+  background: #FFFFFF !important;          /* 흰색 — 기본 */
+}
+
+/* 톤별 강조 색 — sub 안의 <b> 숫자 컬러 */
+.wage-overview .att-hero__tile--info .att-hero__sub b   { color: #92400E; }   /* 앰버 */
+.wage-overview .att-hero__tile--ok .att-hero__sub b     { color: #047857; }   /* 민트 그린 */
+.wage-overview .att-hero__tile--danger .att-hero__sub b { color: #B91C1C; }   /* 코랄 레드 */
+.wage-overview__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px;
+}
+/* 히어로 아래에 배치된 제목 라인 — 위쪽 spacing 추가 + 하단 hairline 으로 본문과 분리 */
+.wage-overview__head--below {
+  margin-top: 12px;
+  padding: 0 4px 12px;
+  border-bottom: 1px solid #E5E5EA;
+}
+.wage-overview__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+/* 「예정금액」 / 「확정금액」 알약 태그 */
+.wage-overview__tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
+}
+.wage-overview__tag.is-estimate {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+.wage-overview__tag.is-final {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+.wage-overview__sub {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* ─────────── ② 정산 진행 stepper — 미니멀 ─────────── */
+.wage-stepper {
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: none;
+}
+.wage-stepper__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.wage-stepper__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.1px;
+}
+.wage-stepper__hint {
+  font-size: 10.5px;
+  color: #94a3b8;
+}
+.wage-stepper__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+}
+.wage-stepper__list.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.wage-stepper__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  min-width: 0;
+}
+.wage-stepper__num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #cbd5e1;
+  z-index: 1;
+}
+.wage-stepper__step.is-done .wage-stepper__num {
+  border-color: #111827;
+  background: #111827;
+  color: #fff;
+}
+.wage-stepper__step.is-current .wage-stepper__num {
+  border-color: #111827;
+  color: #111827;
+}
+.wage-stepper__label {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: #94a3b8;
+  white-space: nowrap;
+  letter-spacing: -0.1px;
+}
+.wage-stepper__step.is-done .wage-stepper__label,
+.wage-stepper__step.is-current .wage-stepper__label {
+  color: #111827;
+  font-weight: 600;
+}
+.wage-stepper__line {
+  position: absolute;
+  top: 9px;
+  left: calc(50% + 12px);
+  right: calc(-50% + 12px);
+  height: 1px;
+  background: #e5e7eb;
+  z-index: 0;
+}
+.wage-stepper__step.is-done .wage-stepper__line {
+  background: #111827;
+}
+
+/* ─────────── ③ 검토 필요 (5타일) — 미니멀 ─────────── */
+.wage-review {
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: none;
+}
+.wage-review__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 2px;
+}
+.wage-review__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.1px;
+}
+.wage-review__sub {
+  margin: 0;
+  font-size: 10.5px;
+  color: #94a3b8;
+}
+.wage-review__tiles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+@media (max-width: 900px) {
+  .wage-review__tiles { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .wage-review__tiles { grid-template-columns: repeat(2, 1fr); }
+}
+.wage-review__tile {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 7px 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.12s;
+  font-family: inherit;
+  text-align: left;
+  min-width: 0;
+}
+.wage-review__tile:hover {
+  border-color: #cbd5e1;
+}
+.wage-review__tile.has-value {
+  border-color: #fcd34d;
+}
+.wage-review__tile.has-value:hover {
+  border-color: #f59e0b;
+}
+.wage-review__tile-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wage-review__tile-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.wage-review__tile.is-clean .wage-review__tile-value { color: #cbd5e1; }
+.wage-review__tile.has-value .wage-review__tile-value { color: #b45309; }
+.wage-review__tile-unit {
+  font-size: 10.5px;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-left: 1px;
+}
+
+/* ─────────── 현장별 정산 — 간소화 테이블 ─────────── */
+.wage__per-site-table--lite {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.wage__per-site-table--lite thead th {
+  font-size: var(--fs-13);
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  white-space: nowrap;
+  letter-spacing: -0.1px;
+  line-height: 1.3;
+}
+.wage__per-site-table--lite thead th.wage__per-site-num {
+  text-align: right;
+}
+.wage__per-site-table--lite tbody td {
+  padding: 4px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.wage__per-site-table--lite tbody tr {
+  height: 32px;
+}
+.wage__per-site-table--lite .wage__per-site-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.wage__per-site-table--lite .wage__per-site-num--strong {
+  font-weight: 700;
+}
+.wage__per-site-table--lite .wage__per-site-name strong {
+  font-weight: 600;
+  color: #111827;
+}
+.wage__per-site-table--lite tbody tr.is-focused {
+  background: #f8fafc;
+}
+.wage__per-site-table--lite tbody tr:hover {
+  background: #fafafa;
+}
+
+/* 상세 버튼 */
+.wage__per-site-detail {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.1px;
+  transition: all 0.12s;
+}
+.wage__per-site-detail:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: #111827;
+}
+tr.is-focused .wage__per-site-detail {
+  border-color: #111827;
+  background: #111827;
+  color: #fff;
+}
+
+/* compact 워크플로우 버튼 — 행 안에서 「상세」 버튼과 동일 사이즈, accent 컬러 */
+.wage__per-site-detail--accent {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.wage__per-site-detail--accent:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.wage__per-site-detail--accent:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.wage__per-site-detail--locked {
+  border-color: #e5e7eb;
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* 정산상태 셀 — 배지 + 워크플로우 버튼 인라인 (한 줄, 높이 유지) */
+.wage__per-site-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.wage__per-site-status > * {
+  flex-shrink: 0;
+}
+
+/* 검토 필요 모달 — Excel 스타일 표 */
+.wage-review-modal__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.wage-review-modal__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 11.5px;
+  background: #fff;
+}
+.wage-review-modal__chip em {
+  font-style: normal;
+  color: #6b7280;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+}
+.wage-review-modal__chip strong {
+  color: #cbd5e1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.wage-review-modal__chip.has-value {
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+.wage-review-modal__chip.has-value strong {
+  color: #b45309;
+}
+.wage-review-modal__empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--accent-hover);
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.wage-review-modal__scroll {
+  max-height: 480px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+.wage-review-modal__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.wage-review-modal__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: left;
+  padding: 6px 10px;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  letter-spacing: -0.1px;
+}
+.wage-review-modal__table tbody td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.wage-review-modal__table tbody tr:hover {
+  background: #fafafa;
+}
+.wage-review-modal__num {
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+}
+.wage-review-modal__name {
+  font-weight: 600;
+}
+.wage-review-modal__reason {
+  color: #6b7280;
+  white-space: normal;
+}
+.wage-review-modal__cat {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+.wage-review-modal__cat--manual      { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.wage-review-modal__cat--no-contract { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.wage-review-modal__cat--no-consent  { background: #fce7f3; color: #9d174d; border-color: #fbcfe8; }
+.wage-review-modal__cat--no-ins      { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+.wage-review-modal__cat--no-out      { background: rgba(0, 122, 255, 0.10); color: #1e40af; border-color: rgba(0, 122, 255, 0.20); }
+.wage-review-modal__btn {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  background: #fffbeb;
+  color: #92400e;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.1px;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.wage-review-modal__btn:hover {
+  background: #fde68a;
+  border-color: #f59e0b;
+  color: #78350f;
+}
+
+/* 상세보기 모달 — 보험 산출 내역 */
+.wage-detail__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.wage-detail__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+}
+.wage-detail__row:last-child {
+  border-bottom: 0;
+}
+.wage-detail__label {
+  color: #6b7280;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+}
+.wage-detail__value {
+  color: #111827;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.2px;
+}
+.wage-detail__row--total {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1.5px solid #111827;
+  border-bottom: 0;
+}
+.wage-detail__row--total .wage-detail__label {
+  color: #111827;
+  font-weight: 700;
+}
+.wage-detail__row--total .wage-detail__value {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 정산상태 배지 */
+.settle-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.settle-badge--btn {
+  cursor: pointer;
+  font-family: inherit;
+  transition: filter 0.12s, transform 0.06s;
+}
+.settle-badge--btn:hover {
+  filter: brightness(0.97);
+}
+.settle-badge--btn:active {
+  transform: scale(0.98);
+}
+.settle-badge--open {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+}
+.settle-badge--review {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+.settle-badge--pending {
+  background: #fff;
+  color: #6b7280;
+  border-color: #cbd5e1;
+}
+.settle-badge--paid {
+  background: #f0fdfa;
+  color: #0f766e;
+  border-color: #99f6e4;
+}
+.settle-badge--done {
+  background: #f1f5f9;
+  color: #111827;
+  border-color: #cbd5e1;
+}
+
+/* ─────────── 진행상황 mini-stepper (6 dot + 라벨, 현재 단계는 호흡) ─────────── */
+.settle-mini {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0;             /* 박스 간격 0 — 연결선이 끊기지 않게 */
+  padding: 2px 0;
+  background: transparent;
+  border: 0;
+}
+.settle-mini__step {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  position: relative;
+  min-width: 48px;     /* 라벨이 들어갈 최소폭 — 좁게 */
+}
+.settle-mini__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  z-index: 1;          /* 라인 위로 */
+  position: relative;
+}
+/* 점 사이 연결선 — gap=0 이라 (자기 박스 가로중앙) ↔ (다음 박스 가로중앙) 전체를 잇는다 */
+.settle-mini__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 100%;          /* 자기 박스 우측 절반 + 다음 박스 좌측 절반 = 박스 폭 */
+  top: 9px;             /* dot 가운데 (18/2) */
+  height: 1.5px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+.settle-mini__label {
+  font-size: 9.5px;
+  color: #94a3b8;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+/* 완료 단계 */
+.settle-mini__step.is-done .settle-mini__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.settle-mini__step.is-done::after {
+  background: var(--accent);
+}
+.settle-mini__step.is-done .settle-mini__label {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* 현재 단계 — 호흡 + 외광 + 진한 색 */
+.settle-mini__step.is-current .settle-mini__dot {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.05);
+  animation: settle-mini-breathe 1.8s ease-in-out infinite;
+}
+.settle-mini__step.is-current .settle-mini__label {
+  color: var(--accent);
+  font-weight: 700;
+  animation: settle-mini-breathe-text 1.8s ease-in-out infinite;
+}
+
+@keyframes settle-mini-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  50%      { box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.22); }
+}
+@keyframes settle-mini-breathe-text {
+  0%, 100% { opacity: 0.65; }
+  50%      { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle-mini__step.is-current .settle-mini__dot,
+  .settle-mini__step.is-current .settle-mini__label {
+    animation: none;
+  }
+  .settle-mini__step.is-current .settle-mini__dot {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+  }
+}
+
+/* ─────────── ⑦ 출력 액션 행 (4 버튼) — 미니멀 ─────────── */
+.wage-export {
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: none;
+}
+.wage-export__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 2px;
+}
+.wage-export__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.1px;
+}
+.wage-export__sub {
+  margin: 0;
+  font-size: 10.5px;
+  color: #94a3b8;
+}
+.wage-export__btns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+@media (max-width: 900px) {
+  .wage-export__btns { grid-template-columns: repeat(2, 1fr); }
+}
+.wage-export__btn {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: border-color 0.12s;
+  min-width: 0;
+}
+.wage-export__btn:hover:not(:disabled) {
+  border-color: #94a3b8;
+}
+.wage-export__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.wage-export__btn-ico { display: none; }
+.wage-export__btn-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wage-export__btn-sub {
+  font-size: 10.5px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wage__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.wage__btn {
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.wage__btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.wage__btn--ghost:hover {
+  background: var(--color-bg-input);
+}
+
+.wage__btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.wage__btn--primary:hover {
+  background: var(--color-primary-dark);
+}
+
+/* 컨트롤 행 */
+.wage__controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr;
+  gap: var(--sp-4);
+  align-items: end;
+  padding: var(--sp-3) var(--sp-4);
+}
+
+@media (max-width: 720px) {
+  .wage__controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wage__control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wage__control label {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.wage__control select,
+.wage__control input {
+  height: var(--ctl-h);
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: var(--fs-13);
+  outline: none;
+}
+
+.wage__control select:focus,
+.wage__control input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.wage__tabs {
+  display: inline-flex;
+  background: var(--color-bg-input);
+  border-radius: var(--r-md);
+  padding: 3px;
+  height: var(--ctl-h);
+  align-self: end;
+}
+
+.wage__tab {
+  height: 32px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  font-size: var(--fs-13);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: 6px;
+}
+
+.wage__tab.is-active {
+  background: white;
+  color: var(--color-text);
+  font-weight: 700;
+  box-shadow: var(--sh-1);
+}
+
+.wage__error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: var(--color-error);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+}
+
+.wage__toast {
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary-dark);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+}
+
+/* 월마감 게이트 안내 — 현장 정보 우측에 인라인 칩 형태 */
+.wage__site-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wage__site-row .wage__site-line {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.wage__close-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.wage__close-bar.is-closed {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+.wage__close-bar.is-open {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+.wage__close-bar strong {
+  font-weight: 800;
+}
+
+/* 현장별 요약 테이블 (전체 모드) */
+.wage__per-site {
+  /* 「월별 노임 명세」 카드와 동일한 흰 본문 padding 적용 */
+  padding: 14px 16px;
+}
+.wage__per-site-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0;
+  margin-bottom: 8px;
+  background: transparent;
+  border-bottom: 0;
+}
+.wage__per-site-head h3 {
+  margin: 0;
+  font-size: var(--fs-15);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+.wage__per-site-summary {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.wage__per-site-summary strong {
+  color: var(--color-text);
+  font-weight: 800;
+}
+/* 모든 현장 한 번에 보이도록 — sticky thead, 가로/세로 스크롤 X (현장 수 많으면 자동으로 스크롤 활성) */
+.wage__per-site-scroll {
+  /* 6개 행은 한 화면에 다 노출. 그 이상이면 스크롤. */
+  max-height: 560px;
+  overflow-y: auto;
+  /* 가로는 본문 폭 안에 강제로 맞춤 — 헤더 underline 이 끝까지 그어지도록 */
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+.wage__per-site-scroll::-webkit-scrollbar { width: 8px; }
+.wage__per-site-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}
+.wage__per-site-scroll::-webkit-scrollbar-track { background: transparent; }
+
+.wage__per-site-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  /* table-layout fixed 로 두면 컬럼 폭 합이 컨테이너에 맞도록 자동 분배 */
+  table-layout: auto;
+}
+/* 처리 컬럼이 우측 끝까지 확장되도록 — 마지막 td/th 가 남는 폭 흡수 */
+.wage__per-site-table thead th:last-child,
+.wage__per-site-table tbody td:last-child {
+  width: 100%;        /* auto layout 에서 마지막 컬럼이 확장 폭을 가짐 */
+}
+.wage__per-site-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.wage__per-site-table thead th {
+  background: white;
+  font-weight: 700;
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  padding: 8px 8px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.wage__per-site-table tbody td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.wage__per-site-row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.wage__per-site-row:hover {
+  background: var(--color-bg-soft);
+}
+.wage__per-site-row:last-child td { border-bottom: 0; }
+/* 클릭하여 focus 된 행 — 진한 배경 + 좌측 인디고 바 */
+.wage__per-site-row.is-focused {
+  background: var(--color-primary-light);
+  position: relative;
+}
+.wage__per-site-row.is-focused td:first-child {
+  box-shadow: inset 3px 0 0 var(--color-primary);
+}
+.wage__per-site-row.is-focused:hover {
+  background: var(--color-primary-light);
+  filter: brightness(0.97);
+}
+
+/* 헤더 우측 — 토글 버튼 + 요약 */
+.wage__per-site-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 준공 보기 토글 버튼 */
+.wage__per-site-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  background: white;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.wage__per-site-toggle:hover:not(:disabled) {
+  background: var(--color-bg-soft);
+  border-color: var(--color-text-muted);
+}
+.wage__per-site-toggle.is-active {
+  background: #fff7ed;
+  border-color: #fb923c;
+  color: #9a3412;
+}
+.wage__per-site-toggle.is-active:hover {
+  background: #ffedd5;
+}
+.wage__per-site-toggle:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 헤더 필터 태그 — "🎯 OO 만 보기 ×" 형태 */
+.wage__per-site-head h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.wage__per-site-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 10px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.wage__per-site-filter-tag:hover {
+  background: var(--color-primary);
+  color: white;
+}
+.wage__per-site-filter-clear {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  color: inherit;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  padding: 0;
+}
+.wage__per-site-filter-tag:hover .wage__per-site-filter-clear {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-primary-dark);
+}
+
+/* 필터 적용 상태에서 테이블 max-height 제거 — 한 행만 보이니 스크롤 불필요 */
+.wage__per-site.is-filtered .wage__per-site-scroll {
+  max-height: none;
+}
+
+/* ─────────────────────────────────────────
+   마감 워크플로우 셀 (4단계)
+   ───────────────────────────────────────── */
+
+.wage__per-site-close {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.cwf {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  min-width: 88px;
+}
+.cwf__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: help;
+  justify-content: center;
+}
+.cwf__badge--open     { background: #f3f4f6; color: #4b5563; border-color: #e5e7eb; }
+.cwf__badge--site     { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.cwf__badge--hq       { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.cwf__badge--settled  { background: rgba(0, 122, 255, 0.10); color: #1e40af; border-color: rgba(0, 122, 255, 0.40); }
+
+.cwf__btn {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.cwf__btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+.cwf__btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+.cwf__btn--accent {
+  background: var(--accent);
+  color: white;
+}
+.cwf__btn--accent:hover:not(:disabled) {
+  background: var(--accent);
+}
+.cwf__btn--ghost {
+  background: white;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+  border-style: dashed;
+}
+.cwf__btn--ghost:hover:not(:disabled) {
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+.cwf__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.wage__per-site-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* 현장명 컬럼 폭 — 한 화면 안에 다 보이도록 적정 폭 */
+  max-width: 280px;
+  min-width: 280px;
+  width: 280px;
+}
+.wage__per-site-name strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+/* 1줄 모드 — 긴 이름은 ellipsis, hover 시 좌측 시프트 */
+.wage__per-site-name--single {
+  display: table-cell;
+  max-width: 280px;
+  min-width: 280px;
+  width: 280px;
+  overflow: hidden;
+  position: relative;
+}
+.wage__per-site-name--single strong {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+/* hover 시 — 셀 폭(460px)을 넘는 긴 이름만 좌측으로 시프트해서 뒷부분 노출.
+   짧은 이름은 min(0, ...) 가 0 으로 평가되어 시각적으로 정지 (불필요한 마퀴 X). */
+.wage__per-site-name--single:hover strong {
+  text-overflow: clip;
+  overflow: visible;
+  animation: wage-marquee-shift 8s ease-in-out infinite;
+}
+@keyframes wage-marquee-shift {
+  /* 텍스트 폭이 280px 미만이면 transform 항상 0 → 안 움직임.
+     초과하면 -(텍스트폭 - 280) 만큼 좌측 시프트해서 뒷부분 노출 */
+  0%, 15%   { transform: translateX(0); }
+  55%, 75%  { transform: translateX(min(0px, calc(-100% + 280px))); }
+  100%      { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wage__per-site-name--single:hover strong {
+    animation: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transform: none;
+  }
+}
+.wage__per-site-addr {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+/* 집행율 색감 */
+.wage__rate {
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+.wage__rate.is-low { background: #ecfdf5; color: var(--accent-hover); border: 1px solid #a7f3d0; }
+.wage__rate.is-mid { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.wage__rate.is-warn { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
+/* 한 셀에 [월 금액] + [progress 막대] + [누적/예산 + 집행율] 3단 표시 */
+.ins-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ins-cell__monthly {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  white-space: nowrap;
+}
+.ins-cell__monthly em {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: -0.01em;
+}
+.ins-cell__monthly strong {
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--color-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+.ins-cell__rate {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: -0.01em;
+}
+.ins-cell__rate.is-low { background: #ecfdf5; color: var(--accent-hover); }
+.ins-cell__rate.is-mid { background: #fef3c7; color: #92400e; }
+.ins-cell__rate.is-warn { background: #fef2f2; color: #b91c1c; }
+.ins-cell__bar {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.ins-cell__bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.ins-cell__bar-fill.is-low { background: #007AFF; }
+.ins-cell__bar-fill.is-mid { background: #f59e0b; }
+.ins-cell__bar-fill.is-warn { background: #ef4444; }
+.ins-cell__cumul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* 임금명세서 발행 다이얼로그 */
+.payslip-dlg__hint {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--color-text);
+  line-height: 1.55;
+}
+.payslip-dlg__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+.payslip-dlg__opt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 10px;
+  background: white;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  transition: background 0.12s, border-color 0.12s, transform 0.06s;
+}
+.payslip-dlg__opt:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+.payslip-dlg__opt-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+.payslip-dlg__opt-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+}
+.payslip-dlg__opt-sub {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  word-break: keep-all;
+}
+.payslip-dlg__opt:hover .payslip-dlg__opt-label {
+  color: var(--color-primary-dark);
+}
+.wage__per-site-num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-feature-settings: 'tnum';
+  /* 컬럼 간 간극 — 표가 컨테이너 폭을 채우도록 넉넉히 */
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+  min-width: 78px;
+}
+/* thead 의 숫자 컬럼도 우측정렬 — text-align: left 가 default 라 강제 */
+.wage__per-site-table thead th.wage__per-site-num {
+  text-align: right;
+}
+
+/* 공제액 컬럼 — 헤더만 가운데 정렬, 본문 셀은 오른쪽 정렬 */
+.wage__per-site-table thead th.wage__per-site-ded {
+  text-align: center;
+}
+.wage__per-site-table tbody td.wage__per-site-ded {
+  text-align: right;
+}
+.wage__per-site-ded {
+  white-space: nowrap;
+}
+.wage__per-site-ded-amt {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  font-weight: 600;
+  margin-right: 6px;
+}
+/* 작은 「상세」 버튼 — 기본 wage__per-site-detail 보다 컴팩트 */
+.wage__per-site-detail--sm {
+  padding: 1px 6px;
+  font-size: 10.5px;
+  height: auto;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+/* ─────────── 처리 컬럼 워크플로우 버튼 — 셀 폭 전체 사용 ─────────── */
+.wage-wf {
+  display: grid;
+  /* HQ 5버튼/SITE 2버튼 모두 자동 줄바꿈 — 최소 70px 단위로 등분 */
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+}
+.wage-wf__btn {
+  display: flex;            /* grid item 으로서 가로 폭을 모두 채우도록 flex */
+  align-items: center;
+  justify-content: center;
+  padding: 1px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #475569;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.08s;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  height: 22px;
+  line-height: 1;
+  width: 100%;
+}
+.wage-wf__btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+/* 활성화 안 된 상태(disabled 아니지만 prereq 미달) — 외형은 회색이지만 클릭 시 안내 */
+.wage-wf__btn:not(:disabled):not(.wage-wf__btn--accent):not(.is-done) {
+  opacity: 0.6;
+  color: #94a3b8;
+  background: #f8fafc;
+}
+.wage-wf__btn:not(:disabled):not(.wage-wf__btn--accent):not(.is-done):hover {
+  opacity: 1;
+  background: #fef3c7;
+  border-color: #fbbf24;
+  color: #92400e;
+}
+.wage-wf__btn:hover:not(:disabled) {
+  background: #fef3c7;
+  border-color: #fbbf24;
+  color: #92400e;
+  transform: translateY(-1px);
+}
+/* 활성(다음에 누를 수 있는) 단계 — 노란 호흡 */
+.wage-wf__btn--accent:not(:disabled) {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fbbf24;
+  font-weight: 700;
+  animation: wage-wf-breathe 1.8s ease-in-out infinite;
+}
+.wage-wf__btn--accent:hover:not(:disabled) {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #f59e0b;
+}
+@keyframes wage-wf-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50%      { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wage-wf__btn--accent:not(:disabled) {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+  }
+}
+/* 완료 단계 — 파스텔 노란색 채움 */
+.wage-wf__btn.is-done {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+  cursor: default;
+  font-weight: 700;
+}
+.wage-wf__btn.is-done:hover {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+  transform: none;
+}
+/* 사이트의 「확정 취소」(ghost 톤) */
+.wage-wf__btn--ghost {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: #fdba74;
+}
+.wage-wf__btn--ghost:hover:not(:disabled) {
+  background: #ffedd5;
+  color: #9a3412;
+  border-color: #fb923c;
+}
+/* 작은 안내 텍스트 */
+.wage-wf__hint {
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.wage__per-site-strong {
+  font-weight: 800;
+  color: var(--color-text-strong);
+}
+/* 집행율 칩이 td 안에서 우측에 깔끔히 붙도록 inline-flex 정렬 */
+.wage__per-site-table .wage__rate {
+  display: inline-block;
+}
+.wage__close-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.wage__close-chip.is-closed {
+  background: #ecfdf5;
+  color: var(--accent-hover);
+  border: 1px solid #a7f3d0;
+}
+.wage__close-chip.is-open {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.wage__site-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-3) var(--sp-5);
+}
+
+.wage__site-name {
+  font-size: var(--fs-15);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.wage__site-meta {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.wage__site-period {
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.wage__loading,
+.wage__empty {
+  text-align: center;
+  padding: var(--sp-12);
+  color: var(--color-text-muted);
+  font-size: var(--fs-14);
+}
+
+/* ── 요약 카드 ── */
+.wage__summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+}
+
+@media (max-width: 720px) {
+  .wage__summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wage-summary-card {
+  padding: var(--sp-4);
+}
+
+.wage-summary-card__label {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.wage-summary-card__value {
+  font-size: var(--fs-22);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.wage-summary-card.is-strong {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.wage-summary-card.is-strong .wage-summary-card__value {
+  color: var(--color-primary-dark);
+}
+
+/* ── 직종별 합계 ── */
+.wage__by-role {
+  padding: var(--sp-4) var(--sp-5);
+}
+
+.wage__by-role h3,
+.wage__grid h3 {
+  font-size: var(--fs-15);
+  font-weight: 700;
+  margin-bottom: var(--sp-3);
+}
+
+/* ── 표 ── */
+.wage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-13);
+  white-space: nowrap;
+}
+
+.wage-table th,
+.wage-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #F0F0F2;
+  text-align: left;
+}
+
+/* 헤더 행 — 다른 테이블/보험 섹션 헤더와 동일 톤 (옅은 회색 + 다크 텍스트 + 진한 hairline) */
+.wage-table th {
+  background: rgba(0, 0, 0, 0.02);
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+  /* 스크롤 시 헤더 고정 */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid #E5E5EA;
+  box-shadow: none;
+  font-size: 12px;
+}
+
+/* 합계 행 (tfoot) — 헤더와 동일 회색 톤 + 진한 상단 hairline */
+.wage-table tfoot td {
+  background: rgba(0, 0, 0, 0.02);
+  font-weight: 700;
+  color: #1A1A1A;
+  border-top: 1px solid #E5E5EA;
+}
+
+.wage-table__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  font-size: var(--fs-12);
+}
+
+.wage-table__num--strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.wage-table__num--ded {
+  color: #a855f7;
+}
+
+.wage-table__num--net {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+.wage-table__name {
+  font-weight: 500;
+}
+
+.wage-table__foot-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-left: 6px;
+}
+
+.wage-table__mono {
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  color: var(--color-text-muted);
+}
+
+/* ── 그리드 스크롤 ── */
+.wage__grid {
+  padding: var(--sp-4) var(--sp-5);
+}
+
+.wage__grid-scroll {
+  overflow-x: auto;
+  /* 20명 정도 보이는 높이 — thead(약 36px) + tfoot(36) + 본문 ~ 660px */
+  max-height: 740px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-sm);
+}
+
+/* tfoot도 하단 고정 — 스크롤해도 합계가 항상 보임 */
+.wage-table tfoot td {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  box-shadow: inset 0 1px 0 var(--color-border-strong);
+}
+
+.wage-table--wide {
+  min-width: 1200px;
+}
+
+.wage__note {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ───────── 정렬 가능한 컬럼 헤더 ───────── */
+
+.wage-table__sort {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.1s, background 0.1s;
+}
+
+.wage-table__sort:hover {
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+}
+
+.wage-table__sort.is-active {
+  color: var(--color-primary-dark);
+}
+
+.wage-table__sort-ind {
+  margin-left: 3px;
+  font-size: 9px;
+  color: var(--color-text-muted);
+}
+
+.wage-table__sort.is-active .wage-table__sort-ind {
+  color: var(--color-primary-dark);
+}
+
+/* 직종별 합계 — 클릭 시 필터 */
+.wage-by-role__row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.wage-by-role__row:hover {
+  background: var(--color-bg-soft);
+}
+
+.wage-by-role__row.is-active {
+  background: var(--color-primary-light);
+}
+
+.wage-by-role__row.is-active td {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+/* 명세 헤더의 직종 태그 */
+.wage__role-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: var(--sp-2);
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-size: var(--fs-12);
+  font-weight: 700;
+}
+
+.wage__role-clear {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ───────── 직종별 합계 — 타일 그리드 ───────── */
+
+.wage__by-role-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-3);
+}
+
+.wage__by-role-head h3 {
+  margin: 0;
+  font-size: var(--fs-15);
+  font-weight: 700;
+}
+
+.wage__by-role-head p {
+  margin: 0;
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.role-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 5px;
+}
+/* 사이드바 — 1컬럼 세로 stack */
+.role-tiles--vertical {
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+/* 사이드바 — 직종이 많으면 스크롤 (내부 리스트만 스크롤, 카드 헤더는 고정) */
+.role-tiles--scroll {
+  max-height: calc(100vh - 240px);
+  overflow-y: auto;
+  padding-right: 2px;
+  /* 스크롤바 미니멀 톤 */
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+.role-tiles--scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.role-tiles--scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.role-tiles--scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ─────────── 노무비 화면 2단 분할 ─────────── */
+.wage__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 12px;
+  align-items: start;
+}
+.wage__split-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.wage__split-side {
+  position: sticky;
+  top: 12px;
+}
+.wage__by-role--side {
+  padding: 0;
+  overflow: hidden;
+}
+/* 사이드바 헤더 — 「현장별 요약」 헤더와 동일 톤(회색 배경, 좌우 양쪽 정렬) */
+.wage__by-role--side .wage__by-role-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  margin: 0;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  flex-wrap: nowrap;
+}
+.wage__by-role--side .wage__by-role-head h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+.wage__by-role--side .wage__by-role-head p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 사이드바 좁은 폭에서 부제 잘릴 수 있어 한 줄 유지하되 …처리 */
+.wage__by-role--side .role-tiles {
+  padding: 10px 12px;
+}
+@media (max-width: 1100px) {
+  .wage__split { grid-template-columns: 1fr; }
+  .wage__split-side { position: static; }
+  .role-tiles--vertical { grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .role-tiles {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  }
+}
+
+/* 컴팩트 — 2줄 (이름 / 메타+금액 한 줄) */
+.role-tile {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 5px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  min-width: 0;
+  transition: border-color 0.1s, background 0.1s, transform 0.05s;
+}
+
+.role-tile:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.role-tile:active { transform: scale(0.98); }
+
+.role-tile.is-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+}
+
+.role-tile.is-active .role-tile__meta,
+.role-tile.is-active .role-tile__amount {
+  color: white;
+  opacity: 0.95;
+}
+
+.role-tile--all {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-soft);
+}
+
+.role-tile--all.is-active {
+  background: var(--color-primary-dark);
+}
+
+.role-tile__name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.role-tile.is-active .role-tile__name { color: white; }
+
+/* 한 줄에 meta(왼쪽) + amount(오른쪽) */
+.role-tile__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.role-tile__meta {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.03em;
+}
+
+.role-tile__amount {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ───────── 현장 표 (이미지 스타일) ───────── */
+
+.wage-sites {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wage-sites__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4) 0;
+  flex-wrap: wrap;
+}
+
+.wage-sites__head h3 {
+  margin: 0;
+  font-size: var(--fs-15);
+  font-weight: 700;
+}
+
+.wage-sites__head p {
+  margin: 0;
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.wage-sites__wrap {
+  overflow-x: auto;
+  padding: 0 var(--sp-3) var(--sp-3);
+  margin-top: var(--sp-2);
+}
+
+.wage-sites__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-12);
+}
+
+.wage-sites__table th,
+.wage-sites__table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.wage-sites__table th {
+  background: var(--color-bg-soft);
+  font-weight: 700;
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+}
+
+.wage-sites__row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.wage-sites__row:hover {
+  background: var(--color-bg-soft);
+}
+
+.wage-sites__row.is-selected {
+  background: var(--color-primary-light);
+}
+
+.wage-sites__row.is-selected td {
+  border-bottom-color: var(--color-primary);
+}
+
+.wage-sites__name {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.wage-sites__small {
+  color: var(--color-text-muted);
+  font-size: var(--fs-12);
+}
+
+.wage-sites__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  font-size: var(--fs-12);
+}
+
+.wage-sites__num--strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.wage-sites__chip {
+  display: inline-block;
+  font-size: var(--fs-11, 0.6875rem);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.wage-sites__chip.is-on {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.wage-sites__chip.is-off {
+  background: var(--color-bg-input);
+  color: var(--color-text-muted);
+}
+
+.wage-prg-mini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.wage-prg-mini__bar {
+  flex: 1;
+  max-width: 70px;
+  height: 6px;
+  background: var(--color-bg-input);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.wage-prg-mini__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #0ea5e9);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.wage-prg-mini__num {
+  font-size: var(--fs-11, 0.6875rem);
+  font-weight: 700;
+  color: var(--color-text);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ───────── 선택 현장 한 줄 안내 ───────── */
+
+.wage__site-line {
+  margin: 0;
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+  padding: 8px 12px;
+}
+
+.wage__site-line strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.wage__sep {
+  color: var(--color-border-strong);
+  margin: 0 6px;
+}
+
+/* ───────── KPI Inline (한 줄 컴팩트) ───────── */
+
+/* ════════════════════════════════════════════════════════════
+   년월 피커 (이미지 3 스타일) — 임금 KPI 행 우측에 배치
+   ════════════════════════════════════════════════════════════ */
+.wage-month-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.wage-month-picker__arrow {
+  background: white;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  width: 32px;
+  height: var(--ctl-h);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.wage-month-picker__arrow:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+.wage-month-picker__sel {
+  height: var(--ctl-h);
+  padding: 0 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  background: white;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  font-family: inherit;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+.wage-month-picker__sel:hover {
+  border-color: var(--color-primary);
+}
+.wage-month-picker__sel:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--ring-primary);
+}
+
+.wage-month-picker__today {
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: white;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.wage-month-picker__today:hover {
+  background: #f1f5f9;
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.wage-month-picker__today.is-active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+/* ── 월별 노임 명세 헤더 — 발행 버튼 ── */
+.wage__grid-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.wage__grid-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ── 헤더 우측 인라인 출력 버튼들 (이전 「출력」 섹션) ── */
+.wage-export-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.wage-export-inline__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e293b;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, transform 0.08s, color 0.12s;
+  white-space: nowrap;
+}
+.wage-export-inline__btn:hover:not(:disabled) {
+  background: rgba(0, 122, 255, 0.05);
+  border-color: rgba(0, 122, 255, 0.40);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.wage-export-inline__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.wage-export-inline__ico {
+  font-size: 13px;
+  line-height: 1;
+}
+.wage__doc-divider {
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  background: #e2e8f0;
+  margin: 0 6px;
+}
+.wage__doc-btn--accent {
+  background: #d97706;
+}
+.wage__doc-btn--accent:hover:not(:disabled) {
+  background: #b45309;
+}
+.wage__doc-btn--locked {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px dashed #cbd5e1;
+  cursor: not-allowed;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 정산 완료 배지 — 액션 버튼이 아닌 상태 표시용 */
+.wage__settle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--ctl-h);
+  padding: 0 14px 0 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-hover);
+  cursor: default;
+}
+.wage__settle-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--accent-hover);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.wage__settle-badge-text {
+  letter-spacing: -0.2px;
+}
+.wage__doc-btn {
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  border: 0;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s;
+}
+.wage__doc-btn:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+.wage__doc-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.wage__doc-btn--ghost {
+  background: white;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong);
+}
+.wage__doc-btn--ghost:hover:not(:disabled) {
+  background: var(--color-bg-soft);
+}
+
+/* ── 컴팩트 컨트롤 (현장 + 년월) — 출퇴근 페이지와 동일한 스타일 ── */
+.wage__controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+  padding: 14px 18px;
+}
+@media (max-width: 720px) {
+  .wage__controls {
+    grid-template-columns: 1fr;
+  }
+}
+.wage__control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wage__control > label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+.wage__control > select {
+  height: var(--ctl-h);
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+.wage__control > select:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--ring-primary);
+}
+
+/* ── 노임대장 카드 ── */
+.wage__ledger {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.wage__ledger-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.wage__ledger-head h3 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+.wage__ledger-sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.wage__ledger-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wage__ledger-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  padding: 24px;
+  background: var(--color-bg-soft);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: 8px;
+  margin: 0;
+}
+
+.wage__ledger-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.wage__ledger-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+.wage__ledger-item-main {
+  flex: 1;
+  min-width: 0;
+}
+.wage__ledger-item-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+.wage__ledger-item-title strong {
+  font-weight: 700;
+  color: var(--color-text-strong);
+}
+.wage__ledger-sep {
+  color: var(--color-text-faint);
+}
+.wage__ledger-item-meta {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.wage__ledger-fname {
+  color: var(--color-primary);
+}
+.wage__ledger-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.wage__ledger-tag--generated {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+.wage__ledger-tag--uploaded {
+  background: var(--tile-mint-bg);
+  color: var(--tile-mint-text);
+}
+.wage__ledger-item-actions {
+  display: flex;
+  gap: 4px;
+}
+.wage__ledger-item-actions button {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+}
+.wage__ledger-item-actions button:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.wage__ledger-del:hover {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #ef4444;
+}

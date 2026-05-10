@@ -1,0 +1,226 @@
+/* 사용 권한 설정 다이얼로그 */
+.perm-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.32);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.perm-modal {
+  width: min(900px, 100%);
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border-strong);
+}
+
+.perm-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+}
+.perm-modal__head h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+.perm-modal__sub {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.perm-modal__sub strong { color: var(--color-text); }
+.perm-modal__x {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.perm-modal__x:hover { background: var(--color-bg-input); color: var(--color-text); }
+
+.perm-modal__body {
+  padding: 12px 16px 6px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 일괄 적용 바 */
+.perm-bulk {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-light);
+  border-radius: 8px;
+}
+.perm-bulk__lbl {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-right: auto;
+}
+.perm-bulk__btn {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.perm-bulk__btn:hover { background: var(--color-bg-soft); }
+.perm-bulk__btn--full { color: var(--accent-hover); border-color: #007AFF; }
+.perm-bulk__btn--full:hover { background: #ecfdf5; }
+.perm-bulk__btn--read { color: var(--color-primary-dark); border-color: var(--color-primary); }
+.perm-bulk__btn--read:hover { background: var(--color-primary-light); }
+.perm-bulk__btn--restrict { color: #b91c1c; border-color: #ef4444; }
+.perm-bulk__btn--restrict:hover { background: #fef2f2; }
+
+/* 섹션 */
+.perm-section {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: white;
+  overflow: hidden;
+}
+.perm-section__title {
+  margin: 0;
+  padding: 7px 12px;
+  background: var(--color-bg-soft);
+  color: var(--color-text-strong);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.3;
+  display: block;
+}
+.perm-section__hint {
+  margin: 4px 0 0 0;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.perm-section__hint--info { color: var(--color-primary-dark); }
+.perm-section__body {
+  padding: 8px 12px;
+}
+.perm-section__body--row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 권한 행 — 라벨(왼쪽) + select(우측 고정) 한 줄 통일 */
+.perm-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  align-items: center;
+  column-gap: 8px;
+  min-width: 0;
+}
+.perm-row__lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.perm-row select {
+  width: 96px;
+  height: 26px;
+  padding: 0 6px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 6px;
+  background: white;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+.perm-row select:hover { border-color: var(--color-primary); }
+.perm-row select:focus { border-color: var(--color-primary); box-shadow: var(--ring-primary); }
+
+/* 권한 레벨별 색감 */
+.perm-select--full {
+  background: #ecfdf5;
+  border-color: #007AFF;
+  color: var(--accent-hover);
+}
+.perm-select--read {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.perm-select--restrict {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+
+/* 그리드 — 메뉴 권한 3칸씩 (컬럼 간격 넉넉히) */
+.perm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px 24px;
+}
+@media (max-width: 760px) {
+  .perm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; }
+}
+@media (max-width: 480px) {
+  .perm-grid { grid-template-columns: 1fr; }
+}
+
+/* 푸터 */
+.perm-modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--color-border);
+  background: white;
+}
+.perm-btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.perm-btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+.perm-btn--ghost:hover { background: var(--color-bg-soft); }
+.perm-btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+.perm-btn--primary:hover { background: var(--color-primary-dark); }

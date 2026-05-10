@@ -1,0 +1,6778 @@
+.att {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);  /* 인증관리(--sp-3) 와 통일 — 히어로 타일과 액션 행 간 간격 */
+}
+
+/* ─────────────────────────────────────────────
+ * 엑셀 업로드 모달 — 양식 선택 / 파일 업로드 / 참고 사항 (세 섹션 줄 분리)
+ * ───────────────────────────────────────────── */
+.att-excel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.att-excel__sec-title {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+}
+.att-excel__formats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.att-excel__format {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.12s, box-shadow 0.15s;
+}
+.att-excel__format:hover {
+  border-color: #B5B5BB;
+}
+.att-excel__format.is-selected {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px rgba(0, 122, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.att-excel__format input[type="radio"] {
+  flex-shrink: 0;
+  margin: 3px 0 0;
+  accent-color: var(--accent);
+}
+.att-excel__format-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.att-excel__format-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+}
+.att-excel__format-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+.att-excel__format-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 파일 드롭존 — dashed 보더 + 그레이 배경 */
+.att-excel__drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 88px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1.5px dashed #D1D1D6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.att-excel__drop:hover {
+  background: rgba(0, 122, 255, 0.04);
+  border-color: var(--accent);
+}
+.att-excel__drop.is-busy {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.att-excel__drop-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+}
+.att-excel__drop-hint {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+/* 참고 사항 — 줄로 분리된 리스트 */
+.att-excel__hint {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.att-excel__hint-title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+}
+.att-excel__hint ul {
+  list-style: disc;
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.att-excel__hint li {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.att-excel__foot {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.att-excel__result {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.att-excel__result pre {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.att-excel__result--ok {
+  background: rgba(0, 122, 255, 0.06);
+  color: var(--accent);
+}
+.att-excel__result--err {
+  background: #FEF2F2;
+  color: #B91C1C;
+}
+
+.att__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+/* 월마감 상태 배지 */
+.att__close-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  margin-right: 6px;
+}
+.att__close-badge.is-open {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+}
+.att__close-badge.is-site {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+.att__close-badge.is-hq {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+.att__close-badge.is-settled {
+  background: rgba(0, 122, 255, 0.10);
+  color: #1e40af;
+  border: 1px solid rgba(0, 122, 255, 0.40);
+}
+/* 호환 — 옛 .is-closed 도 fallback */
+.att__close-badge.is-closed {
+  background: #ecfdf5;
+  color: var(--accent-hover);
+  border: 1px solid #a7f3d0;
+}
+
+/* 하도급 출력인원 확인 — 원도급 시점의 칩 묶음 */
+.att__sub-chips {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: #fafaf9;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-right: 6px;
+}
+.att__sub-chips-label {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-right: 2px;
+}
+.att__sub-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: help;
+}
+.att__sub-chip.is-verified {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+.att__sub-chip.is-pending {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+}
+
+/* ─────────────────────────────────────────
+   하도급 출역확인 — 버튼 + popover
+   원도급 시점에서 PageHeader actions 영역에 노출되며
+   클릭 시 하도급사별 (회사명/업종/출력인원/출력 완료) 보여줌
+   ───────────────────────────────────────── */
+.att__sub-verify {
+  position: relative;
+  display: inline-flex;
+}
+.att__sub-verify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 30px;
+  border-radius: 999px;
+  background: #fafaf9;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.att__sub-verify-btn:hover {
+  background: #f3f4f6;
+}
+.att__sub-verify-btn.is-open {
+  background: rgba(0, 122, 255, 0.05);
+  border-color: rgba(0, 122, 255, 0.40);
+  color: #1e40af;
+}
+.att__sub-verify-btn.is-all-done {
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+  color: var(--accent-hover);
+}
+.att__sub-verify-btn.is-all-done.is-open {
+  background: #d1fae5;
+}
+.att__sub-verify-count {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+}
+.att__sub-verify-caret {
+  font-size: 10px;
+  margin-left: -2px;
+  color: var(--color-text-muted);
+}
+
+.att__sub-verify-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 380px;
+  max-width: 480px;
+  max-height: 380px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  padding: 6px 0;
+  z-index: 100;
+}
+.att__sub-verify-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px 10px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+.att__sub-verify-popover-meta {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.att__sub-verify-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+}
+.att__sub-verify-item {
+  padding: 10px 14px;
+  border-bottom: 1px dashed var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.att__sub-verify-item:last-child {
+  border-bottom: none;
+}
+.att__sub-verify-item.is-verified {
+  background: #f0fdf4;
+}
+.att__sub-verify-item.is-pending {
+  background: #fffbeb;
+}
+.att__sub-verify-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.att__sub-verify-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.att__sub-verify-spec {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  background: white;
+  border: 1px solid var(--color-border);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.att__sub-verify-row2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+.att__sub-verify-cnt {
+  color: var(--color-text-muted);
+}
+.att__sub-verify-cnt strong {
+  color: var(--color-text);
+  font-weight: 800;
+}
+.att__sub-verify-cnt em {
+  font-style: normal;
+  color: #4b5563;
+}
+.att__sub-verify-status {
+  font-weight: 700;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.att__sub-verify-status.is-verified {
+  color: var(--accent-hover);
+}
+.att__sub-verify-status.is-pending {
+  color: #b45309;
+}
+.att__sub-verify-status.is-pending.has-req {
+  color: var(--accent);
+}
+
+/* 「요청 대기」 옆 요청 버튼 */
+.att__sub-verify-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.att__sub-verify-req-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--color-primary, #0f766e);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+.att__sub-verify-req-btn:hover {
+  background: var(--color-primary-dark, #115e59);
+  transform: translateY(-1px);
+}
+.att__sub-verify-req-btn.is-resend {
+  background: #fff;
+  color: var(--accent);
+  border: 1px solid rgba(0, 122, 255, 0.40);
+}
+.att__sub-verify-req-btn.is-resend:hover {
+  background: rgba(0, 122, 255, 0.05);
+}
+
+/* ───────── 출역확인 요청 모달 ───────── */
+/* ───────── 엑셀 업로드 모달 ───────── */
+.att__upload-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.att__upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.att__upload-section-h {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+/* 양식 다운로드 카드 */
+.att__upload-dl-row {
+  display: flex;
+  gap: 10px;
+}
+.att__upload-dl-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfdf5 100%);
+  border: 1.5px solid #99f6e4;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: inherit;
+}
+.att__upload-dl-card:hover:not(:disabled) {
+  border-color: var(--color-primary, #0f766e);
+  background: linear-gradient(135deg, #ccfbf1 0%, #d1fae5 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.12);
+}
+.att__upload-dl-card:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.att__upload-dl-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+.att__upload-dl-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.att__upload-dl-body strong {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.att__upload-dl-body em {
+  font-style: normal;
+  font-size: 11.5px;
+  color: #475569;
+}
+.att__upload-dl-arrow {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-primary, #0f766e);
+}
+.att__upload-hint-line {
+  margin: 0;
+  font-size: 11.5px;
+  color: #94a3b8;
+  padding-left: 4px;
+}
+.att__upload-hint-line strong {
+  color: #475569;
+  font-weight: 700;
+}
+
+.att__upload-format-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.att__upload-format {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+.att__upload-format:hover:not(:disabled) {
+  border-color: var(--color-primary, #0f766e);
+  background: #f0fdfa;
+}
+.att__upload-format.is-active {
+  border-color: var(--color-primary, #0f766e);
+  background: #f0fdfa;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+.att__upload-format:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.att__upload-format-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+.att__upload-format-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.att__upload-format-badge {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 1px 7px;
+  background: var(--color-primary-light, #ccfbf1);
+  color: var(--color-primary-dark, #115e59);
+  border-radius: 999px;
+}
+.att__upload-format-desc {
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.att__upload-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 16px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.att__upload-drop:hover {
+  border-color: var(--color-primary, #0f766e);
+  background: #f0fdfa;
+}
+.att__upload-drop[data-busy="true"] {
+  cursor: wait;
+  opacity: 0.7;
+}
+.att__upload-drop-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+.att__upload-drop-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+.att__upload-drop-hint {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.att__upload-result {
+  padding: 12px 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.att__upload-result strong {
+  font-size: 13px;
+  font-weight: 800;
+}
+.att__upload-result pre {
+  margin: 0;
+  font-family: inherit;
+  font-size: 12px;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.att__upload-result--ok {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: var(--accent-hover);
+}
+.att__upload-result--err {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.att__upload-hint {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.att__upload-hint summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #475569;
+}
+.att__upload-hint ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.att__upload-foot {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.att__upload-btn {
+  height: 36px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.att__upload-btn--ghost {
+  background: #fff;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+.att__upload-btn--ghost:hover:not(:disabled) {
+  border-color: var(--color-primary, #0f766e);
+  color: var(--color-primary, #0f766e);
+}
+.att__upload-btn--primary {
+  background: var(--color-primary, #0f766e);
+  color: #fff;
+}
+.att__upload-btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark, #115e59);
+}
+
+.att__req-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.att__req-recipient {
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.att__req-recipient-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 13px;
+}
+.att__req-recipient-row strong {
+  font-weight: 700;
+  color: #0f172a;
+}
+.att__req-label {
+  display: inline-block;
+  min-width: 80px;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+.att__req-meta-em {
+  color: #64748b;
+  font-size: 12px;
+}
+.att__req-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.att__req-section-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.att__req-reset {
+  font-size: 11px;
+  color: #475569;
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 2px 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.att__req-reset:hover {
+  border-color: var(--color-primary, #0f766e);
+  color: var(--color-primary, #0f766e);
+}
+.att__req-channels {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.att__req-channel {
+  padding: 8px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: #fff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.att__req-channel:hover {
+  border-color: var(--color-primary, #0f766e);
+  color: var(--color-primary, #0f766e);
+}
+.att__req-channel.is-on {
+  background: var(--color-primary-light, #ccfbf1);
+  color: var(--color-primary-dark, #115e59);
+  border-color: var(--color-primary, #0f766e);
+}
+.att__req-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #0f172a;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  resize: vertical;
+  min-height: 180px;
+}
+.att__req-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary, #0f766e);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+.att__req-hint {
+  margin: 0;
+  font-size: 11.5px;
+  color: #64748b;
+}
+.att__req-history {
+  padding: 8px 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 11.5px;
+}
+.att__req-history summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #475569;
+}
+.att__req-history ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.att__req-history li {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 8px;
+  padding: 4px 8px;
+  background: #fff;
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.att__req-history-time {
+  color: #64748b;
+}
+.att__req-history-ch {
+  color: var(--color-primary-dark, #115e59);
+  font-weight: 700;
+}
+.att__req-history-by {
+  color: #475569;
+}
+
+/* 모달 하단 버튼 행 */
+.att__req-modal-foot {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.att__req-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.att__req-btn--ghost {
+  background: #fff;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+.att__req-btn--ghost:hover {
+  border-color: var(--color-primary, #0f766e);
+  color: var(--color-primary, #0f766e);
+}
+.att__req-btn--primary {
+  background: var(--color-primary, #0f766e);
+  color: #fff;
+}
+.att__req-btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark, #115e59);
+}
+.att__req-btn--primary:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* 잠금 상태 — 클릭 불가, 비활성 보여주기용 */
+.att__btn--locked {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px dashed #d1d5db;
+  cursor: not-allowed;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.att__btn--danger {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+.att__btn--danger:hover:not(:disabled) {
+  background: #fee2e2;
+}
+
+.att__btn {
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.att__btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.att__btn--ghost:hover {
+  background: var(--color-bg-input);
+}
+
+.att__btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.att__btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.att__btn--primary:disabled {
+  background: var(--color-border-strong);
+  cursor: not-allowed;
+}
+
+/* 「본사 출역확정」 등 — 다음 진행 단계 안내용 노란 호흡 강조 */
+.att__btn--breathe {
+  background: #fffbeb !important;
+  color: #b45309 !important;
+  border: 1px solid #fbbf24 !important;
+  font-weight: 700;
+  animation: att-btn-breathe 1.8s ease-in-out infinite;
+}
+.att__btn--breathe:hover:not(:disabled) {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #f59e0b !important;
+}
+@keyframes att-btn-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50%      { box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .att__btn--breathe {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+  }
+}
+
+.att__btn--full {
+  width: 100%;
+  height: var(--ctl-h);
+}
+
+/* 컨트롤 — body3 와 동일한 3컬럼 그리드 (좌/우 모서리 완전 일치 위해 자체 패딩·카드 래퍼 없음) */
+.att__controls {
+  display: grid;
+  /* body3 와 폭 통일 — 좌 380 / 가운데 minmax / 우 240 */
+  grid-template-columns: 380px minmax(320px, 1fr) 240px;
+  gap: var(--sp-3);
+  padding: 0;
+  align-items: stretch;
+}
+
+/* 일일확정 액션 바 — hero 타일 아래, 우측 정렬
+ *  인증관리 toolbar 와 동일 위치/사이즈 (auth-view-btn pill 26px) */
+.att__action-bar {
+  display: flex;
+  justify-content: flex-end;        /* 우측 정렬 — 마지막 버튼이 사이드바 우측 모서리에 정렬 */
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+/* 액션 바 안에서는 .att__btn 도 인증관리 토글버튼 사이즈로 컴팩트 pill 처리 */
+.att__action-bar .att__btn {
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;             /* 알약 형태 */
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+.att__action-bar .att__btn:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.att__action-bar .att__btn--primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+.att__action-bar .att__btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: white;
+}
+.att__action-bar .att__btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+.att__action-bar .att__btn--breathe {
+  /* 호흡 강조 — 노란 톤 유지하되 알약 사이즈에 맞춤 */
+  height: 26px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+/* 하도급 popover 컨테이너 안의 버튼도 동일 처리 */
+.att__action-bar .att__sub-verify > button,
+.att__action-bar .att__sub-verify-btn {
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 1280px) {
+  .att__controls {
+    grid-template-columns: 360px minmax(280px, 1fr) 220px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .att__controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 가운데 컬럼 — 3개 KPI 를 작은 그리드로 균등 분할 */
+.att__mini-kpis-mid {
+  display: grid;
+  /* 4개 타일 — 폭 균등 분할 */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  min-width: 0;
+}
+
+.att__control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.att__control label {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.att__control select,
+.att__control input {
+  height: var(--ctl-h);
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: var(--fs-13);
+  outline: none;
+}
+
+.att__control select:focus,
+.att__control input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* 현장 표시 박스 — 화살표 없는 정적 박스 (축소판) */
+.att__control--site { flex: 0 0 auto; }
+
+/* 현장 타일 클릭형 (ALL 모드) + 현장별 출퇴근 드롭다운 */
+.att__mini-kpi--clickable {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+/* 더 구체적인 선택자로 base .att__mini-kpi 의 overflow: hidden 을 확실히 덮음
+   (popover 가 타일 밖으로 나가야 함) */
+.att__mini-kpi.att__mini-kpi--clickable {
+  overflow: visible;
+}
+.att__mini-kpi--clickable:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.att__mini-kpi--clickable.is-open {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.att__site-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: max(100%, 380px);
+  max-height: 360px;
+  background: white;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.att__site-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  font-size: 12px;
+  color: var(--color-text-strong);
+}
+.att__site-popover-close {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+}
+.att__site-popover-close:hover { background: var(--color-bg-input); }
+.att__site-popover-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  flex: 1;
+}
+.att__site-popover-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.att__site-popover-item:hover {
+  background: var(--color-primary-light);
+}
+.att__site-popover-item.is-active {
+  background: var(--color-primary-light);
+  outline: 1px solid var(--color-primary);
+  outline-offset: -1px;
+}
+/* "전체 N개 현장" 옵션 — 약간 강조 */
+.att__site-popover-item--all {
+  background: #f1f5f9;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.att__site-popover-item--all:hover {
+  background: var(--color-primary-light);
+}
+.att__site-popover-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.att__site-popover-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.att__site-popover-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.att__site-popover-stat em {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.att__site-popover-stat strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+.att__site-popover-stat small {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.att__site-popover-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.att__control-display {
+  height: var(--ctl-h);
+  padding: 0 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: var(--fs-13);
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+/* 마감 진행 상태 배지 — 헤더 actions 인라인용 */
+.att__close-badge--inline {
+  height: 30px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  margin-right: 0;
+  border: 1px solid transparent;
+}
+/* button 형태(클릭 가능) — 손가락 커서 */
+button.att__close-badge--inline {
+  cursor: pointer;
+  font-family: inherit;
+}
+button.att__close-badge--inline:hover {
+  filter: brightness(0.96);
+}
+/* 현장 출역확정 대기 — 노란 호흡 (본사 승인 차례) */
+.att__close-badge--breathe {
+  background: #fffbeb !important;
+  color: #b45309 !important;
+  border-color: #fbbf24 !important;
+  animation: att-badge-breathe 1.8s ease-in-out infinite;
+}
+.att__close-badge--breathe:hover {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #f59e0b !important;
+}
+@keyframes att-badge-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50%      { box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .att__close-badge--breathe { animation: none; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18); }
+}
+
+/* ─────────────────────────────────────────
+   미니 KPI 타일 (controls 행) — 현장 + 4 KPI 통일
+   ───────────────────────────────────────── */
+.att__mini-kpi {
+  /* 인증관리 auth-summary__card 와 동일 사이즈 — 12px 14px 패딩 + 10px 라운드 + 4px gap */
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  justify-content: center;
+}
+
+/* 라벨 + 값 — 한 줄에 좌·우 정렬 */
+.att__mini-kpi-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.att__mini-kpi-row .att__mini-kpi-label {
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.att__mini-kpi-row .att__mini-kpi-value {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.att__mini-kpi-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.att__mini-kpi-value {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.att__mini-kpi-value em {
+  font-style: normal;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-left: 3px;
+}
+/* 현장명 — 숫자가 아닌 텍스트라서 letter-spacing 풀어줌 */
+.att__mini-kpi-value--site {
+  font-size: 14.5px;
+  letter-spacing: -0.01em;
+  font-variant-numeric: normal;
+  color: var(--color-text-strong);
+}
+.att__mini-kpi-value--accent  { color: #0284c7; }
+.att__mini-kpi-value--strong  { color: var(--color-primary-dark); }
+.att__mini-kpi-value--success { color: #059669; }
+.att__mini-kpi-value--danger  { color: #dc2626; }
+
+/* 원·하도급 분리 — 두 숫자를 가운데 점으로 묶음 */
+.att__mini-kpi-value--split {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 16px;
+}
+.att__split {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.att__split-tag {
+  font-style: normal !important;
+  font-size: 9.5px !important;
+  font-weight: 700 !important;
+  color: var(--color-text-muted) !important;
+  background: rgba(5, 150, 105, 0.10);
+  padding: 1px 5px !important;
+  border-radius: 999px !important;
+  margin-right: 1px !important;
+  letter-spacing: 0;
+}
+/* 얼굴 — 파란색 (헤더 범례와 동일) */
+.att__split-tag--face {
+  background: rgba(0, 122, 255, 0.10) !important;
+  color: var(--accent) !important;
+}
+/* 수동 — 노란색 */
+.att__split-tag--manual {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+.att__split strong {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.att__split-sep {
+  font-style: normal;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 1px;
+  opacity: 0.6;
+}
+.att__mini-kpi-sub {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.att__legend {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.att__error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: var(--color-error);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+}
+
+/* 요약 KPI */
+.att__summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--sp-3);
+}
+
+@media (max-width: 1100px) {
+  .att__summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .att__summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.att-kcard {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.att-kcard.is-strong {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+/* 라벨 + 값을 한 줄 가로 배치 (label 좌, value 우) */
+.att-kcard__main {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.att-kcard__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.att-kcard__value {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.att-kcard__sub {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: right;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* 본문 — 그리드 + 사이드 */
+.att__body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .att__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.att__grid {
+  padding: var(--sp-2);
+  min-width: 0;
+}
+
+.att__loading,
+.att__empty {
+  text-align: center;
+  padding: var(--sp-12);
+  color: var(--color-text-muted);
+  font-size: var(--fs-14);
+}
+/* 빈 상태 + CTA — 팀원 등록 유도 */
+.att__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 20px;
+  text-align: center;
+}
+.att__empty-state .att__empty {
+  margin: 0;
+  font-weight: 700;
+  color: #475569;
+  font-size: 14px;
+}
+.att__empty-sub {
+  margin: 0;
+  font-size: 12.5px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+.att__empty-cta {
+  margin-top: 12px;
+  min-width: 160px;
+  height: 36px;
+}
+
+/* 그리드 */
+
+/* 캘린더 영역 — 드롭 존 활성 시각 피드백 */
+.att__col--cal.is-drop-target {
+  outline: 2px dashed var(--accent);
+  outline-offset: -4px;
+  background: rgba(0, 122, 255, 0.05);
+  transition: background 0.15s, outline-color 0.15s;
+}
+/* 인력 풀 — 드롭 존 활성 시 (팀원 → 풀 되돌리기) */
+.att-pool.is-drop-target {
+  outline: 2px dashed #f59e0b;
+  outline-offset: -4px;
+  background: #fffbeb;
+  border-radius: 8px;
+}
+/* 팀원 리스트 — 드래그 가능 표시 (호버 시 grab 커서) */
+.att-day-list__item.is-draggable {
+  cursor: grab;
+}
+.att-day-list__item.is-draggable:active {
+  cursor: grabbing;
+}
+
+/* ─────── 우측 인력 풀 패널 (이전 감사 로그 자리) ─────── */
+.att-pool {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+}
+.att-pool__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.att-pool__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.att-pool__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+.att-pool__sub-hint {
+  margin: 0;
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.att-pool__title strong {
+  color: var(--accent);
+  font-weight: 800;
+  margin: 0 2px;
+}
+.att-pool__sub {
+  margin: 0;
+  font-size: 11.5px;
+  color: #64748b;
+}
+.att-pool__sub strong {
+  color: #b45309;
+  font-weight: 700;
+}
+.att-pool__add {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.05);
+  border: 1px solid rgba(0, 122, 255, 0.40);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s, transform 0.08s;
+}
+.att-pool__add:hover {
+  background: rgba(0, 122, 255, 0.10);
+  color: #1e40af;
+  border-color: #60a5fa;
+  transform: translateY(-1px);
+}
+.att-pool__empty {
+  text-align: center;
+  padding: 24px 16px;
+  color: #94a3b8;
+  font-size: 12.5px;
+}
+.att-pool__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  max-height: 460px;
+}
+.att-pool__item {
+  display: grid;
+  /* 좌: ← 버튼(28px) / 중: 이름·직종 / 우: 아바타(30px) */
+  grid-template-columns: 28px 1fr 30px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: grab;
+  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s;
+}
+.att-pool__item:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+.att-pool__item:active {
+  cursor: grabbing;
+}
+.att-pool__item[draggable="false"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.att-pool__handle {
+  color: #cbd5e1;
+  font-weight: 700;
+  letter-spacing: -2px;
+  user-select: none;
+}
+.att-pool__avatar {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 122, 255, 0.05);
+  border: 1px solid rgba(0, 122, 255, 0.20);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+}
+.att-pool__name-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.att-pool__name {
+  font-size: 12.5px;
+  color: #0f172a;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.att-pool__role {
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-style: normal;
+}
+.att-pool__assign {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.att-pool__assign:hover:not(:disabled) {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+.att-pool__assign:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─────── 빠른 팀원 추가 다이얼로그 ─────── */
+
+
+.att-cell:hover {
+  outline: 1px solid var(--color-primary);
+}
+
+.att-cell--empty {
+  background: transparent;
+  color: var(--color-text-placeholder);
+  cursor: default;
+}
+
+.att-cell--g05 {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.att-cell--g1 {
+  background: #15a09f;
+  color: white;
+}
+
+.att-cell--g15 {
+  background: #0f7e7d;
+  color: white;
+}
+
+.att-cell--g2 {
+  background: #064e3b;
+  color: white;
+}
+
+.att-cell--manual {
+  background: #fde68a;
+  color: #78350f;
+}
+
+.att-cell--absent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.att-cell--selected {
+  outline: 2px solid #6d28d9;
+  outline-offset: 1px;
+}
+
+.att-cell--demo {
+  cursor: default;
+  margin-right: 4px;
+}
+
+/* 우측 사이드 */
+.att__side {
+  position: sticky;
+  top: var(--sp-5);
+}
+
+/* 셀 상세 */
+
+
+.att-detail__chip--ok {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+
+.att-time {
+  background: var(--color-bg-soft);
+  border-radius: var(--r-md);
+  padding: var(--sp-3);
+  text-align: center;
+}
+
+
+/* 감사 로그 */
+.att-audit {
+  /* 부모 .att__col 이 padding 12px 을 이미 가지므로 자체 패딩은 0 */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+}
+
+.att-audit__title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.att-audit__empty {
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 24px 0;
+}
+
+.att-audit__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* 부모 카드 높이를 채우고 내부에서 스크롤 */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* 한 항목 — 컴팩트: 1행 (이름+타입), 2행 (실행자+시간), 3행(있으면) 사유 */
+.att-audit__item {
+  background: var(--color-bg-soft);
+  border-left: 3px solid var(--color-border-strong);
+  border-radius: 6px;
+  padding: 6px 8px;
+  min-width: 0;
+}
+
+.att-audit__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.att-audit__name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+.att-audit__cnt {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
+
+.att-audit__type {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.att-audit__type--manual {
+  background: #fef3c7;
+  color: #92400e;
+}
+.att-audit__type--bulk {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.att-audit__type--gongsu {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.att-audit__bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+}
+.att-audit__by {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+}
+.att-audit__time {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.att-audit__reason {
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--color-text);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 일괄 퇴근 다이얼로그 */
+.att-bulk__list {
+  list-style: none;
+  margin: 0 0 var(--sp-4);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-2);
+}
+
+.att-bulk__list label {
+  display: grid;
+  grid-template-columns: 24px 1fr auto auto;
+  gap: var(--sp-2);
+  align-items: center;
+  padding: 6px var(--sp-2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: var(--fs-13);
+}
+
+.att-bulk__list label:hover {
+  background: var(--color-bg-soft);
+}
+
+.att-bulk__list input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.att-bulk__name {
+  font-weight: 600;
+}
+
+.att-bulk__role {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.att-bulk__in {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.att-bulk__reason-label {
+  display: block;
+  font-size: var(--fs-13);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.att-bulk__reason {
+  width: 100%;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  font-size: var(--fs-13);
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+}
+
+.att-bulk__reason:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.att__form-err {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-13);
+  color: var(--color-error);
+}
+
+/* 강제 처리 다이얼로그 */
+.att-manual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.att-manual__seg {
+  display: inline-flex;
+  background: var(--color-bg-input);
+  border-radius: var(--r-md);
+  padding: 3px;
+  width: 100%;
+}
+
+.att-manual__seg-btn {
+  flex: 1;
+  height: var(--ctl-h);
+  border: 0;
+  background: transparent;
+  font-size: var(--fs-14);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: 6px;
+}
+
+.att-manual__seg-btn.is-active {
+  background: white;
+  color: var(--color-text);
+  font-weight: 700;
+  box-shadow: var(--sh-1);
+}
+
+.att-manual__note {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  background: var(--color-bg-soft);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+}
+
+/* ── 미래 일자 셀 ── */
+.att-cell--future {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* ── 빈 셀(+) 호버 ── */
+.att-cell--empty {
+  background: transparent;
+  color: var(--color-text-placeholder);
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.att-cell--empty:hover:not(.att-cell--future) {
+  background: var(--color-bg-input);
+  color: var(--color-text);
+}
+
+/* ── 상세 패널 액션 행 ── */
+
+/* ── 빈 셀 안내 ── */
+
+
+/* ── 공수 직접 입력 다이얼로그 ── */
+.att-gongsu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.att-gongsu__hint {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  line-height: 1.6;
+}
+
+/* 상단 안내/경고 박스 — 자동 얼굴인식 / 수동 처리 / 기록없음 */
+.att-gongsu__alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.att-gongsu__alert strong {
+  color: #78350f;
+  font-weight: 700;
+}
+.att-gongsu__alert--info {
+  background: rgba(0, 122, 255, 0.05);
+  border-color: rgba(0, 122, 255, 0.20);
+  color: var(--accent);
+}
+.att-gongsu__alert--info strong {
+  color: #1e3a8a;
+}
+
+/* 각 섹션 (대상 기록 / 공수 선택 / 반영 결과 / 사유) */
+.att-gongsu__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.att-gongsu__sec-title {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: -0.01em;
+}
+
+/* 대상 기록 — 빈 상태 (record === null) */
+.att-gongsu__head {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.att-gongsu__head--empty {
+  background: #fafafa;
+  border-style: dashed;
+  border-color: #d1d5db;
+}
+.att-gongsu__hint-site {
+  margin: 0;
+  font-size: 12px;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+/* 반영 결과 — 비교 테이블 */
+.att-gongsu__compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.att-gongsu__compare thead th {
+  text-align: right;
+  padding: 6px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+.att-gongsu__compare thead th:first-child {
+  text-align: left;
+  width: 60px;
+}
+.att-gongsu__compare tbody td {
+  padding: 6px 8px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid #f3f4f6;
+}
+.att-gongsu__compare tbody td:first-child {
+  text-align: left;
+  color: #6b7280;
+  font-weight: 500;
+}
+.att-gongsu__compare tbody tr.is-new td {
+  color: #111827;
+  font-weight: 700;
+}
+.att-gongsu__compare tbody tr.is-diff td {
+  color: #6b7280;
+  border-bottom: 0;
+}
+.att-gongsu__compare tbody tr.is-diff.is-up td { color: var(--accent-hover); }
+.att-gongsu__compare tbody tr.is-diff.is-down td { color: #b91c1c; }
+.att-gongsu__compare-meta {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: right;
+}
+
+.att-gongsu__opts {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--sp-2);
+}
+
+@media (max-width: 540px) {
+  .att-gongsu__opts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.att-gongsu__opt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--sp-3) var(--sp-2);
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.att-gongsu__opt:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-soft);
+}
+
+.att-gongsu__opt.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.att-gongsu__opt.is-active .att-gongsu__opt-val,
+.att-gongsu__opt.is-active .att-gongsu__opt-sub {
+  color: white;
+}
+
+.att-gongsu__opt-val {
+  font-size: var(--fs-22);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.att-gongsu__opt-sub {
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.att-gongsu__sum {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-2);
+  background: var(--color-bg-soft);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  margin: 0;
+}
+
+.att-gongsu__sum div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.att-gongsu__sum dt {
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.att-gongsu__sum dd {
+  margin: 0;
+  font-size: var(--fs-15);
+  font-weight: 700;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.att-gongsu__sum dd.is-strong {
+  color: var(--color-primary-dark);
+  font-size: var(--fs-16);
+}
+
+/* ── 감사로그 — 공수 입력 타입 추가 ── */
+.att-audit__type--gongsu {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+/* ── 휴일/주말 헤더 ── */
+
+
+/* 본문 셀 — 휴일 컬럼은 살짝 분홍/회색 배경 */
+
+
+/* 범례용 휴일 색 샘플 */
+
+/* ───────── 3등분 본문 (팀원 / 달력 / 감사로그) ───────── */
+
+.att__body3 {
+  display: grid;
+  /* 출퇴근 시간 표시를 위해 좌측 폭을 320 → 380 으로 확장, 우측 캘린더는 minmax 줄임 */
+  grid-template-columns: 380px minmax(320px, 1fr) 240px;
+  gap: var(--sp-3);
+  align-items: stretch;
+}
+
+@media (max-width: 1280px) {
+  .att__body3 {
+    grid-template-columns: 360px minmax(280px, 1fr) 220px;
+    gap: var(--sp-3);
+  }
+}
+
+@media (max-width: 1024px) {
+  .att__body3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.att__col {
+  padding: 12px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* 한 화면에 다 담기도록 컬럼 높이 제한 — 내부에서만 스크롤 */
+  height: calc(100vh - 280px);
+  min-height: 420px;
+  max-height: 560px;
+  overflow: hidden;
+}
+
+/* 헤더·칩 영역은 고정 (스크롤 안됨) */
+.att-mlist {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 테이블만 스크롤 */
+.att-mlist__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 6px;
+  /* 스크롤바와 컬럼 간 간격 확보 */
+  padding-right: 4px;
+}
+
+/* 헤더 행 sticky — 스크롤해도 컬럼명 보임 */
+.att-mlist__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-bg-soft);
+  box-shadow: inset 0 -1px 0 var(--color-border-strong);
+}
+
+.att__col--cal {
+  padding: var(--sp-3);
+}
+
+.att__col .att__loading,
+.att__col .att__empty {
+  margin: auto;
+  padding: var(--sp-6);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.att-col__head h3 {
+  font-size: var(--fs-14);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.att-col__head h3 small {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.att-col__head p {
+  margin: 4px 0 0;
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+/* ── 좌: 팀원 요약 리스트 ── */
+
+.att-mlist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-height: 0;
+}
+
+.att-mlist__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  table-layout: fixed;
+}
+
+/* 컬럼 폭 명시 — 좌측 컬럼 폭 320px 안에서 안 잘리게 */
+.att-mlist__table th:nth-child(1),
+.att-mlist__table td:nth-child(1) { width: auto; }
+.att-mlist__table th:nth-child(2),
+.att-mlist__table td:nth-child(2) { width: 64px; }
+.att-mlist__table th:nth-child(3),
+.att-mlist__table td:nth-child(3) { width: 48px; }
+.att-mlist__table th:nth-child(4),
+.att-mlist__table td:nth-child(4) { width: 40px; padding-right: 4px; }
+
+.att-mlist__table th {
+  background: var(--color-bg-soft);
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: 11px;
+  padding: 6px 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.att-mlist__table td {
+  padding: 6px 6px;
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.att-mlist__row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.att-mlist__row:hover {
+  background: var(--color-bg-soft);
+}
+
+.att-mlist__row.is-selected {
+  background: var(--color-primary-light);
+}
+
+.att-mlist__row.is-selected td {
+  border-bottom-color: var(--color-primary);
+}
+
+.att-mlist__name {
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.att-mlist__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.att-mlist__role {
+  color: var(--color-text-muted);
+  font-size: var(--fs-11, 0.6875rem);
+}
+
+.att-mlist__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+
+.att-mlist__num--strong {
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+/* ── 중앙: 달력 ── */
+
+.att-cal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 0;
+  /* 부모 .att__col 높이를 채우고 내부에서만 스크롤 */
+  flex: 1;
+  min-height: 0;
+}
+.att-cal__grid {
+  /* 헤더 외 공간 채움 — 셀을 컴팩트하게 줄여 스크롤 없이 6주 모두 표시 */
+  flex: 1;
+  min-height: 0;
+  overflow-y: visible;
+}
+
+.att-cal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+
+.att-cal__head strong {
+  color: var(--color-primary-dark);
+}
+
+/* 헤더 — 메타 라인: 총출력인원 / 총 공수 (원 N · 하 M) */
+.att-cal__meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+.att-cal__meta-item strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  margin: 0 1px;
+}
+.att-cal__meta-sep {
+  opacity: 0.45;
+  font-weight: 700;
+}
+.att-cal__meta-split {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-left: 4px;
+  color: var(--color-text-muted);
+}
+.att-cal__meta-split strong {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+.att-cal__meta-tag {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 700;
+  background: rgba(2, 132, 199, 0.12);
+  color: #0369a1;
+  padding: 1px 5px;
+  border-radius: 999px;
+  letter-spacing: 0;
+  margin: 0 1px;
+}
+.att-cal__meta-tag--sub {
+  background: rgba(217, 119, 6, 0.14);
+  color: #b45309;
+}
+.att-cal__meta-sep-thin {
+  font-style: normal;
+  opacity: 0.45;
+  font-weight: 700;
+  margin: 0 2px;
+}
+/* 선택 해제 버튼 — 헤더 우측의 작은 ✕ */
+.att-cal__head-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  font-size: 11px;
+  border: 1px solid var(--color-border);
+  background: white;
+  color: var(--color-text-muted);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  vertical-align: middle;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.att-cal__head-clear:hover {
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+/* ─────────────────────────────────────────
+   우측 패널 — 탭 스위처 (일자별 / 개인별)
+   ───────────────────────────────────────── */
+
+.att-cal__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.att-cal__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  letter-spacing: -0.01em;
+}
+.att-cal__tab:hover:not(.is-disabled) {
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+}
+.att-cal__tab.is-active {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+.att-cal__tab.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.att-cal__tab-sub {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: inherit;
+  opacity: 0.85;
+}
+
+/* 년월 picker — 캘린더 헤더 우측 상단 (30% 축소판) */
+.att-cal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.att-cal__ym {
+  flex-shrink: 0;
+}
+.att-cal__ym .ymp { gap: 4px; }
+.att-cal__ym .ymp__nav {
+  width: 24px;
+  height: 26px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+.att-cal__ym .ymp__select {
+  height: 26px;
+  padding: 0 6px;
+  font-size: 11.5px;
+  border-radius: 6px;
+}
+.att-cal__ym .ymp__select--year { min-width: 64px; padding-right: 4px; }
+.att-cal__ym .ymp__select--month { min-width: 50px; padding-right: 4px; }
+.att-cal__ym .ymp__today {
+  height: 26px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  border-radius: 6px;
+}
+
+.att-cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+/* ─────────────────────────────────────────
+   일자별 출력인원 캘린더 (DailyAttendanceCalendar)
+   ───────────────────────────────────────── */
+
+.att-cal--daily .att-cal__cell--blank {
+  background: transparent;
+  border: 1px dashed transparent;
+}
+
+/* 개인별 + 미선택 — 빈 캘린더 그리드 (회색, 클릭 불가) */
+.att-cal__grid--placeholder {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.att-cal__cell--placeholder {
+  background: #fafafa;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--r-sm);
+  min-height: 0;
+  height: 54px;
+  padding: 3px 5px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* 전체로 돌아가기 버튼 (멤버 뷰 헤더) */
+.att-cal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 10px;
+  margin-right: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: white;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+.att-cal__back:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+/* 셀 — 단순 흰색 (heatmap 비활성, 안의 캡슐만 색칠) */
+.att-day-cell {
+  position: relative;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-sm);
+  padding: 4px 5px 5px;
+  min-height: 0;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: transform 0.05s, border-color 0.1s;
+  outline: none;
+}
+.att-day-cell:hover:not(.is-future):not(.is-empty) {
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+.att-day-cell:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+.att-day-cell.is-future {
+  background: #fafafa;
+  color: #d4d4d4;
+  cursor: default;
+  pointer-events: none;
+}
+.att-day-cell.is-empty {
+  background: white;
+  color: var(--color-text-muted);
+  cursor: default;
+}
+.att-day-cell.is-today {
+  border-color: var(--color-primary);
+  border-width: 2px;
+  padding: 3px 4px 4px;
+}
+
+/* 일 (요일 색) */
+.att-day-cell__day {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  line-height: 1.1;
+}
+.att-day-cell.is-sun .att-day-cell__day { color: var(--color-error); }
+.att-day-cell.is-sat .att-day-cell__day { color: var(--accent); }
+
+.att-day-cell__count {
+  /* 인원 — 음영 없이 단순 텍스트 (공수만 캡슐 강조) */
+  margin-top: 1px;
+  align-self: flex-end;
+  background: transparent;
+  color: var(--color-primary-dark);
+  padding: 0;
+  font-size: 9px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.att-day-cell__count strong {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-primary-dark);
+  font-variant-numeric: tabular-nums;
+}
+.att-day-cell__count em {
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  opacity: 0.65;
+}
+.att-day-cell__sub {
+  /* 공수 캡슐 — 인원과 동일 톤 (단, 폰트는 작게 보조 정보) */
+  align-self: flex-end;
+  margin-top: 2px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px 2px;
+  border-radius: 5px;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: clip;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.att-day-cell__zero {
+  margin-top: auto;
+  font-size: 12px;
+  color: #d4d4d4;
+  text-align: center;
+  line-height: 1;
+}
+
+/* heatmap 비활성 — 셀 배경/테두리 모두 흰색 통일 (개인별 캘린더와 동일한 단순 디자인).
+   강조는 셀 안의 캡슐(primary-light)이 담당 */
+.att-day-cell.is-h1,
+.att-day-cell.is-h2,
+.att-day-cell.is-h3,
+.att-day-cell.is-h4 {
+  background: white;
+  border-color: var(--color-border);
+}
+
+/* 선택된 일자 — 강한 outline, 배경은 옅게 유지 */
+.att-day-cell.is-selected {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  box-shadow: 0 2px 8px rgba(15, 118, 110, 0.18);
+}
+
+/* ─────────────────────────────────────────
+   일자별 뷰 — 좌측 패널 출석자 리스트 (DateAttendanceList)
+   ───────────────────────────────────────── */
+
+.att-day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 2px;
+  /* 부모 .att__col 높이를 채워서 다른 컬럼과 하단 정렬 */
+  flex: 1;
+  min-height: 0;
+}
+
+.att-day-list__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-border);
+}
+/* 헤더 가로 정렬 — 좌측 제목/부제, 우측 「팀원 추가」 버튼 */
+.att-day-list__head--row {
+  align-items: center;
+}
+.att-day-list__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+/* 「팀원 추가」 버튼 — 헤더 우측 알약 버튼 */
+.att-day-list__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.05);
+  border: 1px solid rgba(0, 122, 255, 0.40);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s, transform 0.08s, border-color 0.12s;
+}
+.att-day-list__add:hover {
+  background: rgba(0, 122, 255, 0.10);
+  color: #1e40af;
+  border-color: #60a5fa;
+  transform: translateY(-1px);
+}
+.att-day-list__head-l {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* 범례 — 얼굴인식(파랑) / 수동(노랑) */
+.att-day-list__legend {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.att-day-list__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.att-day-list__legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.att-day-list__legend-item--face {
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent);
+}
+.att-day-list__legend-item--face .att-day-list__legend-dot { background: var(--accent); }
+.att-day-list__legend-item--manual {
+  background: #fef3c7;
+  color: #92400e;
+}
+.att-day-list__legend-item--manual .att-day-list__legend-dot { background: #92400e; }
+
+.att-day-list__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: white;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+.att-day-list__back:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+.att-day-list__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+}
+.att-day-list__title small {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-left: 4px;
+}
+.att-day-list__sub {
+  width: 100%;
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.att-day-list__sub strong {
+  color: var(--color-text);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.att-day-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* 행이 많으면 컬럼 높이를 넘기고 내부에서만 세로 스크롤 — 행 사이즈를 줄이지 않음 */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 4px; /* 스크롤바와 행 사이 간격 */
+}
+/* 스크롤바 — 얇고 은은하게 */
+.att-day-list__items::-webkit-scrollbar {
+  width: 6px;
+}
+.att-day-list__items::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+}
+.att-day-list__items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 1단(한 줄) 레이아웃 — 원·하 칩 · 이름+직종 · 공수
+   모든 행 정확히 같은 높이로 보이도록 height + 모든 자식 line-height/height 명시 */
+.att-day-list__item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.05s, background 0.15s;
+  height: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.att-day-list__item:hover {
+  border-color: var(--color-primary);
+  background: var(--color-bg-soft);
+}
+.att-day-list__item:active { transform: translateY(1px); }
+.att-day-list__item.is-selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+.att-day-list__item.is-selected .att-day-list__name {
+  color: var(--color-primary-dark);
+}
+
+.att-day-list__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* 원·하도급 식별 칩 — 행 첫머리.
+   타원(pill) 형태 + 연한 배경 + 진한 글자 (TeamListUnified 의 이름 첫글자 아바타와 동일 톤) */
+.att-day-list__owner-tag {
+  height: 22px;
+  min-width: 36px;
+  padding: 0 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+}
+/* 원도급 — 연한 파랑 배경 + 진한 파랑 글자 */
+.att-day-list__owner-tag--own {
+  background: rgba(96, 165, 250, 0.20);
+  color: #1e3a8a;
+}
+/* 하도급 — 연한 앰버 배경 + 진한 앰버 글자 */
+.att-day-list__owner-tag--sub {
+  background: rgba(251, 191, 36, 0.22);
+  color: #92400e;
+}
+
+/* 헤더 메타 — 원도급/하도급 칩 */
+.att-day-list__split-tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 999px;
+  margin-right: 2px;
+  letter-spacing: 0;
+}
+.att-day-list__split-tag--own {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0369a1;
+}
+.att-day-list__split-tag--sub {
+  background: rgba(217, 119, 6, 0.14);
+  color: #b45309;
+}
+
+/* 잠금 — 원도급 본인 뷰에서 하도급 행 클릭 차단 */
+.att-day-list__item.is-locked {
+  cursor: not-allowed;
+  background: #fafafa;
+  opacity: 0.85;
+}
+.att-day-list__item.is-locked:hover {
+  border-color: var(--color-border);
+  background: #fafafa;
+}
+.att-day-list__lock {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+}
+
+.att-day-list__name {
+  flex: 1 1 auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+.att-day-list__role {
+  font-size: 10.5px;
+  font-weight: 600;
+  font-style: normal;
+  padding: 0 7px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bg-input);
+  border-radius: 999px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.att-day-list__manual {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 0 5px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 4px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── 출퇴근 시간 (얼굴인식 강점 표시) ── */
+.att-day-list__times {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 10.5px;
+  letter-spacing: -0.02em;
+}
+.att-day-list__time {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 고정 폭 — 모든 행에서 시간 칩이 같은 폭, 같은 위치에 정렬 */
+  min-width: 50px;
+  padding: 1px 6px;
+  height: 20px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: help;
+  line-height: 1;
+}
+.att-day-list__time.is-face {
+  /* 파란색 — 헤더 범례와 동일 */
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent);
+}
+.att-day-list__time.is-manual {
+  background: #fef3c7;
+  color: #92400e;
+}
+.att-day-list__time--none {
+  color: #cbd5e1;
+  padding: 0;
+}
+.att-day-list__time-sep {
+  color: #cbd5e1;
+  font-size: 9px;
+}
+
+/* ── 지오펜싱 위치 뱃지 (출석자 행) ── */
+.att-day-list__geo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  line-height: 1;
+  cursor: help;
+}
+.att-day-list__geo--out {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 800;
+}
+.att-day-list__geo--low {
+  background: #fef3c7;
+  color: #b45309;
+}
+.att-day-list__geo--none {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.att-day-list__gongsu {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.att-day-list__gongsu strong {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.att-day-list__gongsu em {
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.att-day-list__empty {
+  margin: 24px 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* 미니 데모 (legend 용) */
+.att-day-cell--demo {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  min-height: 0;
+  padding: 0;
+  margin: 0 2px;
+  vertical-align: middle;
+  cursor: default;
+  pointer-events: none;
+}
+
+.att-cal__dow {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding: 2px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.att-cal__dow.is-sun {
+  color: var(--color-error);
+}
+
+.att-cal__dow.is-sat {
+  color: var(--accent);
+}
+
+.att-cal__cell {
+  position: relative;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-sm);
+  padding: 3px 4px;
+  min-height: 0;
+  /* 공수(1.0) 위 + 방식(얼굴/수동) 아래의 2단 배치를 위해 살짝 높임 */
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: border-color 0.1s, transform 0.05s;
+  /* 콘텐츠가 셀 높이를 넘어 겹치는 것을 방지 */
+  overflow: hidden;
+}
+
+.att-cal__cell:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.att-cal__cell:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.att-cal__cell--blank {
+  border: 0;
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.att-cal__cell.is-holi {
+  background: #fff5f5;
+  border-color: #fecaca;
+}
+
+.att-cal__cell.is-sat {
+  background: rgba(0, 122, 255, 0.05);
+  border-color: rgba(0, 122, 255, 0.20);
+}
+
+.att-cal__cell.is-today {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.att-cal__cell.is-future {
+  background: var(--color-bg-soft);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.att-cal__day {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.1;
+  /* 휴일 라벨이 같은 줄에 inline으로 들어갈 때를 위해 inline-flex */
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.att-cal__cell.is-holi .att-cal__day {
+  color: var(--color-error);
+}
+
+.att-cal__cell.is-sat .att-cal__day {
+  color: var(--accent);
+}
+
+/*
+  휴일 라벨은 더 이상 별도 줄을 차지하지 않고 day 옆에 inline으로 표시.
+  (예: 「5 어린이날」 한 줄)
+*/
+.att-cal__holi {
+  font-size: 9px;
+  color: var(--color-error);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+  letter-spacing: -0.03em;
+}
+
+.att-cal__val {
+  margin-top: auto;
+  align-self: end;
+  /*
+    2단 세로 배치: 위에 공수(1.0), 아래에 방식(얼굴/수동).
+    좁은 폭에서 「수동」이 「수」/「동」으로 한 글자씩 깨지는 현상 방지.
+  */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  /* 폰트 — 시스템 산세리프 (개인별 리스트 공수와 동일) */
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--color-text);
+  padding: 1px 5px 2px;
+  border-radius: 5px;
+  min-width: 30px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.att-cal__val-num {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.att-cal__val-method {
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-top: -1px;
+  white-space: nowrap;
+  /* 기본 = 얼굴인식 — 파란색 (헤더 범례와 동일) */
+  color: var(--accent);
+  opacity: 1;
+}
+/* 수동 라벨 — 노란색 파스텔 (헤더 범례와 동일) */
+.att-cal__val-method--manual {
+  color: #b45309;
+}
+
+/* 모든 입력 셀 — 단일 톤(primary-light + primary-dark) */
+.att-cal__cell.has-record .att-cal__val,
+.att-cal__cell.att-cell--filled .att-cal__val {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+/* 삭제(ABSENT) — 별도 빨강 */
+.att-cal__cell.att-cell--absent .att-cal__val {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+.att-cal__cell:not(.has-record):not(.is-future) .att-cal__val {
+  background: transparent;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: var(--fs-14);
+}
+
+.att-cal__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+  align-items: center;
+  border-top: 1px dashed var(--color-border);
+  padding-top: var(--sp-2);
+}
+
+.att-cal__legend .att-cell--demo {
+  margin-left: 4px;
+}
+
+/* ───────── 공수 입력 — 사유 빠른 선택 ───────── */
+
+.att-gongsu__reasons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 540px) {
+  .att-gongsu__reasons {
+    grid-template-columns: 1fr;
+  }
+}
+
+.att-gongsu__reason {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* ─────────── 출역관리 탭 (인증관리 / 공수확정) ─────────── */
+
+@media (max-width: 540px) {
+  .att-tabs__btn { padding: 10px 8px; }
+  .att-tabs__sub { font-size: 10.5px; }
+}
+
+
+/* ─────────── 단계 흐름 stepper (① 인증 → ② 일일 → ③ 월공수마감 → ④ 노무비) ─────────── */
+
+@media (max-width: 720px) {
+  .att-flow { font-size: 11px; padding: 6px 8px; }
+  .att-flow__step { padding: 3px 8px; }
+}
+
+
+/* ─────────── 인증관리 탭 — 로그 테이블 중심 화면 ─────────── */
+/* tab=auth 일 때 기존 메인 콘텐츠는 숨기고 auth 패널만 노출 */
+.att[data-att-tab="auth"] > section.att__controls,
+.att[data-att-tab="auth"] > section.att__body3 {
+  display: none !important;
+}
+.att-auth-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ─── 요약 카드 5장 ─── 첫 타일은 좌측 사이드바(300px) 폭, 나머지 4장은 우측 컬럼(1fr) 분할 */
+@media (max-width: 1279px) {
+  .auth-summary {
+    grid-template-columns: 280px repeat(4, minmax(0, 1fr));
+  }
+}
+.auth-summary__card--ok     { border-color: #a7f3d0; background: #f6fefa; }
+.auth-summary__card--amber  { border-color: #fde68a; background: #fffbeb; }
+.auth-summary__card--danger { border-color: #fecaca; background: #fef2f2; }
+.auth-summary__card--ok     .auth-summary__value { color: var(--accent-hover); }
+.auth-summary__card--amber  .auth-summary__value { color: #b45309; }
+.auth-summary__card--danger .auth-summary__value { color: #b91c1c; }
+
+@media (max-width: 1080px) {
+  .auth-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .auth-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ─── 인증 로그 테이블 ─── */
+.auth-empty {
+  background: white;
+  border: 1px dashed #e5e7eb;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.auth-table-wrap {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  overflow-x: auto;
+}
+.auth-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.auth-table thead tr {
+  background: #f8f9fb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.auth-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 700;
+  color: #6b7280;
+  font-size: 11.5px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.auth-table tbody tr {
+  border-top: 1px solid #e5e7eb;
+}
+.auth-table tbody tr:first-child { border-top: none; }
+.auth-table td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #111827;
+}
+.auth-td-name strong { font-size: 13px; font-weight: 700; }
+.auth-td-num  { font-variant-numeric: tabular-nums; }
+.auth-td-site {
+  max-width: 200px;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.auth-td-actions {
+  display: flex; gap: 4px; justify-content: flex-end;
+}
+
+/* ─── 작은 칩 ─── */
+.auth-pill {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap; letter-spacing: -0.01em;
+}
+.auth-pill--ok     { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+.auth-pill--danger { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+/* 수동 입력 출처별 알약 — 본사 / 현장 / 반장 */
+
+.auth-status {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 9px; border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.auth-status--amber { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+
+/* ─── 액션 버튼 ─── */
+.auth-btn {
+  height: 26px; padding: 0 10px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 11.5px; font-weight: 600;
+  color: #111827; cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+.auth-btn:hover {
+  border-color: #4f6fb8;
+  color: #4f6fb8;
+}
+/* 시스템 블루 outline 버튼 (그린 → 시스템 블루로 통일) */
+.auth-btn--ok {
+  border-color: rgba(0, 122, 255, 0.40);
+  color: var(--accent);
+}
+.auth-btn--ok:hover {
+  background: rgba(0, 122, 255, 0.06);
+  border-color: var(--accent);
+}
+.auth-btn--no {
+  border-color: #fecaca; color: #b91c1c;
+}
+.auth-btn--no:hover { background: #fef2f2; border-color: #b91c1c; }
+/* 가장 도드라지는 기본 액션 — 채워진 파랑 (출역 추가 같은 핵심 CTA) */
+.auth-btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 122, 255, 0.20);
+}
+.auth-btn--primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 122, 255, 0.30);
+}
+.auth-btn--primary:disabled {
+  background: rgba(0, 122, 255, 0.40); border-color: rgba(0, 122, 255, 0.40); color: #fff;
+  box-shadow: none; cursor: not-allowed;
+}
+
+/* 코랄 레드 modifier — 「확정」(잠금 처리) 액션 강조용 (일일확정·월간 확정) */
+.auth-btn--coral.auth-btn--primary {
+  background: #FF6B6B;
+  border-color: #FF6B6B;
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.30);
+}
+.auth-btn--coral.auth-btn--primary:hover {
+  background: #F25555;
+  border-color: #F25555;
+  color: #FFFFFF;
+  box-shadow: 0 3px 10px rgba(255, 107, 107, 0.40);
+}
+.auth-btn--coral.auth-btn--primary:disabled {
+  background: rgba(255, 107, 107, 0.45);
+  border-color: rgba(255, 107, 107, 0.45);
+  color: #FFFFFF;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+
+/* ─────────── 인증관리 추가 컴포넌트 (2단 레이아웃) ─────────── */
+
+/* 5 요약카드 — 클릭 가능한 button 형태 */
+
+/* 보기 토글 */
+/* 토글 — 둥근 pill 모양 (이미지 1 차용) + 시스템 블루 */
+/* 토글 컨테이너 — 흰 배경 + 입체감 (3-tier 그림자 + inset highlight) */
+.auth-view-toggle {
+  display: inline-flex;
+  gap: 2px;
+  background: #FFFFFF;
+  border-radius: 9999px;
+  padding: 3px;
+  align-self: flex-start;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.auth-view-btn {
+  height: 28px;
+  padding: 0 16px;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1A1A1A;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s, color 0.12s, box-shadow 0.15s;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.auth-view-btn:focus { outline: none; }
+.auth-view-btn:focus-visible {
+  outline: 2px solid rgba(0, 122, 255, 0.35);
+  outline-offset: 1px;
+}
+/* 비활성 (선택 안 됨) — hover 시 옅은 회색 */
+.auth-view-btn:hover:not(.is-active) {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--accent);
+}
+/* 활성 — 시스템 블루 pill + inset highlight + 시스템 블루 글로우 */
+.auth-view-btn.is-active {
+  background: var(--accent);
+  color: #FFFFFF;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.20),
+    0 2px 6px rgba(0, 122, 255, 0.30),
+    0 1px 2px rgba(0, 122, 255, 0.20);
+}
+.auth-view-btn.is-active:hover {
+  background: var(--accent-hover);
+  color: #FFFFFF;
+}
+
+/* 2단 레이아웃 — 좌(현장카드) 1 / 우(상세) 2 */
+/* ─────────────────────────────────────────────────────────────
+ *  4페이지 공통 — 좌측 현장 리스트 / 우측 상세
+ *  · 좌측 고정 300px (1024~1279: 280px / 1024 미만: 1열 스택)
+ *  · 우측은 남은 공간 전체
+ *  · 카드 높이 max 88px — 1행 상태+이름 / 2행 핵심 / 3행 보조
+ * ─────────────────────────────────────────────────────────── */
+.auth-split {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1279px) {
+  .auth-split { grid-template-columns: 280px minmax(0, 1fr); }
+}
+
+/* 좌측 — 현장 카드 리스트 (sticky 가능) */
+.auth-sites {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 720px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* 카드 — 76~88px 고정 높이, padding 12px, 1줄 말줄임 */
+.auth-site-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 76px;
+  max-height: 92px;
+  transition: border-color 0.12s, box-shadow 0.12s, background 0.12s;
+  overflow: hidden;
+}
+.auth-site-card:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+.auth-site-card.is-selected {
+  border-color: #4f6fb8;
+  background: #eef2ff;
+}
+.auth-site-card--ok     { border-left: 3px solid var(--accent); }
+.auth-site-card--warn   { border-left: 3px solid #f59e0b; }
+.auth-site-card--danger { border-left: 3px solid #b91c1c; }
+
+/* 일일 출역확정 — 액션바 (BEM): 1행 3섹션 그리드 [300px | 16px gap | 1fr] */
+.att-daily-actionbar {
+  display: grid;
+  grid-template-columns: 300px 16px 1fr;
+  align-items: center;
+  width: 100%;
+  margin: 8px 0 12px;
+  gap: 0;
+}
+.att-daily-actionbar__left {
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+.att-daily-actionbar__right {
+  grid-column: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+}
+.att-daily-actionbar__right .auth-filter-chips--right {
+  margin-left: auto;
+}
+
+.auth-site-card__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.auth-site-card__name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 핵심 1줄 (2~3 지표) — 같은 폰트 크기, tabular-nums */
+.auth-site-card__line {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 11.5px;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.auth-site-card__line strong { font-weight: 700; }
+.auth-site-card__line--sub {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+}
+.auth-site-card__line--sub strong { color: #b45309; font-weight: 700; }
+
+/* 좌측 리스트 헤더 — 4페이지 공통 */
+
+/* 우측 — 선택 현장 상세 */
+.auth-detail {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.auth-detail__head h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.auth-detail__head p {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 필터 칩 */
+.auth-filter-chip {
+  height: 28px;
+  padding: 0 12px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+.auth-filter-chip:hover {
+  border-color: #4f6fb8;
+  color: #4f6fb8;
+}
+.auth-filter-chip.is-active {
+  background: #eef2ff;
+  border-color: #4f6fb8;
+  color: var(--accent);
+}
+
+.auth-empty--small {
+  padding: 24px 16px;
+  font-size: 12px;
+}
+
+/* 반응형 — 태블릿 이하: 1열 (현장 카드 위, 상세 아래) */
+@media (max-width: 980px) {
+  .auth-split { grid-template-columns: 1fr; }
+  .auth-sites {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+  }
+  .auth-site-card {
+    min-width: 240px;
+    flex-shrink: 0;
+  }
+}
+
+/* 인증관리 — 보기 토글 + 페이지 액션 한 줄 */
+.auth-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+@media (max-width: 720px) {
+  .auth-toolbar { flex-direction: column; align-items: stretch; }
+  .auth-toolbar__actions { margin-left: 0; justify-content: flex-end; }
+}
+
+/* 인증관리 — 날짜 필터 바 */
+.auth-date-chip {
+  height: 32px;
+  padding: 0 14px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+.auth-date-chip:hover {
+  border-color: #4f6fb8;
+  color: #4f6fb8;
+}
+.auth-date-chip.is-active {
+  background: #eef2ff;
+  border-color: #4f6fb8;
+  color: var(--accent);
+}
+.auth-date-chip--accent.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.auth-date-chip--day {
+  width: 32px;
+  padding: 0;
+  font-weight: 700;
+}
+@media (max-width: 720px) {
+  .auth-datebar__field { min-width: 0; flex: 1 1 0; }
+}
+
+/* 인증관리 — 보기 토글 + 인라인 기간 필터 (1단 가로형, 박스 없음)
+ *  · 알약 필터칩(.auth-filter-chip) 이 좌측 끝(=요약타일 좌측 모서리)에 정렬.
+ *  · 보기 토글(.auth-view-toggle--right) 은 margin-left:auto 로 우측 끝.            */
+.auth-toolbar-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+.auth-toolbar-inline .auth-view-toggle {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+/* 필터 칩 그룹 — 우측 끝 정렬 */
+.auth-toolbar-inline .auth-filter-chips--right {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.auth-inline-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+  margin-left: 4px;
+  margin-right: 2px;
+  white-space: nowrap;
+}
+.auth-inline-divider {
+  width: 1px;
+  height: 20px;
+  background: #e5e7eb;
+  margin: 0 4px;
+}
+.auth-inline-tilde {
+  color: #cbd5e1;
+  font-size: 13px;
+  margin: 0 -2px;
+}
+
+/* 인증관리 — 필터 칩 안의 「숫자」 배지 */
+.auth-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.auth-filter-chip__label {
+  letter-spacing: -0.01em;
+}
+.auth-filter-chip__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.auth-filter-chip:hover .auth-filter-chip__count {
+  background: #e5e7eb;
+}
+.auth-filter-chip.is-active .auth-filter-chip__count {
+  background: #4f6fb8;
+  color: white;
+}
+
+/* 인증관리 — 인라인 toolbar 컴팩트 모드 (검색 제거 + chip 크기 축소) */
+
+/* 보기 토글 — 컴팩트 */
+.auth-toolbar-inline .auth-view-toggle {
+  margin-right: 6px;
+}
+.auth-toolbar-inline .auth-view-btn {
+  height: 26px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+/* 기간 라벨 */
+.auth-toolbar-inline .auth-inline-label {
+  font-size: 11.5px;
+  margin-right: 0;
+}
+
+/* 날짜 chip — 오늘/이번 주/이번 달/전체 */
+.auth-toolbar-inline .auth-date-chip {
+  height: 26px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+/* 요일 chip (월화수목금토일) — 정사각 24x24 */
+.auth-toolbar-inline .auth-date-chip--day {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* 인라인 구분선 */
+.auth-toolbar-inline .auth-inline-divider {
+  height: 18px;
+  margin: 0 2px;
+}
+.auth-toolbar-inline .auth-inline-tilde {
+  font-size: 12px;
+}
+
+/* 필터 chip (전체/정상/...) — 컴팩트 변형 */
+.auth-filter-chip--xs {
+  height: 26px;
+  padding: 0 9px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.auth-filter-chip--xs .auth-filter-chip__label {
+  font-size: 11.5px;
+}
+.auth-filter-chip--xs .auth-filter-chip__count {
+  min-width: 16px;
+  height: 16px;
+  font-size: 9.5px;
+  padding: 0 4px;
+}
+
+/* 인증관리 toolbar — 컴팩트 (가로 스크롤 X, 자연스러운 줄바꿈)
+ *  · 이전엔 nowrap + overflow-x:auto 였는데, 칩이 너무 많아 크램되고 가로 스크롤이 비직관적이어서 wrap 으로 변경.
+ *  · 또한 overflow:visible 로 MacDatePicker/MacSelect 드롭다운이 잘리지 않게 함.
+ */
+.auth-toolbar-inline {
+  flex-wrap: wrap !important;
+  overflow: visible !important;
+  gap: 6px !important;
+  row-gap: 6px;
+  position: relative;
+}
+/* MacDatePicker 드롭다운이 toolbar 아래로 자연스럽게 떨어지도록 — 잘리지 않게 z-index 끌어올림 */
+.auth-toolbar-inline .mac-date.is-open,
+.auth-toolbar-inline .mac-select.is-open {
+  z-index: 9999 !important;
+  position: relative;
+}
+.auth-toolbar-inline .mac-date__popup,
+.auth-toolbar-inline .mac-select__menu {
+  z-index: 9999 !important;
+}
+/* MacDatePicker / MacSelect 컴팩트 — 인증관리 toolbar 안에서 inline pill 처럼 노출
+ * (기본 width:100% 라서 full-row 가 되어 줄바꿈을 유발 → auto + 고정 폭 강제) */
+.auth-toolbar-inline .mac-date,
+.auth-toolbar-inline .mac-select {
+  width: auto !important;
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+}
+.auth-toolbar-inline .mac-date__trigger {
+  width: 150px !important;
+  min-width: 0 !important;
+  height: 26px !important;
+  padding: 0 10px !important;
+  font-size: 12px !important;
+  font-variant-numeric: tabular-nums;
+  border-radius: 999px !important;
+}
+.auth-toolbar-inline .mac-select__trigger {
+  width: auto !important;
+  min-width: 0 !important;
+  height: 26px !important;
+  padding: 0 10px !important;
+  font-size: 12px !important;
+  border-radius: 999px !important;
+}
+.auth-toolbar-inline .auth-view-btn {
+  height: 24px;
+  padding: 0 9px;
+  font-size: 11.5px;
+}
+.auth-toolbar-inline .auth-inline-label {
+  font-size: 11px;
+  margin-left: 2px;
+}
+.auth-toolbar-inline .auth-date-chip {
+  height: 24px;
+  padding: 0 9px;
+  font-size: 11px;
+}
+/* 요일 chip — 작은 원형 (22x22) */
+.auth-toolbar-inline .auth-date-chip--day {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.auth-toolbar-inline .auth-inline-divider {
+  height: 16px;
+  margin: 0 1px;
+}
+.auth-toolbar-inline .auth-inline-tilde {
+  font-size: 11px;
+  margin: 0 -3px;
+}
+.auth-toolbar-inline .auth-filter-chip--xs {
+  height: 24px;
+  padding: 0 8px;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.auth-toolbar-inline .auth-filter-chip--xs .auth-filter-chip__label { font-size: 11px; }
+.auth-toolbar-inline .auth-filter-chip--xs .auth-filter-chip__count {
+  min-width: 14px;
+  height: 14px;
+  font-size: 9px;
+  padding: 0 3px;
+}
+
+/* 인증관리 — 처리 완료 라벨 (전체 로그 보기에서 노출) */
+
+/* 인증관리 — 상세 로그 팝업 */
+.auth-detail-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 2px;
+}
+.auth-detail-modal__handled {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: var(--accent-hover);
+  font-size: 13px;
+}
+.auth-detail-modal__handled--danger {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+.auth-detail-modal__handled strong { font-weight: 700; }
+.auth-detail-modal__handled span { font-size: 12px; opacity: 0.85; }
+
+.auth-detail-modal__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  padding: 12px 14px;
+  background: #f8f9fb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.auth-detail-modal__grid > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+}
+.auth-detail-modal__grid dt {
+  flex: 0 0 64px;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 11.5px;
+}
+.auth-detail-modal__grid dd {
+  margin: 0;
+  color: #111827;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.auth-detail-modal__reason {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.auth-detail-modal__reason strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+.auth-detail-modal__reason p {
+  margin: 0;
+  font-size: 13px;
+  color: #111827;
+  line-height: 1.5;
+}
+
+.auth-detail-modal__history {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.auth-detail-modal__history strong {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+.auth-detail-modal__history ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.auth-detail-modal__history li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  padding: 8px 10px;
+  background: #f8f9fb;
+  border-radius: 6px;
+}
+.auth-detail-modal__history .hist-time {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 11.5px;
+}
+.auth-detail-modal__history .hist-change {
+  flex: 1 1 100%;
+  color: #111827;
+}
+.auth-detail-modal__history .hist-change strong {
+  display: inline;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0;
+}
+.auth-detail-modal__history .hist-reason {
+  flex: 1 1 100%;
+  color: #6b7280;
+  font-size: 11.5px;
+}
+.auth-detail-modal__history .hist-by {
+  color: #6b7280;
+  font-size: 11.5px;
+  margin-left: auto;
+}
+
+.auth-detail-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 12px;
+  margin-top: 4px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* 처리완료 배지 — danger 변형 */
+.auth-handled-badge--danger {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+@media (max-width: 540px) {
+  .auth-detail-modal__grid { grid-template-columns: 1fr; }
+}
+
+/* 인증관리 — 좌측 현장카드 5개, 우측 테이블 11행 가시 + 세로 스크롤 */
+.auth-sites {
+  max-height: 580px;        /* ≈ 5 cards × 110px + gaps */
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.auth-detail .auth-table-wrap {
+  max-height: 480px;        /* ≈ header(36) + 11 rows × 40px */
+  overflow-y: auto;
+}
+/* 테이블 헤더 sticky — 스크롤 중에도 컬럼 라벨 항상 보이게 */
+.auth-detail .auth-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8f9fb;
+  z-index: 1;
+  box-shadow: inset 0 -1px 0 #e5e7eb;
+}
+
+/* 스크롤바 — 얇고 깔끔하게 */
+.auth-sites::-webkit-scrollbar,
+.auth-detail .auth-table-wrap::-webkit-scrollbar {
+  width: 6px;
+}
+.auth-sites::-webkit-scrollbar-thumb,
+.auth-detail .auth-table-wrap::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+.auth-sites::-webkit-scrollbar-thumb:hover,
+.auth-detail .auth-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 인증관리 — 인증방식 / 상태 알약 사이즈 통일 + 셀 정렬 */
+
+/* 모든 auth-pill 동일 폭으로 정렬 (인증방식·얼굴·라이브니스·GPS) */
+.auth-table .auth-pill {
+  min-width: 64px;
+  height: 22px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  letter-spacing: -0.01em;
+}
+
+/* 인증방식 톤 */
+.auth-table .auth-pill--face {
+  background: #eef2ff; color: #4338ca; border-color: #c7d2fe;
+}
+/* 본사입력 — 옅은 보라 (3종 분리) */
+.auth-table .auth-pill--hq {
+  background: #ede9fe; color: #5b21b6; border-color: #c4b5fd;
+}
+/* 현장입력 — 옅은 노랑 */
+.auth-table .auth-pill--site {
+  background: #fef3c7; color: #92400e; border-color: #fcd34d;
+}
+/* 반장입력 — 옅은 청록 */
+.auth-table .auth-pill--foreman {
+  background: #ecfeff; color: #0e7490; border-color: #a5f3fc;
+}
+/* 기존 manual 톤 fallback */
+.auth-table .auth-pill--manual {
+  background: #fff7ed; color: #c2410c; border-color: #fed7aa;
+}
+
+/* 결과 톤 (얼굴/GPS) */
+.auth-table .auth-pill--ok     { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+.auth-table .auth-pill--danger { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+.auth-table .auth-pill--gray   { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+
+/* 인증방식 셀 가운데 정렬 */
+.auth-table th:nth-child(5),
+.auth-table th:nth-child(6),
+.auth-table th:nth-child(7),
+.auth-table th:nth-child(8),
+.auth-table td:nth-child(5),
+.auth-table td:nth-child(6),
+.auth-table td:nth-child(7),
+.auth-table td:nth-child(8) {
+  text-align: center;
+}
+
+/* 인증관리 — 얼굴상태/라이브니스/GPS상태 알약 (5,6,7번째 컬럼) 더 컴팩트
+   - 인증방식(5)·얼굴상태(6)·라이브니스(7)·GPS상태(8) 통일하지 않고
+     얼굴/라이브니스/GPS만 작게 줄임 */
+.auth-table td:nth-child(6) .auth-pill,
+.auth-table td:nth-child(7) .auth-pill,
+.auth-table td:nth-child(8) .auth-pill {
+  min-width: 44px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+/* 인증관리 — 얼굴상태/라이브니스/GPS 컬럼 폭 축소 */
+.auth-table th:nth-child(6),
+.auth-table th:nth-child(7),
+.auth-table th:nth-child(8),
+.auth-table td:nth-child(6),
+.auth-table td:nth-child(7),
+.auth-table td:nth-child(8) {
+  width: 64px;
+  max-width: 64px;
+  font-size: 11px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* ─────────── 인증 로그 상세 — 3초 가독성 레이아웃 ─────────── */
+
+/* ① 신원 — 가장 큰 타이틀 */
+.auth-dx__id {
+  padding: 14px 16px 12px;
+  background: #f8f9fb;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+.auth-dx__name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.auth-dx__sub {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+}
+.auth-dx__dot { color: #cbd5e1; }
+
+/* ② 시간 + 공수 + 일당 — 가로 한 줄 */
+.auth-dx__time {
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.auth-dx__date {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.auth-dx__time-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+.auth-dx__metric {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.auth-dx__metric-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 600;
+}
+.auth-dx__metric-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.auth-dx__arrow {
+  color: #cbd5e1;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+.auth-dx__divider {
+  width: 1px;
+  height: 28px;
+  background: #e5e7eb;
+  margin: 0 4px;
+  align-self: center;
+}
+
+/* ③ 인증 결과 — 가로 균등 4개 */
+.auth-dx__verify {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.auth-dx__verify-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-right: 1px solid #e5e7eb;
+}
+.auth-dx__verify-item:last-child { border-right: none; }
+.auth-dx__verify-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.auth-dx__verify-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.auth-dx__verify-value--bad {
+  color: #b91c1c;
+}
+
+@media (max-width: 540px) {
+  .auth-dx__verify { grid-template-columns: repeat(2, 1fr); }
+  .auth-dx__verify-item:nth-child(2n) { border-right: none; }
+  .auth-dx__verify-item:nth-child(-n+2) { border-bottom: 1px solid #e5e7eb; }
+}
+
+/* ── 인증 상세 ② 타일 (근로일 / 출근·퇴근 / 공수·일당 3단) ── */
+.auth-dx__time {
+  display: grid;
+  grid-template-columns: minmax(110px, 1fr) auto minmax(160px, 1.4fr) auto minmax(180px, 1.4fr);
+  gap: 0;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.auth-dx__col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.auth-dx__col--date {
+  text-align: left;
+  align-items: flex-start;
+}
+.auth-dx__col--time,
+.auth-dx__col--pay {
+  align-items: center;
+}
+.auth-dx__col-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.auth-dx__date-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.auth-dx__col-divider {
+  width: 1px;
+  height: 36px;
+  background: #e5e7eb;
+  margin: 0 8px;
+}
+
+/* ② 타일 안의 metric-value 폰트는 통일된 16px */
+.auth-dx__time .auth-dx__metric-value { font-size: 16px; }
+
+/* ── 인증 상세 ③ 타일 (인증결과 4분할) — 높이 축소 ── */
+.auth-dx__verify {
+  /* 기존 padding 12px → 8px */
+}
+.auth-dx__verify-item {
+  padding: 8px 6px;       /* 12 → 8, 8 → 6 */
+  gap: 2px;               /* 4 → 2 */
+}
+.auth-dx__verify-label {
+  font-size: 10.5px;      /* 11 → 10.5 */
+}
+.auth-dx__verify-value {
+  font-size: 13px;        /* 14 → 13 */
+}
+
+@media (max-width: 720px) {
+  .auth-dx__time {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .auth-dx__col-divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+  }
+  .auth-dx__col--time,
+  .auth-dx__col--pay { align-items: flex-start; }
+}
+
+/* 인증관리 — 반려 칩 (history 그룹) — 빨강 톤 */
+.auth-filter-chip--history {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+.auth-filter-chip--history:hover {
+  background: #fef2f2;
+  border-color: #b91c1c;
+}
+.auth-filter-chip--history.is-active {
+  background: #fee2e2;
+  border-color: #b91c1c;
+  color: #991b1b;
+}
+.auth-filter-chip--history .auth-filter-chip__count {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+.auth-filter-chip--history.is-active .auth-filter-chip__count {
+  background: #b91c1c;
+  color: white;
+  border-color: #b91c1c;
+}
+
+/* 인증관리 — 클릭 액션 피드백 토스트 (오른쪽 하단 floating) */
+.auth-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: #111827;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  letter-spacing: -0.01em;
+  animation: auth-toast-in 0.2s ease-out;
+}
+@keyframes auth-toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 얼굴상태 / 라이브니스 / GPS상태 칩 — 컬럼 위치와 무관하게 mini 사이즈로 통일
+   (현장별 보기·전체 로그 보기 모두 적용 — nth-child 대신 클래스 기반) */
+.auth-table .auth-pill--mini {
+  min-width: 44px !important;
+  height: 20px !important;
+  padding: 0 6px !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+}
+
+/* 인증관리 — 승인/반려/확인 사유 입력 다이얼로그 */
+
+/* 인증 로그 상세 — 처리 이력 박스에 사유 추가 */
+.auth-detail-modal__handled {
+  display: flex !important;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch !important;
+}
+.auth-detail-modal__handled-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.auth-detail-modal__handled-row strong { font-weight: 700; }
+.auth-detail-modal__handled-row span { font-size: 12px; opacity: 0.85; }
+.auth-detail-modal__handled-reason {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding-top: 6px;
+  border-top: 1px solid currentColor;
+  margin-top: 2px;
+  opacity: 0.95;
+}
+.auth-detail-modal__handled-reason-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  opacity: 0.65;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+.auth-detail-modal__handled-reason-value {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.auth-detail-modal__handled-reason {
+  border-top-color: rgba(0,0,0,0.1);
+}
+
+/* ─────────────────────────────────────────
+ *  일일 출역확정 — 새 레이아웃 (인증관리 패턴)
+ * ───────────────────────────────────────── */
+.att-daily-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+/* 월간 내역 뷰일 때 panel 내부 컨텐츠가 false 로 빠져 빈 section 이 되는데,
+ * gap/margin 이 빈 공간을 만들어 화면이 아래로 밀림 → :empty 일 때 완전히 접음. */
+.att-daily-panel:empty {
+  display: none !important;
+  margin: 0 !important;
+  gap: 0 !important;
+}
+
+/* 보기 토글 + 출역 대기 인력 토글 */
+
+/* KPI 5타일 — auth-summary 와 동일한 그리드(첫 300px + 우측 4×1fr) 사용. 별도 override 불필요 */
+.att-daily-kpi {
+  /* auth-summary 의 기본 그리드를 그대로 상속 */
+}
+
+/* 일괄 처리 버튼 그룹 */
+
+/* 우측 상세 — 헤더 요약 */
+.att-daily-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  margin-bottom: 10px;
+}
+.att-daily-summary__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+.att-daily-summary__line {
+  font-size: 12.5px;
+  color: #4b5563;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.att-daily-summary__line strong { color: #111827; font-weight: 700; }
+.att-daily-summary__sep { color: #d1d5db; font-weight: 400; }
+
+/* 근로자 확정 테이블 */
+.att-daily-table-wrap {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+  max-height: 540px;
+  overflow-y: auto;
+}
+.att-daily-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.att-daily-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: left;
+  white-space: nowrap;
+}
+.att-daily-table tbody td {
+  padding: 7px 6px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #374151;
+  font-size: 12px;
+}
+.att-daily-table tbody tr:hover { background: #fafbfd; }
+.att-daily-table tbody tr:last-child td { border-bottom: none; }
+
+.att-daily-actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+.auth-btn--xs {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 11px;
+  border-radius: 999px;
+}
+
+
+/* 출역 추가 다이얼로그 */
+.att-add { display: flex; flex-direction: column; gap: 14px; }
+.att-add__sec { display: flex; flex-direction: column; gap: 8px; }
+.att-add__sec-h {
+  margin: 0; font-size: 12.5px; font-weight: 700;
+  color: #374151; letter-spacing: -0.01em;
+}
+.att-add__grid {
+  display: grid; gap: 8px;
+}
+.att-add__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.att-add__field {
+  display: flex; flex-direction: column; gap: 4px;
+  font-size: 11.5px; color: #6b7280; font-weight: 500;
+}
+.att-add__field > span {
+  font-size: 11px; color: #6b7280; font-weight: 600;
+}
+.att-add__field input,
+.att-add__field-input {
+  height: 32px; padding: 0 10px;
+  border: 1px solid #d1d5db; border-radius: 6px;
+  font-size: 13px; color: #111827; background: #fff;
+  font-family: inherit; outline: none;
+}
+.att-add__field input:focus,
+.att-add__field-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+.att-add__field-input { width: 100%; margin-top: 6px; }
+.att-add__field input:disabled { background: #f3f4f6; color: #6b7280; }
+.att-add__mono {
+  font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+  letter-spacing: 0.01em;
+}
+.att-add__opts {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px;
+}
+.att-add__opt {
+  display: flex; flex-direction: column; gap: 2px;
+  align-items: center; justify-content: center;
+  padding: 10px 8px; border: 1px solid #e5e7eb;
+  border-radius: 8px; background: white; cursor: pointer;
+  transition: all 0.15s;
+}
+.att-add__opt strong { font-size: 16px; color: #111827; font-weight: 800; }
+.att-add__opt span { font-size: 10.5px; color: #6b7280; }
+.att-add__opt:hover { border-color: rgba(0, 122, 255, 0.40); }
+.att-add__opt.is-active {
+  background: var(--accent); border-color: var(--accent);
+}
+.att-add__opt.is-active strong { color: white; }
+.att-add__opt.is-active span { color: rgba(255,255,255,0.85); }
+.att-add__chips {
+  display: inline-flex; flex-wrap: wrap; gap: 4px;
+}
+.att-add__chips--reason { margin-bottom: 6px; }
+.att-add__chip {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 3px 8px; font-size: 11px; font-weight: 600;
+  border: 1px solid #d1d5db; background: #fff; color: #6b7280;
+  border-radius: 4px; cursor: pointer; white-space: nowrap;
+  transition: all 0.12s;
+}
+.att-add__chip:hover { border-color: rgba(0, 122, 255, 0.40); }
+.att-add__chip.is-on {
+  background: rgba(0, 122, 255, 0.10); color: var(--accent); border-color: rgba(0, 122, 255, 0.40);
+}
+.att-add__doc-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+}
+.att-add__doc {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 6px; border: 1px dashed #d1d5db; border-radius: 8px;
+  background: #fafafa;
+}
+.att-add__doc.is-done {
+  border: 1px solid rgba(0, 122, 255, 0.40); background: rgba(0, 122, 255, 0.05);
+}
+.att-add__doc-label {
+  font-size: 11px; font-weight: 600; color: #374151;
+}
+.att-add__doc-upload {
+  height: 64px; border: 1px solid #e5e7eb; border-radius: 6px;
+  background: white; cursor: pointer;
+  font-size: 11.5px; color: var(--accent); font-weight: 600;
+}
+.att-add__doc-upload:hover { background: rgba(0, 122, 255, 0.05); border-color: var(--accent); }
+.att-add__doc-thumb {
+  position: relative; height: 64px;
+  border: 1px solid rgba(0, 122, 255, 0.40); border-radius: 6px; overflow: hidden;
+  cursor: pointer; padding: 0; background: #fff;
+}
+.att-add__doc-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.att-add__doc-thumb span {
+  position: absolute; inset: auto 0 0 0;
+  background: rgba(17,24,39,0.65); color: #fff;
+  font-size: 10px; padding: 2px;
+  text-align: center; opacity: 0; transition: opacity 0.15s;
+}
+.att-add__doc-thumb:hover span { opacity: 1; }
+.att-add__err {
+  margin: 0; padding: 8px 12px;
+  background: #fee2e2; color: #b91c1c;
+  border: 1px solid #fecaca; border-radius: 6px;
+  font-size: 12px; font-weight: 600;
+}
+
+/* auth-pill — 인증상태 작은 알약 (모든 칩 동일 폭, 중앙 정렬)
+ *  · 「얼굴+GPS」(긴 텍스트) 와 「확인필요」(짧은 텍스트) 가 같은 폭이 되도록 min-width + 중앙 정렬 + 폰트 축소 */
+.auth-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  min-width: 64px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: #f3f4f6;
+  color: #374151;
+  text-align: center;
+  white-space: nowrap;
+}
+.auth-pill--ok { background: #d1fae5; color: var(--accent-hover); }
+.auth-pill--warn { background: #fef3c7; color: #92400e; }
+.auth-pill--amber { background: #fef3c7; color: #b45309; }
+.auth-pill--danger { background: #fee2e2; color: #b91c1c; }
+
+/* 인증상태 컬럼 — 셀 자체도 중앙 정렬 (헤더+본문) */
+.att-daily-table thead th:nth-child(5),
+.att-daily-table tbody td:nth-child(5) {
+  text-align: center;
+}
+
+/* 일일확정 — 누계 금액 (헤더 첫 항목, 강조 톤) */
+.att-daily-summary__sum {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.att-daily-summary__sum strong {
+  color: var(--color-primary-darker);
+  font-weight: 800;
+}
+
+/* 일일확정 테이블 — 순번 컬럼 (좁고 회색) */
+.att-daily-th-no,
+.att-daily-td-no {
+  width: 24px;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 근로자 컬럼 — 한국 3자 ≈ 50px 고정 (한 화면 내 fit). 긴 이름은 마키 */
+.att-daily-th-name,
+.att-daily-td-name {
+  width: 56px;
+  max-width: 56px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.att-daily-name {
+  display: block;
+  width: 56px;
+  max-width: 56px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+  color: #111827;
+  position: relative;
+}
+.att-daily-name__inner {
+  display: inline-block;
+}
+/* 긴 이름 — 좌·우 슬라이딩 마키 (왕복) */
+.att-daily-name--marquee .att-daily-name__inner {
+  animation: att-daily-name-scroll 7s ease-in-out infinite;
+}
+@keyframes att-daily-name-scroll {
+  0%, 12%   { transform: translateX(0); }
+  50%, 62%  { transform: translateX(calc(56px - 100% - 4px)); }
+  100%      { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .att-daily-name--marquee .att-daily-name__inner { animation: none; }
+}
+
+/* 일일확정 — 확정 공수 분포 (2공수 N명, 1공수 N명, 0.5공수 N명) */
+.att-daily-summary__breakdown {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+/* ─────────────────────────────────────────
+ *  공수 입력 다이얼로그 — RecordDetailPanel 스타일 (rec-detail)
+ *  · CSS 누락으로 텍스트가 줄바꿈/구분 없이 붙어 보이던 문제 수정
+ * ───────────────────────────────────────── */
+.rec-detail {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 2단 헤더: 1단 현장명 / 2단 일자(좌) + 상태 칩(우) */
+.rec-detail__head2 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.rec-detail__head2-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.rec-detail__head2-row--bottom {
+  justify-content: space-between;
+}
+.rec-detail__site {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+.rec-detail__date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  font-variant-numeric: tabular-nums;
+}
+.rec-detail__chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background: #f3f4f6;
+  color: #374151;
+  white-space: nowrap;
+}
+.rec-detail__chip--manual { background: #fef3c7; color: #92400e; }
+.rec-detail__chip--face   { background: #d1fae5; color: var(--accent-hover); }
+.rec-detail__chip--late   { background: #fee2e2; color: #b91c1c; }
+.rec-detail__chip--early  { background: #fee2e2; color: #b91c1c; }
+.rec-detail__chip--absent { background: #fee2e2; color: #b91c1c; }
+.rec-detail__chip--normal { background: #d1fae5; color: var(--accent-hover); }
+
+/* 출근 / 퇴근 / 근로시간 — 3분할 그리드 */
+.rec-detail__times {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 4px;
+}
+.rec-detail__time {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.rec-detail__time-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+}
+.rec-detail__time-value {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.rec-detail__time-method {
+  margin: 0;
+  font-size: 11px;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+}
+.rec-detail__time-method strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+/* 강제 처리 / 수동 입력 사유 + 변동 체인 */
+.rec-detail__reason {
+  margin-top: 4px;
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rec-detail__reason-title {
+  margin: 0;
+  font-size: 12px;
+  color: #92400e;
+  letter-spacing: -0.01em;
+}
+.rec-detail__reason-title strong {
+  font-weight: 700;
+  margin-right: 4px;
+}
+.rec-detail__chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #4b5563;
+}
+.rec-detail__chain-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+}
+.rec-detail__chain-item strong {
+  font-weight: 700;
+  color: #111827;
+}
+.rec-detail__chain-arrow {
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+/* 인증관리 테이블 — 순번 + 정렬 가능 헤더 */
+.auth-th-no {
+  width: 28px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 11px;
+}
+.auth-td-no {
+  width: 28px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 정렬 가능 컬럼 — 클릭 가능 + 화살표 */
+.auth-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.auth-table thead th.sortable:hover { background: rgba(0, 122, 255, 0.05); }
+.auth-table thead th.sortable.is-active { color: var(--accent); }
+.sortable__label { margin-right: 4px; }
+.sortable__arrow {
+  display: inline-block;
+  font-size: 9px;
+  color: #9ca3af;
+  vertical-align: middle;
+}
+.auth-table thead th.sortable.is-active .sortable__arrow { color: var(--accent); }
+
+/* 일일확정 테이블도 동일 정렬 헤더 톤 (인증관리와 통일) */
+.att-daily-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.att-daily-table thead th.sortable:hover { background: rgba(0, 122, 255, 0.05); }
+.att-daily-table thead th.sortable.is-active { color: var(--accent); }
+.att-daily-table thead th.sortable.is-active .sortable__arrow { color: var(--accent); }
+
+/* 이번주 요일 chip — 오늘 이후 미래 요일은 disabled */
+.auth-date-chip--day.is-disabled,
+.auth-date-chip--day:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+/* ─────────────────────────────────────────
+ *  월간 내역 — 3단 레이아웃 (조회 전용)
+ *  좌 1/4 사이트카드 / 가운데 2/4 근로자 월공수 / 우 1/4 미니 달력
+ * ───────────────────────────────────────── */
+.att-monthly {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* 상단 액션바 */
+
+/* 3단 그리드 — 좌 300px 고정 / 가운데 1fr / 우 240px (작은 보조 달력) */
+.att-monthly-grid {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 240px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1280px) {
+  .att-monthly-grid {
+    grid-template-columns: 280px minmax(0, 1fr) 220px;
+  }
+}
+@media (max-width: 1024px) {
+  .att-monthly-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 좌측 — 압축 사이트 카드 리스트 */
+.att-monthly-sites {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 720px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+
+/* 가운데 영역 */
+.att-monthly-center {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* 가운데 헤더 요약 */
+.att-monthly-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+}
+.att-monthly-summary__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+.att-monthly-summary__line {
+  font-size: 12.5px;
+  color: #4b5563;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.att-monthly-summary__line strong { color: #111827; font-weight: 700; }
+.att-monthly-summary__date-clear {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 우측 미니 달력 */
+.att-monthly-cal {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+}
+.att-monthly-cal__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+/* 미니 달력 안의 YMP 는 한 줄에 들어가게 컴팩트 */
+.att-monthly-cal__head .ymp {
+  gap: 4px;
+}
+.att-monthly-cal__head .ymp__nav {
+  width: 22px;
+  height: 22px;
+}
+.att-monthly-cal__head .ymp__select {
+  height: 24px;
+  font-size: 12px;
+  padding: 0 4px;
+}
+.att-monthly-cal__head .ymp__today {
+  height: 22px;
+  font-size: 11px;
+  padding: 0 6px;
+}
+.att-monthly-cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.att-monthly-cal__dow {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #6b7280;
+  text-align: center;
+  padding: 4px 0;
+}
+.att-monthly-cal__dow:nth-child(1) { color: #b91c1c; }    /* 일 */
+.att-monthly-cal__dow:nth-child(7) { color: var(--accent); }    /* 토 */
+.att-monthly-cal__pad { height: 0; }
+.att-monthly-cal__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1px;
+  padding: 3px 1px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: #f9fafb;
+  cursor: pointer;
+  font-family: inherit;
+  min-height: 44px;
+}
+.att-monthly-cal__day:hover {
+  background: rgba(0, 122, 255, 0.05);
+  border-color: var(--accent);
+}
+.att-monthly-cal__day--empty   { background: white; }
+.att-monthly-cal__day--normal  { background: #ecfdf5; }
+.att-monthly-cal__day--check   { background: #fef2f2; }
+.att-monthly-cal__day--closed  { background: #d1fae5; }
+.att-monthly-cal__day.is-selected {
+  border: 2px solid var(--accent);
+  background: var(--color-primary-light);
+}
+.att-monthly-cal__num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #111827;
+}
+.att-monthly-cal__att {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.att-monthly-cal__gongsu {
+  font-size: 9px;
+  color: var(--accent-hover);
+  font-variant-numeric: tabular-nums;
+}
+.att-monthly-cal__check {
+  font-size: 8.5px;
+  color: #b91c1c;
+  font-weight: 700;
+}
+.att-monthly-cal__closed {
+  font-size: 9px;
+  color: var(--accent-hover);
+  font-weight: 700;
+}
+.att-monthly-cal__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 10.5px;
+  color: #6b7280;
+  padding-top: 4px;
+  border-top: 1px solid #e5e7eb;
+}
+.att-monthly-cal__legend .dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+.att-monthly-cal__legend .dot--normal { background: var(--accent); }
+.att-monthly-cal__legend .dot--check  { background: #b91c1c; }
+.att-monthly-cal__legend .dot--closed { background: var(--accent-hover); }
+
+/* 근로자 월간 상세 모달 — 일자별 공수 리스트 */
+@media (max-width: 540px) {
+  .att-monthly-detail__list { grid-template-columns: 1fr; }
+}
+
+/* 출역 대기 인력 패널 (모달 안) */
+.att-monthly-pool {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.att-monthly-pool__actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+/* 출역 대기 인력 — 각 행을 흰 카드로 분리 + 입체감 */
+.att-monthly-pool__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.att-monthly-pool__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 0;
+  border-radius: 10px;
+  /* 입체감 — 외부 그림자 + 내부 흰 highlight */
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.att-monthly-pool__item:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.att-monthly-pool__item:last-child { border-bottom: none; }
+.att-monthly-pool__item strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+.att-monthly-pool__item em {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-style: normal;
+}
+.att-monthly-pool__role {
+  margin-left: auto;
+  font-size: 11px;
+  color: #b45309;
+  white-space: nowrap;
+}
+.att-monthly-pool__empty {
+  padding: 16px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 12.5px;
+}
+.att-monthly-pool__hint {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  color: #4b5563;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+/* 행 안의 「+ 출역 추가」 버튼 — 검정 텍스트 (auth-btn--ok 의 시스템 블루 텍스트 무력화) */
+.att-monthly-pool__add {
+  margin-left: 8px;
+  height: 26px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: #1A1A1A !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  background: #FFFFFF !important;
+}
+.att-monthly-pool__add:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.20) !important;
+  color: #1A1A1A !important;
+}
+.att-monthly-pool__add:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.att-monthly-pool__more {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* 월간 내역 — 보조 안내 */
+
+/* 상단 — 좌(스텝퍼) + 우(KPI) */
+@media (max-width: 1024px) {
+  .att-monthly-top {
+    grid-template-columns: 1fr;
+  }
+}
+/* 스텝퍼 제거 시 — KPI 만 노출 */
+
+/* 세로형 단계 스텝퍼 */
+/* 세로 연결선 — 점들을 잇는 선 (마지막 단계 제외) */
+
+/* 5 KPI 타일 그리드 — 첫(월 출역인원)/마지막(월 노무비) 폭을 좌·우 사이드바와 정렬,
+   gap 도 att-monthly-grid 와 동일(16px)로 통일하여 가운데 3타일이 가운데 1fr 컬럼과 정확히 정렬 */
+@media (max-width: 1280px) {
+  .att-monthly-kpis { grid-template-columns: 280px repeat(3, minmax(0, 1fr)) 220px; }
+}
+@media (max-width: 1080px) {
+  .att-monthly-kpis { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+}
+@media (max-width: 720px) {
+  .att-monthly-kpis { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
+.att-monthly-kpi--ok     { border-color: #a7f3d0; background: #f6fefa; }
+.att-monthly-kpi--amber  { border-color: #fde68a; background: #fffbeb; }
+.att-monthly-kpi--danger { border-color: #fecaca; background: #fef2f2; }
+.att-monthly-kpi--ok     .att-monthly-kpi__value { color: var(--accent-hover); }
+.att-monthly-kpi--amber  .att-monthly-kpi__value { color: #b45309; }
+.att-monthly-kpi--danger .att-monthly-kpi__value { color: #b91c1c; }
+
+/* 가운데 헤더 — 2줄 구조
+ *  Line 1 (att-monthly-summary__row1): 현장명 + 요약 메트릭 인라인
+ *  Line 2 (att-monthly-summary__actions): 액션 버튼 우측 정렬
+ */
+.att-monthly-summary--2lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.att-monthly-summary__row1 {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.att-monthly-summary__row1 > .att-monthly-summary__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+.att-monthly-summary__row1 > .att-monthly-summary__line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #4b5563;
+}
+.att-monthly-summary--2lines .att-monthly-summary__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 0;
+}
+.att-monthly-summary__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.att-monthly-summary__actions .auth-btn--xs {
+  height: 24px;
+  padding: 0 9px;
+  font-size: 11.5px;
+  border-radius: 999px;
+}
+
+/* 월간 내역 테이블 — 숫자 컬럼 우측 정렬 (출역일·총공수·기본·예외·수동·확인필요·월임금) */
+.att-monthly-center .att-daily-table thead th:nth-child(5),
+.att-monthly-center .att-daily-table tbody td:nth-child(5),
+.att-monthly-center .att-daily-table thead th:nth-child(6),
+.att-monthly-center .att-daily-table tbody td:nth-child(6),
+.att-monthly-center .att-daily-table thead th:nth-child(7),
+.att-monthly-center .att-daily-table tbody td:nth-child(7),
+.att-monthly-center .att-daily-table thead th:nth-child(8),
+.att-monthly-center .att-daily-table tbody td:nth-child(8),
+.att-monthly-center .att-daily-table thead th:nth-child(9),
+.att-monthly-center .att-daily-table tbody td:nth-child(9),
+.att-monthly-center .att-daily-table thead th:nth-child(10),
+.att-monthly-center .att-daily-table tbody td:nth-child(10),
+.att-monthly-center .att-daily-table thead th:nth-child(11),
+.att-monthly-center .att-daily-table tbody td:nth-child(11) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────
+ *  근로자 월간 출역 상세 모달 — 달력 보기 + 목록 보기
+ * ───────────────────────────────────────── */
+.mdetail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 상단 5 요약 카드 */
+.mdetail-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+@media (max-width: 720px) {
+  .mdetail-summary { grid-template-columns: repeat(3, 1fr); }
+}
+.mdetail-summary__card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mdetail-summary__card--ok     { border-color: #a7f3d0; background: #f6fefa; }
+.mdetail-summary__card--amber  { border-color: #fde68a; background: #fffbeb; }
+.mdetail-summary__card--danger { border-color: #fecaca; background: #fef2f2; }
+/* 클릭 가능한 히어로 카드 — 호버/active 시각 표현 */
+.mdetail-summary__card--btn {
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: border-color 0.12s, transform 0.06s, box-shadow 0.12s;
+}
+.mdetail-summary__card--btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+.mdetail-summary__card--btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.mdetail-summary__card--btn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* 다중 매칭 도트 인디케이터 */
+.mdetail-summary__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 2px;
+}
+.mdetail-summary__dot {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: #d1d5db;
+}
+.mdetail-summary__dots--amber .mdetail-summary__dot  { background: #f59e0b; }
+.mdetail-summary__dots--danger .mdetail-summary__dot { background: #b91c1c; }
+.mdetail-summary__dot.is-active {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+.mdetail-summary__dots-more {
+  font-size: 9px;
+  color: #6b7280;
+  font-weight: 700;
+  margin-left: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.mdetail-summary__label {
+  font-size: 11px; font-weight: 600; color: #6b7280;
+  letter-spacing: -0.01em;
+}
+.mdetail-summary__value {
+  font-size: 17px; font-weight: 800; color: #111827;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+}
+.mdetail-summary__value em {
+  font-size: 11px; font-weight: 600; color: #6b7280;
+  margin-left: 2px; font-style: normal;
+}
+.mdetail-summary__card--ok     .mdetail-summary__value { color: var(--accent-hover); }
+.mdetail-summary__card--amber  .mdetail-summary__value { color: #b45309; }
+.mdetail-summary__card--danger .mdetail-summary__value { color: #b91c1c; }
+
+/* 보기 토글 + 마감 안내 */
+.mdetail-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.mdetail-toolbar__lock {
+  margin-left: auto;
+  padding: 4px 10px;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  color: #92400e;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+/* 달력 보기 — 좌(달력) + 우(일자 상세) */
+.mdetail-cal-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 10px;
+}
+@media (max-width: 720px) {
+  .mdetail-cal-wrap { grid-template-columns: 1fr; }
+}
+.mdetail-cal {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mdetail-cal__head {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.mdetail-cal__dow {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-align: center;
+  padding: 2px 0;
+}
+.mdetail-cal__dow.is-sun { color: #b91c1c; }
+.mdetail-cal__dow.is-sat { color: var(--accent); }
+.mdetail-cal__pad { height: 0; }
+.mdetail-cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.mdetail-cal__day {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 6px 6px 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+  min-height: 56px;
+  position: relative;
+  transition: border-color 0.12s, background 0.12s;
+}
+.mdetail-cal__day:hover {
+  border-color: var(--color-primary);
+}
+.mdetail-cal__day.is-selected {
+  border: 2px solid var(--accent);
+  background: var(--color-primary-light);
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.16);
+}
+/* 공수별 톤 */
+.mdetail-cal__day--none {
+  background: #f9fafb;
+  color: #9ca3af;
+}
+.mdetail-cal__day--half {
+  background: #fef9c3; /* 연한 노랑 */
+}
+.mdetail-cal__day--full {
+  background: rgba(0, 122, 255, 0.10); /* 연한 파랑 */
+}
+.mdetail-cal__day--over {
+  background: #ffedd5; /* 주황 */
+  border-color: #fed7aa;
+}
+.mdetail-cal__day--double {
+  background: #fee2e2; /* 빨강 */
+  border-color: #fecaca;
+}
+/* 수동 — 점선 테두리 */
+.mdetail-cal__day.is-manual {
+  border-style: dashed;
+}
+/* 확인필요 — 빨간 외곽선 (미처리 시) — 얇게 */
+.mdetail-cal__day.is-check {
+  border: 1px solid #b91c1c;
+}
+/* 미처리 (수동/확인필요 + 처리 안 됨) — 빨강 강조 (얇은 테두리 + 옅은 그림자) */
+.mdetail-cal__day.is-pending {
+  border: 1px solid #b91c1c;
+  box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.12);
+}
+/* 처리 완료 (일일확정 OR handled.action='done') — 녹색 외곽선 (얇게) */
+.mdetail-cal__day.is-resolved {
+  border: 1px solid var(--accent-hover) !important;
+  border-style: solid !important;
+  background: #f0fdf4;
+  box-shadow: 0 0 0 1px rgba(4, 120, 87, 0.10);
+}
+.mdetail-cal__day.is-resolved .mdetail-cal__num,
+.mdetail-cal__day.is-resolved .mdetail-cal__gongsu {
+  color: var(--accent-hover);
+}
+.mdetail-cal__num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #111827;
+}
+.mdetail-cal__num.is-sun { color: #b91c1c; }
+.mdetail-cal__num.is-sat { color: var(--accent); }
+.mdetail-cal__gongsu {
+  font-size: 12px;
+  font-weight: 800;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.mdetail-cal__day--double .mdetail-cal__gongsu { color: #b91c1c; }
+.mdetail-cal__day--over   .mdetail-cal__gongsu { color: #b45309; }
+.mdetail-cal__day--full   .mdetail-cal__gongsu { color: var(--accent); }
+.mdetail-cal__day--half   .mdetail-cal__gongsu { color: #92400e; }
+.mdetail-cal__empty {
+  font-size: 11px;
+  color: #9ca3af;
+}
+.mdetail-cal__tags {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  margin-top: 1px;
+}
+.mdetail-cal__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 14px;
+  padding: 0 4px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.mdetail-cal__tag--over    { background: #fed7aa; color: #92400e; }
+.mdetail-cal__tag--double  { background: #fecaca; color: #b91c1c; }
+.mdetail-cal__tag--manual  { background: #fef3c7; color: #92400e; }
+.mdetail-cal__tag--face    { background: rgba(0, 122, 255, 0.10); color: var(--accent); }
+.mdetail-cal__tag--check   { background: #fee2e2; color: #b91c1c; }
+.mdetail-cal__tag--closed  { background: #d1fae5; color: var(--accent-hover); }
+/* 처리 완료 시 모든 태그(연장/특근/수동/확인필요)는 녹색으로 통일 */
+.mdetail-cal__tag.is-resolved {
+  background: #d1fae5;
+  color: var(--accent-hover);
+}
+
+/* 범례 */
+.mdetail-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 10.5px;
+  color: #6b7280;
+  padding-top: 6px;
+  border-top: 1px solid #e5e7eb;
+}
+.mdetail-legend__dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  margin-right: 3px;
+  vertical-align: middle;
+  border: 1px solid transparent;
+}
+.mdetail-legend__dot--half   { background: #fef9c3; border-color: #fde68a; }
+.mdetail-legend__dot--full   { background: rgba(0, 122, 255, 0.10); border-color: rgba(0, 122, 255, 0.40); }
+.mdetail-legend__dot--over   { background: #ffedd5; border-color: #fdba74; }
+.mdetail-legend__dot--double { background: #fee2e2; border-color: #fecaca; }
+.mdetail-legend__dot--manual { background: white; border: 1.5px dashed #92400e; }
+.mdetail-legend__dot--check  { background: white; border: 2px solid #b91c1c; }
+.mdetail-legend__dot--closed { background: #d1fae5; border-color: #6ee7b7; }
+
+/* 우측 일자 상세 패널 */
+.mdetail-day {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mdetail-day__empty {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 20px 0;
+  line-height: 1.6;
+}
+.mdetail-day__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.mdetail-day__date {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+.mdetail-day__status {
+  flex-shrink: 0;
+}
+
+/* 핵심 hero — 공수 + 일 임금 큰 글씨 (3초 가독성) */
+.mdetail-day__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+.mdetail-day__hero-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+}
+.mdetail-day__hero-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+}
+.mdetail-day__hero-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.mdetail-day__hero-value--money {
+  font-size: 15px;
+  color: var(--accent-hover);
+}
+/* 공수 옆 작은 ✎ 수정 아이콘 */
+.mdetail-day__edit-icon {
+  margin-left: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #6b7280;
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mdetail-day__edit-icon:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.mdetail-day__edit-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 출퇴근 시간대 — 가로 1줄 */
+.mdetail-day__time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #4b5563;
+  font-variant-numeric: tabular-nums;
+  flex-wrap: wrap;
+}
+.mdetail-day__time em {
+  font-style: normal;
+  color: #9ca3af;
+  font-size: 10.5px;
+  margin-right: 3px;
+}
+.mdetail-day__time strong {
+  color: #111827;
+  font-weight: 700;
+}
+.mdetail-day__time-arrow {
+  color: #d1d5db;
+  font-size: 11px;
+}
+.mdetail-day__time-work {
+  margin-left: auto;
+  color: #6b7280;
+  font-size: 11px;
+}
+
+/* 부가 알약 (인증·얼굴·GPS·일당) */
+.mdetail-day__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.mdetail-day__chip {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #4b5563;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.mdetail-day__chip--bad   { background: #fee2e2; color: #b91c1c; }
+.mdetail-day__chip--mute  { background: white; border: 1px solid #e5e7eb; color: #6b7280; }
+
+/* 사유 박스 */
+.mdetail-day__reason {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  font-size: 11.5px;
+  color: #92400e;
+}
+.mdetail-day__reason em {
+  font-style: normal;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.mdetail-day__reason span {
+  color: #78350f;
+}
+.mdetail-day__actions {
+  display: flex;
+  flex-wrap: wrap;          /* 좁은 패널에서 버튼이 줄 바꿈 가능 */
+  gap: 4px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #e5e7eb;
+}
+/* 우측 일자 패널의 작은 알약 버튼 — 글자 줄바꿈 방지 */
+.mdetail-day__actions .auth-btn {
+  white-space: nowrap;
+  height: 24px;
+  padding: 0 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  flex: 0 1 auto;
+}
+.mdetail-day__actions .auth-btn--xs {
+  white-space: nowrap;
+}
+
+/* 목록 보기 — 표 */
+.mdetail-list-wrap {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+  max-height: 480px;
+  overflow-y: auto;
+}
+.mdetail-list {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.mdetail-list thead th {
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: left;
+  white-space: nowrap;
+}
+.mdetail-list tbody td {
+  padding: 7px 8px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #374151;
+}
+.mdetail-list tbody tr:hover { background: #fafbfd; }
+.mdetail-list tbody tr.is-absent { color: #9ca3af; background: #f9fafb; }
+.mdetail-list .is-sun { color: #b91c1c; font-weight: 700; }
+.mdetail-list .is-sat { color: var(--accent); font-weight: 700; }
+.mdetail-list__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* 인증 테이블 — 행 클릭으로 상세 모달 진입 */
+.auth-row.is-clickable {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.auth-row.is-clickable:hover {
+  background: var(--color-primary-soft);
+}
+/* 근로자 컬럼 — 클릭 가능 시각 표시 (밑줄 호버) */
+.auth-td-name--link strong {
+  color: #111827;
+  border-bottom: 1px dashed transparent;
+  transition: color 0.12s, border-color 0.12s;
+}
+.auth-row.is-clickable:hover .au
+
+/* ─────────────────────────────────────────────
+ * 년/월 픽커 (.ymp) — 베이스 디자인
+ *  · 가운데 [년] [월] 셀렉트는 native arrow 제거 + 호버 시 시안 톤
+ *  · 좌/우 화살표 nav 는 라운드 pill, 호버 배경
+ *  · "이번 달" 은 텍스트 톤 + 호버 배경
+ * ───────────────────────────────────────────── */
+.ymp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 999px;
+  padding: 3px 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  font-family: inherit;
+  white-space: nowrap;
+}
+.ymp__nav {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #6B7280;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background-color 0.12s, color 0.12s;
+  padding: 0;
+}
+.ymp__nav:hover {
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent);
+}
+.ymp__nav:active {
+  background: rgba(0, 122, 255, 0.10);
+}
+.ymp__nav:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(60, 200, 200, 0.35);
+}
+
+/* 년/월 select — 네이티브 화살표 제거 + 시각적으로 텍스트 버튼 */
+.ymp__select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: 0;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
+  font-family: inherit;
+}
+.ymp__select:hover {
+  background: #F3F4F6;
+}
+.ymp__select:focus {
+  outline: none;
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent);
+}
+.ymp__select option {
+  font-size: 13px;
+  padding: 4px;
+  color: #111827;
+}
+
+/* "이번 달" 버튼 — 텍스트 버튼 톤 */
+.ymp__today {
+  height: 26px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--accent);
+  border: 0;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  font-family: inherit;
+  margin-left: 2px;
+  transition: background-color 0.12s;
+}
+.ymp__today:hover {
+  background: rgba(0, 122, 255, 0.10);
+}
+.ymp__today:active {
+  background: rgba(0, 122, 255, 0.10);
+}
+.ymp__today:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(60, 200, 200, 0.35);
+}
+
+/* 컴팩트 변형 — 미니 달력 안의 YMP
+ *  · 캘린더 사이드바 폭 (240px → 내부 콘텐츠 ≈ 216px) 안에 한 줄로 들어가야 함
+ *  · MacSelect 기본 width:100% 이 좁은 컬럼에서 줄바꿈/오버플로우 유발 → 모두 컴팩트로 강제
+ *  · 사이즈 합산 (대략): 18(nav) + 56(연) + 40(월) + 18(nav) + 32(오늘) + gap(8) ≈ 172px → 여유 OK
+ */
+.att-monthly-cal {
+  padding: 10px 8px;            /* 좌우 padding 12 → 8 로 축소해 4px 확보 */
+}
+.att-monthly-cal__head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-bottom: 4px;
+}
+.att-monthly-cal__head .ymp {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  gap: 1px !important;
+  box-shadow: none !important;
+  white-space: nowrap;
+  overflow: visible !important;     /* ← 드롭다운 메뉴가 잘리지 않도록 visible 강제 */
+  position: relative;
+  font-size: 11px;
+}
+/* 캘린더 사이드바 자체도 드롭다운이 밖으로 떨어질 수 있도록 overflow visible */
+.att-monthly-cal {
+  overflow: visible !important;
+}
+.att-monthly-cal__head {
+  overflow: visible !important;
+}
+.att-monthly-cal__head .ymp > * {
+  flex-shrink: 0;
+  min-width: 0;
+}
+.att-monthly-cal__head .ymp__nav {
+  width: 18px !important;
+  height: 22px !important;
+  font-size: 13px !important;
+  padding: 0 !important;
+}
+.att-monthly-cal__head .ymp__today {
+  height: 22px !important;
+  padding: 0 6px !important;
+  font-size: 11px !important;
+  margin-left: 2px !important;
+  font-weight: 600;
+}
+/* MacSelect 컴팩트 — 컬럼 내 폭 절약 */
+.att-monthly-cal__head .ymp .mac-select.ymp__select,
+.att-monthly-cal__head .ymp .mac-select {
+  width: auto !important;
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+}
+/* macOS Sequoia popup button 톤 — translucent gray pill (컴팩트 사이즈) */
+.att-monthly-cal__head .ymp .mac-select__trigger {
+  width: auto !important;
+  min-width: 0 !important;
+  height: 26px !important;
+  padding: 0 6px 0 10px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  gap: 4px !important;
+  letter-spacing: -0.01em;
+  color: #1A1A1A !important;
+  transition: background-color 0.12s !important;
+}
+.att-monthly-cal__head .ymp .mac-select__trigger:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+.att-monthly-cal__head .ymp .mac-select__trigger.is-open {
+  background: rgba(0, 0, 0, 0.10) !important;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.20) !important;
+}
+/* chevron — 컴팩트 */
+.att-monthly-cal__head .ymp .mac-select__trigger .mac-select__chevron,
+.att-monthly-cal__head .ymp .mac-select__chevron,
+.att-monthly-cal__head .ymp .mac-select__trigger > svg {
+  width: 9px !important;
+  height: 9px !important;
+  margin-left: 0 !important;
+  flex-shrink: 0;
+  color: #6B7280 !important;
+}
+/* 드롭다운 메뉴 — 새 liquid glass 톤 (전역 MacSelect 와 통일) */
+.att-monthly-cal__head .ymp .mac-select__menu {
+  z-index: 9999 !important;
+  min-width: 92px !important;
+  max-height: 260px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+.att-monthly-cal__head .ymp .mac-select__item {
+  font-size: 13px !important;
+  padding: 0 10px !important;
+  border-radius: 6px !important;
+  height: 28px !important;
+}
+/* 드롭다운이 sticky/카드 위로 떨어지도록 .mac-select 컨테이너에 stacking context */
+.att-monthly-cal__head .ymp .mac-select.is-open {
+  z-index: 99999 !important;
+  position: relative;
+}
+/* sticky 인 .att-monthly-cal 가 자체 stacking context 를 만들기 때문에
+ *  드롭다운이 카드 안에서만 표시됨 → 드롭다운 열림 상태일 때 카드 z-index 도 올림 */
+.att-monthly-cal:has(.mac-select.is-open) {
+  z-index: 99999 !important;
+}
+/* :has() 미지원 브라우저 fallback — 그리드/사이트 카드도 overflow visible 보장 */
+.att-monthly-grid,
+.att-monthly,
+.att-monthly-center,
+.att-monthly-sites,
+.att-monthly-cal,
+.att-monthly-cal__head {
+  overflow: visible !important;
+}
+/* portal 로 document.body 에 렌더된 mac-select__menu — 모든 sticky/sidebar/modal 위에 떠야 함 */
+body > .mac-select__menu,
+body > .mac-select__menu--fixed {
+  z-index: 99999 !important;
+}
+
+/* ─────────────────────────────────────────────
+ * 일일 출역확정 히어로 — iOS 알림 카드 톤
+ *  (인력관리 .team-hero 와 동일 패턴)
+ * ───────────────────────────────────────────── */
+.att-daily-kpi--notif {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin-bottom: 12px;
+}
+@media (max-width: 1100px) {
+  .att-daily-kpi--notif { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .att-daily-kpi--notif { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* 6컬럼 변형 — 노무비 (WagePage WageOverviewHeader) */
+.att-daily-kpi--notif.att-daily-kpi--notif--6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+@media (max-width: 1280px) {
+  .att-daily-kpi--notif.att-daily-kpi--notif--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .att-daily-kpi--notif.att-daily-kpi--notif--6 { grid-template-columns: repeat(2, 1fr); }
+}
+
+.att-hero__tile {
+  display: grid !important;
+  grid-template-columns: 36px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  column-gap: 10px !important;
+  background: #FFFFFF !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  padding: 10px 12px !important;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  /* 둥근 모서리 + 입체감 (3-tier 그림자 + inset white highlight) — 인력관리 히어로와 통일 */
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 3px 6px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+  transition: transform 0.15s, box-shadow 0.2s, background-color 0.18s;
+  min-height: 56px;
+  min-width: 0;
+}
+.att-hero__tile:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.09),
+    0 5px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+.att-hero__tile:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+.att-hero__tile.is-active {
+  background: rgba(0, 122, 255, 0.10) !important;
+  box-shadow:
+    0 8px 20px rgba(0, 122, 255, 0.12),
+    0 3px 6px rgba(0, 122, 255, 0.08),
+    0 1px 2px rgba(0, 122, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+.att-hero__icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.att-hero__icon svg { width: 36px; height: 36px; display: block; }
+.att-hero__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 1px;
+}
+.att-hero__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.015em;
+  line-height: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.att-hero__sub {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.att-hero__sub b {
+  color: #111827;
+  font-weight: 700;
+  margin-right: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.att-hero__time {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9CA3AF;
+  align-self: flex-start;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  margin-top: 1px;
+}
+.att-hero__tile.is-active .att-hero__time {
+  color: var(--accent);
+  font-weight: 600;
+}
+.att-hero__tile--ok     .att-hero__sub b { color: var(--accent-hover); }
+.att-hero__tile--amber  .att-hero__sub b { color: #b45309; }
+.att-hero__tile--info   .att-hero__sub b { color: var(--accent); }
+.att-hero__tile--danger .att-hero__sub b { color: #b91c1c; }
+
+/* ─────────────────────────────────────────────
+ * 일일 출역확정 좌측 사이드바 (.auth-site-card)
+ *  → 인력관리 반장 카드와 동일한 톤
+ *  · 흰 배경, hairline #F0F0F2, 12px corner, 미세 그림자
+ *  · 좌측 status accent stripe (안쪽 들여쓴 pill)
+ *  · 활동중 = 녹색 pill + 카드 좌측 녹색 라인
+ *  · is-selected = 시안 1px inset
+ * ───────────────────────────────────────────── */
+.auth-sites .auth-site-card {
+  display: block !important;
+  width: 100% !important;
+  background: #FFFFFF !important;
+  border: 1px solid #F0F0F2 !important;
+  border-radius: 12px !important;
+  padding: 14px 16px 14px 22px !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  position: relative !important;
+  font-family: inherit !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 1px rgba(0,0,0,0.02) !important;
+  transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s !important;
+}
+.auth-sites .auth-site-card:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03) !important;
+  border-color: #E5E5E8 !important;
+}
+.auth-sites .auth-site-card.is-selected {
+  border: 0 !important;
+  box-shadow:
+    0 0 0 1px #B5B5BB inset,
+    0 2px 6px rgba(0,0,0,0.04),
+    0 1px 2px rgba(0,0,0,0.03) !important;
+}
+
+/* 좌측 status accent — 안쪽 들여쓴 pill (close) */
+.auth-sites .auth-site-card::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.auth-sites .auth-site-card--warn::before    { background: #f59e0b; }
+.auth-sites .auth-site-card--danger::before  { background: #b91c1c; }
+
+/* ─────────────────────────────────────────────
+ * 일일 출역확정 — 액션바 (BEM 클래스 정의)
+ *  · auth-split = [300px sidebar | 16px gap | 1fr detail] 컬럼과 X축 정렬
+ *  · LEFT 셀  : 오늘/월간 토글 (300px 사이드바 위)
+ *  · RIGHT 셀 : 일일확정 + 출역추가 + 필터칩 (1fr 디테일 위)
+ * ───────────────────────────────────────────── */
+.att-daily-actionbar {
+  display: grid;
+  grid-template-columns: 300px 16px 1fr;
+  align-items: center;
+  width: 100%;
+  margin: 8px 0 12px;
+  gap: 0;
+}
+.att-daily-actionbar__left {
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+.att-daily-actionbar__right {
+  grid-column: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+}
+.att-daily-actionbar__right .auth-filter-chips--right {
+  margin-left: auto;
+}
+
+

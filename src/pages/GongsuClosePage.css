@@ -1,0 +1,279 @@
+/* 공수마감 페이지 — 정산관리 → 첫 단계
+ *  · 톤은 기존 BodaPass 와 동일 (#f8f9fb, #ecfdf5, #fef3c7, #fef2f2)
+ *  · 정보밀도: KPI 6장 + 본문 표 1개 + 액션 영역
+ */
+
+.gc-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);   /* .att / .wage 와 동일한 16px 간격 — 헤더 위치 일치 보장 */
+}
+
+/* ─────────── 필터 행 ─────────── */
+.gc-filter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+}
+/* 외곽 타일 제거 — 히어로 아래에 flat 으로 배치 (배경/보더/그림자 모두 무효화) */
+.gc-filter--flat {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 4px 12px !important;
+  border-bottom: 1px solid #E5E5EA !important;
+}
+.gc-filter__cell { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+/* 라벨(현장/해당월) — 가로 1줄 강제 + 줄바꿈 방지 */
+.gc-filter__cell label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  writing-mode: horizontal-tb;
+}
+.gc-filter__cell select,
+.gc-filter__cell input {
+  height: 32px; padding: 0 12px;
+  border: 1px solid var(--color-border-strong, #d1d5db);
+  border-radius: 6px; background: white; font-size: 13px;
+  font-family: inherit; cursor: pointer;
+}
+.gc-filter__cell input[type='month'] { padding-right: 8px; }
+.gc-filter__status {
+  margin-left: auto; padding-left: 12px;
+  border-left: 1px solid var(--color-border, #e5e7eb);
+}
+.gc-filter__actions {
+  display: flex; align-items: center; gap: 8px;
+}
+
+.gc-status {
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.gc-status--open   { background: rgba(0, 122, 255, 0.05); color: var(--accent); border-color: rgba(0, 122, 255, 0.20); }
+.gc-status--closed { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+
+/* ─────────── 버튼 ─────────── */
+.gc-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 34px; padding: 0 16px;
+  font-size: 13px; font-weight: 600;
+  border-radius: 8px; cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  white-space: nowrap; letter-spacing: -0.01em;
+  border: 1px solid;
+}
+.gc-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.gc-btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong, #d1d5db);
+  color: var(--color-text);
+}
+.gc-btn--ghost:hover:not(:disabled) {
+  border-color: #111827; background: #f9fafb;
+}
+.gc-btn--primary {
+  background: #111827; border-color: #111827; color: white;
+}
+.gc-btn--primary:hover:not(:disabled) { background: #000; }
+.gc-btn--dark {
+  background: #b91c1c; border-color: #b91c1c; color: white;
+}
+.gc-btn--dark:hover:not(:disabled) { background: #991b1b; }
+
+/* 마감 취소 — 코랄 레드 알약 (마감완료 chip 톤과 같은 pill 형태, 반대 색) */
+.gc-btn--cancel {
+  background: rgba(255, 107, 107, 0.10);
+  border-color: rgba(255, 107, 107, 0.40);
+  color: #C9302C;
+  height: auto;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.gc-btn--cancel:hover:not(:disabled) {
+  background: rgba(255, 107, 107, 0.18);
+  border-color: rgba(255, 107, 107, 0.55);
+  color: #B02A26;
+}
+.gc-btn--cancel:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ─────────── 표 ─────────── */
+.gc-empty {
+  background: white;
+  border: 1px dashed var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+.gc-loading,
+.gc-error,
+.gc-toast {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.gc-loading { color: var(--color-text-muted); }
+.gc-error   { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
+.gc-toast   { background: #ecfdf5; border: 1px solid #a7f3d0; color: var(--accent-hover); }
+
+.gc-table-wrap {
+  background: white;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  overflow: hidden;
+  overflow-x: auto;
+}
+.gc-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+}
+.gc-table thead tr {
+  background: #f8f9fb;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+}
+/* 모든 헤더·셀 가운데 정렬 (근로자 셀만 좌측, 순번/조치는 가운데) */
+.gc-table th {
+  text-align: center; padding: 10px 12px;
+  font-weight: 700; color: var(--color-text-muted);
+  font-size: 11.5px; white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.gc-table tbody tr { border-top: 1px solid var(--color-border, #e5e7eb); }
+.gc-table tbody tr:first-child { border-top: none; }
+.gc-table td {
+  padding: 10px 12px; vertical-align: middle; white-space: nowrap;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.gc-td-name {
+  text-align: center;
+  display: flex; flex-direction: column; gap: 2px;
+  align-items: center;
+}
+.gc-td-name strong {
+  font-size: 13px; color: var(--color-text); font-weight: 700;
+}
+.gc-td-sub {
+  font-size: 11px; color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.gc-td-num    { text-align: center; font-variant-numeric: tabular-nums; }
+.gc-td-center { text-align: center; }
+.gc-td-actions { text-align: center; }
+.gc-td--warn   { color: #b45309; font-weight: 700; }
+.gc-td--danger { color: #b91c1c; font-weight: 700; }
+/* 순번(#) 컬럼 */
+.gc-table th.gc-th-no, .gc-table td.gc-td-no {
+  width: 40px; min-width: 40px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+/* 조치 컬럼 */
+.gc-table th.gc-th-actions { width: 70px; }
+/* 정렬 가능 헤더 — hover 강조 + 정렬 화살표 */
+.gc-th-sortable { cursor: pointer; transition: color 0.12s; }
+.gc-th-sortable:hover { color: var(--color-text); }
+.gc-th-sortable.is-active { color: var(--color-text); }
+.gc-th-sortable.is-active .gc-th-arrow { color: var(--accent); }
+.gc-th-arrow {
+  display: inline-block;
+  margin-left: 2px;
+  font-size: 9.5px;
+  color: #d1d5db;
+  vertical-align: middle;
+}
+
+.gc-row--need_check { background: #fffbeb; }
+.gc-row--closed     { background: #f8fafc; }
+
+.gc-row-btn {
+  height: 26px; padding: 0 10px;
+  background: white;
+  border: 1px solid var(--color-border-strong, #d1d5db);
+  border-radius: 6px;
+  font-size: 11.5px; font-weight: 600;
+  color: var(--color-text); cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.12s, color 0.12s;
+}
+.gc-row-btn:hover {
+  border-color: var(--color-primary, #4f6fb8);
+  color: var(--color-primary, #4f6fb8);
+}
+
+/* 작은 ✓ / × 도장 (계약·동의·얼굴·보험) */
+.gc-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  font-size: 12px; font-weight: 700;
+  border: 1px solid transparent;
+}
+.gc-pill--ok  { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+.gc-pill--off { background: #f3f4f6; color: #9ca3af; border-color: #e5e7eb; }
+
+/* 상태 칩 */
+.gc-status-chip {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 9px; border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.gc-status-chip--green { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+.gc-status-chip--amber { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.gc-status-chip--gray  { background: #f3f4f6; color: #4b5563; border-color: #e5e7eb; }
+
+/* ─────────── 마감 / 취소 모달 ─────────── */
+.gc-confirm {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 4px 2px;
+}
+.gc-confirm p {
+  margin: 0;
+  font-size: 13px; color: var(--color-text);
+  line-height: 1.55;
+}
+.gc-confirm__hint {
+  color: var(--color-text-muted) !important;
+  font-size: 12px !important;
+}
+.gc-confirm ul {
+  margin: 0; padding: 12px 16px;
+  list-style: none;
+  background: #f8f9fb;
+  border-radius: 8px;
+  display: flex; flex-direction: column; gap: 6px;
+  font-size: 13px;
+}
+.gc-confirm li {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.gc-confirm li strong {
+  color: var(--color-text); font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.gc-confirm__actions {
+  display: flex; justify-content: flex-end; gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border, #e5e7eb);
+}

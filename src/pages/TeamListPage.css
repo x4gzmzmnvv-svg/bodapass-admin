@@ -1,0 +1,4344 @@
+/* CSS_VERSION 1777637382 — force HMR reload */
+.team-list {
+  display: flex;
+  flex-direction: column;
+  /* 반장관리·현장관리 와 동일 간격 (20px) */
+  gap: 20px;
+}
+
+/* ─────────── 인력관리 KPI 헤더 (제목 + 5타일) — 노무정산 헤더와 동일 톤 ─────────── */
+.team-overview {
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.team-overview__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.team-overview__head .team-overview__title,
+.team-overview__head .team-overview__sub {
+  white-space: nowrap;
+}
+.team-overview__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.2px;
+}
+.team-overview__sub {
+  font-size: 11px;
+  color: #94a3b8;
+}
+.team-overview__tiles {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+@media (max-width: 1100px) {
+  .team-overview__tiles { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .team-overview__tiles { grid-template-columns: repeat(2, 1fr); }
+}
+.team-overview__tile {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 7px 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 8px;
+  font-family: inherit;
+  text-align: left;
+  min-width: 0;
+}
+.team-overview__tile--clickable {
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.team-overview__tile--clickable:hover {
+  border-color: #cbd5e1;
+}
+.team-overview__tile.is-warn {
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+.team-overview__tile.is-warn .team-overview__tile-value { color: #b45309; }
+.team-overview__tile.is-ok .team-overview__tile-value { color: var(--accent-hover); }
+/* 출근 가능 (현장 미배정) — 옅은 파랑 톤 */
+.team-overview__tile.is-info .team-overview__tile-value { color: var(--accent); }
+.team-overview__tile-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-overview__tile-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
+}
+.team-overview__tile-value em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-left: 1px;
+}
+
+/* ─────────── 처리 필요 (4타일) — 컴팩트 ─────────── */
+.team-review {
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.team-review__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 2px;
+}
+.team-review__head h3 {
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.1px;
+}
+.team-review__head p {
+  margin: 0;
+  font-size: 10px;
+  color: #94a3b8;
+}
+.team-review__tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+@media (max-width: 700px) {
+  .team-review__tiles { grid-template-columns: repeat(2, 1fr); }
+}
+.team-review__tile {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  column-gap: 4px;
+  cursor: pointer;
+  transition: border-color 0.12s;
+  font-family: inherit;
+  text-align: left;
+  height: 28px;
+  box-sizing: border-box;
+}
+.team-review__tile:hover { border-color: #cbd5e1; }
+.team-review__tile.has-value { border-color: #fcd34d; }
+.team-review__tile.has-value:hover { border-color: #f59e0b; }
+.team-review__tile-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+.team-review__tile-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.team-review__tile.is-clean .team-review__tile-value { color: #cbd5e1; }
+.team-review__tile.has-value .team-review__tile-value { color: #b45309; }
+.team-review__tile-unit {
+  font-size: 10.5px;
+  color: #9ca3af;
+}
+
+/* ─────────── 근로자 목록 — 한 줄 inline (소속만 합성) ─────────── */
+/* td 자체는 table-cell 유지 (display: flex 사용 시 table 레이아웃 깨짐). */
+.team-table--workers .team-table__belong {
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.team-table--workers .team-table__belong > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.team-table--workers .team-table__belong > *:last-child {
+  margin-right: 0;
+}
+.team-table--workers .team-table__belong-site {
+  font-size: 12.5px;
+  color: #111827;
+  font-weight: 500;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-table--workers .team-table__belong-sep {
+  color: #cbd5e1;
+  font-size: 11px;
+}
+/* 책임자 컬럼 — 반장 칩 / 현장담당자 칩만 단일 표시 */
+.team-table--workers .team-table__mgr-cell {
+  white-space: nowrap;
+}
+.team-table--workers .team-table__role {
+  font-size: 12.5px;
+  color: #111827;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.team-table--workers .team-table__docs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.team-table--workers .team-table__last {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* 필수서류 chip — 미완료(워닝)만 노출. 완료된 항목은 chip 자체를 안 그림 */
+.doc-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.doc-chip.is-pending {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+.doc-chip--btn {
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.doc-chip--btn:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+/* ─────────── 처리 필요 모달 — Excel 스타일 표 ─────────── */
+.team-review-modal__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.team-review-modal__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 11.5px;
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.12s;
+}
+.team-review-modal__chip:hover {
+  border-color: #94a3b8;
+}
+.team-review-modal__chip em {
+  font-style: normal;
+  color: #6b7280;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+}
+.team-review-modal__chip strong {
+  color: #cbd5e1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.team-review-modal__chip.has-value {
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+.team-review-modal__chip.has-value strong {
+  color: #b45309;
+}
+/* 선택된 카테고리 — 굵은 검정 외곽 + 흰 배경 (다른 chip 보다 한 단계 강조) */
+.team-review-modal__chip.is-active {
+  border-color: #111827;
+  border-width: 2px;
+  padding: 3px 9px; /* border 1px 추가분 보정 */
+  background: #fff;
+}
+.team-review-modal__chip.is-active em {
+  color: #111827;
+  font-weight: 700;
+}
+.team-review-modal__chip.is-active.has-value {
+  border-color: #f59e0b;
+  background: #fef3c7;
+}
+.team-review-modal__chip.is-active.has-value em {
+  color: #92400e;
+}
+.team-review-modal__empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--accent-hover);
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.team-review-modal__scroll {
+  max-height: 480px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+.team-review-modal__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.team-review-modal__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: left;
+  padding: 6px 10px;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  letter-spacing: -0.1px;
+}
+.team-review-modal__table tbody td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.team-review-modal__table tbody tr:hover {
+  background: #fafafa;
+}
+.team-review-modal__num {
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+}
+.team-review-modal__name {
+  font-weight: 600;
+}
+.team-review-modal__reason {
+  color: #6b7280;
+  white-space: normal;
+}
+.team-review-modal__cat {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+.team-review-modal__cat--no-contract { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.team-review-modal__cat--no-consent  { background: #fce7f3; color: #9d174d; border-color: #fbcfe8; }
+.team-review-modal__cat--no-face     { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.team-review-modal__cat--no-ins      { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+.team-review-modal__btn {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  background: #fffbeb;
+  color: #92400e;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.1px;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.team-review-modal__btn:hover {
+  background: #fde68a;
+  border-color: #f59e0b;
+  color: #78350f;
+}
+
+/* ─────────── 구인요청 다이얼로그 ─────────── */
+.recruit {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.recruit__sec-h {
+  margin: 0 0 6px;
+  padding: 0 0 4px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: -0.1px;
+}
+.recruit__sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.recruit__select-all {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  font-family: inherit;
+}
+.recruit__select-all:hover { border-color: #94a3b8; background: #f8fafc; }
+
+/* 출근가능 풀 리스트 */
+.recruit__pool {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.recruit__pool-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.recruit__pool-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 11.5px;
+}
+.recruit__pool-item strong { color: #111827; }
+.recruit__pool-meta { color: #6b7280; font-variant-numeric: tabular-nums; }
+.recruit__pool-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+.recruit__muted {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* 폼 */
+.recruit__form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.recruit__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.recruit__field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.recruit__field > span {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+.recruit__field > input,
+.recruit__field > select {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 12.5px;
+  font-family: inherit;
+  background: #fff;
+  outline: none;
+}
+.recruit__field > input:focus,
+.recruit__field > select:focus {
+  border-color: #0f766e;
+}
+
+/* 특약사항 */
+.recruit__perks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+.recruit__perks-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+}
+.recruit__perks-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.recruit__perk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 11.5px;
+  color: #475569;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.12s;
+}
+.recruit__perk:hover { border-color: #94a3b8; }
+.recruit__perk.is-on {
+  background: #f0fdfa;
+  border-color: #0f766e;
+  color: #0f766e;
+  font-weight: 600;
+}
+.recruit__perk input[type='checkbox'] { display: none; }
+.recruit__perk-etc {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 12.5px;
+  font-family: inherit;
+  background: #fff;
+  outline: none;
+}
+.recruit__perk-etc:focus { border-color: #0f766e; }
+
+/* 발송 대상 반장 */
+.recruit__recipients {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.recruit__recipients-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.recruit__recipient {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.12s;
+  font-size: 12px;
+}
+.recruit__recipient:hover { border-color: #cbd5e1; }
+.recruit__recipient.is-on {
+  border-color: #0f766e;
+  background: #f0fdfa;
+}
+.recruit__recipient input[type='checkbox'] {
+  margin: 0;
+  accent-color: #0f766e;
+}
+.recruit__recipient-name {
+  font-weight: 600;
+  color: #111827;
+}
+.recruit__recipient-meta {
+  flex: 1;
+  text-align: right;
+  font-size: 11px;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 문자 미리보기 — 카카오톡 말풍선 느낌 */
+.recruit__preview {
+  margin: 0;
+  padding: 14px 16px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  font-family: 'Pretendard', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #111827;
+  white-space: pre-wrap;
+  word-break: break-all;
+  letter-spacing: -0.1px;
+}
+
+/* 근로자 상세 모달 — 타이틀(이름) 크게, T-tier 배지를 같은 줄 우측 정렬 */
+.modal:has(.member-detail) .modal__title {
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+.member-detail__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+.member-detail__title-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.member-detail__title-name strong {
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  color: #111827;
+}
+.member-detail__title-role {
+  font-weight: 400;
+  font-size: 18px;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+}
+.member-detail__title-tier {
+  flex-shrink: 0;
+  font-size: 11px;
+  padding: 3px 8px;
+  font-weight: 700;
+}
+
+/* 현장정보 — 풀폭 1줄 + 3컬럼 1줄 (총 2줄) */
+.member-detail__rows--full {
+  margin-bottom: 8px;
+}
+/* 3컬럼 — content auto 폭 + flex-wrap 으로 짧은 라벨/긴 칩 모두 자연스럽게 */
+.member-detail__rows--3col {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+}
+.member-detail__rows--3col > div {
+  flex: 0 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.member-detail__rows--3col > div > dt {
+  flex: 0 0 auto;
+  font-size: 11.5px;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.member-detail__rows--3col > div > dd {
+  margin: 0;
+  font-size: 12.5px;
+  color: #111827;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.member-detail__site-name {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─────────── 근로자 상세 패널 (5섹션) ─────────── */
+.member-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* 첫 섹션(기본정보) 위에 불필요한 상단 여백 제거 — 모달 본문 padding 으로 충분 */
+  margin-top: -4px;
+}
+/* 첫 섹션의 제목 — 위 구분선/마진 최소화 */
+.member-detail__sec:first-child > .member-detail__sec-h {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+.team-table__row--clickable {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.team-table__row--clickable:hover {
+  background: #f8fafc;
+}
+.member-detail__sec {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.member-detail__sec-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 4px;
+  padding: 0 0 4px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: -0.1px;
+}
+.member-detail__sec--sensitive .member-detail__sec-h {
+  color: #b45309;
+}
+.member-detail__sec-h-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.member-detail__reveal {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.12s;
+}
+.member-detail__reveal:hover {
+  border-color: #b45309;
+  color: #b45309;
+  background: #fffbeb;
+}
+.member-detail__reveal-link {
+  height: 22px;
+  padding: 0 6px;
+  font-size: 10.5px;
+  font-weight: 500;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+.member-detail__reveal-link:hover {
+  color: #111827;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* 열람 후 노출되는 알림 — 「감사 로그에 기록됨」 */
+.member-detail__reveal-notice {
+  margin: 4px 0 6px;
+  padding: 6px 10px;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #92400e;
+  letter-spacing: -0.1px;
+  line-height: 1.4;
+}
+
+/* ─────────── 감사 로그 (민감정보 열람 이력) ─────────── */
+.audit-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+.audit-log__item {
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+.audit-log__head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.audit-log__actor {
+  color: #111827;
+  font-weight: 700;
+  font-size: 13px;
+}
+.audit-log__role {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+.audit-log__sep { color: #cbd5e1; }
+.audit-log__time {
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+.audit-log__what,
+.audit-log__why {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.audit-log__label {
+  flex: 0 0 32px;
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+.audit-log__what strong {
+  color: #111827;
+  font-weight: 600;
+}
+.audit-log__fields {
+  display: inline-flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.audit-log__field {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+.audit-log__why {
+  color: #374151;
+  background: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 4px;
+  margin-top: 2px;
+}
+.member-detail__rows {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+}
+.member-detail__rows > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.member-detail__rows dt {
+  flex: 0 0 72px;
+  font-size: 11.5px;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+/* 민감정보 섹션 — dt 폭을 컨텐츠에 맞춰 자동 (주민등록번호와 계좌번호 라벨 길이 다름) */
+.member-detail__sec--sensitive .member-detail__rows dt {
+  flex: 0 0 auto;
+}
+.member-detail__sec--sensitive .member-detail__rows > div {
+  gap: 6px;
+}
+.member-detail__rows dd {
+  margin: 0;
+  font-size: 12.5px;
+  color: #111827;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  min-width: 0;
+}
+.member-detail__rows dd:not(:has(.rsel)):not(:has(.member-detail__ins-toggles)) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 사진·서류 등록 영역 */
+.member-detail__hint {
+  margin: 4px 0 10px;
+  font-size: 11.5px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+.member-detail__doc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+.doc-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  border: 1px dashed #d1d5db;
+  border-radius: 6px;
+  background: #fafafa;
+  transition: border-color 0.15s;
+  min-width: 0;
+}
+.doc-tile.is-done {
+  border-style: solid;
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+.doc-tile__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.doc-tile__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.doc-tile.is-done .doc-tile__head { color: #166534; }
+.doc-tile__remove {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: #6b7280;
+}
+.doc-tile__remove:hover { background: #fecaca; color: #991b1b; }
+.doc-tile__upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  min-height: 56px;
+}
+.doc-tile__upload:hover {
+  border-color: var(--accent);
+  background: rgba(0, 122, 255, 0.05);
+}
+.doc-tile__upload:disabled { opacity: 0.6; cursor: not-allowed; }
+.doc-tile__plus {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+}
+.doc-tile__hint {
+  font-size: 9.5px;
+  color: #6b7280;
+}
+.doc-tile__thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  padding: 0;
+}
+.doc-tile__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.doc-tile__overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 3px;
+  background: rgba(17, 24, 39, 0.7);
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.doc-tile__thumb:hover .doc-tile__overlay { opacity: 1; }
+
+/* 인라인 편집 입력 */
+.member-detail__input {
+  width: 100%;
+  height: 28px;
+  padding: 0 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #111827;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  font-family: inherit;
+}
+.member-detail__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+.member-detail__input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+.member-detail__input--mono {
+  font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+  letter-spacing: 0.01em;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* RoleSelect 트리거 버튼 — 다른 입력과 동일 높이(28px)로 통일 */
+.member-detail__rows .rsel__btn {
+  height: 28px;
+  padding: 0 8px;
+  font-size: 12.5px;
+  border-radius: 6px;
+  border-color: #d1d5db;
+}
+.member-detail__rows .rsel__btn-name {
+  font-weight: 500;
+}
+.member-detail__rows .rsel__btn-cat {
+  font-size: 9.5px;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.member-detail__eye {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+.member-detail__eye:hover { background: #f3f4f6; }
+
+/* 기본정보 — 좌측 얼굴 사진 + 우측 정보 (2단 가로 레이아웃) */
+.member-detail__basic {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+/* 기본정보 외 모든 섹션 — 사진 폭(84px + gap 14px = 98px) 만큼 들여쓰기.
+   제목(h4)·내용 모두 이동하여 「이름」 칼럼과 시각적으로 정렬 */
+.member-detail__sec:not(:first-child) {
+  padding-left: 98px;
+}
+/* 첫 섹션(기본정보) — 제목만 들여쓰고 내용(.basic 그리드)은 photo 컬럼을 갖도록 그대로
+   margin-left 사용 — h4 의 border-bottom 길이를 다른 섹션(98px 들여쓴 후의 폭)과 동일하게 유지 */
+.member-detail__sec:first-child > .member-detail__sec-h {
+  margin-left: 98px;
+}
+.member-detail__photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+.member-detail__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.member-detail__photo-empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #9ca3af;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+.member-detail__photo-empty span {
+  letter-spacing: -0.02em;
+}
+
+/* 필수 상태 — 4종 인증 한 줄 가로 배치 */
+.member-detail__verify-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 4px 0 8px;
+}
+.member-detail__verify-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+.member-detail__verify-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .member-detail__verify-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* 인라인 편집 토글 칩 (이수/미이수, 가입/미가입) */
+.member-detail__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.member-detail__toggle:hover { border-color: #9ca3af; }
+.member-detail__toggle.is-on {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+.member-detail__ins-toggles {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+  white-space: nowrap;
+}
+.member-detail__ins-toggles .member-detail__chip {
+  padding: 1px 5px;
+  font-size: 10.5px;
+}
+.member-detail__chip.is-muted {
+  background: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+}
+.member-detail__mono {
+  font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+  font-size: 12px !important;
+}
+
+/* 상태 chip */
+.member-detail__chip {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+.member-detail__chip.is-ok {
+  background: #f0fdfa;
+  color: var(--accent-hover);
+  border-color: #99f6e4;
+}
+.member-detail__chip.is-pending {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+.member-detail__chip--btn {
+  cursor: pointer;
+  font-family: inherit;
+}
+.member-detail__chip--btn:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.member-detail__link {
+  color: #0f766e;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.member-detail__link:hover { text-decoration: underline; }
+.member-detail__muted {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* 4대보험 dot 라인 */
+.member-detail__ins {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px dashed #f1f5f9;
+}
+.member-detail__ins-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+}
+.member-detail__ins-dot {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  background: #f8fafc;
+  color: #94a3b8;
+  letter-spacing: -0.1px;
+}
+.member-detail__ins-dot.is-on {
+  background: #f0fdfa;
+  color: var(--accent-hover);
+  border-color: #99f6e4;
+}
+
+/* 완료 항목 평문 — 박스 없이 「✓계약」 회색 톤 */
+.doc-text {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  padding: 0 2px;
+}
+
+.team-list__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.team-list__btn {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: var(--r-md);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.team-list__btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+.team-list__btn--ghost:hover { background: var(--color-bg-input); }
+.team-list__btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+.team-list__btn--primary:hover { background: var(--color-primary-dark); }
+
+.team-list__btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+.team-list__btn--primary:hover { background: var(--color-primary-dark); }
+
+.team-list__error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: var(--color-error);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+}
+
+/* 필터 */
+.team-list__filters {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  align-items: end;
+  padding: var(--sp-1) var(--sp-3);
+}
+
+@media (max-width: 1100px) {
+  .team-list__filters {
+    flex-wrap: wrap;
+  }
+}
+
+.team-list__filter {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 0 0 auto;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+/* 직속 자식 .mac-select wrapper 가 외곽 박스를 그리지 않도록 명시 차단 */
+.team-list__filter > .mac-select {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+/* 검색은 남은 공간 차지하되 컴팩트하게 — 너무 길지 않도록 */
+.team-list__filters .team-list__search {
+  flex: 0 1 280px;
+  min-width: 140px;
+  max-width: 320px;
+}
+
+.team-list__filter label {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.team-list__filter select {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: 12px;
+  outline: none;
+  /* 셀렉트 폭 컴팩트화 — 한 줄에 4 셀렉트 + 검색이 들어가도록 */
+  min-width: 100px;
+  max-width: 140px;
+}
+/* 현장 select 만 더 넓게 (현장명이 긴 「대전 유성구 R&D 센터 신축」 등도 한 줄에 보이도록) */
+.team-list__filters .team-list__filter:first-child select {
+  min-width: 200px;
+  max-width: 240px;
+}
+
+.team-list__filter select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.team-list__search {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  background: var(--color-bg-input);
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+}
+
+.team-list__search:focus-within {
+  background: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.team-list__search > svg {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.team-list__search input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 12.5px;
+  min-width: 0;
+}
+
+.team-list__counts {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.team-list__counts strong {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.team-list__sep {
+  width: 1px;
+  height: 12px;
+  background: var(--color-border-strong);
+}
+
+/* 섹션 헤더 */
+.team-list__section {
+  display: flex;
+  flex-direction: column;
+  /* 섹션 헤더 ↔ 본문 간격 압축 */
+  gap: var(--sp-2);
+}
+
+/* 우측 섹션 헤더 — 좌측 「반장별 팀원」 헤더와 동일 톤 (16px/800) */
+.team-list__sec-head {
+  padding: 0 4px 6px;
+  margin-bottom: 4px;
+}
+.team-list__sec-head h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.3;
+  /* 좌측 헤더와 baseline 정렬 */
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.team-list__sec-head p {
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+
+/* 빈 상태 / 로딩 */
+.team-list__loading,
+.team-list__empty {
+  background: white;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--r-lg);
+  padding: var(--sp-12) var(--sp-4);
+  text-align: center;
+  font-size: var(--fs-14);
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.team-list__empty-sub {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.team-list__empty-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ── 반장 카드 그리드 ── */
+.foreman-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* 한 줄에 모든 반장 타일이 들어가도록 flex + nowrap.
+     너무 많으면 가로 스크롤로 fall-back */
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px; /* 스크롤바와 타일 그림자 충돌 방지 */
+}
+.foreman-grid > li {
+  flex: 1 1 0;
+  min-width: 180px;
+}
+
+.foreman-tile {
+  width: 100%;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: 5px 8px;
+  /* 한 칸짜리 타일 — 아바타 / 이름·전화 / 명수 가 한 컨테이너 안에서 자연스럽게 흐름 */
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s, transform 0.05s;
+  font-family: inherit;
+  text-align: left;
+}
+
+.foreman-tile:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.foreman-tile:active {
+  transform: scale(0.99);
+}
+
+.foreman-tile__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.foreman-tile__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.foreman-tile__avatar-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  background: var(--color-primary);
+  color: white;
+}
+
+.foreman-tile__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.foreman-tile__name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.foreman-tile__name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 0 1 auto;
+  letter-spacing: -0.01em;
+}
+
+.foreman-tile__role {
+  font-size: 9.5px;
+  font-weight: 700;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  padding: 1px 5px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.foreman-tile__phone {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+/* 반장 타일 — 통계 라인 (팀원 / 출근중 / 출근가능) */
+.foreman-tile__stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+.foreman-tile__stats strong {
+  font-weight: 700;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  margin: 0 1px;
+}
+.foreman-tile__stats strong.is-working {
+  color: var(--accent-hover);
+}
+.foreman-tile__stats strong.is-available {
+  color: var(--accent);
+}
+.foreman-tile__stats-sep {
+  color: #cbd5e1;
+}
+
+.foreman-tile__site {
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.foreman-tile__count {
+  /* 별도 박스 느낌 제거 — 같은 타일 안의 우측 inline 카운트 (좌측 분리선만) */
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  background: transparent;
+  border-radius: 0;
+  padding: 1px 1px 1px 6px;
+  min-width: 0;
+  border-left: 1px solid var(--color-border);
+  margin-left: 1px;
+}
+
+.foreman-tile__count strong {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  line-height: 1;
+}
+
+.foreman-tile__count small {
+  font-size: 9.5px;
+  color: var(--color-primary-dark);
+  margin-top: 0;
+}
+
+/* 등록 상태 칩 — 이름 옆에 inline */
+.foreman-tile__chip {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;  /* name-row 안에서 우측 끝으로 밀기 */
+}
+
+.foreman-tile__chip.is-ok {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.foreman-tile__chip.is-pending {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* ── 팀원 행열 테이블 ── */
+.team-table-wrap {
+  overflow-x: auto;
+  /* 한 화면에 들어가도록 높이 제한 — 넘치면 내부 스크롤 (sticky thead 유지) */
+  overflow-y: auto;
+  max-height: calc(100vh - 320px);
+  min-height: 280px;
+  padding: 0;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-12);
+  table-layout: auto;
+}
+
+.team-table--modal {
+  font-size: var(--fs-13);
+}
+
+/* macOS Finder 톤 — 헤더는 옅은 회색, 본문은 흰 배경 + hairline 분리, hover 시 그레이 pill */
+.team-table th,
+.team-table td {
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  border-bottom: 1px solid #F0F0F2;
+  vertical-align: middle;
+  white-space: nowrap;
+  height: 24px;
+}
+.team-table tbody tr {
+  height: 24px;
+}
+/* 「일당」 등 숫자 컬럼 — 헤더·내용 모두 좌측 정렬 (직종 ~ 출근상태 사이) */
+.team-table th.team-table__num,
+.team-table td.team-table__num {
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  padding-left: 6px;
+}
+.team-table th.team-table__num .team-table__sort-ind {
+  margin-left: 4px;
+}
+
+/* 4대보험 컬럼 — 4개 칩 + gap 모두 한 줄에 들어가도록 폭 부여, 헤더·내용 좌측 정렬 */
+.team-table th.team-table__ins,
+.team-table td.team-table__ins {
+  width: 88px;
+  text-align: left;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.team-table--modal th,
+.team-table--modal td {
+  padding: 4px 10px;
+}
+.team-table--modal tbody tr {
+  height: 28px;
+}
+.team-table--modal th {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid #E5E5EA;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.team-table th {
+  padding: 4px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--text-primary);
+  border-bottom: 1px solid #E5E5EA;
+  background: rgba(0, 0, 0, 0.02);
+  white-space: nowrap;
+  height: 26px;
+  letter-spacing: -0.01em;
+}
+
+/* 본문 셀은 기본적으로 줄바꿈 허용 — 좁은 화면에서도 한 화면에 들어오게 */
+.team-table tbody td {
+  word-break: break-word;
+}
+
+/* 단, mono / chip / 버튼 셀은 줄바꿈 없이 */
+.team-table__mono,
+.team-table__num,
+.team-table__chip,
+.team-table__actions {
+  white-space: nowrap;
+}
+
+/* macOS Finder hover — 옅은 그레이 pill (full-row), divider 위에 자연스럽게 얹힘 */
+.team-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+/* 옅은 zebra (선택 사항) — 짝수 행에 ultra-light tint */
+.team-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.012);
+}
+.team-table tbody tr:nth-child(even):hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.team-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.team-table__num {
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  font-size: var(--fs-12);
+  color: var(--color-text);
+}
+
+.team-table__num--strong {
+  font-weight: 700;
+}
+
+.team-table__name {
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  /* 이름 컬럼 — 너무 길어지지 않도록 폭 제한 */
+  max-width: 132px;
+  width: 132px;
+}
+/* 신뢰등급 배지 — T1/T2/T3 */
+.team-table__tier {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  line-height: 18px;
+  margin-left: 4px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  vertical-align: middle;
+  letter-spacing: 0.02em;
+}
+.team-table__tier--ok    { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+.team-table__tier--info  { background: rgba(0, 122, 255, 0.10); color: #1e40af; border: 1px solid rgba(0, 122, 255, 0.40); }
+.team-table__tier--warn  { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+/* 필수서류 상태 칩 — 절제된 톤 (배경/테두리 없이 텍스트 컬러만) */
+.team-table__doc {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  line-height: 22px;
+  gap: 2px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 500;
+  border: 0;
+  background: transparent;
+  margin-right: 4px;
+  white-space: nowrap;
+  color: #6b7280;
+}
+.team-table__doc--ok      { color: #4b5563; }
+.team-table__doc--pending { color: #b45309; }
+.team-table__doc--btn {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.team-table__doc--btn:hover { color: #92400e; }
+
+/* 4대보험 도트 — 단색 (가입=짙은 회색, 미가입=옅은 회색) */
+.team-table__ins-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+.team-table__ins-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  padding: 0 3px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background: transparent;
+}
+.team-table__ins-dot.is-on  { color: #1f2937; border-color: #d1d5db; background: #f9fafb; }
+.team-table__ins-dot.is-off { color: #d1d5db; border-color: #f3f4f6; background: transparent; }
+
+/* NEW 배지 — 'n' 한 글자 (작고 잘리지 않게) */
+.team-table__new {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  border-radius: 50%;
+  vertical-align: middle;
+  background: #ef4444;
+  color: #fff;
+  line-height: 1;
+}
+/* 워커 코드 — 이름 아래 한 줄 표시 */
+.team-table__worker-code {
+  margin-top: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #6b7280);
+  letter-spacing: 0.02em;
+}
+/* 이름 텍스트 — ellipsis 처리, hover 시 즉시 뜨는 커스텀 툴팁으로 풀 이름 노출 */
+.team-table__name-text {
+  display: inline-block;
+  max-width: 76px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  position: relative;
+  cursor: default;
+}
+/* ⚠ 와 동일한 즉시 뜨는 커스텀 툴팁 — 풀 이름 노출 */
+.team-table__name-text:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 10;
+}
+.team-table__name-text:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1f2937;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.team-table--modal .team-table__name {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.team-table__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+  overflow: hidden;
+  position: relative;
+}
+.team-table__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.team-table__avatar-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.team-table--modal .team-table__avatar {
+  width: 26px;
+  height: 26px;
+  font-size: var(--fs-12);
+}
+
+/* ─── 반장 모달 — 이름 셀 정렬 수정 ─── */
+.team-table--modal {
+  table-layout: auto;
+}
+.team-table--modal th,
+.team-table--modal td {
+  height: 36px; /* 아바타 26px 보다 한 단계 큼 */
+  padding: 4px 10px;
+  vertical-align: middle;
+}
+/* 이름 셀 — 폭 제한 해제 + flex 정렬 (아바타와 이름 겹침 방지) */
+.team-table--modal .team-table__name {
+  max-width: none;
+  width: auto;
+  min-width: 140px;
+  white-space: nowrap;
+}
+.team-table--modal .team-table__name {
+  /* td 자체는 table-cell 유지, 자식들을 inline-block 으로 정렬 */
+}
+.team-table--modal .team-table__name > .team-table__avatar {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.team-table--modal .team-table__name-inline {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 600;
+  color: #111827;
+}
+
+.team-table__mono {
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+}
+
+/* 클릭하면 마스킹 ↔ 원본 토글되는 셀 */
+.mask-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: transparent;
+  border: 1px dashed transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: -0.01em;
+  transition: background 0.1s, border-color 0.1s;
+}
+.mask-cell:hover {
+  background: var(--color-bg-soft);
+  border-color: var(--color-border);
+}
+.mask-cell.is-open {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #9a3412;
+}
+.mask-cell__icon {
+  font-size: 11px;
+  opacity: 0.55;
+}
+.mask-cell.is-open .mask-cell__icon { opacity: 0.9; }
+.mask-cell__text {
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  white-space: nowrap;
+}
+
+.team-table__small {
+  font-size: var(--fs-12);
+}
+
+.team-table__date {
+  font-size: var(--fs-11, 0.6875rem);
+  color: var(--color-text-muted);
+}
+
+.team-table__chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  line-height: 22px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.team-table__chip.is-ok {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.team-table__chip.is-pending {
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.team-table__chip.is-off {
+  background: var(--color-bg-input);
+  color: var(--color-text-muted);
+}
+/* 출근가능 — 현장 미배정 (대기 풀) — 옅은 파랑 톤 */
+.team-table__chip.is-info {
+  background: rgba(0, 122, 255, 0.05);
+  color: var(--accent);
+  border: 1px solid rgba(0, 122, 255, 0.20);
+}
+
+.team-table__foreman-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.team-table__foreman-link:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.team-table__foreman-link:disabled {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: default;
+  font-weight: 400;
+}
+
+/* 관리자 셀 — 라벨(반장/공무) + 이름 2줄 */
+.team-table__mgr-link {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.team-table__mgr-link.is-direct {
+  cursor: default;
+}
+.team-table__mgr-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  line-height: 18px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  padding: 0 5px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.team-table__mgr-tag--foreman {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+.team-table__mgr-tag--office {
+  background: #f1f5f9;
+  color: #334155;
+}
+.team-table__mgr-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.team-table__mgr-link:hover .team-table__mgr-name {
+  color: var(--color-primary);
+}
+
+/* 클릭 가능한 칩 (미체결/미인증 → 발송 팝업) */
+.team-table__chip--btn {
+  border: 1px dashed currentColor;
+  background: transparent !important;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  transition: background 0.1s, transform 0.05s;
+}
+.team-table__chip--btn:hover {
+  background: rgba(255, 237, 213, 0.6) !important;
+  transform: translateY(-1px);
+}
+.team-table__chip--btn:active {
+  transform: translateY(0);
+}
+
+/* ───────── 수정/삭제 버튼 ───────── */
+
+.team-table__actions-col {
+  width: 84px;
+  text-align: center;
+}
+
+.team-table__actions {
+  /* td 직접 — display:flex 는 td 의 vertical-align 무시함, table-cell 유지하고 inline 으로 */
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.team-table__actions .team-table__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.team-table__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 6px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.team-table--modal .team-table__btn {
+  height: 26px;
+  padding: 0 10px;
+  font-size: var(--fs-12);
+}
+
+.team-table__btn--edit {
+  color: var(--color-primary-dark);
+}
+
+.team-table__btn--edit:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.team-table__btn--del {
+  color: var(--color-error);
+  border-color: #fecdd3;
+}
+
+.team-table__btn--del:hover {
+  background: #fff1f2;
+}
+
+/* ───────── 팀원 수정 다이얼로그 ───────── */
+
+.med {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.med__hint {
+  margin: 0;
+  padding: 8px 12px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--r-md);
+  color: #92400e;
+  font-size: var(--fs-12);
+}
+
+.med__row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+@media (max-width: 540px) {
+  .med__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+.med__row > label {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.med__input {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-text);
+  background: var(--tf-fill-bg, #F2F2F2);
+  border: 1.5px solid transparent;
+  caret-color: var(--tf-caret, var(--accent, #007AFF));
+  outline: none;
+  transition: background-color 0.15s, border-color 0.15s;
+  box-sizing: border-box;
+}
+.med__input::placeholder { color: var(--tf-placeholder, #9C9A95); }
+.med__input:hover { background: var(--tf-fill-bg-hover, #EBEBEB); }
+.med__input:focus {
+  background: #FFFFFF;
+  border-color: var(--tf-focus, var(--accent, #007AFF));
+}
+.med__row--error label,
+.med__row--error .med__label { color: var(--tf-error, #F44336); }
+.med__row--error .med__input { border-color: var(--tf-error, #F44336); }
+.med__row--error .med__input:focus { border-color: var(--tf-error, #F44336); }
+.med__row--error .med__hint { color: var(--tf-error, #F44336); }
+
+.med__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* 민감정보 fieldset — 노임/사회보험 처리용 */
+.med__sensitive {
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: 10px 14px 12px;
+  margin: 4px 0 0 0;
+  background: var(--color-bg-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.med__sensitive-legend {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  padding: 0 6px;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.med__edit-btn {
+  margin-left: 4px;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  background: white;
+  color: var(--color-primary-dark);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  transition: background 0.12s, color 0.12s;
+}
+.med__edit-btn:hover { background: var(--color-primary-light); }
+.med__edit-btn.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+.med__edit-btn.is-active:hover { background: var(--color-primary-dark); }
+
+/* 눈 아이콘 토글 */
+.med__sensitive-input {
+  position: relative;
+  width: 100%;
+}
+.med__sensitive-input .med__input {
+  padding-right: 36px;
+}
+.med__eye-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.med__eye-btn:hover {
+  background: var(--color-bg-input);
+  color: var(--color-text);
+}
+.med__sensitive-hint {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+.med__sensitive-hint strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* 은행 + 계좌번호 분할 */
+.med__split {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 8px;
+}
+.med__input--bank {
+  width: 100% !important;
+}
+@media (max-width: 540px) {
+  .med__split { grid-template-columns: 1fr; }
+}
+
+.med__chip {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  font-size: var(--fs-13);
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.med__chip.is-on {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.med__err {
+  margin: 0;
+  padding: 10px 14px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: var(--r-md);
+  color: var(--color-error);
+  font-size: var(--fs-13);
+}
+
+.med__cta {
+  display: flex;
+  gap: var(--sp-2);
+  justify-content: flex-end;
+}
+
+/* ───────── 압축 표시(2줄 스택) ───────── */
+
+.team-table__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.25;
+}
+
+.team-table__stack > * {
+  display: block;
+}
+
+.team-table__site {
+  font-size: var(--fs-12);
+  color: var(--color-text);
+  font-weight: 500;
+  /* 현장명이 길어도 셀 폭을 넓히지 않게 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+  display: block;
+}
+
+.team-table__nowrap {
+  white-space: nowrap;
+}
+
+/* ───────── 정렬 가능한 컬럼 헤더 ───────── */
+
+.team-table__sort {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.1s, background 0.1s;
+}
+
+.team-table__sort:hover {
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+}
+
+.team-table__sort.is-active {
+  color: var(--color-primary-dark);
+}
+
+.team-table__sort-ind {
+  margin-left: 4px;
+  font-size: 9px;
+  color: var(--color-text-muted);
+  display: inline-block;
+}
+
+.team-table__sort.is-active .team-table__sort-ind {
+  color: var(--color-primary-dark);
+}
+
+/* ───────── 직종별 카운트 칩 ───────── */
+
+.team-list__head-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* 직종 칩이 한 줄에 다 보이도록 wrap 제거 — 좁으면 role-bd 내부에서 가로 스크롤 */
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.team-list__head-row > h2 {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.role-bd {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.role-bd__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  background: white;
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--color-text);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+  transition: border-color 0.1s, background 0.1s, color 0.1s;
+}
+
+.role-bd__chip:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.role-bd__chip strong {
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.role-bd__chip.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.role-bd__chip.is-active strong {
+  color: white;
+}
+
+.role-bd__chip--all {
+  font-weight: 700;
+  border-color: var(--color-border-strong);
+}
+
+/* ───────── 엑셀 업로드 다이얼로그 ───────── */
+
+.excel-imp {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+/* 엑셀 양식 컬럼 표 — 24컬럼이 한 줄에 못 들어가도 가로 스크롤로 처리 (세로 깨짐 방지) */
+.excel-imp__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.7;
+}
+.excel-imp__steps li {
+  padding: 2px 0;
+}
+.excel-imp__steps strong {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-right: 4px;
+}
+.excel-imp__dl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.excel-imp__dl-note {
+  font-size: 11.5px;
+  color: #6b7280;
+}
+
+.excel-imp__sample {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 12px 0;
+  border-radius: 0;
+}
+.excel-imp__sample > strong {
+  font-size: 12.5px;
+  color: #111827;
+  font-weight: 700;
+}
+.excel-imp__sample table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+.excel-imp__sample th,
+.excel-imp__sample td {
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+  background: #fff;
+  line-height: 1.3;
+}
+.excel-imp__sample th {
+  background: #fafafa;
+  color: #374151;
+  font-weight: 600;
+  font-size: 11px;
+}
+.excel-imp__sample td {
+  color: #111827;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.excel-imp__file {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.excel-imp__file input[type="file"] {
+  display: none !important;
+}
+.excel-imp__file-btn {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+.excel-imp__file-btn:hover {
+  text-decoration: underline;
+}
+.excel-imp__file-name {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.excel-imp__info {
+  margin: 0;
+  font-size: 12px;
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+/* 직종별 칩 */
+.role-bd {
+  /* 직종 필터 — 한 줄에 모두 표시. 너무 많으면 가로 스크롤 fall-back */
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin-bottom: 0;
+  overflow-x: auto;
+  min-width: 0;
+  flex: 1;
+  padding-bottom: 1px;
+}
+
+.role-bd__chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--color-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+  transition: background 0.1s, border-color 0.1s;
+}
+.role-bd__chip em {
+  font-style: normal;
+  margin-left: 3px;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  font-size: 10.5px;
+}
+.role-bd__chip:hover {
+  background: var(--color-bg-input);
+  border-color: var(--color-text-faint);
+}
+.role-bd__chip.is-active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+.role-bd__chip.is-active em { color: rgba(255, 255, 255, 0.85); }
+
+/* ── 4대보험 가입 미니 인디케이터 ── */
+.team-table__ins {
+  white-space: nowrap;
+  text-align: center;
+}
+.ins-dots {
+  display: inline-flex;
+  gap: 1px;
+}
+.ins-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--color-bg-input);
+  color: var(--color-text-faint);
+  font-size: 9px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  letter-spacing: 0;
+}
+.ins-dot.is-on {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+
+/* ── 안전교육 미이수 경고 + 커스텀 툴팁 ── */
+.team-table__edu-warn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  font-size: 11px;
+  color: #b45309;
+  background: #fef3c7;
+  border-radius: 50%;
+  cursor: help;
+  position: relative;
+}
+/* 호버 시 즉시 뜨는 커스텀 안내 — 글자가 잘 보이도록 짙은 배경 */
+.team-table__edu-warn::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s;
+  z-index: 10;
+}
+/* 작은 화살표 (말풍선 꼬리) */
+.team-table__edu-warn::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1f2937;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s;
+  z-index: 10;
+}
+.team-table__edu-warn:hover::after,
+.team-table__edu-warn:hover::before,
+.team-table__edu-warn:focus::after,
+.team-table__edu-warn:focus::before {
+  opacity: 1;
+}
+
+/* 반장 타일 — 활성 (필터 적용 중) 표시 */
+.foreman-tile.is-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  box-shadow: 0 0 0 2px rgba(79, 111, 184, 0.18);
+}
+
+/* 근로자 목록 헤더 — 반장 필터 배지 */
+.team-list__filter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  padding: 2px 10px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.team-list__filter-badge em {
+  font-style: normal;
+  font-weight: 700;
+}
+.team-list__filter-clear {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  color: var(--color-primary-dark);
+  font-size: 11px;
+  cursor: pointer;
+  margin-left: 2px;
+}
+.team-list__filter-clear:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ *  인력관리 — 통일 패턴 (좌 300px 반장 리스트 + 우 근로자 표)
+ * ─────────────────────────────────────────────────────────── */
+/* 본문 — 좌·우 동일 높이 stretch
+ *  · 화면 높이 - 상단 영역(헤더/KPI/필터 ≈280px) = 본문 영역
+ *  · 좌·우 grid item 모두 height: 100% 로 동일 (align-items: stretch 기본)
+ *  · 내부에서 자체 스크롤
+ *  · !important 로 기존 .team-table-wrap max-height 덮어씀
+ */
+.team-split {
+  display: grid !important;
+  grid-template-columns: 300px minmax(0, 1fr) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+  height: calc(100vh - 280px) !important;
+  min-height: 520px !important;
+}
+@media (max-width: 1279px) {
+  .team-split { grid-template-columns: 280px minmax(0, 1fr) !important; }
+}
+@media (max-width: 1024px) {
+  .team-split {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+/* 좌측 — 반장 카드 영역 (헤더 고정 + 카드만 스크롤) */
+.team-foremen-aside {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: hidden !important;        /* 부모는 스크롤 X — 자식 ul 만 스크롤 */
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* 좌측 헤더 — 타일 배경 제거, 평문만 (스크롤 영역 밖) */
+.team-foremen-aside .team-foremen-aside__head {
+  position: static !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+}
+/* 카드 리스트 — 헤더 아래 영역에서 자체 스크롤 (스크롤바가 첫 카드 상단~마지막 카드 하단에만 표시됨) */
+.team-foremen-aside .team-foremen-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+}
+
+/* 우측 — 근로자 목록 영역도 동일 높이 + 내부 스크롤 */
+.team-split > .team-list__section {
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+.team-split > .team-list__section > .team-list__sec-head {
+  flex-shrink: 0;
+  margin: 0 !important;
+}
+.team-split > .team-list__section > .team-list__empty {
+  flex-shrink: 0;
+}
+/* 테이블 wrap — 부모 stretch 받아서 채우고 내부 스크롤만 */
+.team-split > .team-list__section .team-table-wrap,
+.team-split > .team-list__section .card.team-table-wrap {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  margin: 0 !important;
+}
+/* 테이블 헤더 sticky */
+.team-split .team-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  z-index: 1;
+}
+/* 좌측 헤더 — 한 줄: 제목(좌) + 활동/대기(우) */
+.team-foremen-aside__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 4px 6px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 4px;
+  /* 우측 「근로자 목록」 헤더와 baseline 정렬 — 동일 padding/font-size */
+  min-height: 24px;
+}
+.team-foremen-aside__title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.team-foremen-aside__sub {
+  font-size: 12px;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.team-foremen-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ─────────────────────────────────────────────
+ * 반장 카드 — auth-site-card 톤 (일일 출역확정 사이드바와 동일)
+ *  · 흰 배경, hairline #e5e7eb, 10px corner, 컴팩트 padding
+ *  · 좌측 status accent stripe (::before, 안쪽 들여쓴 pill)
+ *  · 활동중 = 시스템 블루 / 대기 = 앰버
+ *  · is-selected = 중성 회색 1px inset
+ * ───────────────────────────────────────────── */
+/* 좌측 status accent stripe — pill 형태 */
+/* 1행: 상태 뱃지 + 반장명 */
+/* 2행: 현장명 — 1줄 말줄임 */
+/* 3행: 메트릭 라인 */
+/* 우측 영역 — section.team-list__section 그대로 사용 */
+
+/* ─────────────────────────────────────────
+ *  인력관리 — 반장 중심 5 KPI 히어로 타일
+ *  (전체/활성/대기/오늘활동/조치필요)
+ * ───────────────────────────────────────── */
+/* 반장관리(.foreman-kpi) / 현장관리(.sl-hero) 와 동일 사이즈·간격 통일 */
+.team-hero {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+}
+@media (max-width: 1280px) {
+  .team-hero { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+}
+@media (max-width: 1180px) {
+  .team-hero { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px) {
+  .team-hero { grid-template-columns: repeat(2, 1fr); }
+}
+.team-hero__tile {
+  background: white;     /* 10 → 12 (반장관리와 동일) */
+  padding: 14px 16px;       /* 12 14 → 14 16 (반장관리와 동일) */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;                 /* 4 → 6 (반장관리와 동일) */
+  font-family: inherit;
+  text-align: left;
+}
+.team-hero__tile--ok     { background: #f6fefa; }
+.team-hero__tile--amber  { background: #fffbeb; }
+.team-hero__tile--info   { background: rgba(0, 122, 255, 0.05); }
+.team-hero__tile--danger { background: #fef2f2; }
+.team-hero__label {
+  font-size: 12px;          /* 반장관리와 동일 */
+  color: var(--color-text-muted, #6b7280);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.team-hero__value {
+  font-size: 24px;          /* 22 → 24 (반장관리와 동일) */
+  font-weight: 800;
+  color: var(--color-text, #111827);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.team-hero__value em {
+  font-size: 13px;          /* 12 → 13 (반장관리와 동일) */
+  font-weight: 600;
+  color: var(--color-text-muted, #6b7280);
+  margin-left: 3px;
+  font-style: normal;
+}
+.team-hero__tile--ok     .team-hero__value { color: var(--accent-hover); }
+.team-hero__tile--amber  .team-hero__value { color: #b45309; }
+.team-hero__tile--info   .team-hero__value { color: var(--accent); }
+.team-hero__tile--danger .team-hero__value { color: #b91c1c; }
+.team-hero__tile--btn {
+  cursor: pointer;
+  transition: border-color 0.12s, transform 0.06s, box-shadow 0.12s;
+}
+.team-hero__tile--btn:hover:not(:disabled) {
+}
+.team-hero__tile--btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.team-hero__tile--btn:disabled,
+.team-hero__tile--btn.is-empty {
+  cursor: default;
+  opacity: 0.6;
+}
+/* 활성(필터 적용 중) 타일 강조 */
+.team-hero__tile--btn.is-active {
+}
+.team-hero__tile--btn.is-active.team-hero__tile--ok      { }
+.team-hero__tile--btn.is-active.team-hero__tile--amber   { }
+.team-hero__tile--btn.is-active.team-hero__tile--info    { }
+.team-hero__tile--btn.is-active.team-hero__tile--danger  { }
+
+/* 필터 행 — 카드 배경 제거 + 하단 구분선만 */
+.team-list__filters--flat {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  border-radius: 0 !important;
+  padding: 8px 4px !important;
+  box-shadow: none !important;
+  margin-bottom: 8px;
+}
+
+/* 필수서류 칩 — 박스 없는 평면 톤 (line-up 정렬용) */
+.doc-chip--flat {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  height: auto;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: default;
+}
+.doc-chip--flat.is-ok {
+  color: var(--accent-hover);
+}
+.doc-chip--flat.is-pending {
+  color: #b45309;
+  cursor: pointer;
+}
+/* 노란 세모 ⚠ 아이콘 */
+.doc-chip__warn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  color: #f59e0b;
+  font-weight: 700;
+  text-shadow: 0 0 1px rgba(245, 158, 11, 0.4);
+}
+
+/* 필수서류 셀 — 4 아이템 한 줄 가로 정렬 (계약 얼굴 동의 안전) */
+.team-table__docs {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+/* 보험 아이콘 — 소속 컬럼 제거로 폭 여유 → 좀더 크게 */
+.team-table__ins {
+  white-space: nowrap;
+}
+.team-table__ins .ins-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  margin-right: 2px;
+  border: 0;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+}
+.team-table__ins .ins-dot.is-on {
+  background: #E8F8EE;
+  box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.18);
+  color: var(--accent-hover);
+}
+.team-table__ins .ins-dot.is-off {
+  background: #F3F4F6;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  color: #9CA3AF;
+}
+
+/* ─────────────────────────────────────────
+ *  근로자 테이블 — 컬럼 폭/정렬 조정
+ *  · 이름 + T1234 같은 위치 정렬 (flex + 고정 폭 name-cell)
+ *  · 외국인 긴 이름 — 좌측 슬라이딩 마키
+ *  · 주민등록번호 컬럼 + 👁 토글
+ *  · 컬럼 간 간극 정돈
+ * ───────────────────────────────────────── */
+
+/* 컬럼 폭 — 일당/출근상태/필수서류/보험/최근출근 간극 정돈 */
+.team-table__th-id        { width: 130px; min-width: 130px; }
+.team-table__th-status    { width: 96px;  min-width: 96px;  padding-left: 16px; }
+.team-table__th-docs      { width: 220px; min-width: 220px; padding-left: 12px; }
+
+.team-table__th-ins       { width: 130px; min-width: 130px; padding-left: 12px; }
+
+/* ─────────────────────────────────────────
+ * 사진·서류 업로드 타일 (DocUploadTile)
+ * ───────────────────────────────────────── */
+.doc-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 8px;
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: var(--color-bg-soft);
+  color: var(--color-text-muted);
+  font-size: var(--fs-12);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.doc-tile:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+.doc-tile.is-filled {
+  border-style: solid;
+  border-color: var(--color-primary);
+  background: white;
+  color: var(--color-text);
+  padding: 0;
+  overflow: hidden;
+}
+.doc-tile__placeholder {
+  font-size: 28px;
+  line-height: 1;
+}
+.doc-tile__img {
+  width: 100%;
+  height: calc(100% - 22px);
+  object-fit: cover;
+  display: block;
+}
+.doc-tile__label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.doc-tile.is-filled .doc-tile__label {
+  background: var(--color-bg-soft);
+  width: 100%;
+  text-align: center;
+  height: 22px;
+  line-height: 22px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─────────────────────────────────────────
+ * 근로계약서 미리보기 (ContractSendDialog Step 3)
+ *   - 화면: 종이 느낌 + 한 페이지 분량으로 컴팩트
+ *   - 인쇄: visibility 토글 + 컴팩트 폰트로 A4 한 장에 맞춤
+ * ───────────────────────────────────────── */
+.contract-doc {
+  background: white;
+  color: #1a1a1a;
+  padding: 16px 20px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 10.5px;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+}
+.contract-doc__title {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 6px 0 8px;
+  border-top: 2px solid #111;
+  border-bottom: 2px solid #111;
+}
+.contract-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1.2px solid #555;
+}
+.contract-grid th,
+.contract-grid td {
+  border: 1px solid #888;
+  padding: 3px 6px;
+  vertical-align: middle;
+  font-size: 10.5px;
+  font-weight: 500;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.contract-grid th {
+  background: #f4f5f7;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+.contract-grid__lbl {
+  background: #e6ebf2 !important;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  padding: 4px 2px !important;
+  line-height: 1.3;
+}
+.contract-grid__txt {
+  text-align: left;
+  background: white;
+  padding: 4px 8px !important;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.contract-grid__txt p { margin: 0 0 2px; }
+.contract-grid__txt p:last-child { margin-bottom: 0; }
+.contract-grid__txt--small { font-size: 9.8px; color: #333; }
+.contract-grid__sub {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3px 0 0;
+}
+.contract-grid__sub td {
+  border: 0;
+  padding: 1px 0;
+  font-size: 10px;
+}
+.contract-grid__sub--legend td {
+  font-size: 9.8px;
+  color: #444;
+}
+.contract-grid__special { padding: 0 !important; background: white; }
+.contract-grid__special-line {
+  height: 22px;
+  border-bottom: 1px solid #bbb;
+}
+.contract-grid__special-line:last-child { border-bottom: 0; }
+
+/* 임금 산정내역 9컬럼 표 */
+.contract-wage {
+  width: 100%;
+  border-collapse: collapse;
+}
+.contract-wage th,
+.contract-wage td {
+  border: 1px solid #888;
+  padding: 3px 2px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+}
+.contract-wage thead th {
+  background: #eef3fb;
+  font-weight: 700;
+}
+.contract-wage tbody th {
+  background: #f4f5f7;
+  font-weight: 600;
+  width: 60px;
+}
+.contract-wage__total {
+  background: #fff8e1 !important;
+  font-weight: 800 !important;
+  color: #b45309;
+}
+.contract-chk {
+  display: inline-block;
+  margin-right: 12px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+.contract-doc__bottom-note {
+  margin: 8px 0 4px;
+  font-size: 10.5px;
+  color: #333;
+  text-align: center;
+}
+.contract-doc__date {
+  margin: 2px 0 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.contract-sign {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1.2px solid #555;
+  page-break-inside: avoid;
+}
+.contract-sign th,
+.contract-sign td {
+  border: 1px solid #888;
+  padding: 6px 8px;
+  font-size: 10.5px;
+  vertical-align: middle;
+}
+.contract-sign th {
+  background: #e6ebf2;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  width: 70px;
+}
+.contract-sign__stamp {
+  text-align: center;
+  color: #555;
+  width: 90px;
+}
+
+/* ───────── 인쇄 — A4 한 페이지 (서명까지) + 충분한 상단 여백 ───────── */
+@media print {
+  @page { size: A4; margin: 18mm 10mm 10mm 10mm; }
+
+  /* 1) 모든 요소 숨김 */
+  body.contract-printing * { visibility: hidden !important; }
+  /* 2) 계약서만 보이게 */
+  body.contract-printing .contract-doc,
+  body.contract-printing .contract-doc * { visibility: visible !important; }
+  /* 3) 계약서를 페이지 좌상단으로 끌어올림 */
+  body.contract-printing .contract-doc {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+    font-size: 9px !important;
+    line-height: 1.3 !important;
+  }
+  body.contract-printing .contract-doc__title {
+    font-size: 17px !important;
+    padding: 4px 0 6px !important;
+    margin: 0 0 6px !important;
+    border-top: 1.5px solid #111 !important;
+    border-bottom: 1.5px solid #111 !important;
+    letter-spacing: 0.05em !important;
+  }
+  body.contract-printing .contract-grid th,
+  body.contract-printing .contract-grid td {
+    padding: 2px 5px !important;
+    font-size: 8.8px !important;
+    line-height: 1.3 !important;
+  }
+  body.contract-printing .contract-grid__lbl {
+    font-size: 9.5px !important;
+    padding: 3px 2px !important;
+  }
+  body.contract-printing .contract-grid__txt {
+    padding: 3px 6px !important;
+    line-height: 1.4 !important;
+  }
+  body.contract-printing .contract-grid__txt p { margin: 0 0 1.5px !important; }
+  body.contract-printing .contract-grid__txt--small { font-size: 8.3px !important; }
+  body.contract-printing .contract-grid__sub td { font-size: 8.5px !important; padding: 1px 0 !important; }
+  body.contract-printing .contract-grid__sub--legend td { font-size: 8.3px !important; }
+  body.contract-printing .contract-grid__special-line { height: 14px !important; }
+  body.contract-printing .contract-wage th,
+  body.contract-printing .contract-wage td {
+    padding: 2px 2px !important;
+    font-size: 8.5px !important;
+  }
+  body.contract-printing .contract-chk { font-size: 9px !important; margin-right: 10px !important; }
+  body.contract-printing .contract-doc__bottom-note {
+    margin: 6px 0 3px !important;
+    font-size: 9px !important;
+  }
+  body.contract-printing .contract-doc__date {
+    margin: 2px 0 6px !important;
+    font-size: 12px !important;
+  }
+  body.contract-printing .contract-sign {
+    page-break-inside: avoid !important;
+  }
+  body.contract-printing .contract-sign th,
+  body.contract-printing .contract-sign td {
+    padding: 5px 8px !important;
+    font-size: 9.5px !important;
+  }
+  /* 색상 보존 */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
+/* ──────────────────────────────────────────────
+ * Wantedly Design Language — 인력관리 화면 전용
+ *  Scope: .team-list (페이지 루트) + team-list 에서 띄운 모달
+ *  Brand cyan var(--accent), hairline borders, 카드 중심 레이아웃,
+ *  프로필 카드, pill chip, 미니멀 그림자.
+ * ────────────────────────────────────────────── */
+
+.team-list {
+  /* Wantedly tokens */
+  --wt-cyan:           var(--accent);
+  --wt-cyan-dark:      var(--accent);
+  --wt-cyan-darker:    var(--accent-hover, #0070F5);
+  --wt-cyan-light:     rgba(0, 122, 255, 0.10);
+  --wt-cyan-50:        rgba(0, 122, 255, 0.06);
+  --wt-red:            #FF5252;
+  --wt-yellow:         #FFC107;
+  --wt-green:          #4CAF50;
+  --wt-bg:             #FAFAFA;
+  --wt-surface:        #FFFFFF;
+  --wt-border:         #E5E7EB;
+  --wt-border-strong:  #D1D5DB;
+  --wt-text:           #1A1A1A;
+  --wt-text-secondary: #6B7280;
+  --wt-text-tertiary:  #9CA3AF;
+  --wt-radius-xs:      4px;
+  --wt-radius-sm:      6px;
+  --wt-radius-md:      8px;
+  --wt-radius-lg:      12px;
+  --wt-radius-pill:    9999px;
+  --wt-shadow-sm:      0 1px 2px rgba(0,0,0,0.04);
+  --wt-shadow-md:      0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
+  --wt-shadow-lg:      0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --wt-shadow-xl:      0 12px 32px rgba(0,0,0,0.08);
+  --wt-font:           'Inter', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+  font-family: var(--wt-font);
+  background: var(--wt-bg);
+  color: var(--wt-text);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 페이지 타이틀 — 큰 볼드 */
+.team-list .page-header__title {
+  font-family: var(--wt-font);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  color: var(--wt-text);
+}
+.team-list .page-header__subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--wt-text-secondary);
+  letter-spacing: -0.01em;
+}
+
+/* Wantedly 버튼 — 8px corner, solid cyan / outlined / text / danger */
+.team-list .team-list__btn {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--wt-radius-md);
+  font-family: var(--wt-font);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.08s, box-shadow 0.15s;
+  box-shadow: none;
+  user-select: none;
+}
+.team-list .team-list__btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.team-list .team-list__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.team-list .team-list__btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(60, 200, 200, 0.20);
+}
+
+.team-list .team-list__btn--primary {
+  background: var(--accent, #007AFF);
+  color: #FFFFFF;
+}
+.team-list .team-list__btn--primary:hover:not(:disabled) {
+  background: var(--accent-hover, #0070F5);
+}
+.team-list .team-list__btn--ghost {
+  background: var(--wt-surface);
+  color: var(--wt-text);
+  border: 1px solid var(--wt-border-strong);
+}
+.team-list .team-list__btn--ghost:hover:not(:disabled) {
+  background: rgba(0, 122, 255, 0.10);
+  border-color: var(--accent, #007AFF);
+  color: var(--accent-hover, #0070F5);
+}
+.team-list .team-list__btn--text {
+  background: transparent;
+  color: var(--accent-hover, #0070F5);
+  padding: 0 12px;
+}
+.team-list .team-list__btn--text:hover:not(:disabled) {
+  background: rgba(0, 122, 255, 0.10);
+}
+.team-list .team-list__btn--danger {
+  background: var(--wt-red);
+  color: #FFFFFF;
+}
+.team-list .team-list__btn--danger:hover:not(:disabled) {
+  background: #E53935;
+}
+
+/* 카드 — 흰 배경 + hairline border + 미니멀 그림자 */
+.team-list .card,
+.team-list .team-review__card,
+.team-list .team-overview__tile {
+  background: var(--wt-surface);
+  border: 1px solid var(--wt-border);
+  border-radius: var(--wt-radius-lg);
+  box-shadow: var(--wt-shadow-sm);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.team-list .card:hover {
+  box-shadow: var(--wt-shadow-md);
+  border-color: var(--wt-border-strong);
+}
+
+/* 아바타 — 둥글게 */
+.team-list .team-table img,
+.team-list .member-detail__photo {
+  border-radius: var(--wt-radius-pill);
+  object-fit: cover;
+  border: 2px solid var(--wt-surface);
+  box-shadow: 0 0 0 1px var(--wt-border);
+}
+
+/* Hero KPI — 미니멀 가로 한 줄 */
+.team-list .team-hero {
+  background: var(--wt-surface);
+  border: 1px solid var(--wt-border);
+  border-radius: var(--wt-radius-lg);
+  padding: 16px;
+  box-shadow: var(--wt-shadow-sm);
+}
+.team-list .team-hero__tile {
+  background: transparent;
+  padding: 12px 16px;
+  transition: background-color 0.15s;
+  cursor: pointer;
+}
+.team-list .team-hero__tile:hover {
+  background: rgba(0, 122, 255, 0.10);
+}
+.team-list .team-hero__tile.is-active {
+  background: rgba(0, 122, 255, 0.10);
+}
+.team-list .team-hero__value {
+  font-family: var(--wt-font);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--wt-text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.team-list .team-hero__tile.is-active .team-hero__value {
+  color: var(--accent-hover, #0070F5);
+}
+.team-list .team-hero__label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--wt-text-secondary);
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* Pill chips — Wantedly 시그니처 */
+.team-list .md-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--wt-radius-pill);
+  border: 1px solid var(--wt-border);
+  background: var(--wt-surface);
+  color: var(--wt-text);
+  font-family: var(--wt-font);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.team-list .md-chip:hover {
+  border-color: var(--accent, #007AFF);
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent-hover, #0070F5);
+}
+.team-list .md-chip.is-selected {
+  background: rgba(0, 122, 255, 0.10);
+  border-color: var(--accent, #007AFF);
+  color: var(--accent-hover, #0070F5);
+  font-weight: 600;
+}
+
+/* 데이터 테이블 — hairline + 카드 안에 놓임 */
+.team-list .team-table {
+  background: var(--wt-surface);
+  border-radius: var(--wt-radius-lg);
+  border: 1px solid var(--wt-border);
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  box-shadow: var(--wt-shadow-sm);
+}
+.team-list .team-table thead th {
+  background: var(--wt-bg);
+  border-bottom: 1px solid var(--wt-border);
+  height: 44px;
+  padding: 0 16px;
+  font-family: var(--wt-font);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--wt-text-secondary);
+  text-align: left;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.team-list .team-table tbody td {
+  height: 31px;
+  padding: 0 12px;
+  border-bottom: 1px solid #F0F0F2;
+  font-size: 13px;
+  color: var(--wt-text);
+  vertical-align: middle;
+  letter-spacing: -0.01em;
+}
+.team-list .team-table tbody tr {
+  height: 31px;
+}
+.team-list .team-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.team-list .team-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.team-list .team-table__row--clickable { cursor: pointer; }
+.team-list .team-table__row--clickable:active { background: rgba(0, 122, 255, 0.10); }
+
+/* 폼 인풋 */
+.team-list input[type="text"],
+.team-list input[type="search"],
+.team-list input[type="tel"],
+.team-list input[type="email"],
+.team-list select,
+.team-list .team-list__search input {
+  font-family: var(--wt-font);
+  font-size: 13px;
+  border-radius: var(--wt-radius-md);
+  border: 1px solid var(--wt-border-strong);
+  background: var(--wt-surface);
+  color: var(--wt-text);
+  height: 30px;
+  padding: 0 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  letter-spacing: -0.01em;
+  caret-color: var(--accent, #007AFF);
+}
+.team-list input[type="text"]:focus,
+.team-list input[type="search"]:focus,
+.team-list input[type="tel"]:focus,
+.team-list select:focus {
+  outline: none;
+  border-color: var(--accent, #007AFF);
+  box-shadow: 0 0 0 3px rgba(60, 200, 200, 0.15);
+}
+
+/* 트러스트 티어 뱃지 — Wantedly 톤 */
+.team-list .team-table__tier {
+  border-radius: var(--wt-radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 2px 6px;
+}
+
+/* 모달 — team-list 에서 띄운 것들만 Wantedly 톤 */
+.modal:has(.member-detail),
+.modal:has(.recruit__form),
+.modal:has(.team-review-modal),
+.modal:has(.contract-doc),
+.modal:has(.med),
+.modal:has(.excel-imp) {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.06);
+  font-family: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.01em;
+}
+.modal:has(.member-detail) .modal__head,
+.modal:has(.recruit__form) .modal__head,
+.modal:has(.contract-doc) .modal__head,
+.modal:has(.med) .modal__head,
+.modal:has(.excel-imp) .modal__head,
+.modal:has(.team-review-modal) .modal__head {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #E5E7EB;
+  background: #FFFFFF;
+}
+.modal:has(.member-detail) .modal__title,
+.modal:has(.recruit__form) .modal__title,
+.modal:has(.contract-doc) .modal__title,
+.modal:has(.med) .modal__title,
+.modal:has(.excel-imp) .modal__title,
+.modal:has(.team-review-modal) .modal__title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #1A1A1A;
+  letter-spacing: -0.02em;
+}
+.modal:has(.member-detail) .modal__sub,
+.modal:has(.recruit__form) .modal__sub,
+.modal:has(.contract-doc) .modal__sub,
+.modal:has(.med) .modal__sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: #6B7280;
+  letter-spacing: -0.01em;
+}
+.modal:has(.member-detail) .modal__body,
+.modal:has(.recruit__form) .modal__body,
+.modal:has(.contract-doc) .modal__body,
+.modal:has(.med) .modal__body,
+.modal:has(.excel-imp) .modal__body {
+  padding: 20px 24px 24px;
+  background: #FFFFFF;
+  font-size: 14px;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+}
+.modal:has(.member-detail) .modal__foot,
+.modal:has(.recruit__form) .modal__foot,
+.modal:has(.contract-doc) .modal__foot,
+.modal:has(.med) .modal__foot,
+.modal:has(.excel-imp) .modal__foot {
+  padding: 12px 24px 16px;
+  border-top: 1px solid #E5E7EB;
+  background: #FAFAFA;
+}
+.modal:has(.member-detail) .modal__close,
+.modal:has(.recruit__form) .modal__close,
+.modal:has(.contract-doc) .modal__close,
+.modal:has(.med) .modal__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background: transparent;
+  color: #9CA3AF;
+  border: 0;
+  font-size: 14px;
+  transition: background-color 0.15s, color 0.15s;
+}
+.modal:has(.member-detail) .modal__close:hover,
+.modal:has(.recruit__form) .modal__close:hover,
+.modal:has(.contract-doc) .modal__close:hover {
+  background: #F3F4F6;
+  color: #1A1A1A;
+}
+
+/* 모달 안 fieldset — 흰 배경 + hairline */
+.modal:has(.member-detail) fieldset,
+.modal:has(.recruit__form) fieldset,
+.modal:has(.med) fieldset {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.modal:has(.member-detail) input[type="text"],
+.modal:has(.member-detail) input[type="tel"],
+.modal:has(.member-detail) select,
+.modal:has(.recruit__form) input[type="text"],
+.modal:has(.recruit__form) input[type="tel"],
+.modal:has(.recruit__form) select,
+.modal:has(.med) input[type="text"],
+.modal:has(.med) input[type="tel"],
+.modal:has(.med) select {
+  font-family: 'Inter', 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid #D1D5DB;
+  background: #FFFFFF;
+  height: 30px;
+  padding: 0 10px;
+  caret-color: var(--accent);
+}
+.modal:has(.member-detail) input:focus,
+.modal:has(.recruit__form) input:focus,
+.modal:has(.med) input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(60, 200, 200, 0.15);
+}
+
+/* scrim */
+.modal-backdrop:has(.member-detail),
+.modal-backdrop:has(.recruit__form),
+.modal-backdrop:has(.contract-doc),
+.modal-backdrop:has(.med),
+.modal-backdrop:has(.excel-imp),
+.modal-backdrop:has(.team-review-modal) {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* ─────────────────────────────────────────────
+ * 인력관리 히어로 — iOS 알림 카드 스타일 (.team-list 안)
+ *  좌: 36px 아이콘 / 가운데: 타이틀+서브 / 우: 시각 표시
+ *  Wantedly 시안 톤과 호환 — 활성 시 시안 보더 + 살짝 들림
+ * ───────────────────────────────────────────── */
+.team-list .team-hero {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+@media (min-width: 1280px) {
+  .team-list .team-hero {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  .team-list .team-hero {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.team-list .team-hero__tile {
+  display: grid !important;
+  grid-template-columns: 36px 1fr auto !important;
+  flex-direction: initial !important;
+  align-items: center !important;
+  column-gap: 10px !important;
+  gap: 10px !important;
+  background: #FFFFFF !important;
+  padding: 10px 12px !important;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  /* 둥근 모서리 + 입체감 (3-tier 그림자 + inset white highlight) */
+  border: 0 !important;
+  border-radius: 16px !important;
+  box-shadow:
+    /* 외부 ambient (떠있는 그림자) */
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 3px 6px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    /* 내부 white edge highlight (glass refraction) */
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+  transition: transform 0.15s, box-shadow 0.2s, background-color 0.18s;
+  min-height: 0;
+}
+.team-list .team-hero__tile:hover {
+  transform: translateY(-2px);
+  background: #FFFFFF !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.09),
+    0 5px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+.team-list .team-hero__tile:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+.team-list .team-hero__tile.is-active {
+  background: rgba(0, 122, 255, 0.10) !important;
+  box-shadow:
+    0 8px 20px rgba(0, 122, 255, 0.12),
+    0 3px 6px rgba(0, 122, 255, 0.08),
+    0 1px 2px rgba(0, 122, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+/* 좌측 아이콘 — iOS 앱 그리드 톤 */
+.team-list .team-hero__icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.team-list .team-hero__icon svg {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+
+/* 가운데 본문 */
+.team-list .team-hero__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 1px;
+}
+.team-list .team-hero__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.015em;
+  line-height: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-list .team-hero__sub {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-list .team-hero__sub b {
+  color: #111827;
+  font-weight: 700;
+  margin-right: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 우측 시각 표시 ("오늘" / "필터중") */
+.team-list .team-hero__time {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9CA3AF;
+  align-self: flex-start;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  margin-top: 1px;
+}
+.team-list .team-hero__tile.is-active .team-hero__time {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* 톤별 서브텍스트 강조 색상 (살짝만) */
+.team-list .team-hero__tile--ok     .team-hero__sub b { color: var(--accent-hover); }
+.team-list .team-hero__tile--amber  .team-hero__sub b { color: #b45309; }
+.team-list .team-hero__tile--info   .team-hero__sub b { color: var(--accent); }
+.team-list .team-hero__tile--danger .team-hero__sub b { color: #b91c1c; }
+
+/* ─────────────────────────────────────────────
+ * 카드 외곽선 톤 통일 — 더 옅은 hairline (#F0F0F2)
+ *  표 카드 (.team-table-wrap), 일반 .card 모두
+ * ───────────────────────────────────────────── */
+.team-list .card,
+.team-list .team-table-wrap,
+.team-list .card.team-table-wrap {
+  background: #FFFFFF !important;
+  border: 1px solid #F0F0F2 !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    0 1px 1px rgba(0, 0, 0, 0.02) !important;
+}
+.team-list .card:hover,
+.team-list .team-table-wrap:hover {
+  border-color: #E8E8EB !important;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ─────────────────────────────────────────────
+ * 카드 외곽선 제거 — 스크롤바만 보이게
+ *  (이전 #F0F0F2 hairline 도 제거하고 그림자만으로 경계 표현)
+ * ───────────────────────────────────────────── */
+.team-list .card,
+.team-list .team-table-wrap,
+.team-list .card.team-table-wrap {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.02) !important;
+}
+.team-list .card:hover,
+.team-list .team-table-wrap:hover {
+  border: 0 !important;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ─────────────────────────────────────────────
+ * 배경 통일 — 페이지/히어로/필터는 AdminShell 본문(#F6F6F6) 과 일체
+ *  · 흰 면(white surface) 은 실제 카드(테이블/반장카드)에만 남김
+ * ───────────────────────────────────────────── */
+.team-list {
+  background: transparent !important;
+}
+.team-list .team-hero {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.team-list .team-list__filters,
+.team-list .team-list__filters--flat {
+  background: transparent !important;
+}
+.team-list .team-list__search {
+  background: transparent !important;
+}
+
+/* ─────────────────────────────────────────────
+ * 필터 줄 레이아웃 — 좌측: 4 필터, 우측: 검색 + 카운트
+ *  · 라벨(현장/반장/직종/상태) 제거 → MacSelect pill 만 노출 (현장관리 톤과 통일)
+ *  · 검색은 margin-left: auto 로 우측 push
+ *  · 현장은 max-width 안에서 ellipsis, hover 시 슬라이드
+ *  · 행 전체를 center 정렬해서 검색바/카운트와 동일 baseline
+ * ───────────────────────────────────────────── */
+.team-list__filters {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
+  padding: 8px 12px 12px !important;
+  margin-bottom: 12px !important;
+  border-bottom: 1px solid #E5E5EA !important;
+}
+/* 라벨(현장/반장/직종/상태) 숨김 — pill 만 보이도록 */
+.team-list__filter > label {
+  display: none !important;
+}
+@media (max-width: 1100px) {
+  .team-list__filters {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* 4 필터 — 텍스트가 잘리지 않을 정도로 충분한 폭 */
+.team-list__filter {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+}
+.team-list__filter:nth-child(1) { /* 현장 */
+  width: 220px !important;
+  max-width: 220px !important;
+}
+.team-list__filter:nth-child(2) { /* 반장 */
+  width: 140px !important;
+}
+.team-list__filter:nth-child(3) { /* 직종 */
+  width: 140px !important;
+}
+.team-list__filter:nth-child(4) { /* 상태 */
+  width: 120px !important;
+}
+
+/* 검색은 우측으로 밀고, 카운트는 그 옆에 (타이트하게)
+ * 행 전체가 center 정렬이므로 자연스럽게 dropdown pill 과 같은 baseline */
+.team-list__filters > .team-list__search {
+  margin-left: auto !important;
+  flex: 0 0 260px !important;
+  width: 260px !important;
+  max-width: 260px !important;
+  min-width: 200px !important;
+  align-self: center !important;
+}
+.team-list__filters > .team-list__counts {
+  margin-left: 12px !important;
+  flex: 0 0 auto !important;
+  align-self: center !important;
+  white-space: nowrap !important;
+  height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Foreman card — canonical (single source of truth) */
+.team-foreman-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 10px 12px 10px 18px;
+  min-height: 86px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.team-foreman-card::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 10px; bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.team-foreman-card--ok::before { background: var(--accent); }
+.team-foreman-card--warn::before { background: #f59e0b; }
+.team-foreman-card__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.team-foreman-card__badge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.team-foreman-card__badge--ok { background: #dbeafe; color: #1d4ed8; }
+.team-foreman-card__badge--warn { background: #fef3c7; color: #92400e; }
+.team-foreman-card__name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-foreman-card__site {
+  font-size: 11.5px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 2px 0;
+}
+.team-foreman-card__line {
+  font-size: 11.5px;
+  color: #4b5563;
+  font-variant-numeric: tabular-nums;
+}
+.team-foreman-card:hover {
+  border-color: #d4d4d8;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+.team-foreman-card.is-selected {
+  box-shadow: inset 0 0 0 1px #B5B5BB;
+}

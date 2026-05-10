@@ -1,0 +1,83 @@
+/* AddressField — 통일된 주소 입력 디자인 */
+
+.addr-field {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 6px;
+  width: 100%;
+}
+
+/* 우편번호 박스 (선택적 표시) */
+.addr-field__zone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 우편번호 검색 버튼 */
+.addr-field__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.addr-field__btn:hover:not(:disabled) {
+  border-color: var(--color-primary, #0f766e);
+  color: var(--color-primary, #0f766e);
+  background: #f0fdfa;
+}
+.addr-field__btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 주소 인풋 — flex 1로 가용 폭 모두 차지 */
+.addr-field__input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #0f172a;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.addr-field__input:focus {
+  border-color: var(--color-primary, #0f766e);
+  box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.12);
+}
+.addr-field__input:read-only {
+  background: #f8fafc;
+  color: #475569;
+}
+
+/* big 모드 — 소재지·현장명 같은 강조 */
+.addr-field__input--big {
+  font-size: 15px;
+  font-weight: 700;
+}

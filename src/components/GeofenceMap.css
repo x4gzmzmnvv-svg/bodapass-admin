@@ -1,0 +1,192 @@
+/* GeofenceMap — 지오펜싱 시각화 위젯 */
+
+.geofence {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.geofence__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  /* 「고용보험」·「일자별 출력」 박스와 동일한 sky 톤 */
+  background: var(--tile-sky-bg);
+  border-bottom: 1px solid var(--tile-sky-deco);
+}
+.geofence__title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--tile-sky-text);
+}
+.geofence__addr {
+  font-size: 11.5px;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.geofence__body {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 14px;
+  padding: 14px;
+}
+@media (max-width: 900px) {
+  .geofence__body { grid-template-columns: 1fr; }
+}
+
+/* ── 지도 ── */
+.geofence__map-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.geofence__map {
+  width: 100%;
+  height: 220px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: crosshair;
+  background: #f8fafc;
+}
+.geofence__map.is-ro { cursor: not-allowed; opacity: 0.85; }
+
+.geofence__coords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  font-size: 11.5px;
+  color: #475569;
+  font-variant-numeric: tabular-nums;
+}
+.geofence__coords strong {
+  display: inline-block;
+  margin-right: 4px;
+  color: #0f172a;
+  font-weight: 700;
+}
+.geofence__btn-tiny {
+  margin-left: auto;
+  height: 24px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary, #0f766e);
+  background: #fff;
+  border: 1px solid #99f6e4;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.geofence__btn-tiny:hover { background: #f0fdfa; }
+.geofence__btn-tiny:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── 컨트롤 ── */
+.geofence__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.geofence__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.geofence__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.geofence__value {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--color-primary, #0f766e);
+  font-variant-numeric: tabular-nums;
+}
+.geofence__hint {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* range — primary 색 트랙 */
+.geofence__field input[type="range"] {
+  width: 100%;
+  height: 24px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.geofence__field input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+.geofence__field input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+.geofence__field input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  background: var(--color-primary, #0f766e);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+  cursor: pointer;
+}
+.geofence__field input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--color-primary, #0f766e);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+  cursor: pointer;
+}
+.geofence__field input[type="range"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* 칩 */
+.geofence__chips {
+  display: flex;
+  gap: 4px;
+}
+.geofence__chip {
+  flex: 1;
+  height: 30px;
+  padding: 0 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #475569;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.geofence__chip:hover:not(:disabled) {
+  border-color: var(--color-primary, #0f766e);
+  color: var(--color-primary, #0f766e);
+}
+.geofence__chip.is-active {
+  background: var(--color-primary, #0f766e);
+  border-color: var(--color-primary, #0f766e);
+  color: #fff;
+}
+.geofence__chip:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

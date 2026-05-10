@@ -1,0 +1,293 @@
+/* MacDatePicker — macOS 컨텍스트 메뉴 톤 날짜 선택기 */
+
+.mac-date {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* trigger — MacSelect 와 동일 톤 */
+.mac-date__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  padding: 0 14px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E8;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #1A1A1A;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  outline: none;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  text-align: left;
+}
+.mac-date__trigger:hover:not(:disabled) {
+  border-color: #D1D1D6;
+}
+.mac-date__trigger.is-open {
+  border-color: #B5B5BB;
+  box-shadow:
+    0 0 0 3px rgba(0, 122, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.mac-date__trigger:disabled {
+  background: #F5F5F5;
+  color: #9CA3AF;
+  cursor: not-allowed;
+}
+.mac-date__icon {
+  flex-shrink: 0;
+  color: #6B7280;
+}
+.mac-date__current {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.mac-date__placeholder {
+  color: #9CA3AF;
+  font-weight: 400;
+}
+
+/* 메뉴 — 블러 + 흰 반투명 */
+.mac-date__menu {
+  position: absolute;
+  left: 0;
+  z-index: 9999;
+  width: 280px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.18),
+    0 4px 8px rgba(0, 0, 0, 0.06);
+  animation: mac-date-in 0.14s cubic-bezier(0.2, 0, 0.2, 1);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+.mac-date__menu--down {
+  top: calc(100% + 6px);
+}
+.mac-date__menu--up {
+  bottom: calc(100% + 6px);
+}
+
+/* 헤더 — 년/월 + 이전/다음 */
+.mac-date__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 4px 8px;
+}
+.mac-date__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.02em;
+}
+.mac-date__nav {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: #6B7280;
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
+}
+.mac-date__nav:hover {
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent-hover);
+}
+
+/* 요일 헤더 */
+.mac-date__dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.mac-date__dow-cell {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B7280;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mac-date__dow-cell--sun { color: #ef4444; }
+.mac-date__dow-cell--sat { color: var(--accent); }
+
+/* 일 그리드 */
+.mac-date__day-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.mac-date__day-cell {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1A1A1A;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.1s, color 0.1s;
+  position: relative;
+}
+.mac-date__day-cell--pad {
+  cursor: default;
+}
+.mac-date__day-cell--sun:not(.is-disabled):not(.is-selected) { color: #ef4444; }
+.mac-date__day-cell--sat:not(.is-disabled):not(.is-selected) { color: var(--accent); }
+.mac-date__day-cell:hover:not(:disabled):not(.is-selected) {
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent-hover);
+}
+.mac-date__day-cell.is-today {
+  font-weight: 700;
+}
+.mac-date__day-cell.is-today:not(.is-selected)::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.mac-date__day-cell.is-selected {
+  background: var(--accent) !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+}
+.mac-date__day-cell.is-disabled {
+  color: #D1D5DB;
+  cursor: not-allowed;
+}
+
+/* 월 그리드 (type='month') */
+.mac-date__month-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+}
+.mac-date__month-cell {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1A1A1A;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.1s, color 0.1s;
+}
+.mac-date__month-cell:hover {
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent-hover);
+}
+.mac-date__month-cell.is-selected {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* 푸터 — 지우기 / 오늘 */
+.mac-date__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px 4px;
+  margin-top: 6px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.mac-date__foot-btn {
+  height: 26px;
+  padding: 0 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.12s, color 0.12s;
+}
+.mac-date__foot-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #1A1A1A;
+}
+.mac-date__foot-btn--accent {
+  color: var(--accent);
+}
+.mac-date__foot-btn--accent:hover {
+  background: rgba(0, 122, 255, 0.10);
+  color: var(--accent-hover);
+}
+
+@keyframes mac-date-in {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─────────────────────────────────────────────
+ * MacDatePicker 이중 박스 방지 — MacSelect.css 의 글로벌 규칙과 동일 패턴
+ *  · 외곽 wrapper(.tf / .input / .field / __input / __field 등) 안에 .mac-date 가 들어가면
+ *    wrapper 의 padding/border/background/shadow 를 모두 제거
+ *  · 자세한 catch-all 패턴은 MacSelect.css 에 같이 정의되어 있음 (MacDatePicker 도 함께 다룸)
+ * ───────────────────────────────────────────── */
+.tf:has(.mac-date),
+.input:has(.mac-date),
+.field:has(.mac-date),
+.form-field:has(.mac-date),
+.form-control:has(.mac-date),
+.tf-wrap:has(.mac-date),
+.input-wrap:has(.mac-date),
+.field-wrap:has(.mac-date),
+[class$="__input"]:has(.mac-date),
+[class$="__field"]:has(.mac-date),
+[class$="__field-input"]:has(.mac-date),
+[class$="__select"]:has(.mac-date),
+[class$="__control"]:has(.mac-date),
+[class$="__trigger"]:has(.mac-date) {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}

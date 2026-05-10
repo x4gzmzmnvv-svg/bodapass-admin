@@ -1,0 +1,40 @@
+/*
+  관리자 화면 — macOS Shortcuts 톤.
+  · 사이드바: floating tile (떠있는 흰 타일)
+  · 메인: 페이지 배경과 일체로 흐름 (transparent)
+*/
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  min-width: 1280px;
+  padding: 12px;
+  gap: 12px;
+  background: transparent;
+}
+
+/* 메인 영역 — 떠있는 타일이 아니라 페이지 배경과 일체로 흐름 */
+.admin-shell__main {
+  flex: 1;
+  min-width: 1040px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.admin-shell__content {
+  flex: 1;
+  padding: var(--sp-6);
+  max-width: var(--content-max-w);
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .admin-shell__content {
+    padding: var(--sp-4);
+  }
+}

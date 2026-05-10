@@ -1,0 +1,2729 @@
+[
+  {
+    "seq": 1,
+    "name": "소장",
+    "description": "공사를 도급한 회사를 대표해서 현장에 상주하여 현장을 관리하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 2,
+    "name": "관리자",
+    "description": "공사 현장의 각 부서별 중간 관리자(부장, 차장, 과장, 대리, 기사, 사원)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 3,
+    "name": "사무보조",
+    "description": "공사현장의 각 부서별 관리자 업무를 보조해주는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 4,
+    "name": "기술보조",
+    "description": "기술을 요하는 작업을 수행하는 관리자의 업무를 보조해주는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 5,
+    "name": "작업반장",
+    "description": "각 공종별로 인부를 통솔하여 지휘하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 6,
+    "name": "건설안전공",
+    "description": "건축 및 토목분야의 산업안전관리 업무에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 7,
+    "name": "안전시설공",
+    "description": "공사 현장 안전시설물의 조립, 설치 및 해체 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 8,
+    "name": "경비",
+    "description": "건설공사의 보안을 유지하고 공사자재와 장비를 보호․관리하기 위하여 공사장을 순찰․방호하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 9,
+    "name": "특별인부",
+    "description": "보통인부보다 다소 높은 기능정도를 요하며, 특수한 작업조건하에서 작업하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 10,
+    "name": "보통인부",
+    "description": "기능을 요하지 않는 경작업인 일반잡역에 종사하면서 단순육체노동을 하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 11,
+    "name": "조력공",
+    "description": "숙련공을 도와서 그의 지시를 받아 작업에 협력하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 12,
+    "name": "신호수",
+    "description": "건설현장에서 작업에 차질이 없도록 원활한 차량통행을 위해 교통정리 및 건설장비 등의 안전한 운행을 위한 신호를 하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 13,
+    "name": "청소원",
+    "description": "현장 사무실, 숙소 청소원",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 14,
+    "name": "측량공",
+    "description": "공사시공을 위한 측량 및 지형공간을 측정하여 수치화 하는 전문측량사와 측량 pole 등을 가지고 측량사의 지시에 따라 업무를 수행하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 15,
+    "name": "바이브래타공",
+    "description": "소정의 중량화 및 용적화의 콘크리트를 만들기 위해 콘크리트 타설시 바이브래타기기를 사용하여 시멘트, 모래, 자갈 등이 고루 혼합되도록 다지기 하는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 16,
+    "name": "경량철골공",
+    "description": "비교적 살이 얇은 형강을 이용하여 작업을 수행하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 17,
+    "name": "철골제작공",
+    "description": "철골을 가공하고 제작, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 18,
+    "name": "철골설치공",
+    "description": "가공되어진 철골 구조물을 조립, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 19,
+    "name": "P.C설치공",
+    "description": "PC콘크리트(Prestress Concrete)를 조립, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 20,
+    "name": "P.C제작공",
+    "description": "Prestress Concrete를 제작하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 21,
+    "name": "데크공",
+    "description": "슬래브 콘크리트를 타설하기 위한 거푸집, 바닥슬래브 또는 지붕 슬래브의 가공, 조립 및 해체 등의 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 22,
+    "name": "제재공",
+    "description": "원목을 필요한 용도로 절단․가공하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 23,
+    "name": "시스템서포트공",
+    "description": "각종 시스템의 설치 및 운용을 지원하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 24,
+    "name": "철근공",
+    "description": "철근의 절단, 가공, 조립, 해체 등의 작업에 종사하는 기능공",
+    "employmentCode": 7013,
+    "employmentName": "철근공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 25,
+    "name": "콘크리트공",
+    "description": "소정의 중량화 및 용적화의 콘크리트를 만들기 위해 시멘트, 모래, 자갈, 물 비비기와 부어넣기 및 바이브레타를 사용하여 다지거나 숏크리트를 분사하는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 26,
+    "name": "성형공",
+    "description": "콘크리트를 몰드에 채워 넣고 다져서 제품의 모양을 만드는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 27,
+    "name": "경량기포공",
+    "description": "콘크리트 등에 기포를 주입하여 단위중량을 줄이는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 28,
+    "name": "로드헤다공",
+    "description": "‘로드헤더’로 콘크리트를 굴삭 해체해 삭공하는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 29,
+    "name": "비계공",
+    "description": "비계, 운반대, 작업대, 보호망 등의 설치 및 해체 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 30,
+    "name": "방화공",
+    "description": "건물의 외주에 있어서는 인접화재에 의한 연소방지와 건물내에 있어서는 불이 붙는 것을 방지하기 위한 작업 및 구조물 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 31,
+    "name": "줄눈공",
+    "description": "석축 및 조적조에 줄눈을 장치하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 32,
+    "name": "코킹공",
+    "description": "창틀, 욕조 등의 방수나 고정을 위하여 코킹 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 33,
+    "name": "양생공",
+    "description": "소정의 강도를 얻기 위하여 콘크리트를 양생하거나 석재면, 목재면, 타일면, 테라조면 등을 양생하는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 34,
+    "name": "제철축로공",
+    "description": "제철용 각종로(1,000˚C∼1,400˚C) 내화물시공(R오차 ±1mm이내) 및 보수 등의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 35,
+    "name": "철물절단공",
+    "description": "철재를 가공하여 만든 건축재료의 조립, 보강 등에 쓰이는 부속재료를 절단하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 36,
+    "name": "구조물공",
+    "description": "교량, 터널, 댐 등과 같이 천연 또는 인공재료를 써서 하중을 기초에 전달하고 그 사용목적에 유익하도록 건조된 공작물 등의 작업을 종사하는 기능공",
+    "employmentCode": 7011,
+    "employmentName": "강구조물 가공원 및 건립원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 37,
+    "name": "배관공",
+    "description": "설계압력 5kg/㎠미만의 배관을 시공 및 보수하는 작업에 종사하는 기능공",
+    "employmentCode": 7031,
+    "employmentName": "건설 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 38,
+    "name": "천장공",
+    "description": "지붕 밑 또는 위층의 바닥 밑을 가려 장식적, 보온적 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 39,
+    "name": "덕트공",
+    "description": "금속박판을 가공하여 덕트 등을 가공, 제작, 조립, 설치 등의 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 40,
+    "name": "흄관공",
+    "description": "철선을 종, 횡으로 조립한 바구니를 몰드에 넣고 회전하면서, 혼합한 콘크리트를 몰드 속에 넣어 원심력에 의해 제조하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 41,
+    "name": "쇼트공",
+    "description": "금속이나 비철금속제품의 표면에 묻어있는 찌꺼기, 녹, 기름때, 군더더기 등의 불순물을 제거하고 표면을 매끄럽게 하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 42,
+    "name": "위생공",
+    "description": "위생도기의 설치 및 부대 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 43,
+    "name": "보온공",
+    "description": "기기 및 배관류의 보온시공 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 44,
+    "name": "부대공",
+    "description": "본 공사에 부대되는 공사의 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 45,
+    "name": "견출공",
+    "description": "콘크리트 면을 매끈하게 마감하는 작업에 종사하는 기능공",
+    "employmentCode": 7014,
+    "employmentName": "콘크리트공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 46,
+    "name": "조경공",
+    "description": "수목 식재 및 조경 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 47,
+    "name": "조림공",
+    "description": "수목들을 식재하여 인위적인 방법으로 숲을 조성하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 48,
+    "name": "우오수공",
+    "description": "우오수(가정하수나 공장폐수 포함)를 배수하는 작업에 종사하는 기능공",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 49,
+    "name": "설비공",
+    "description": "전기, 통신공사 등의 설비 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 50,
+    "name": "전공",
+    "description": "건설현장의 전기기기를 작동 보수 수리하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 51,
+    "name": "전기공",
+    "description": "구조물 또는 가시설물의 전기 관련 작업을 수행하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 52,
+    "name": "내선전공",
+    "description": "옥내전선관, 배선 및 등기구류 설비의 시공 및 보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 53,
+    "name": "외선전공",
+    "description": "목주, 철근콘크리트, 철주 등의 전주를 세우고 전선을 가설하고, 배전 및 배전활선 등 옥외 전기설비의 시공 및 보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 54,
+    "name": "배전전공",
+    "description": "22.9kv이하의 배전설비의 시공 및 보수에 종사하는 사람으로서 전주를 세우고 완금, 애자 등의 부품과 기계류(변압기, 개폐기 등)를 설치하고 무거운 전선을 가설하는 등의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 55,
+    "name": "송전전공",
+    "description": "발전소와 변전소 사이의 송전선 철탑 및 송전설비의 시공 및 보수 등의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 56,
+    "name": "변전전공",
+    "description": "변전소 설비의 시공 및 보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 57,
+    "name": "배전활선전공",
+    "description": "소정의 활선작업교육을 이수한 숙련배전전공으로서 전기가 흐르는 상태에서 필수 활선장비를 사용하여 배전설비 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 58,
+    "name": "송전활선전공",
+    "description": "소정의 활선작업교육을 이수한 숙련송전전공으로서 전기가 흐르는 상태에서 필수 활선장비를 사용하여 송전설비 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 59,
+    "name": "송배전설비보수원",
+    "description": "변압기, 단로기, 개폐기 등 송배전설비의 장애요인을 제거하고, 파손된 설비를 교체, 보수하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 60,
+    "name": "케이블공",
+    "description": "각종 케이블의 가설, 포설, 접속, 연공, 시험 및 보수공사 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 61,
+    "name": "통신케이블공",
+    "description": "각종 동선케이블의 가설, 포설, 접속, 연공, 시험 및 유지보수 등의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 62,
+    "name": "통신공",
+    "description": "전기통신 설비의 시험, 측정, 조정, 유지보수 등의 작업에 종사하는 기능공(광단말장치 및 광중계장치 제외)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 63,
+    "name": "통신내선공",
+    "description": "구내에 통신용 합성수지관 및 배선을 시공 또는 유지보수 등의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 64,
+    "name": "통신외선공",
+    "description": "전주, PE내관(전선관)포설, 조가선, 나선로 등의 시공 및 보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 65,
+    "name": "통신설비공",
+    "description": "무선기기, 반송기기, 영상·음향·정보·제어설비 등의 시공 및 유지보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 66,
+    "name": "통신안테나공",
+    "description": "각종 통신기기에 필요한 안테나를 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 67,
+    "name": "무선안테나공",
+    "description": "철탑, 항공, 항만, 선박통신, 철도신호의 각종 안테나설비 설치 및 도색 등 유지보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 68,
+    "name": "계장공",
+    "description": "기계, 급배수, 전기, 가스, 위생, 냉난방 및 기타공사에 있어서 계기(공업제어장치, 공업계측 및 컴퓨터, 자동제어장치 등)를 전문으로 설치, 부착 및 점검하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 69,
+    "name": "기계계장공",
+    "description": "공업제어장치, 공업계측기기를 설치, 부착 및 점검하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 70,
+    "name": "고압케이블전공",
+    "description": "고압케이블 설비의 시공 및 보수 작업에 종사하는 기능공 (교류 600V초과, 직류 750V초과 7,000V 이하)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 71,
+    "name": "저압케이블전공",
+    "description": "저압케이블 및 제어용 케이블 설비의 시공 및 보수 작업에 종사하는 기능공(교류 600V이하, 직류 750V이하)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 72,
+    "name": "기계설치공",
+    "description": "일반기계설비 및 기계의 조립설치, 조정, 검사 및 유지보수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 73,
+    "name": "기계설계사",
+    "description": "필요한 기계장치를 제작하기 위하여 설계도를 작성하는 작업을 수행하는 기사",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 74,
+    "name": "기계제도사",
+    "description": "기계 설계를 하기 위한 작업계획 및 세부도면을 제작하는 작업에 종사하는 기사",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 75,
+    "name": "냉동수리공",
+    "description": "냉동기기를 수리·보수하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 76,
+    "name": "발전기공",
+    "description": "발전기를 운전 수리·보수하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 77,
+    "name": "보일러공",
+    "description": "보일러 조립, 설치 및 정비를 하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 78,
+    "name": "로구로공",
+    "description": "로구로기로 제품을 가공하는 작업에 종사하는 기능공 (로구로기 : 볼트 및 낫트류를 가공하는 기계)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 79,
+    "name": "리벳공",
+    "description": "철골구조물의 조립을 위하여 리벳치기 작업에 종사하는 기능공 * Rivet : 강재를 서로연결 시키기 위하여 강재에 구멍을 뚫고 여기에 삽입하여 연결시키는 못의 일종",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 80,
+    "name": "전주설치공",
+    "description": "전기, 통신, 조명시설용 시멘트주 또는 철주 설치의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 81,
+    "name": "전기제도사",
+    "description": "전기설비나 장비 등의 제작과 설치에 필요한 시공도와 상세설계도를 제도하는 작업에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 82,
+    "name": "전선작업공",
+    "description": "전기를 송전, 배전하기 위하여 전주를 설치하고 전선을 가선하는 작업에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 83,
+    "name": "엘리베이터공",
+    "description": "전기 또는 수압에 의하여 수평, 수직으로 가동되는 승강장비를 조립, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 84,
+    "name": "엘리베이터기계공",
+    "description": "승강기의 기계적인 부분을 조립, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 85,
+    "name": "엘리베이터전공",
+    "description": "승강기의 전기적인 신호를 계측, 제어하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 86,
+    "name": "엘리베이터조정공",
+    "description": "승강기의 조립, 설치상태의 안전성 여부를 파악하기 위하여 기중기와 기계장치를 시험하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 87,
+    "name": "호이스트운전원",
+    "description": "호이스트운전요원",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 88,
+    "name": "목공",
+    "description": "건축물의 목재부 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 89,
+    "name": "형틀목공",
+    "description": "콘크리트 타설을 위하여 형틀 및 동바리를 제작, 조립, 설치, 해체하는 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 90,
+    "name": "건축목공",
+    "description": "건축물의 축조 및 실내 목구조물의 제작, 설치 또는 해체하는 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 91,
+    "name": "내장목공",
+    "description": "건물의 내부에 목재를 사용하여 마무리하는 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 92,
+    "name": "내장공",
+    "description": "건물의 내부에 수장재를 사용하여 마무리하는 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 93,
+    "name": "가구목공",
+    "description": "건축물에 부속된 설비구로서 침대, 책상, 테이블, 조리대, 옷장, 책장, 식기 등 물품에 필요한 목재를 제작하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 94,
+    "name": "가구공",
+    "description": "건축물에 부속된 설비구로서 침대, 책상, 테이블, 조리대, 옷장, 책장, 식기 등 물품을 조립, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 95,
+    "name": "인조목공",
+    "description": "인공적으로 만든 나무를 이용하여 물품을 조립, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 96,
+    "name": "조선목공",
+    "description": "선박에 취급되는 목재를 가공하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 97,
+    "name": "프레스공",
+    "description": "프레스기로 제품을 가공하는 작업에 종사하는 기능공(주로 절단, 절곡, 구멍 뚫기, 수축 등을 지칭)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 98,
+    "name": "스프레이도장공",
+    "description": "스프레이기를 이용하여 페인트류 및 기타 도료를 구조물이나 기타 부분에 칠하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 99,
+    "name": "벽체뿜칠공",
+    "description": "건축구조물 내외부의 미관을 높이고 결로현상을 방지하기 위하여 공기압축기에 설치된 분사총을 이용하여 미장재를 뿌리는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 100,
+    "name": "바닥공",
+    "description": "바닥을 대리석 및 타일 등의 재료로 마감하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 101,
+    "name": "도배공",
+    "description": "실내의 벽체, 천정, 바닥, 창호 등 실내표면에 종이나 장판지 등 도배재료를 부착시키는 작업에 종사하는 기능공",
+    "employmentCode": 7025,
+    "employmentName": "도배공 및 유리 부착원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 102,
+    "name": "인테리어공",
+    "description": "실내를 장식하는 작업에 종사하는 기능공",
+    "employmentCode": 7025,
+    "employmentName": "도배공 및 유리 부착원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 103,
+    "name": "합판공",
+    "description": "목재를 얇은 단판으로 만들고 이를 여러 장 접착체로 붙여 합판을 제작하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 104,
+    "name": "마루판공",
+    "description": "목재를 가공하여 만든 판재로 마루를 마감하는 작업에 종사하는 기능공",
+    "employmentCode": 7024,
+    "employmentName": "바닥재 시공원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 105,
+    "name": "장판공",
+    "description": "구조물 내부에 장판지를 사용하여 바닥을 마감하는 작업에 종사하는 기능공",
+    "employmentCode": 7024,
+    "employmentName": "바닥재 시공원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 106,
+    "name": "차선도색공",
+    "description": "고속도로, 일반도로, 활주로, 주차장 등 노면에 차선을 표시하는 분사기기를 사용하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 107,
+    "name": "라인마킹공",
+    "description": "바닥 또는 도로면에 선 또는 숫자 등을 새기는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 108,
+    "name": "도색공",
+    "description": "건축물, 구조물 등의 내·외부 표면을 미화시키는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 109,
+    "name": "도장공",
+    "description": "도장을 위한 바탕처리작업 및 페인트류 및 기타 도료를 구조물 등에 칠하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 110,
+    "name": "계령공",
+    "description": "철강교나 철강재 등 철재 표면에서 페인트나 기타 부식물의 제거 등의 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 111,
+    "name": "모래분사공",
+    "description": "찌꺼기, 도료, 기름때, 녹 등 금속의 불순물을 제거하거나 마무리 작업을 하기 위하여 모래분사기를 조작하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 112,
+    "name": "수장공",
+    "description": "목공사의 마무리공사로서 걸레받이, 마루놓기, 출입구, 창둘레, 천장, 벽, 바닥 등을 붙이는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 113,
+    "name": "조적공",
+    "description": "벽돌 또는 블럭을 쌓거나 해체하는 작업에 종사하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 114,
+    "name": "벽돌(블록)제작공",
+    "description": "벽돌 및 블록을 소정의 규격대로 제작하는 작업에 종사하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 115,
+    "name": "벽돌(블록)공",
+    "description": "벽돌(블록) 쌓기 작업에 종사하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 116,
+    "name": "치장벽돌공",
+    "description": "치장벽돌로 마감쌓기를 하는 작업에 종사하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 117,
+    "name": "내화벽돌공",
+    "description": "내화성 원료로 만든 황백색의 특수벽돌을 시공하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 118,
+    "name": "미장공",
+    "description": "시멘트, 모르타르나 회반죽, 석고 프라스타 및 기타 미장재료를 이용하여 구조물의 내외표면에 바름 작업에 종사하는 기능공",
+    "employmentCode": 7021,
+    "employmentName": "미장공",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 119,
+    "name": "사춤공",
+    "description": "벽이나 담의 틈을 진흙으로 메우는 작업에 종사하는 기능공",
+    "employmentCode": 7021,
+    "employmentName": "미장공",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 120,
+    "name": "방수공",
+    "description": "구조물의 바닥, 벽체, 지붕 등 누수방지 작업에 종사하는 기능공",
+    "employmentCode": 7022,
+    "employmentName": "방수공",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 121,
+    "name": "액체방수공",
+    "description": "모르타르에 액체 방수제를 혼합하여 방수 효과를 내는 작업에 종사하는 기능공",
+    "employmentCode": 7022,
+    "employmentName": "방수공",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 122,
+    "name": "판넬조립공",
+    "description": "P.C판넬이나 샌드위치 판넬 등에 보온재를 채우거나 자르는 등 가공하여 조립 부착하는 작업에 종사하는 기능공",
+    "employmentCode": 7027,
+    "employmentName": "새시 조립 및 설치원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 123,
+    "name": "지붕잇기공",
+    "description": "기와잇기 및 슬레이트를 절단·가공하여 지붕, 벽체, 천정 등에 부착작업을 하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 124,
+    "name": "슬레이트공",
+    "description": "지붕·천장·내장·외장 등에 사용되는 천연 또는 인조 돌판을 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 125,
+    "name": "기와공",
+    "description": "기와를 잇는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 126,
+    "name": "루핑공",
+    "description": "루핑(지붕재료)을 깔거나 부착시키는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 127,
+    "name": "대장공",
+    "description": "철물을 불에 달구어 가구 및 공구를 제작 및 수리하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 128,
+    "name": "커튼월공",
+    "description": "적재하중이나 다른 어떤 부재의 구조적인 하중을 분담하지 않는 칸막이 같은 형태의 벽체를 시공하는 작업에 종사하는 기능공",
+    "employmentCode": 7027,
+    "employmentName": "새시 조립 및 설치원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 129,
+    "name": "금속쇠톱공",
+    "description": "금속재료 또는 금속제품을 절단하는 작업에 종사하는 기능공",
+    "employmentCode": 7027,
+    "employmentName": "새시 조립 및 설치원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 130,
+    "name": "제관공",
+    "description": "구조물과 압력용기의 가공, 제작 시공 및 보수 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 131,
+    "name": "판금공",
+    "description": "금속 또는 합금의 철괴를 압연해서 제조하여 평면판으로 가공하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 132,
+    "name": "마킹공",
+    "description": "금속소재의 절단, 제관, 기계가공 등의 작업을 위하여 금속소재에 명세된 모양과 치수로 선을 긋거나 참고사항을 작성하기 위하여 직각자, 게이지, 마이크로키터 등의 측정기구를 이용하여 설계상의 길이, 넓이, 부피 등을 계산하는 작업에 종사하는 기능공(제작도면을 치수에 의거하여 가공부위에 선 또는 점을 표시하거나 금긋기하는 사람)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 133,
+    "name": "창호목공",
+    "description": "건물에서 목재로 된 창 및 문짝을 제작 또는 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 134,
+    "name": "샷시공",
+    "description": "철재 창문틀, 샷시 또는 셔터를 제작, 설치, 해체하는 작업에 종사하는 기능공",
+    "employmentCode": 7027,
+    "employmentName": "새시 조립 및 설치원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 135,
+    "name": "유리공",
+    "description": "유리를 규격에 맞게 재단하거나 끼우는 작업에 종사하는 기능공",
+    "employmentCode": 7025,
+    "employmentName": "도배공 및 유리 부착원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 136,
+    "name": "창틀공",
+    "description": "창문틀을 가공, 조립하여 공구나 동력공구를 사용해 벽에 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7025,
+    "employmentName": "도배공 및 유리 부착원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 137,
+    "name": "창호공",
+    "description": "건물 등에서 목재, 철재, 샷시 등으로 된 창 및 문짝을 제작 또는 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7025,
+    "employmentName": "도배공 및 유리 부착원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 138,
+    "name": "철골공",
+    "description": "H빔 BOX빔 등 철골의 절단, 가공, 조립 및 해체 등의 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 139,
+    "name": "P.S공",
+    "description": "Prestressed Steel. 고강도의 강재를 사용하는 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 140,
+    "name": "절단공",
+    "description": "각종 철제를 소정의 규격으로 절단하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 141,
+    "name": "철거공",
+    "description": "구조물(아파트, 주택, 지하구조물 및 시설물) 등을 철거하고 철거하면서 발생되는 모든 폐기물(인목, 건설, 지정, 사업장, 혼합 폐기물)등을 반출(수집, 운반, 처리) 정리 하는 과정을 수행하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 142,
+    "name": "철공",
+    "description": "철재의 절단, 가공, 조립, 설치 등의 작업에 종사하는 기능공",
+    "employmentCode": 7013,
+    "employmentName": "철근공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 143,
+    "name": "철판공",
+    "description": "철판을 주자재로 하여 제작, 가공, 조립 및 해체 등의 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 144,
+    "name": "잡철공",
+    "description": "소형 철 구조물을 제작, 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 145,
+    "name": "함석공",
+    "description": "함석을 가공제작하거나 조립하는 작업에 종사하는 기능공",
+    "employmentCode": 7012,
+    "employmentName": "경량 철골공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 146,
+    "name": "용접공",
+    "description": "일반철재, 일반기기 또는 일반배관 등의 용접작업에 종사하는 기능공을(난이도 일반수준)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 147,
+    "name": "전기용접공",
+    "description": "전기용접장비를 사용하여 명세서, 설계도면, 용접절차에 따라 건축설비 및 조립제품의 금속구성부품들을 용접하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 148,
+    "name": "가스용접공",
+    "description": "작업지시서, 설계도면에 따라 가스용접기, 와이어브러시, 강철자 등 가스용접장비를 사용하여 금속부분품을 서로 맞붙이거나 금속 소재를 절단하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 149,
+    "name": "가시설철골공",
+    "description": "본공사를 하기 위한 가시설 철골시설물을 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 150,
+    "name": "가시설공",
+    "description": "본공사를 하기 위한 시설물(복공판설치, 지지대벽, 현장사무실)을 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 151,
+    "name": "궤도공",
+    "description": "철도의 궤도부설작업 또는 일반 공사장(사업장)내의 운반수단으로 임시 간이궤도를 부설, 해체, 유지 보수하는 작업에 종사하는 기능공",
+    "employmentCode": 7052,
+    "employmentName": "철로 설치 및 보수원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 152,
+    "name": "철도신호공",
+    "description": "철도신호기를 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7052,
+    "employmentName": "철로 설치 및 보수원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 153,
+    "name": "전차선공",
+    "description": "가공전차선 또는 제3레일로부터 전력을 공급하는 작업에 종사하는 기능공",
+    "employmentCode": 7052,
+    "employmentName": "철로 설치 및 보수원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 154,
+    "name": "타일공",
+    "description": "타일 또는 아스타일 등 타일류를 구조물의 표면에 부착시키는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 155,
+    "name": "아스타일공",
+    "description": "구조물에 접착제를 사용하여 아스타일을 부착시키는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 156,
+    "name": "대리석공",
+    "description": "대리석을 가공하여 시설물에 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 157,
+    "name": "연돌공",
+    "description": "각종 굴뚝을 축조하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 158,
+    "name": "연마공",
+    "description": "인조석 및 태라죠의 표면을 인력이나 기계로 물갈기하여 광택을 내는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 159,
+    "name": "인조석공",
+    "description": "인공적으로 만든 돌을 이용하여 주방상판 설치 및 인테리어를 장식하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 160,
+    "name": "석공",
+    "description": "대할 및 소할 된 석재를 가공하여 형성된 마름돌과 석재를 설치 또는 붙이거나 일반 쌓기를 하여 구조물을 축조하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 161,
+    "name": "갱부",
+    "description": "터널이나 갱(굴)속에서 토석 채취나 굴착작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 162,
+    "name": "그라우팅공",
+    "description": "지반의 개량, 누수 등의 방지를 목적으로 토사 또는 암반의 틈새 등에 그라우트(시멘트풀, 모르타르 등)를 가압 주입하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 163,
+    "name": "보링공",
+    "description": "지하수 개발 또는 지질조사나 구조물기초설계를 위한 보링을 전문으로 하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 164,
+    "name": "노즐공",
+    "description": "터널벽이나 절개지의 암벽에 쇼크리트를 분사하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 165,
+    "name": "동발공",
+    "description": "터널이나 갱내에서 동바리의 설치 및 해체 하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 166,
+    "name": "우물공",
+    "description": "지하의 천층수와 심층수를 취수하기 위한 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 167,
+    "name": "발파공",
+    "description": "암석에 구멍을 뚫고 폭약을 넣어 암석을 부수는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 168,
+    "name": "착암공",
+    "description": "착암기를 사용하여 암반의 천공작업을 하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 169,
+    "name": "락볼팅공",
+    "description": "암반을 천공하여 그 속에 볼트를 타입함으로써 상양력에 잘 견디게 하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 170,
+    "name": "보안공",
+    "description": "암석이나 구조물의 발파작업 시 발생하는 모든 사고를 미연에 방지하기 위하여 경계 신호를 하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 171,
+    "name": "할석공",
+    "description": "큰 돌을 소정의 규격에 맞도록 깨는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 172,
+    "name": "벌목공",
+    "description": "나무를 베는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 173,
+    "name": "드릴링공",
+    "description": "드릴기로 제품을 가공하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 174,
+    "name": "양수공",
+    "description": "양수 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 175,
+    "name": "토류판공",
+    "description": "흙막이 공사에 토류판을 설치하여 하천의 흐름을 유도시키는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 176,
+    "name": "골재쇄석공",
+    "description": "모르타르, 콘크리트 또는 역청질 혼합물을 만들기 위하여 잔골재와 굵은 골재를 쇄석하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 177,
+    "name": "적층공",
+    "description": "두개 또는 그 이상의 재료층을 중첩하고 접착하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 178,
+    "name": "항타공",
+    "description": "항타기를 이용하여 천공하는 작업에 종사하는 기능공",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 179,
+    "name": "화약취급공",
+    "description": "화약의 저장관리 및 장진 발파작업을 전문으로 하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 180,
+    "name": "발포콘크리트공",
+    "description": "콘크리트의 수축을 방지하기 위해 공기를 주입시키는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 181,
+    "name": "토공",
+    "description": "흙쌓기, 땅깍기 등 흙을 대상으로 하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 182,
+    "name": "물다짐흙쌓기공",
+    "description": "물의 운반력과 체적작용을 응용해 흙을 쌓는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 183,
+    "name": "파일공",
+    "description": "구조물의 중량을 지지 못할 정도로 지반이 약하여 굳은 층에 말뚝을 박는 주된 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 184,
+    "name": "흙막이공",
+    "description": "토압에 저항하여 흙이 무너지는 것을 방지하기 위한 주된 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 185,
+    "name": "포장공",
+    "description": "도로포장 등 공사에 있어서 표면처리를 하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 186,
+    "name": "포설공",
+    "description": "골재를 포설하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 187,
+    "name": "아스팔트타이트공",
+    "description": "아트팔트 타설을 하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 188,
+    "name": "아스팔트방수공",
+    "description": "평지붕의 방수법으로 아스팔트를 칠하고 그 위에 방수처리를 하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 189,
+    "name": "아스팔트포장공",
+    "description": "골재를 역청재료와 결합시켜서 만든 표층을 포장하는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 190,
+    "name": "플랜트공",
+    "description": "배관, 용접 등 플랜트공사의 설비작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 191,
+    "name": "플랜트배관공",
+    "description": "유해가스 이송관, 플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 배관 또는 설계압력 5kg/cm2 이상의 배관을 시공 및 보수하는 작업에 종사하는 기능공(원자력배관공 포함)",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 192,
+    "name": "플랜트용접공",
+    "description": "유해가스 이송관 및 유해가스 용기를 용접하거나, 플랜트 기기 및 플랜트 배관을 용접하거나, 철재․강관(합금강제외)을 TIG, MIG 등 용접하거나, 각각의 설계압력이 5kg/㎠이상인 기기 또는 배관의 용접 작업에 종사하는 기능공(난이도 중․고급수준)",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 193,
+    "name": "원자력용접공",
+    "description": "원자력발전소 건설·보수 시 원전의 안정성 및 신뢰성 확보를 위하여 다른 건설공사에 비해 엄격한 원자력관련 제규정, 규격 및 품질보증 요구조건에 따라 1차계통의 용접작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 194,
+    "name": "플랜트제관공",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 강제구조물과 압력용기의 가공, 제작시공 및 보수를 하는 작업에 종사하는 기능공(원자력 포함)",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 195,
+    "name": "플랜트특수용접공",
+    "description": "각각의 사용압력이 100kg/㎠이상인 배관 또는 압력용기를 용접하거나, 합금강을 용접 하거나, 합금강을 TIG, MIG 등 용접을 하는 작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 196,
+    "name": "플랜트도장공",
+    "description": "플랜트 시설에 기기를 이용하여 페인트류 및 기타 도료를 칠하는 작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 197,
+    "name": "플랜트비계공",
+    "description": "15m 이상의 곳에서 비계, 운반대, 작업대, 보호망 등의 설치 및 해체작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 198,
+    "name": "플랜트시운전공",
+    "description": "플랜트 시설의 사전 점검을 위한 시험 운전 작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 199,
+    "name": "플랜트기계설치공",
+    "description": "정밀을 요하는 플랜트 기계설비의 조립, 설치, 조정, 검사 및 보수를 하는 작업에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 200,
+    "name": "원자력기계설치공",
+    "description": "원자력발전소 건설·보수 시 원전의 안정성 및 신뢰성 확보를 위하여 다른 건설공사에 비해 엄격한 원자력 관련 제규정, 규격 및 품질보증 요구조건에 따라 1차계통의 기계조립, 설치 및 정비를 전문으로 하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 201,
+    "name": "플랜트전공",
+    "description": "발전소 중공업설비․플랜트설비의 시공 및 보수에 작업에 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 202,
+    "name": "원자력플랜트전공",
+    "description": "원자력발전소 건설·보수 시 원전의 안정성 및 신뢰성 확보를 위하여 다른 건설공사에 비해 엄격한 원자력관련 제규정, 규격 및 품질보증 요구조건에 따라 발·변전설비의 시공 및 보수작업을 하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 203,
+    "name": "비파괴시험공",
+    "description": "일반 또는 플랜트(철강,  석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 등 시설물의 기기 및 배관 등의 용접부위 또는 구조물 주요부위의 비파괴검사를 실시하는 사람(검사자)",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 204,
+    "name": "계측공",
+    "description": "구조물 등을 검측하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 205,
+    "name": "시운전공",
+    "description": "기계, 급배수, 전기, 가스, 위생, 냉난방 및 기타공사에 있어서 계기(플랜트 프로세스의 자동제어장치, 공업제어장치, 공업계측 및 컴퓨터 등)를 작동 운용하는 작업에 종사하는 기능공",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 206,
+    "name": "공구검사원",
+    "description": "새롭게 제작된 공구, 다이, 게이지, 지그, 고정구 등이 설계도면이나 명세서의 치수, 허용오차, 경도와 일치하는지를 측정기구들을 사용하여 검사, 시험, 조정하기 위한 작업에 종사하는 기능공",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 207,
+    "name": "전기시험공",
+    "description": "전기시험기기, 전기계측기구 등을 사용하여 사업체내에 설치되어 있는 원동기, 발전기, 변압기, 정밀계기 등 각종 제반 전기설비의 성능 및 이상여부를 측정하기 위한 시험, 검사 등의 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 208,
+    "name": "해상공",
+    "description": "해상에서 선박을 이용하여 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 209,
+    "name": "잠수공",
+    "description": "수중에서 잠수작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 210,
+    "name": "잠함공",
+    "description": "공기케이스를 조립, 설치 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 211,
+    "name": "준설선공",
+    "description": "물 밑바닥의 토사나 암석을 굴착하기 위하여 사용하는 작업에 종사하는 선박의 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 212,
+    "name": "항타선원",
+    "description": "항타기를 설치한 배의 운항 등의 작업에 종사하는 선원",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 213,
+    "name": "선장",
+    "description": "화물 및 승객운송, 어로를 위하여 항해하는 선박내의 제반활동을 지휘, 감독, 조정하는 사람",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 214,
+    "name": "기관장",
+    "description": "선박의 엔진, 보일러, 갑판의 기계장치 및 전기장치를 조작, 정비하는데 종사하는 선원들의 활동을 감독, 조정하는 사람",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 215,
+    "name": "기관선원",
+    "description": "선박의 엔진, 보일러, 갑판의 기계장치 및 전기장치를 조작, 정비하는 작업에 종사하는 사람",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 216,
+    "name": "갑판선원",
+    "description": "선박의 갑판에 설치된 각종 갑판시설 및 장비를 유지 관리하는 사람",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 217,
+    "name": "선원",
+    "description": "선박의 운항을 위한 각 부서의 선원",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 218,
+    "name": "인양공",
+    "description": "해저의 침하물을 해상으로 들어 올리는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 219,
+    "name": "기중기선원",
+    "description": "기중기(중량물을 들어 올리는 하역기계)를 장치한 배에서 작업하는 기능자",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 220,
+    "name": "준설선기관사",
+    "description": "준설기를 장치한 선박의 기관사(준설선기관장, 준설선전기사 포함)",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 221,
+    "name": "준설선선장",
+    "description": "준설기를 장치한 선박의 선장",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 222,
+    "name": "준설선운전사",
+    "description": "준설기를 장치한 준설기계 운전사",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 223,
+    "name": "도편수",
+    "description": "전통한식 건조물의 신축 또는 보수 시 설계도를 해독하고 한식목공, 한식석공 등을 총괄, 지휘하며 여러 전문 직종의 우두머리가 되는 기능공(도석수 포함)",
+    "employmentCode": 7026,
+    "employmentName": "건축 도장공",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 224,
+    "name": "목조각공",
+    "description": "목조불상, 한식건축물의 장식물인 포부재, 화반, 대공 등의 조각을 담당하여 새김질을 하는 작업에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 225,
+    "name": "한식목공",
+    "description": "도편수의 지휘아래 전통한식 기법으로 목재마름질 등 목조건조물의 나무를 치목하여 깎고 다듬어서 기물이나 건물을 짜 세우는 일에 종사하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 226,
+    "name": "한식목공조공",
+    "description": "전통한식 건조물의 치목, 조립을 하는 사람으로 한식목공을 보조하는 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 227,
+    "name": "한식석공",
+    "description": "도편수(도석수)의 지휘아래 전통한식 기법으로 흑두기 등 석재를 마름질하여 기단, 성곽, 석축 등 석조물 조립·해체를 전문으로 기능공",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 228,
+    "name": "드잡이공",
+    "description": "내려앉거나 기울어진 목조건조물, 석조건조물을 바로잡는 작업에 종사하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 229,
+    "name": "한식와공",
+    "description": "전통한식 건조물의 지붕을 옛 기법대로 기와를 잇거나 보수하는 사람으로 연와공사를 총괄 지휘하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 230,
+    "name": "한식와공조공",
+    "description": "한식와공의 지도를 받아 전통한식 건조물의 기와를 잇는 사람으로 한식와공을 보조하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 231,
+    "name": "석조각공",
+    "description": "석조불상, 기단우석, 전통석탑 등 석조건조물의 조각에 종사하는 기능공",
+    "employmentCode": 7017,
+    "employmentName": "조적공 및 석재 부설원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 232,
+    "name": "특수화공",
+    "description": "고유단청을 현장에서 시공하는 사람으로서 안료배합 및 초를 낼 수 있고 벽화를 시공할 수 있는 기능을 가진 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 233,
+    "name": "도목수",
+    "description": "건축공사에서 목공분야를 전담하며 현장의 전공정을 조정, 통솔하는 실무 책임자",
+    "employmentCode": 7016,
+    "employmentName": "건축 목공",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 234,
+    "name": "화공",
+    "description": "고유단청을 현장에서 시공하는 사람으로서 타분, 채색 및 색긋기, 먹긋기, 가칠 등을 전문으로 하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 235,
+    "name": "미술사",
+    "description": "구조물의 외관을 장식하는 작업에 종사하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 236,
+    "name": "한식미장공",
+    "description": "미장 바름재(진흙, 회삼물, 강회 등)를 사용하여 한식벽체·앙벽·온돌·외역기 등을 전통기법대로 시공하는 기능공",
+    "employmentCode": 7018,
+    "employmentName": "기타 건설관련 기능 종사원",
+    "insuranceCode": 701,
+    "insuranceName": "건설구조 기능원"
+  },
+  {
+    "seq": 237,
+    "name": "플랜트덕트공",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 덕트의 제작·설치작업에 종사하는 기능공(원자력 포함)",
+    "employmentCode": 7021,
+    "employmentName": "미장공",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 238,
+    "name": "플랜트케이블전공",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 케이블시공 및 보수작업에 종사하는 기능공(원자력 포함)",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 239,
+    "name": "플랜트계장공",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 계장작업에 종사하는 기능공(원자력 포함)",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 240,
+    "name": "플랜트기술자",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 설비 시공을 관리, 감독 할 수 있는 기술자로 경력이 3년 미만인 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 241,
+    "name": "원자력품질관리사",
+    "description": "원자력 품질관리규정(10 CFR 50 APP.B)의 요건에 따라 소정의 교육을 이수 후 관리사자격을 취득하고 원자력관련 제규정 및 규격에 관한 지식을 보유하고 동 규정에 따라 품질보증 업무에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 242,
+    "name": "플랜트특별인부",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 1차계통의 전문작업을 보조해 주는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 243,
+    "name": "플랜트보온공",
+    "description": "플랜트(철강, 석유, 제지, 화학, 원자력 및 발전 등의 에너지시설) 시설에서 다른 건설공사보다 엄격한 규격 및 품질보증 요구조건에 따라 기기 및 배관류 등의 보온시공에 종사하는 기능공",
+    "employmentCode": 7032,
+    "employmentName": "공업 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 244,
+    "name": "H/W설치사",
+    "description": "전자교환기 및 컴퓨터시스템의 하드웨어 설치 및 시공지도 운영업무에 종사하는 사람",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 245,
+    "name": "H/W시험사",
+    "description": "전자교환기, 기지국, 컴퓨터시스템의 기계설비(하드웨어 포함)의 설치, 시험, 분석, 운영 시공지도, 유지보수 등의 업무에 종사하는 사람",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 246,
+    "name": "S/W시험사",
+    "description": "전자교환기, 기지국, 컴퓨터시스템(CPU 등 포함)의 소프트웨어 및 프로그램 설계, 작성, 입력, 시험, 분석, 설치, 유지보수 등의 업무에 종사하는 사람",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 247,
+    "name": "CPU시험사",
+    "description": "전자교환기용 컴퓨터 CPU 및 주변장치(TTY, MTU등)에 대한 시험 및 운영, 프로그램의 분석, 관리업무에 종사하는 사람",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 248,
+    "name": "광통신설치사",
+    "description": "광통신시설 중 광전송장치(단말장치, 중계기 포함) 설치 및 특시험, 교정, 유지보수 업무에 종사하는 사람",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 249,
+    "name": "광케이블설치사",
+    "description": "광케이블 및 전송장치(단말장치, 중계기 포함)의 설치, 각종시험, 교정 및 유지보수 등의 작업에 종사하는 사람",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 250,
+    "name": "특고압케이블전공",
+    "description": "특별고압케이블 설비의 시공 및 보수 작업에 종사하는 기능공(7,000V 초과)",
+    "employmentCode": 7039,
+    "employmentName": "기타 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 251,
+    "name": "굴삭기(운전원)",
+    "description": "교각, 댐, 도로건설 및 하수도, 배수구, 송수관, 섬유관, 가스관 등의 설치장소에 있는 흙, 자갈, 돌, 기타 유사한 물질을 굴삭, 이동하기 위하여 바퀴나 무한궤도 트랙 위에 이동쇼벨, 그라브 버킷 등이 장치된 동력 구동기계의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 252,
+    "name": "그레이더(운전원)",
+    "description": "도로, 활주로, 제방 등의 건설시 노면의 토목공사를 위하여 토사나 자갈을 긁고 펼쳐 지표면을 일정한 높이로 평탄하게 고르는 기계의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 253,
+    "name": "덤프트럭(운전원)",
+    "description": "흙, 모래, 자갈, 파쇄된 암석, 아스콘 등 건설공사에 필요한 자재, 물품, 재료를 한 장소에서 다른 장소로 운반하기 위한 덤프기가 부착된 트럭 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 254,
+    "name": "도우저(운전원)",
+    "description": "도저의 토목공사, 건축공사, 농작물의 파종, 채광 또는 채석, 벌목, 제설 등의 작업을 하기 위하여 암석, 토사, 눈 등을 운반, 절토, 성토, 분배, 정리하는 기계의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 255,
+    "name": "롤러(운전원)",
+    "description": "도로, 활주로, 운동경기장, 제방 등의 지반이나 지층을 다져주기 위하여 정지명세서에 따라 지표면에 깔아진 흙, 돌, 자갈, 아스팔트, 콘크리트 등을 굳게 다지는 롤러의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 256,
+    "name": "로우더(운전원)",
+    "description": "트랙터에 여러 기구의 짧은 암을 대고 여기에 큰 디퍼를 붙인 기계의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 257,
+    "name": "지게차(운전원)",
+    "description": "생산품, 자재 등을 하역, 운반, 적재하는 지게차를 운전, 점검하는 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 258,
+    "name": "트레일러(운전원)",
+    "description": "트레일러나 피견인 장비를 끌기 위한 트랙터 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 259,
+    "name": "화물차(운전원)",
+    "description": "운반을 목적으로 하는 화물자동차의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 260,
+    "name": "콤퓨레샤(운전원)",
+    "description": "공기나 기타 여러 가지 가스 등의 기체에 압력을 가하는 기계(압축기)의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 261,
+    "name": "크레인(운전원)",
+    "description": "중량물을 필요한 위치와 목적에 따라 운반, 교환, 장입, 적재하기 위한 기중기의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 262,
+    "name": "타워크레인(운전원)",
+    "description": "중량물을 달아 올려 임의의 장소에 운반 하역할 수 있는 고층 건축용 양중기 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 263,
+    "name": "굴착기(운전원)",
+    "description": "토사와 암석을 굴착하는데 쓰이는 건설기계 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 264,
+    "name": "포크리트(운전원)",
+    "description": "차륜 또는 무한궤도식자동차 전면에 포크형을 한 양탑기를 갖는 크레인을 운전하는 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 265,
+    "name": "쉴드머신(운전원)",
+    "description": "실드공법에 쓰이는 굴착기 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 266,
+    "name": "스테이빌라이저(운전원)",
+    "description": "흙의 안전처리를 위한 모든 공정을 일관으로 작업하는 기계의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 267,
+    "name": "스크레이퍼(운전원)",
+    "description": "이동용 차체 밑에 삽날을 단 운반용 적재함을 갖고 그 함을 상하로 이동하면서 토사를 굴착하여 싣고 가동식 마개로 토사의 유출을 막고 운반하여 목적지에 가서 토사를 방출하는 토공기계의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 268,
+    "name": "아스팔트플랜트(운전원)",
+    "description": "가열된 아스팔트와 골재를 정확히 혼합하는 장치의 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 269,
+    "name": "아스팔트피니셔(운전원)",
+    "description": "아스팔트혼합물을 호퍼, 피더, 스크로, 탬퍼 등을 거쳐서 스크리드로 포설하는 기계를 운전하는 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 270,
+    "name": "건설기계운전원",
+    "description": "각종 건설기계의 운전과 조작을 하는 운전원(12t이상 트럭 포함)",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 271,
+    "name": "일반기계운전원",
+    "description": "각종 건설기계 이외 일반기계 운전과 조작을 하는 운전원",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 272,
+    "name": "중장비정비공",
+    "description": "중장비의 원활한 작동과 운행 유지를 위해 엔진계통과 램프, 배선, 베터리 등의 전기계통과 변속기, 기어 등의 동력전달계통의 부속품 및 장치를 분해하고 수리, 교체, 정비하는 작업에 종사하는 기능공",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 273,
+    "name": "열처리공",
+    "description": "슬러지의 탈수 특성을 좋게 하기 위해 열처리 방법을 통해 슬러지 개량 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 274,
+    "name": "제도공",
+    "description": "고안된 도면에 따라 깨끗이 그리는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 275,
+    "name": "현도사",
+    "description": "공작물의 제작을 위하여 실물을 원형대로 그리는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 276,
+    "name": "초음파절단공",
+    "description": "초음파기의 진동자에 지립을 분재시켜 공작하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 277,
+    "name": "가위절단공",
+    "description": "잡철 등 경량의 재료를 수작업으로 절단하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 278,
+    "name": "모형절단공",
+    "description": "실쇠톱이 부착된 자동금속(쇠톱)기로 절단하는 작업에 종사하는 기능공",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 279,
+    "name": "커튼공",
+    "description": "실내 창가 등에 커튼을 설치하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 280,
+    "name": "카페트공",
+    "description": "재래노면에 역청재를 살포하고 그 위에 다시 잘게 부순 돌이나 모래를 뿌려서 얇은 층을 만드는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 281,
+    "name": "콘도라공",
+    "description": "고층 건물의 외부 도장, 벽세척, 창소제 등에 사용되는 간이달비계를 운전하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 282,
+    "name": "강판공",
+    "description": "강판으로 제품을 제조하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 283,
+    "name": "디워터링공",
+    "description": "물막이를 하고 내측에 있는 물을 강제적으로 배수시키는 일을 하는 작업에 종사하는 기능공",
+    "employmentCode": 7029,
+    "employmentName": "기타 건축 마감 관련 기능 종사원",
+    "insuranceCode": 702,
+    "insuranceName": "건축마감 기능원"
+  },
+  {
+    "seq": 284,
+    "name": "몰탈스프래이공",
+    "description": "비탈면에 거푸집을 설치하지 않고, 시멘트모르타르나 콘크리트를 압축공기압으로 비탈면에 직접 뿜어 붙이는 작업에 종사하는 기능공",
+    "employmentCode": 7059,
+    "employmentName": "기타 채굴 및 토목 관련 종사원",
+    "insuranceCode": 705,
+    "insuranceName": "기타 건설 기능원"
+  },
+  {
+    "seq": 285,
+    "name": "배관공(수도)",
+    "description": "옥외(건물외부)에서 상·하수도, 공업용수로 등의 배관을 시공 및 보수하는 사람",
+    "employmentCode": 7031,
+    "employmentName": "건설 배관공",
+    "insuranceCode": 703,
+    "insuranceName": "배관공"
+  },
+  {
+    "seq": 286,
+    "name": "인력운반공",
+    "description": "2인 이상이 1조가 되어 인력으로 중량물을 운반하는 작업에 종사하는 사람(목도 포함)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 287,
+    "name": "건설기계조장",
+    "description": "건설기계 조종원을 통솔, 지휘하는 사람",
+    "employmentCode": 7040,
+    "employmentName": "건설 및 채굴기계 운전원",
+    "insuranceCode": 704,
+    "insuranceName": "건설 채굴 기계 운전원"
+  },
+  {
+    "seq": 288,
+    "name": "품질관리원\n※ 초급·중급·고급·특급",
+    "description": "건설기술진흥법 시행규칙 별표5에 해당하는 (특급·고급·중급·초급)품질관리자격을 가진 자로서 건설현장에 배치되어 각종 건설자재의 품질시험, 검사, 분석, 검토, 확인 등을 실시하는 시험인력",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 289,
+    "name": "지적기사",
+    "description": "지적산업기사가 하는 업무와 지적측량의 종합적 계획수립에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 290,
+    "name": "지적산업기사",
+    "description": "지적기능사가 하는 업무와 지적측량에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 291,
+    "name": "지적기능사",
+    "description": "지적측량의 보조 또는 도면의 정리와 등사, 면적측정 및 도면작성에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 292,
+    "name": "석면해체공",
+    "description": "건축물, 시설물, 설비 등에서 석면이 함유된 자재를 해체 또는 철거하는 작업에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 293,
+    "name": "드잡이공편수",
+    "description": "전통한식 건조물의 신축 또는 보수 시 설계도를 해독하고 드잡이공을 총괄, 지휘하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 294,
+    "name": "한식미장공편수",
+    "description": "전통한식 건조물의 신축 또는 보수 시 설계도를 해독하고 한식미장공을 총괄, 지휘하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 295,
+    "name": "한식와공편수",
+    "description": "전통한식 건조물의 신축 또는 보수 시 설계도를 해독하고 한식와공을 총괄, 지휘하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 296,
+    "name": "한식단청공편수",
+    "description": "전통한식 건조물의 신축 또는 보수 시 설계도를 해독하고 화공 및 특수화공을 총괄, 지휘하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 297,
+    "name": "한식석공조공",
+    "description": "기단, 성곽, 석축 등 석조물의 치석과 해체, 조립을 하는 사람으로 한식석공을 보조하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 298,
+    "name": "한식미장공조공",
+    "description": "전통한식 건조물의 미장을 하는 사람으로 한식미장공을 보조하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 299,
+    "name": "통신관련기사",
+    "description": "정보통신공사업법상의 통신기술 자격자(기사)로서 전기통신 설비의 시험·측정·조정·유지보수 등에서 종사하는 사람(광단말장치 및 광중계장치 제외)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 300,
+    "name": "통신관련산업기사",
+    "description": "정보통신공사업법상의 통신기술 자격자(산업기사)로서 전기통신 설비의 시험·측정·조정·유지보수 등에서 종사하는 사람(광단말장치 및 광중계장치 제외)",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 301,
+    "name": "통신관련기능사",
+    "description": "정보통신공사업법상의 통신기술 자격자(기능사)로서 전기통신 설비의 유지보수 및 엔지니어링 업무 보조자로 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 302,
+    "name": "전기공사기사",
+    "description": "전기공사업법상의 전기기술 자격자(기사)로 전기설비의 설치 및 유지보수에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  },
+  {
+    "seq": 303,
+    "name": "전기공사산업기사",
+    "description": "전기공사업법상의 전기기술 자격자(산업기사)로 전기설비의 설치 및 유지보수에 종사하는 사람",
+    "employmentCode": 7060,
+    "employmentName": "건설 및 광업 단순 종사원",
+    "insuranceCode": 706,
+    "insuranceName": "건설채굴 단순 종사자"
+  }
+]

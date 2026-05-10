@@ -1,0 +1,425 @@
+/* =========================================================================
+   현장 등록 — 4단계 위저드 (컴팩트 · 스크롤 없음)
+   ========================================================================= */
+
+/* 주소 검색 인라인 — Daum 우편번호 검색 (돋보기 = 우편번호 input 안 좌측 아이콘) */
+.srd-addr-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.srd-addr-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.srd-addr-row {
+  display: flex;
+  gap: 6px;
+}
+.srd-addr-text {
+  flex: 1 1 auto;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  background: white;
+  font-size: 13px;
+  outline: none;
+  min-width: 0;
+}
+.srd-addr-text:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18);
+}
+
+/* 우편번호 입력 — 돋보기(클릭) | 우편번호 숫자 (flexbox layout, no overlap) */
+
+
+
+
+/* 우편번호 input 자체 — wrapper 안에서 flex item 으로 배치 (absolute 사용 X) */
+
+
+
+
+.srd-wiz {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── 단계 인디케이터 (점 + 연결선 + 라벨, WorkCloseHeader 패턴) ── */
+.srd-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 8px 12px 16px;
+  margin: 0 0 8px;
+  list-style: none;
+}
+.srd-steps__row {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.srd-steps__row:last-of-type {
+  flex: 0 0 auto;
+}
+.srd-steps__step {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+.srd-steps__dot {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid #d1d5db;
+  background: white;
+  color: #9ca3af;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.srd-steps__label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #9ca3af;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.3;
+}
+/* 완료 단계 */
+.srd-steps__step.is-completed .srd-steps__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.srd-steps__step.is-completed .srd-steps__label {
+  color: var(--accent-hover, #0070F5);
+  font-weight: 700;
+}
+/* 현재 단계 */
+.srd-steps__step.is-active .srd-steps__dot {
+  background: white;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.srd-steps__step.is-active .srd-steps__label {
+  color: var(--accent);
+  font-weight: 700;
+}
+/* 미완료 단계 */
+.srd-steps__step.is-pending .srd-steps__dot {
+  background: white;
+  border-color: rgba(0, 122, 255, 0.40);
+  color: var(--accent);
+}
+.srd-steps__step.is-pending .srd-steps__label {
+  color: #6b7280;
+}
+/* 연결선 */
+.srd-steps__line {
+  flex: 1 1 0;
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 9px;
+  align-self: flex-start;
+  min-width: 32px;
+}
+.srd-steps__line-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(to right, #60a5fa, var(--accent));
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+.srd-steps__line.is-full .srd-steps__line-fill {
+  width: 100% !important;
+}
+
+/* ── 패널 ── */
+.srd-wiz__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 320px;
+}
+
+.srd-wiz__hint {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.srd-wiz__row {
+  display: grid;
+  gap: 10px;
+}
+.srd-wiz__row--1 { grid-template-columns: 1fr; }
+.srd-wiz__row--2 { grid-template-columns: 1fr 1fr; }
+.srd-wiz__row--3 { grid-template-columns: 1fr 1fr 1fr; }
+/* 주소 행 — 우편번호(좁게) + 소재지(넓게) */
+.srd-wiz__row--addr { grid-template-columns: 130px 1fr; }
+
+.srd-wiz__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.srd-wiz__label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.srd-wiz__req {
+  color: #ef4444;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.srd-wiz__input {
+  height: 32px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E8;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit;
+}
+
+.srd-wiz__input:focus {
+  border-color: #B5B5BB;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18), 0 1px 2px rgba(0, 0, 0, 0.04);
+  outline: none;
+}
+
+.srd-wiz__input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.srd-wiz__helper {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── MacSelect / MacDatePicker — 외곽 wrapper 박스 제거 + trigger 라운드 통일 ── */
+.srd-wiz__input.mac-select,
+.srd-wiz__input.mac-date,
+.srd-wiz__field:has(.mac-select),
+.srd-wiz__field:has(.mac-date) .srd-wiz__input {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+  box-shadow: none !important;
+}
+.srd-wiz__input .mac-select__trigger,
+.srd-wiz__input.mac-select .mac-select__trigger,
+.srd-wiz__field .mac-select__trigger {
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E5E5E8 !important;
+  height: 32px !important;
+  padding: 0 14px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02) !important;
+  font-size: 13px !important;
+}
+.srd-wiz__input .mac-select__trigger:hover:not(:disabled),
+.srd-wiz__field .mac-select__trigger:hover:not(:disabled) {
+  border-color: #D1D1D6 !important;
+}
+.srd-wiz__input .mac-select__trigger.is-open,
+.srd-wiz__field .mac-select__trigger.is-open {
+  border-color: #B5B5BB !important;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ── MacDatePicker 팝업 — 모달 우측 경계로 잘리지 않도록 우측 정렬 ──
+   사회보험 행의 달력(우측 160px 칼럼) 및 계약정보 행의 우측 칼럼 모두 적용 */
+.srd-wiz__ins-row .mac-date__menu,
+.srd-wiz__row .srd-wiz__field:nth-child(even) .mac-date__menu,
+.srd-wiz__row--2 .srd-wiz__field:last-child .mac-date__menu,
+.srd-wiz__row--3 .srd-wiz__field:last-child .mac-date__menu {
+  left: auto !important;
+  right: 0 !important;
+}
+
+/* ── 사회보험 행 ── */
+.srd-wiz__ins-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 160px;
+  gap: 8px;
+  align-items: center;
+}
+
+.srd-wiz__ins-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.10);
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ── 역할 미니카드 ── */
+.srd-wiz__role {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: var(--color-bg-soft);
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.srd-wiz__role-title {
+  margin: 0 0 2px 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Fix 1 — 진행 중 step 의 숨쉬기 애니메이션 */
+@keyframes srd-step-breath {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.40);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 122, 255, 0);
+    transform: scale(1.05);
+  }
+}
+.srd-steps__step.is-active .srd-steps__dot {
+  animation: srd-step-breath 2.0s ease-in-out infinite;
+}
+
+
+/* Fix 2 — 모든 텍스트박스 / dropdown 높이 통일 (40px) */
+/* NOTE: 
+
+
+/* ── Footer 액션 버튼 (취소 / 이전 / 다음 / 등록 완료) ── */
+.srd__btn {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  background: white;
+  color: var(--color-text);
+  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s, color 0.12s;
+}
+.srd__btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+.srd__btn--ghost:hover { background: var(--color-bg-soft); }
+.srd__btn--primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.srd__btn--primary:hover:not(:disabled) {
+  background: var(--accent-hover, #0070F5);
+  border-color: var(--accent-hover, #0070F5);
+}
+.srd__btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 우편번호 입력 — 돋보기 | 숫자 (안쪽 pill 박스 완전 제거) */
+.srd-zip-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 32px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E8;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.srd-zip-wrap:focus-within {
+  border-color: #B5B5BB;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.srd-zip-search {
+  width: 36px;
+  height: 100%;
+  flex: 0 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+  color: var(--accent);
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+.srd-zip-search:hover {
+  background: rgba(0, 122, 255, 0.05);
+}
+.srd-zip-search > svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+/* CRITICAL — wrap 안의 input 은 배경/보더/그림자/라운드 모두 제거 */
+.srd-zip-wrap .srd-wiz__input,
+.srd-zip-wrap input.srd-wiz__input,
+.srd-zip-wrap > input {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: 0 14px !important;
+  margin: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font-size: 13px !important;
+  color: var(--text-primary) !important;
+  box-sizing: border-box;
+}

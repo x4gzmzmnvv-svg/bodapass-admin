@@ -1,0 +1,294 @@
+/* 세금관리 페이지 */
+
+.tx-page { display: flex; flex-direction: column; gap: 16px; }
+
+/* ─────────────────────────────────────────────
+ * 노무비 상세 팝업 — 합계 요약 카드(고정) + 근로자별 세부 표(내부 스크롤)
+ *
+ * 동작 원리:
+ *  · modal__body 를 flex column 으로 강제
+ *  · .tx-detail flex column + flex:1 → modal body 가용 높이 모두 차지
+ *  · .tx-detail__summary flex-shrink:0 → 항상 표시 (스크롤 영향 X)
+ *  · .tx-detail__table-wrap flex:1 + overflow-y:auto → 남은 공간 내부 스크롤
+ *  · table thead sticky → 데이터 행만 스크롤되고 헤더 고정
+ * ───────────────────────────────────────────── */
+.modal__body:has(.tx-detail) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.tx-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+.tx-detail > .tx-detail__summary {
+  flex-shrink: 0;
+}
+.tx-detail > .tx-detail__table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+.tx-detail__empty {
+  margin: 0;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* 합계 요약 카드 — 5행 가로 그리드 (label + strong 값) */
+.tx-detail__summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.tx-detail__summary-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 8px;
+  border-right: 1px solid #F0F0F2;
+}
+.tx-detail__summary-row:last-child {
+  border-right: 0;
+}
+.tx-detail__summary-row > span {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.tx-detail__summary-row > strong {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1A1A1A;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+/* 마지막 행(원천징수 합계) — 시스템 블루 강조 */
+.tx-detail__summary-row--total > strong {
+  color: var(--accent);
+}
+
+/* 근로자별 세부 표 */
+/* table-wrap — 자체 스크롤 제거 (modal__body 가 단일 스크롤 컨테이너로 동작) */
+.tx-detail__table-wrap {
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 12px;
+  overflow: visible;
+}
+.tx-detail__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.tx-detail__table th,
+.tx-detail__table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #F0F0F2;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+/* 헤더 — 다른 표와 동일 톤 (불투명 회색 + 다크 텍스트 + bold + sticky)
+ * background 는 반투명이 아닌 OPAQUE 색이어야 sticky 시 아래 행들이 비치지 않음 */
+.tx-detail__table thead th {
+  background: #F8F8FA;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  /* sticky 헤더 하단 hairline — border 대신 box-shadow 로 (sticky border 끊김 방지) */
+  box-shadow: inset 0 -1px 0 #E5E5EA;
+  border-bottom: 0;
+}
+.tx-detail__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.tx-detail__table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.tx-detail__th-no {
+  width: 36px;
+  text-align: center;
+}
+.tx-detail__num {
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+.tx-detail__table tbody td:first-child {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* 좁은 화면 fallback */
+@media (max-width: 720px) {
+  .tx-detail__summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tx-detail__summary-row {
+    border-right: 0;
+    border-bottom: 1px solid #F0F0F2;
+    padding: 6px 8px;
+  }
+}
+
+.tx-flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px;
+  padding: 8px 12px;
+  background: white; border: 1px solid #e5e7eb; border-radius: 10px;
+  font-size: 12px; color: #6b7280;
+}
+.tx-flow__step {
+  display: inline-flex; padding: 4px 10px; border-radius: 999px;
+  background: #f3f4f6; color: #6b7280;
+  font-weight: 600; border: 1px solid transparent;
+}
+.tx-flow__step.is-current {
+  background: #eef2ff; color: var(--accent); border-color: rgba(0, 122, 255, 0.20);
+}
+.tx-flow__step--btn {
+  cursor: pointer; font-family: inherit; font-size: 12px;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.tx-flow__step--btn:hover {
+  background: #e0e7ff; color: var(--accent); border-color: #c7d2fe;
+}
+.tx-flow__arrow { color: #cbd5e1; font-size: 13px; }
+
+.tx-filter {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 16px;
+  background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+}
+/* 외곽 타일 제거 — 히어로 아래 flat 으로 표시 */
+.tx-filter--flat {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 4px 12px !important;
+  border-bottom: 1px solid #E5E5EA !important;
+}
+.tx-filter__cell { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.tx-filter__cell label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  writing-mode: horizontal-tb;
+}
+.tx-filter__cell input {
+  height: 32px; padding: 0 12px;
+  border: 1px solid #d1d5db; border-radius: 6px;
+  background: white; font-size: 13px; font-family: inherit;
+}
+
+.tx-kpi {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+/* KPI 타일 — 인력관리/노무비 히어로와 동일한 입체감 (3-tier 그림자 + inset highlight) */
+.tx-kpi__card {
+  background: #FFFFFF;
+  border: 0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 3px 6px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: transform 0.15s, box-shadow 0.2s, background-color 0.18s;
+}
+.tx-kpi__card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.09),
+    0 5px 10px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+/* 톤별 색감 (옅은 tint) — 노무비 히어로와 통일 */
+.tx-kpi__card--ok    { background: #ECFDF5; }   /* 옅은 민트 — 원천징수 총액 */
+.tx-kpi__card--amber { background: #FFF8E6; }   /* 옅은 앰버 — 소득세/지방세 */
+.tx-kpi__label { font-size: 11.5px; color: #6b7280; font-weight: 600; }
+.tx-kpi__value {
+  font-size: 20px; font-weight: 800; color: #111827;
+  font-variant-numeric: tabular-nums;
+}
+.tx-kpi__unit { font-size: 12px; color: #6b7280; font-weight: 600; margin-left: 3px; }
+.tx-kpi__card--ok    .tx-kpi__value { color: #047857; }   /* 민트 그린 */
+.tx-kpi__card--amber .tx-kpi__value { color: #92400E; }   /* 앰버 */
+
+@media (max-width: 1180px) {
+  .tx-kpi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .tx-kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.tx-loading, .tx-empty {
+  padding: 40px 20px; text-align: center;
+  color: #6b7280; font-size: 13px;
+  background: white; border: 1px dashed #e5e7eb; border-radius: 12px;
+}
+
+.tx-table-wrap {
+  background: white; border: 1px solid #e5e7eb;
+  border-radius: 12px; overflow: hidden; overflow-x: auto;
+}
+.tx-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.tx-table thead tr { background: #f8f9fb; border-bottom: 1px solid #e5e7eb; }
+.tx-table th {
+  text-align: right; padding: 10px 12px;
+  font-weight: 700; color: #6b7280; font-size: 11.5px;
+  white-space: nowrap;
+}
+.tx-table th.tx-th-name { text-align: left; }
+.tx-table tbody tr { border-top: 1px solid #e5e7eb; }
+.tx-table td { padding: 12px; vertical-align: middle; white-space: nowrap; }
+.tx-td-name { text-align: left; }
+.tx-td-num { text-align: right; font-variant-numeric: tabular-nums; }
+.tx-td-actions { text-align: right; display: flex; gap: 4px; justify-content: flex-end; }
+
+.tx-btn {
+  height: 28px; padding: 0 12px;
+  background: white; border: 1px solid #d1d5db; border-radius: 6px;
+  font-size: 11.5px; font-weight: 600; color: #111827;
+  cursor: pointer; font-family: inherit;
+  transition: border-color 0.12s, color 0.12s;
+}
+.tx-btn:hover { border-color: #4f6fb8; color: #4f6fb8; }
+.tx-btn--sm { height: 26px; padding: 0 10px; font-size: 11.5px; }
+
+.tx-note {
+  background: #fffbeb; border: 1px solid #fde68a; color: #92400e;
+  border-radius: 10px; padding: 12px 16px;
+  font-size: 12.5px; line-height: 1.55;
+}
+.tx-note strong { font-weight: 700; margin-right: 4px; }
+.tx-note code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; background: white; padding: 1px 6px;
+  border-radius: 4px; border: 1px solid #fde68a;
+}

@@ -1,0 +1,1147 @@
+.trp {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.trp__back {
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+  /* trp__btn 과 동일 정렬로 시각적 균형 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.trp__back:hover {
+  background: var(--color-bg-input);
+}
+
+/* 등록 방식 토글 */
+.trp__seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--sp-2);
+}
+
+@media (max-width: 720px) {
+  .trp__seg {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trp__seg-btn {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  text-align: left;
+  font-size: var(--fs-14);
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.trp__seg-btn:hover {
+  border-color: var(--color-border-strong);
+}
+
+.trp__seg-btn.is-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.trp__seg-sub {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.trp__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.trp__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--sp-3);
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .trp__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trp__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+/* 섹션 — plain header + rounded tile body */
+.trp-sec {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trp-sec__title {
+  padding: 0 2px;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--fs-13);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.trp-sec__body {
+  background: #FFFFFF;
+  border: 0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.trp__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  align-items: end;
+}
+
+.trp__row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* 주소 행 — 주소(2/3) + 신분증 업로드(1/3) */
+.trp__addr-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--sp-3);
+  align-items: end;
+}
+.trp__addr-input,
+.trp__addr-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.trp__addr-label {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+}
+.trp__addr-input-row {
+  display: flex;
+  gap: 6px;
+}
+.trp__addr-text {
+  flex: 1 1 auto;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: var(--fs-13);
+  outline: none;
+  min-width: 0;
+}
+.trp__addr-text:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+.trp__addr-search {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  color: var(--accent, #007AFF);
+  border-radius: 12px;
+  font-size: 0;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.trp__addr-search svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+.trp__addr-search:hover {
+  background: rgba(0, 122, 255, 0.10);
+  border-color: var(--accent, #007AFF);
+}
+
+/* 인라인 업로드 버튼 (신분증/통장) — 라벨이 없는 큰 단일 버튼 */
+.trp__inline-upload {
+  height: 32px;
+  padding: 0 14px;
+  border: 1px dashed var(--color-border-strong);
+  background: white;
+  color: var(--color-text);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  align-self: end;
+}
+.trp__inline-upload:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.trp__inline-upload.is-done {
+  background: rgba(0, 122, 255, 0.08);
+  border-color: #007AFF;
+  border-style: solid;
+  color: #007AFF;
+}
+
+/* 계좌 행 — 은행 / 계좌번호 / 예금주 / 통장 업로드 (4컬럼) */
+.trp__row--bank {
+  grid-template-columns: 1fr 1.4fr 1fr 1.1fr;
+}
+
+/* 타계좌 입금 행 — 라디오(좌) + 입금 확인증(우). 4대보험 행과 같은 위치로 정렬 */
+.trp__remit-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--sp-3);
+  align-items: end;
+  /* 점선 구분선 / 추가 간격 제거 — Section body 의 기본 gap 만 사용 */
+}
+.trp__radio-group {
+  display: flex;
+  gap: 6px;
+  height: 36px;
+  align-items: center;
+}
+.trp__radio {
+  flex: 1 1 0;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;  /* 둥근 pill — chip 과 통일 */
+  background: white;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.trp__radio input[type="radio"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  margin: 0;
+  position: relative;
+}
+.trp__radio.is-on {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.trp__radio.is-on input[type="radio"] {
+  border-color: var(--color-primary);
+  background: white;
+}
+.trp__radio.is-on input[type="radio"]::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+.trp__radio:hover { background: var(--color-bg-soft); }
+.trp__radio.is-on:hover { background: var(--color-primary-light); }
+
+/* 입금 확인증 — 두 버튼 가로 배치 */
+.trp__remit-actions {
+  display: flex;
+  gap: 6px;
+}
+.trp__remit-actions .trp__inline-upload {
+  flex: 1 1 0;
+}
+@media (max-width: 720px) {
+  .trp__remit-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .trp__row--bank {
+    grid-template-columns: 1fr 1fr;
+  }
+  .trp__addr-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .trp__row,
+  .trp__row--3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* select wrap */
+.trp__select-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trp__select-wrap label {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.trp__select-wrap select {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  background: white;
+  font-size: 13px;
+  outline: none;
+}
+
+.trp__select-wrap select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* 파일 슬롯 */
+.trp-file {
+  width: 100%;
+  background: white;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--r-md);
+  padding: var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-align: left;
+  font-size: var(--fs-13);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+  color: var(--color-text);
+}
+
+.trp-file:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.trp-file--filled {
+  border-style: solid;
+  border-color: var(--color-primary);
+  cursor: default;
+  background: white;
+}
+
+.trp-file__plus {
+  width: 36px;
+  height: var(--ctl-h);
+  border-radius: 50%;
+  background: var(--color-bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.trp-file__check {
+  width: 36px;
+  height: var(--ctl-h);
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.trp-file__img {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--r-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.trp-file__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.trp-file__name {
+  display: block;
+  font-size: var(--fs-14);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.trp-file__desc {
+  display: block;
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.trp-file__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* 얼굴 영역 */
+.trp__cert-desc {
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.trp__face {
+  /* 기본 정보 좌측에 들어가는 작은 원형 사진 */
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  background: var(--color-bg-input);
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 기본 정보 — 좌(사진+버튼) 160px + 우(폼 필드 5컬럼) */
+.trp__basic-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: var(--sp-3);
+  align-items: flex-start;
+}
+@media (max-width: 720px) {
+  .trp__basic-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 우측 추가정보 — 280px 고정 폭, 4대보험 + 안전교육 chips */
+.trp__extra-side {
+  flex: 0 0 auto;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-left: var(--sp-3);
+  border-left: 1px solid var(--color-border);
+}
+.trp__extra-side > .trp-extra__label {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.trp-extra__sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 4px 0;
+}
+
+/* 4컬럼 행 — 옛 정의, 호환용 */
+.trp__row--4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-2);
+}
+
+/* 신분증 행 — 내외국인(소) · 주민등록번호 · 주소(검색버튼) · 신분증 업로드 */
+.trp__row--id {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) minmax(0, 1.8fr) auto;
+  gap: var(--sp-2);
+  align-items: end;
+}
+@media (max-width: 1100px) {
+  .trp__row--id {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+  .trp__row--id > :nth-child(3),
+  .trp__row--id > :nth-child(4) {
+    grid-column: span 2;
+  }
+}
+
+/* 4대보험 chips — 한 줄, 균등 분할 (4개) */
+.trp-extra__chips--inline {
+  display: flex;
+  gap: 6px;
+  height: 32px;
+  align-items: center;
+}
+.trp-extra__chips--inline .trp-chip {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 26px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 기초안전교육 chip — 풀폭 같은 높이 */
+.trp-chip--block {
+  width: 100%;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ② 현장 정보 + ③ 계좌 정보 좌우 2컬럼 — 박스 높이 stretch 로 동일 정렬 */
+.trp__bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  align-items: stretch;
+}
+/* 카드(Section) 가 grid 셀 높이를 채우도록 */
+.trp__bottom-grid > .trp-sec {
+  display: flex;
+  flex-direction: column;
+}
+.trp__bottom-grid > .trp-sec > .trp-sec__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+@media (max-width: 1100px) {
+  .trp__bottom-grid {
+    grid-template-columns: 1fr;
+  }
+  .trp__extra-side {
+    width: 100%;
+    padding-left: 0;
+    padding-top: var(--sp-3);
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+}
+.trp__basic-photo {
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+.trp__basic-fields {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  /* 4컬럼 행이 들어가야 하므로 max-width 제거 — 사진·추가정보 사이 공간 채움 */
+  min-width: 0;
+}
+
+/* 기본정보 안의 모든 입력 박스 — 32px 고정 (select·Field input·주소·버튼 통일) */
+.trp__basic-fields .field__input {
+  height: 32px;
+  padding: 0 10px;
+  font-size: var(--fs-13);
+  border-radius: 12px;
+}
+.trp__basic-fields .field__row {
+  align-items: stretch;
+}
+/* 라벨 — 모든 wrapper 단일 행 + 동일 line-height (전 섹션 통일) */
+.trp__form .field__label,
+.trp__form .trp__select-wrap label,
+.trp__form .trp__addr-label {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  line-height: 20px;
+  height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+/* 라벨 → 입력 사이 gap 통일 */
+.trp__form .field,
+.trp__form .trp__select-wrap,
+.trp__form .trp__addr-cell {
+  gap: 6px;
+}
+/* 모든 입력/박스 — 32px 고정 통일 (select/input/upload-btn) — chips 는 26px 별도 */
+.trp__form .field__input,
+.trp__form .trp__select-wrap select,
+.trp__form .trp__addr-text,
+.trp__form .trp__addr-search,
+.trp__form .trp__inline-upload,
+.trp__form .trp__radio {
+  height: 32px;
+  box-sizing: border-box;
+}
+.trp__form .trp-chip {
+  box-sizing: border-box;
+}
+.trp__form .field__input {
+  padding: 0 10px;
+  font-size: var(--fs-13);
+}
+
+/* 기본 정보 안 추가 정보 구분선 */
+.trp__basic-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--sp-2) 0;
+}
+
+/* 기본 정보 안 추가 정보 인라인 (4대보험 + 기초안전교육) */
+.trp-extra-inline__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+.trp-extra-inline__toggle:hover {
+  color: var(--color-primary-dark);
+}
+.trp-extra-inline__body {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: 8px 4px 4px;
+}
+
+/* 작은 버튼 (사진 영역용) */
+.trp__btn--sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 11.5px;
+}
+
+@media (max-width: 720px) {
+  .trp__basic-row { flex-direction: column; }
+  .trp__basic-fields { max-width: none; }
+}
+
+/* 우측 컬럼 — 에러/성공 토스트 */
+.trp__toast {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 작은 얼굴 사진 (사이드바용) — 정사각형 140x140 */
+.trp__face--small {
+  width: 140px;
+  height: 140px;
+  aspect-ratio: auto;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+}
+
+.trp__face--small .trp__face-empty {
+  font-size: var(--fs-12);
+}
+
+.trp__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trp__face-empty {
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+}
+
+/* 사진 아래 버튼 — 가로 배치, 글씨 깨지지 않게 컴팩트 */
+.trp__face-actions {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  justify-content: center;
+}
+.trp__face-actions .trp__btn {
+  white-space: nowrap;
+  padding: 0 8px;
+  font-size: 11px;
+  height: 26px;
+  flex: 0 1 auto;
+}
+
+/* 동의 */
+.trp__agree {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--fs-13);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.trp__agree input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.trp__agree strong {
+  color: var(--color-text);
+}
+
+.trp__agree-meta {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  margin-top: var(--sp-2);
+  line-height: 1.6;
+}
+
+/* CTA */
+.trp__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+}
+
+.trp__btn {
+  /* PageHeader actions 표준 — trp__back 과 동일 사이즈 (--ctl-h = 36px) */
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.trp__btn--primary {
+  background: var(--accent, #007AFF);
+  color: white;
+  border-color: var(--accent, #007AFF);
+}
+
+.trp__btn--primary:hover:not(:disabled) {
+  background: var(--accent-hover, #0066D6);
+  border-color: var(--accent-hover, #0066D6);
+}
+
+.trp__btn--primary:disabled {
+  background: var(--color-border-strong);
+  border-color: var(--color-border-strong);
+  cursor: not-allowed;
+}
+
+/* RoleSelect 사이즈 통일 — 다른 input(32px) 과 시각적 균형 */
+.trp__form .rsel__btn {
+  height: 32px !important;
+  padding: 0 12px !important;
+  font-size: var(--fs-13, 13px) !important;
+  border-radius: 12px !important;
+}
+
+.trp__form .rsel__btn-name {
+  font-weight: 500 !important;
+  font-size: var(--fs-13, 13px) !important;
+}
+
+.trp__form .rsel__placeholder {
+  font-size: var(--fs-13, 13px) !important;
+}
+
+.trp__btn--ghost {
+  background: white;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.trp__btn--ghost:hover {
+  background: var(--color-bg-input);
+}
+
+.trp__btn--danger {
+  background: white;
+  border-color: #fecdd3;
+  color: var(--color-error);
+}
+
+.trp__btn--danger:hover {
+  background: #fff1f2;
+}
+
+.trp__err {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: var(--color-error);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+}
+
+.trp__ok {
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary-dark);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+}
+
+/* ── 전자동의서 (PART 1·2·3) ── */
+.trp__consent-intro {
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--sp-3) !important;
+}
+
+.trp__consent-intro strong {
+  color: var(--color-text);
+}
+
+.consent-part {
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-3);
+  background: white;
+  transition: border-color 0.15s, opacity 0.15s, box-shadow 0.15s;
+}
+
+.consent-part.is-checked {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+.consent-part.is-disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.consent-part__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.consent-part__num {
+  font-size: var(--fs-11, 0.6875rem);
+  font-weight: 800;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+}
+
+.consent-part.is-checked .consent-part__num {
+  background: var(--color-primary);
+  color: white;
+}
+
+.consent-part__title {
+  font-size: var(--fs-14);
+  font-weight: 700;
+}
+
+.consent-part__body {
+  font-size: var(--fs-12);
+  color: var(--color-text);
+  line-height: 1.7;
+  background: var(--color-bg-soft);
+  padding: var(--sp-3);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--sp-3);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.consent-part__body p {
+  margin: 0 0 var(--sp-2);
+}
+.consent-part__body p:last-child {
+  margin: 0;
+}
+.consent-part__body ol {
+  margin: 0 0 var(--sp-2);
+  padding-left: 20px;
+}
+.consent-part__body ol li {
+  margin-bottom: 2px;
+}
+.consent-part__body em {
+  font-style: normal;
+  color: #92400e;
+}
+
+.consent-part__check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  font-size: var(--fs-13);
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+}
+
+.consent-part__check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.trp__consent-link {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+.trp__consent-link a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ───────── (재구성) 헤더/레이아웃 보강 ───────── */
+
+.trp__head-actions {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.trp__row--2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+
+@media (max-width: 720px) {
+  .trp__row--2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── 추가 정보 (선택) — 접이식 섹션 ── */
+.trp-sec__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.trp-sec__toggle:hover {
+  background: var(--color-bg-input);
+}
+.trp-sec__caret {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+.trp-sec__body--extra {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 14px 16px 4px;
+}
+.trp-extra__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.trp-extra__label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.trp-extra__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.trp-extra__hint {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.trp-chip {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: white;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-strong);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.trp-chip:hover { background: var(--color-bg-soft); }
+.trp-chip.is-on {
+  background: rgba(0, 122, 255, 0.10);
+  color: #007AFF;
+  border-color: #007AFF;
+}
+
+
+/* ── Embedded(모달 안에 임베드된) 모드 전용 ───────────────────────────────
+   TeamListPage 의 「+ 직접 등록」 팝업에서 본 페이지를 모달 안에 임베드해
+   사용한다. 페이지의 좌우 여백·타이틀 영역은 모달 chrome 이 대신하므로
+   .trp__form 의 padding 만 약간 줄여 모달 안에 자연스럽게 들어가게 한다. */
+.trp--embedded { padding: 0; background: transparent; }
+.trp--embedded .trp__form { padding: 0; gap: 16px; }
+.trp__embed-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 4px;
+}
+.trp__embed-bar--bottom {
+  padding: 12px 0 4px;
+  border-bottom: none;
+  border-top: 1px solid var(--color-border);
+  margin-top: 12px;
+  margin-bottom: 0;
+  position: sticky;
+  bottom: 0;
+  background: transparent;
+  z-index: 5;
+}
+
+/* 직종(MacSelect)·기타 select — 32px 통일 */
+.trp__select-wrap > button,
+.trp__select-wrap .mac-select__trigger,
+.trp__select-wrap [role="combobox"],
+.trp__select-wrap [role="button"] {
+  height: 32px !important;
+  font-size: 13px !important;
+  border-radius: 12px !important;
+  padding: 0 10px !important;
+  box-sizing: border-box;
+}
+
+/* 기초안전교육 — pills + 이수증 업로드 가로 배치 */
+.trp__safety-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.trp__safety-pills {
+  flex: 0 0 auto;
+  width: auto;
+  height: 32px;
+}
+.trp__safety-pills .trp-chip {
+  flex: 0 0 auto;
+  min-width: 56px;
+  height: 26px;
+  padding: 0 14px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.trp__safety-upload {
+  flex: 1 1 auto;
+  align-self: center !important;
+}
+
+/* TeamRegisterPage 전용 — 우편번호 버튼을 magnifier 아이콘 타일로 */
+.trp__form .addr-field__btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  font-size: 0;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-strong);
+}

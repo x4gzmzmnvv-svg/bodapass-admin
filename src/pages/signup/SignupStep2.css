@@ -1,0 +1,319 @@
+.su2 {
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.su2__header {
+  margin-bottom: var(--sp-2);
+}
+
+.su2__title {
+  font-size: var(--fs-24);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.su2__sub {
+  margin-top: 6px;
+  font-size: var(--fs-14);
+  color: var(--color-text-muted);
+}
+
+/* 좌/우 2단 그리드 */
+.su2__grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .su2__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.su2__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.su2__right {
+  position: sticky;
+  top: var(--sp-5);
+}
+
+/* 섹션 */
+.su2-section {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.su2-section__title {
+  padding: 14px var(--sp-5);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  font-size: var(--fs-15);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.su2-section__required {
+  font-size: var(--fs-11, 0.6875rem);
+  font-weight: 600;
+  background: var(--color-error);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0;
+}
+
+.su2-section__body {
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* 2칸 행 */
+.su2__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+@media (max-width: 700px) {
+  .su2__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 중복확인 버튼 */
+.su2__check-btn {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border-strong);
+  background: white;
+  border-radius: var(--r-md);
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.su2__check-btn:hover:not(:disabled) {
+  background: var(--color-bg-input);
+}
+
+.su2__check-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.su2__ok {
+  color: var(--color-success);
+  font-weight: 500;
+}
+.su2__warn {
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+/* 비밀번호 강도 미터 */
+.pw-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.pw-meter__bar {
+  width: 80px;
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.pw-meter__fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.2s, background 0.2s;
+}
+
+.pw-meter__label {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+}
+
+/* 건설회사 체크 */
+.su2__construction {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+  font-size: var(--fs-13);
+  color: var(--color-text);
+  user-select: none;
+}
+
+.su2__construction input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+/* 우측 인증서 영역 */
+.su2__cert-desc {
+  font-size: var(--fs-13);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--sp-3);
+}
+
+.su2__cert-desc strong {
+  color: var(--color-text);
+}
+
+.su2__cert-zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.su2__cert-upload {
+  width: 100%;
+  border: 1px dashed var(--color-border-strong);
+  background: white;
+  border-radius: var(--r-md);
+  padding: var(--sp-6) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: var(--fs-14);
+  color: var(--color-text);
+  font-weight: 500;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.su2__cert-upload:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.su2__cert-plus {
+  width: 36px;
+  height: var(--ctl-h);
+  border-radius: 50%;
+  background: var(--color-bg-input);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+
+.su2__cert-upload:hover .su2__cert-plus {
+  background: var(--color-primary);
+  color: white;
+}
+
+.su2__cert-formats {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.su2__cert-uploaded {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.su2__cert-mark {
+  width: 36px;
+  height: var(--ctl-h);
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.su2__cert-name {
+  font-size: var(--fs-14);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.su2__cert-meta {
+  font-size: var(--fs-12);
+  color: var(--color-primary-dark);
+  margin-top: 2px;
+}
+
+.su2__cert-remove {
+  margin-left: auto;
+  background: white;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+  font-size: var(--fs-12);
+  color: var(--color-text);
+}
+
+.su2__cert-remove:hover {
+  background: var(--color-bg-input);
+}
+
+.su2__cert-error {
+  font-size: var(--fs-12);
+  color: var(--color-error);
+}
+
+.su2__cert-tip {
+  margin-top: var(--sp-3);
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--r-md);
+  padding: var(--sp-3);
+  font-size: var(--fs-12);
+  color: #92400e;
+  line-height: 1.7;
+}
+
+.su2__cert-tip strong {
+  color: #78350f;
+}
+
+/* 액션 */
+.su2__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.su2__overall-error {
+  font-size: var(--fs-13);
+  color: var(--color-error);
+  text-align: right;
+}

@@ -1,0 +1,179 @@
+/* macOS Sequoia Liquid Glass — Modal popup
+ *  · backdrop: 약한 블러 + 거의 투명한 dim (뒤 배경 컬러가 자연스럽게 비침)
+ *  · modal: ultra-thin 머터리얼 + 강한 블러 + 높은 채도 (300%) 로 ambient 컬러 픽업
+ *  · 흰 inner highlight 로 글래스 엣지 강조 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  /* 뉴트럴 그레이 dim — 컬러 블롭 없음, 본문 컨텐츠가 회색으로 부드럽게 페이드 */
+  background: rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--sp-6);
+  animation: modal-backdrop-in 0.22s ease-out;
+}
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  width: 100%;
+  position: relative;
+  /* 대시보드 본문 배경과 동일 톤 — 단일 솔리드 그레이 (#F6F6F6) */
+  background: #F6F6F6;
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  /* 더 둥근 모서리 — soft pillow 같은 느낌 */
+  border-radius: 26px;
+  box-shadow:
+    /* 외부 ambient (떠있는 그림자) */
+    0 30px 60px rgba(0, 0, 0, 0.15),
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    /* 내부 white edge highlight — 상단/좌측 강조 */
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.5),
+    /* 내부 light refraction — 우하단 미세 음영 */
+    inset 0 -1px 0 rgba(0, 0, 0, 0.04),
+    inset -1px 0 0 rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 80px);
+  /* overflow: visible 로 두어 내부 popover/달력이 모달 경계 밖까지 표시되도록 함.
+     스크롤은 .modal__body 가 담당. */
+  overflow: visible;
+  animation: modal-in 0.28s cubic-bezier(0.34, 1.32, 0.64, 1);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.modal__title-wrap {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.modal__title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.modal__sub {
+  margin-top: 4px;
+  font-size: var(--fs-13);
+  color: var(--text-secondary);
+}
+
+.modal__head-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: var(--sp-3);
+}
+.modal__close {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.modal__close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+.modal__body {
+  padding: var(--sp-6);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-6);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: transparent;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+ * Liquid Glass 모달 안의 form 컨트롤 — 토큰 매핑
+ *  · 모달 컨텍스트에서는 input/select 의 흰색이 너무 강하지 않게 살짝 옅게.
+ *  · MacSelect trigger 는 cream/yellow 톤이 비치는 문제 → 흰 + 투명 보더로 강제
+ * ───────────────────────────────────────────── */
+.modal input[type="text"],
+.modal input[type="tel"],
+.modal input[type="number"],
+.modal input[type="email"],
+.modal input[type="search"],
+.modal textarea {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: var(--radius-control);
+  color: var(--text-primary);
+}
+.modal input:focus,
+.modal textarea:focus {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18);
+  outline: none;
+}
+
+/* MacSelect trigger 가 모달 안에서 yellow/cream 톤으로 보이는 문제 수정
+ *  · trigger 자체에 강한 흰 배경 + 옅은 보더로 강제
+ *  · 외곽 wrapper 의 보더/배경 제거 (이중 박스 방지) */
+.modal .mac-select {
+  background: transparent !important;
+}
+.modal .mac-select__trigger {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  border-radius: var(--radius-control) !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+.modal .mac-select__trigger:hover:not(:disabled) {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.18) !important;
+}
+.modal .mac-select__trigger.is-open {
+  background: #FFFFFF !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18) !important;
+}

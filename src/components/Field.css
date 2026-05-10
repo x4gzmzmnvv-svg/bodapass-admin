@@ -1,0 +1,99 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field__label {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.field__required {
+  color: var(--color-error);
+  margin-left: 4px;
+}
+
+.field__hint {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: -0.01em;
+}
+
+.field__err-inline {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-error);
+  letter-spacing: -0.01em;
+}
+
+.field__row {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: stretch;
+}
+
+.field__input {
+  flex: 1;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: white;
+  font-size: var(--fs-14);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  min-width: 0;
+}
+
+.field__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.field__input:disabled {
+  background: var(--color-bg-input);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.field__input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+/* 한글 입력 우선 — 일부 환경(레거시 Firefox 등)에서 IME 자동 한글 모드 */
+.field__input[lang="ko"] {
+  ime-mode: active;
+}
+
+.field--error .field__input {
+  border-color: var(--color-error);
+}
+
+.field--error .field__input:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.field__trailing {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.field__msg {
+  font-size: var(--fs-12);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field__msg--error {
+  color: var(--color-error);
+}

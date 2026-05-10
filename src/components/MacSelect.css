@@ -1,0 +1,342 @@
+/* MacSelect — macOS 컨텍스트 메뉴 스타일 드롭다운 */
+
+.mac-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* trigger — macOS Sequoia Popup Button (single flat translucent gray pill) */
+.mac-select__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 32px;
+  padding: 0 10px 0 14px;
+  /* 단일 플랫 그레이 머터리얼 — 외곽 wrapper / inset 하이라이트 없음 */
+  background: rgba(0, 0, 0, 0.05);
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #1A1A1A;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  outline: none;
+  box-shadow: none;
+  transition: background-color 0.12s;
+}
+.mac-select__trigger:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08);
+}
+.mac-select__trigger.is-open {
+  background: rgba(0, 0, 0, 0.10);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.20);
+}
+.mac-select__trigger:disabled {
+  background: rgba(0, 0, 0, 0.03);
+  color: #9CA3AF;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.mac-select__current {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.mac-select__placeholder {
+  color: #9CA3AF;
+  font-weight: 400;
+}
+.mac-select__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  color: #6B7280;
+  flex-shrink: 0;
+  transition: color 0.12s, transform 0.18s;
+}
+.mac-select__trigger.is-open .mac-select__chevron {
+  color: #1A1A1A;
+  transform: rotate(180deg);
+}
+
+/* 메뉴 — macOS Sequoia Liquid Glass (흰 ultra-thin material + glass refraction) */
+.mac-select__menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  min-width: 100%;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+  /* Liquid Glass — 흰 반투명 + 강한 backdrop blur + saturate */
+  background: rgba(248, 248, 250, 0.78);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow:
+    /* 외부 ambient 그림자 (3-tier depth) */
+    0 18px 40px rgba(0, 0, 0, 0.18),
+    0 6px 14px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    /* 내부 white edge highlight (glass refraction) */
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -0.5px 0 rgba(0, 0, 0, 0.04);
+  animation: mac-select-in 0.14s cubic-bezier(0.2, 0, 0.2, 1);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+.mac-select__menu--down {
+  top: calc(100% + 6px);
+}
+.mac-select__menu--up {
+  bottom: calc(100% + 6px);
+  animation-name: mac-select-in-up;
+}
+/* fixed 모드 — top/bottom 은 인라인 style 로 지정, --down/--up 의 100% 룰은 무시 */
+.mac-select__menu--fixed {
+  /* viewport 의 right:0 까지 늘어나는 것 방지 — 메뉴 폭은 inline width 로만 결정 */
+  right: auto !important;
+  min-width: 0 !important;
+}
+.mac-select__menu--fixed.mac-select__menu--down {
+  top: auto;
+}
+.mac-select__menu--fixed.mac-select__menu--up {
+  bottom: auto;
+}
+
+/* 항목 — Sequoia 메뉴 스타일: 다크 텍스트 on glass, active 는 시스템 블루 pill */
+.mac-select__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #1A1A1A;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.06s, color 0.06s;
+  letter-spacing: -0.01em;
+}
+/* selected — 시스템 블루 채움 + 흰 텍스트 (image 의 「Item Two」) */
+.mac-select__item.is-selected {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(0, 122, 255, 0.30);
+}
+.mac-select__item.is-selected .mac-select__hint {
+  color: rgba(255, 255, 255, 0.85);
+}
+/* hover (선택 안된 항목) — 회색 highlight pill (Sequoia 메뉴 톤) */
+.mac-select__item:hover:not(.is-disabled):not(.is-selected),
+.mac-select__item:focus-visible:not(.is-selected) {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1A1A1A;
+  outline: none;
+}
+.mac-select__item:hover:not(.is-selected) .mac-select__hint,
+.mac-select__item:focus-visible:not(.is-selected) .mac-select__hint {
+  color: #6B7280;
+}
+.mac-select__item.is-disabled {
+  color: rgba(0, 0, 0, 0.35);
+  cursor: not-allowed;
+  background: transparent !important;
+}
+
+.mac-select__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.mac-select__label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.mac-select__hint {
+  font-size: 11px;
+  color: #9CA3AF;
+  margin-left: 12px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 그룹 헤더 */
+.mac-select__header {
+  padding: 6px 10px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6B7280;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+/* 페이드인 */
+@keyframes mac-select-in {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes mac-select-in-up {
+  from { opacity: 0; transform: translateY(4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 메뉴 내부 스크롤바 (얇게) */
+.mac-select__menu::-webkit-scrollbar {
+  width: 6px;
+}
+.mac-select__menu::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 9999px;
+}
+
+/* ─────────────────────────────────────────────
+ * 이중 박스 방지 (Global) — wrapper 클래스가 input-style 보더/배경을 그릴 때 무력화
+ *  · 모든 dialog/modal/form 의 wrapper 클래스가 MacSelect/MacDatePicker/NumberStepper 를
+ *    감쌀 때 wrapper 의 padding/border/background/shadow/height 를 제거해서 내부 컴포넌트의 pill 만 보이게 함
+ *  · 신규 다이얼로그가 추가돼도 catch-all (속성 선택자 [class$="__input"] 등) 로 자동 해결
+ * ───────────────────────────────────────────── */
+
+/* (1) 명시적 wrapper 클래스 — 일반/공용 */
+.tf:has(.mac-select), .tf:has(.mac-date), .tf:has(.number-stepper),
+.input:has(.mac-select), .input:has(.mac-date), .input:has(.number-stepper),
+.field:has(.mac-select), .field:has(.mac-date), .field:has(.number-stepper),
+.form-field:has(.mac-select), .form-field:has(.mac-date), .form-field:has(.number-stepper),
+.form-control:has(.mac-select), .form-control:has(.mac-date), .form-control:has(.number-stepper),
+.tf-wrap:has(.mac-select), .tf-wrap:has(.mac-date), .tf-wrap:has(.number-stepper),
+.input-wrap:has(.mac-select), .input-wrap:has(.mac-date), .input-wrap:has(.number-stepper),
+.field-wrap:has(.mac-select), .field-wrap:has(.mac-date), .field-wrap:has(.number-stepper) {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* (2) Catch-all — BEM 접미사가 __input / __field / __select / __control / __trigger 인 모든 wrapper */
+[class$="__input"]:has(.mac-select),
+[class$="__input"]:has(.mac-date),
+[class$="__input"]:has(.number-stepper),
+[class$="__field"]:has(.mac-select),
+[class$="__field"]:has(.mac-date),
+[class$="__field"]:has(.number-stepper),
+[class$="__field-input"]:has(.mac-select),
+[class$="__field-input"]:has(.mac-date),
+[class$="__field-input"]:has(.number-stepper),
+[class$="__select"]:has(.mac-select),
+[class$="__select"]:has(.mac-date),
+[class$="__select"]:has(.number-stepper),
+[class$="__control"]:has(.mac-select),
+[class$="__control"]:has(.mac-date),
+[class$="__control"]:has(.number-stepper),
+[class$="__trigger"]:has(.mac-select),
+[class$="__trigger"]:has(.mac-date),
+[class$="__trigger"]:has(.number-stepper),
+[class*="__input "]:has(.mac-select),
+[class*="__input "]:has(.mac-date),
+[class*="__input "]:has(.number-stepper),
+[class*="__field "]:has(.mac-select),
+[class*="__field "]:has(.mac-date),
+[class*="__field "]:has(.number-stepper) {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* (3) MacSelect 가 직접 wrapper 클래스를 받았을 때 (className="input" / "srd-wiz__input" 등) */
+.mac-select.tf,
+.mac-select.input,
+.mac-select.field,
+.mac-select.form-field,
+.mac-select.form-control,
+.mac-select.tf-wrap,
+.mac-select.input-wrap,
+.mac-select.field-wrap,
+.mac-select[class$="__input"],
+.mac-select[class$="__field"],
+.mac-select[class$="__field-input"],
+.mac-select[class$="__select"],
+.mac-select[class$="__control"],
+.mac-select[class$="__trigger"] {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* (4) MacDatePicker 가 직접 wrapper 클래스를 받았을 때 */
+.mac-date.tf,
+.mac-date.input,
+.mac-date.field,
+.mac-date.form-field,
+.mac-date.form-control,
+.mac-date.tf-wrap,
+.mac-date.input-wrap,
+.mac-date.field-wrap,
+.mac-date[class$="__input"],
+.mac-date[class$="__field"],
+.mac-date[class$="__field-input"],
+.mac-date[class$="__select"],
+.mac-date[class$="__control"],
+.mac-date[class$="__trigger"] {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* (5) NumberStepper 가 직접 wrapper 클래스를 받았을 때 */
+.number-stepper.tf,
+.number-stepper.input,
+.number-stepper.field,
+.number-stepper.form-field,
+.number-stepper.form-control,
+.number-stepper[class$="__input"],
+.number-stepper[class$="__field"],
+.number-stepper[class$="__field-input"],
+.number-stepper[class$="__select"],
+.number-stepper[class$="__control"] {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+

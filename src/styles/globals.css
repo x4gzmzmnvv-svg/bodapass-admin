@@ -1,0 +1,1360 @@
+/* =========================================================================
+   일당백 관리자 웹 — 디자인 시스템 v3 (라이트 모던 · 신뢰감 있는 블루)
+
+   컨셉
+   ─────────────────────────────────────────────────────────────────────────
+   · 메인 컬러     : 한 단계 밝은 신뢰의 블루 (#3b82f6 / #2563eb / #1d4ed8)
+   · 사이드바     : WHITE — 옅은 회청 보더, 활성 메뉴만 메인 블루 칩
+   · KPI 타일     : 라일락·하늘·민트·피치 4색 파스텔로 데이터 위계 분명히
+   · 분위기       : 라이트 모던 · 가볍지만 산만하지 않게
+   · 그림자       : 미세한 차가운 회청 톤만 — 무게감 ↓ 청결함 ↑
+   · 타깃 환경    : 사무실 데스크탑 모니터 (1440px)
+   ========================================================================= */
+
+/* ─────────────────────────────────────────────
+ * macOS Tahoe / iOS 18 Design System Tokens
+ *  (Light Mode values; Dark Mode 변형은 @media (prefers-color-scheme: dark) 필요 시 추가)
+ *
+ *  ## 사용 가이드
+ *    - Material thickness 는 backdrop-filter 와 함께 사용 (frosted surfaces)
+ *    - Opaque vs Vibrant: Vibrant 는 더 채도 높은 색 (vibrancy 백드롭에서 사용)
+ *    - Text Primary 는 대부분 본문, Secondary 는 보조 라벨, Tertiary 는 placeholder/disabled
+ * ───────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+ * macOS Sequoia Design System — Web Tokens
+ *  사용자 제공 디자인 사양 (FONT, TYPOGRAPHY, COLORS, MATERIALS, RADIUS, SIZES, THEMES)
+ *  · Light/Dark Theme 모두 지원 (Dark: [data-theme="dark"])
+ *  · 기존 legacy 토큰(--color-*, --r-*, --ctl-*)은 alias 로 매핑
+ * ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light;
+
+  /* ── 1. FONT SYSTEM ── */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --font-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-heavy: 800;
+
+  /* ── 2. TYPOGRAPHY ── */
+  --text-large-title-size: 26px; --text-large-title-line: 32px; --text-large-title-weight: 400; --text-large-title-bold-weight: 700;
+  --text-title1-size: 22px; --text-title1-line: 26px; --text-title1-weight: 400; --text-title1-bold-weight: 700;
+  --text-title2-size: 17px; --text-title2-line: 22px; --text-title2-weight: 400; --text-title2-bold-weight: 700;
+  --text-title3-size: 15px; --text-title3-line: 20px; --text-title3-weight: 400; --text-title3-bold-weight: 600;
+  --text-headline-size: 13px; --text-headline-line: 16px; --text-headline-weight: 700; --text-headline-heavy-weight: 800;
+  --text-body-size: 13px; --text-body-line: 16px; --text-body-weight: 400; --text-body-bold-weight: 600;
+  --text-callout-size: 12px; --text-callout-line: 15px; --text-callout-weight: 400; --text-callout-bold-weight: 600;
+  --text-subheadline-size: 11px; --text-subheadline-line: 14px; --text-subheadline-weight: 400; --text-subheadline-bold-weight: 600;
+  --text-footnote-size: 10px; --text-footnote-line: 13px; --text-footnote-weight: 400; --text-footnote-bold-weight: 600;
+  --text-caption1-size: 10px; --text-caption1-line: 13px; --text-caption1-weight: 400; --text-caption1-bold-weight: 600;
+  --text-caption2-size: 10px; --text-caption2-line: 13px; --text-caption2-weight: 400; --text-caption2-bold-weight: 600;
+
+  /* ── 4. TEXT COLORS (Light) ── */
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.50);
+  --text-tertiary: rgba(0, 0, 0, 0.25);
+  --text-quaternary: rgba(0, 0, 0, 0.10);
+  --text-quinary: rgba(0, 0, 0, 0.05);
+  --text-vibrant-primary: #4C4C4C;
+  --text-vibrant-secondary: #808080;
+  --text-vibrant-tertiary: #BFBFBF;
+  --text-vibrant-quaternary: #E6E6E6;
+  --text-vibrant-quinary: #F2F2F2;
+
+  /* ── 5. ACCENT / TINT COLORS ── */
+  --accent: #007AFF;
+  --accent-hover: #0070F5;
+  --accent-default: #007AFF;
+  --accent-red: #FF3B30;
+  --accent-orange: #FF9500;
+  --accent-yellow: #FFCC00;
+  --accent-green: #28CD41;
+  --accent-mint: #00C7BE;
+  --accent-teal: #59ADC4;
+  --accent-cyan: #55BEF0;
+  --accent-blue: #007AFF;
+  --accent-indigo: #5856D6;
+  --accent-purple: #AF52DE;
+  --accent-pink: #FF2D55;
+  --accent-brown: #A2845E;
+  --accent-gray: #8E8E93;
+
+  /* ── 6. FILL / BACKGROUND ── */
+  --fill-primary: rgba(0, 0, 0, 0.10);
+  --fill-secondary: rgba(0, 0, 0, 0.08);
+  --fill-tertiary: rgba(0, 0, 0, 0.05);
+  --fill-quaternary: rgba(0, 0, 0, 0.03);
+  --fill-quinary: rgba(0, 0, 0, 0.02);
+
+  /* ── 7. MATERIAL TOKENS (Light) ── */
+  --material-header: rgba(255, 255, 255, 0.80);
+  --material-menu: rgba(246, 246, 246, 0.72);
+  --material-popover: rgba(246, 246, 246, 0.60);
+  --material-sidebar: rgba(246, 246, 246, 0.84);
+  --material-titlebar: rgba(245, 245, 245, 0.80);
+  --material-tooltip: rgba(246, 246, 246, 0.60);
+  --material-under-window: rgba(246, 246, 246, 0.84);
+  --material-ultra-thick: rgba(246, 246, 246, 0.84);
+  --material-thick: rgba(246, 246, 246, 0.72);
+  --material-medium: rgba(246, 246, 246, 0.60);
+  --material-thin: rgba(246, 246, 246, 0.48);
+  --material-ultra-thin: rgba(246, 246, 246, 0.36);
+
+  /* ── 8. BLUR / SATURATION ── */
+  --backdrop-blur-macos: blur(30px);
+  --backdrop-saturation-light: saturate(300%);
+  --backdrop-saturation-dark: saturate(240%);
+
+  /* ── 9. RADIUS / BORDER ── */
+  --radius-control: 5px;
+  --radius-card: 8px;
+  --radius-panel: 10px;
+  --radius-window: 10px;
+  --border-light: rgba(0, 0, 0, 0.10);
+  --border-dark: rgba(255, 255, 255, 0.10);
+
+  /* ── 10. COMPONENT SIZES ── */
+  --control-height-small: 20px;
+  --control-height-default: 22px;
+  --control-radius: 5px;
+  --button-height: 22px;
+  --button-min-width: 47px;
+  --popup-button-height: 22px;
+  --popup-button-width: 100px;
+  --text-field-height: 22px;
+  --text-field-width: 206px;
+  --search-field-height: 22px;
+  --search-field-width: 206px;
+  --segmented-height-small: 20px;
+  --segmented-height-default: 22px;
+  --segmented-width: 190px;
+  --switch-width: 26px;
+  --switch-height: 15px;
+  --checkbox-size: 16px;
+  --radio-size: 16px;
+
+  /* ── 11. LIGHT THEME aliases ── */
+  --app-bg: #F5F5F5;
+  --window-bg: rgba(255, 255, 255, 0.80);
+  --sidebar-bg: var(--material-sidebar);
+  --toolbar-bg: var(--material-titlebar);
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --control-bg: rgba(0, 0, 0, 0.05);
+  --control-bg-hover: rgba(0, 0, 0, 0.08);
+  --control-border: var(--border-light);
+  --separator: rgba(0, 0, 0, 0.10);
+
+  /* ── LEGACY ALIASES — 기존 컴포넌트가 사용 중인 토큰들을 새 시스템에 매핑 ── */
+  --color-bg-page: #F6F6F6;
+  --color-bg: #FFFFFF;
+  --color-bg-input: var(--control-bg);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-secondary);
+  --color-text-faint: var(--text-tertiary);
+  --color-text-placeholder: var(--text-tertiary);
+  --color-border: var(--control-border);
+  --color-border-strong: rgba(0, 0, 0, 0.20);
+  --color-primary: var(--accent);
+  --color-primary-300: #5AC8F5;
+  --color-error: var(--accent-red);
+  --color-success: var(--accent-green);
+  --r-sm: 4px;
+  --r-md: var(--radius-control);
+  --r-lg: var(--radius-card);
+  --r-xl: var(--radius-panel);
+  --ctl-h: var(--control-height-default);
+  --header-h: 56px;
+  --sidebar-w: 220px;
+  --sidebar-w-collapsed: 72px;
+  --content-max-w: none;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --ring-primary: 0 0 0 3px rgba(0, 122, 255, 0.18);
+  --font-family-base: var(--font-sans);
+}
+
+/* ── 12. DARK THEME ── */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --text-primary: rgba(255, 255, 255, 0.85);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-tertiary: rgba(255, 255, 255, 0.25);
+  --text-quaternary: rgba(255, 255, 255, 0.10);
+  --text-quinary: rgba(255, 255, 255, 0.05);
+  --text-vibrant-primary: #E5E5E5;
+  --text-vibrant-secondary: #7C7C7C;
+  --text-vibrant-tertiary: #414141;
+
+  --accent: #0A84FF;
+  --accent-hover: #148EFF;
+  --accent-red: #FF453A;
+  --accent-green: #32D74B;
+
+  --fill-primary: rgba(255, 255, 255, 0.10);
+  --fill-secondary: rgba(255, 255, 255, 0.08);
+  --fill-tertiary: rgba(255, 255, 255, 0.05);
+
+  --material-header: rgba(30, 30, 30, 0.80);
+  --material-menu: rgba(40, 40, 40, 0.70);
+  --material-popover: rgba(40, 40, 40, 0.60);
+  --material-sidebar: rgba(40, 40, 40, 0.80);
+  --material-titlebar: rgba(60, 60, 60, 0.80);
+  --material-tooltip: rgba(40, 40, 40, 0.60);
+  --material-under-window: rgba(40, 40, 40, 0.80);
+
+  --app-bg: #171717;
+  --window-bg: rgba(30, 30, 30, 0.80);
+  --card-bg: rgba(40, 40, 40, 0.70);
+  --control-bg: rgba(255, 255, 255, 0.05);
+  --control-bg-hover: rgba(255, 255, 255, 0.08);
+  --control-border: var(--border-dark);
+  --separator: rgba(255, 255, 255, 0.10);
+
+  --color-bg-page: #171717;
+  --color-bg: #1E1E1E;
+}
+
+/* ── 13. TYPOGRAPHY UTILITY CLASSES ── */
+.ui-large-title { font-family: var(--font-sans); font-size: var(--text-large-title-size); line-height: var(--text-large-title-line); font-weight: var(--text-large-title-bold-weight); }
+.ui-title1      { font-family: var(--font-sans); font-size: var(--text-title1-size);      line-height: var(--text-title1-line);      font-weight: var(--text-title1-bold-weight); }
+.ui-title2      { font-family: var(--font-sans); font-size: var(--text-title2-size);      line-height: var(--text-title2-line);      font-weight: var(--text-title2-bold-weight); }
+.ui-title3      { font-family: var(--font-sans); font-size: var(--text-title3-size);      line-height: var(--text-title3-line);      font-weight: var(--text-title3-bold-weight); }
+.ui-headline    { font-family: var(--font-sans); font-size: var(--text-headline-size);    line-height: var(--text-headline-line);    font-weight: var(--text-headline-weight); }
+.ui-body        { font-family: var(--font-sans); font-size: var(--text-body-size);        line-height: var(--text-body-line);        font-weight: var(--text-body-weight); }
+.ui-callout     { font-family: var(--font-sans); font-size: var(--text-callout-size);     line-height: var(--text-callout-line);     font-weight: var(--text-callout-weight); }
+.ui-subheadline { font-family: var(--font-sans); font-size: var(--text-subheadline-size); line-height: var(--text-subheadline-line); font-weight: var(--text-subheadline-weight); }
+.ui-footnote, .ui-caption { font-family: var(--font-sans); font-size: 10px; line-height: 13px; font-weight: 400; color: var(--text-secondary); }
+
+/* macOS material 헬퍼 */
+.macos-material-light { background: var(--material-sidebar); backdrop-filter: blur(30px) saturate(300%); -webkit-backdrop-filter: blur(30px) saturate(300%); }
+
+/* ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Material Thickness (Light) — frosted glass background tokens ── */
+  --material-ultra-thick:  rgba(246, 246, 246, 0.84);
+  --material-thick:        rgba(246, 246, 246, 0.72);
+  --material-medium:       rgba(246, 246, 246, 0.60);
+  --material-thin:         rgba(246, 246, 246, 0.48);
+  --material-ultra-thin:   rgba(246, 246, 246, 0.36);
+
+  /* ── Opaque Tint Colors (Light) — solid system colors ── */
+  --tint-default:        #007AFF;
+  --tint-system-red:     #FF3B30;
+  --tint-system-orange:  #FF9500;
+  --tint-system-yellow:  #FFCC00;
+  --tint-system-green:   #28CD41;
+  --tint-system-mint:    #00C7BE;
+  --tint-system-teal:    #59ADC4;
+  --tint-system-cyan:    #55BEF0;
+  --tint-system-blue:    #007AFF;
+  --tint-system-indigo:  #5856D6;
+  --tint-system-purple:  #AF52DE;
+  --tint-system-pink:    #FF2D55;
+  --tint-system-brown:   #A2845E;
+  --tint-system-gray:    #8E8E93;
+
+  /* ── Vibrant Tint Colors (Light) — vibrancy 효과용 ── */
+  --vtint-default:       #0070F5;
+  --vtint-system-red:    #F53126;
+  --vtint-system-orange: #F58B00;
+  --vtint-system-yellow: #F5C200;
+  --vtint-system-green:  #1EC337;
+  --vtint-system-mint:   #00BDB4;
+  --vtint-system-teal:   #2EA7BD;
+  --vtint-system-cyan:   #41AFDC;
+  --vtint-system-blue:   #0070F5;
+  --vtint-system-indigo: #5452CC;
+  --vtint-system-purple: #9F4BC9;
+  --vtint-system-pink:   #F5234B;
+  --vtint-system-brown:  #987A54;
+  --vtint-system-gray:   #848489;
+
+  /* ── Opaque System Colors (Light) — fills/overlays ── */
+  --fill-primary:    rgba(0, 0, 0, 0.10);
+  --fill-secondary:  rgba(0, 0, 0, 0.08);
+  --fill-tertiary:   rgba(0, 0, 0, 0.05);
+  --fill-quaternary: rgba(0, 0, 0, 0.03);
+  --fill-quinary:    rgba(0, 0, 0, 0.02);
+
+  /* ── Vibrant System Colors (Light) — solid fills ── */
+  --vfill-primary:    #D9D9D9;
+  --vfill-secondary:  #E6E6E6;
+  --vfill-tertiary:   #F2F2F2;
+  --vfill-quaternary: #F7F7F7;
+  --vfill-quinary:    #FBFBFB;
+
+  /* ── Opaque Text Colors (Light) — alpha black ── */
+  --text-primary:    rgba(0, 0, 0, 0.85);
+  --text-secondary:  rgba(0, 0, 0, 0.50);
+  --text-tertiary:   rgba(0, 0, 0, 0.25);
+  --text-quaternary: rgba(0, 0, 0, 0.10);
+  --text-quinary:    rgba(0, 0, 0, 0.05);
+
+  /* ── Vibrant Text Colors (Light) — vibrancy 백드롭에서 사용하는 grayscale 텍스트 ── */
+  --vtext-primary:    #4C4C4C;
+  --vtext-secondary:  #808080;
+  --vtext-tertiary:   #BFBFBF;
+  --vtext-quaternary: #E6E6E6;
+  --vtext-quinary:    #F2F2F2;
+
+  /* ── Surface aliases (의미 기반 매핑 — 권장 사용) ── */
+  --surface-sidebar:        var(--material-ultra-thick);   /* #F6F6F6 @0.84 */
+  --surface-titlebar:       rgba(245, 245, 245, 0.80);     /* TitleBar */
+  --surface-headerview:     rgba(255, 255, 255, 0.80);     /* HeaderView */
+  --surface-menu:           var(--material-thick);          /* dropdown */
+  --surface-popover:        var(--material-medium);         /* Modal/popover */
+  --surface-tooltip:        var(--material-medium);
+  --surface-window-bg:      var(--material-ultra-thick);   /* page bg base */
+
+  --selection-focused:      var(--tint-default);            /* solid blue */
+  --selection-focused-soft: rgba(0, 122, 255, 0.75);
+  --selection-unfocused:    var(--material-ultra-thick);
+  --selection-border:       var(--fill-primary);            /* black @0.10 */
+}
+
+/* Dark Mode 변형 — 향후 prefers-color-scheme: dark 지원 시 활성화
+@media (prefers-color-scheme: dark) {
+  :root {
+    --material-ultra-thick: rgba(40, 40, 40, 0.80);
+    --material-thick:       rgba(40, 40, 40, 0.70);
+    --material-medium:      rgba(40, 40, 40, 0.60);
+    --material-thin:        rgba(40, 40, 40, 0.50);
+    --material-ultra-thin:  rgba(40, 40, 40, 0.40);
+    --tint-default: #0A84FF;
+    --text-primary:   rgba(255, 255, 255, 0.85);
+    --text-secondary: rgba(255, 255, 255, 0.55);
+    ...
+  }
+}
+*/
+
+
+:root {
+  /* 시스템 블루 (Apple #007AFF) 통일 — 기존 navy 팔레트 모두 시스템 블루 톤으로 매핑 */
+  --color-primary:        #007AFF;
+  --color-primary-dark:   #0070F5;
+  --color-primary-darker: #0061D6;
+  --color-primary-light:  rgba(0, 122, 255, 0.10);
+  --color-primary-soft:   rgba(0, 122, 255, 0.05);
+  --color-primary-50:     rgba(0, 122, 255, 0.05);
+  --color-primary-100:    rgba(0, 122, 255, 0.10);
+  --color-primary-200:    rgba(0, 122, 255, 0.20);
+  --color-primary-300:    rgba(0, 122, 255, 0.35);
+  --color-primary-400:    rgba(0, 122, 255, 0.55);
+  --color-primary-500:    #007AFF;
+  --color-primary-600:    #0070F5;
+  --color-primary-700:    #0061D6;
+  --color-primary-800:    #004FB0;
+  --color-primary-900:    #003D8A;
+  --color-primary-950:    #002A60;
+
+  /* 일당백 로고 강조색 */
+  --color-brand-red: #dc2626;
+
+  /* ════════════════════════════════════════════════════════════════════
+     ② NEUTRAL — 차가운 슬레이트 (블루와 한 톤)
+     ════════════════════════════════════════════════════════════════════ */
+  /* 따뜻한 톤의 그레이 (Strut 레퍼런스 매칭) */
+  --color-text:             #1f1d1b;          /* M3 on-surface */
+  --color-text-strong:      #0e0d0c;
+  --color-text-muted:       #6c6a65;          /* M3 on-surface-variant */
+  --color-text-faint:       #a09d97;          /* M3 outline */
+  --color-text-placeholder: #cdc9c2;          /* M3 outline-variant */
+
+  --color-border:           #e8e5de;
+  --color-border-strong:    #d8d3c8;
+  --color-divider:          #f0ece4;
+
+  --color-bg:               #ffffff;
+  --color-bg-soft:          #f5f7fa;
+  --color-bg-input:         #e5e9ef;
+  --color-bg-elevated:  #FFFFFF;
+
+  /* ── SEMANTIC ── */
+  --color-success:          #10b981;
+  --color-success-soft:     #d1fae5;
+  --color-warn:             #f59e0b;
+  --color-warn-soft:        #fef3c7;
+  --color-error:            #ef4444;
+  --color-error-soft:       #fee2e2;
+  --color-info:             #0ea5e9;
+  --color-info-soft:        #e0f2fe;
+
+  /* ── DATA TILE — 거의 무채색에 가까운 톤다운 파스텔 ──
+     크림 배경 위에서 미세한 hue 차이로만 구분되는 차분한 4색 */
+  --tile-lilac-bg:    #ebe6f0;          /* 라이트 라벤더 */
+  --tile-lilac-text:  #4d425f;
+  --tile-lilac-deco:  #a294b8;
+  --tile-sky-bg:      #e2e7ee;          /* 머리 차분한 블루-그레이 */
+  --tile-sky-text:    #3d4a60;
+  --tile-sky-deco:    #8a9bb4;
+  --tile-mint-bg:     #e1eae3;          /* 차 한잔 같은 세이지 그린 */
+  --tile-mint-text:   #3f5849;
+  --tile-mint-deco:   #8aa494;
+  --tile-peach-bg:    #f0e6da;          /* 따뜻한 베이지 */
+  --tile-peach-text:  #5e4a39;
+  --tile-peach-deco:  #b8a087;
+  --tile-rose-bg:     #ede0e0;          /* 차분한 로즈 */
+  --tile-rose-text:   #5d3f3f;
+  --tile-rose-deco:   #b89999;
+
+  /* ── SIDEBAR — macOS Tahoe / System Settings 라이트 파스텔
+     은은한 시안 그라디언트 + iOS 시스템 블루 활성 pill */
+  --color-bg-page:       #F6F6F6;          /* macOS Tahoe Under Window Background (solid base) */
+  --sidebar-bg:          linear-gradient(180deg, #E8F4FF 0%, #DDEEF8 100%);
+  --sidebar-bg-hover:    rgba(0, 0, 0, 0.05);
+  --sidebar-bg-active:   #007AFF;
+  --sidebar-text:        #1A1A1A;
+  --sidebar-text-active: #FFFFFF;
+  --sidebar-text-muted:  #6B7280;
+  --sidebar-divider:     rgba(0, 0, 0, 0.06);
+  --sidebar-border:      rgba(0, 0, 0, 0.06);
+  --sidebar-indicator:   #007AFF;
+
+  /* ── TYPOGRAPHY ── */
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Apple SD Gothic Neo',
+    'Noto Sans KR', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-10: 0.625rem;
+  --fs-11: 0.6875rem;
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-15: 0.9375rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-22: 1.375rem;
+  --fs-24: 1.5rem;
+  --fs-28: 1.75rem;
+  --fs-32: 2rem;
+  --fs-36: 2.25rem;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+  --fw-extra:   800;
+
+  --lh-tight:   1.25;
+  --lh-snug:    1.375;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.625;
+
+  --tracking-tight:   -0.02em;
+  --tracking-tighter: -0.03em;
+
+  /* ── SPACING (8px grid) ── */
+  --sp-0:  0;
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-14: 56px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+
+  /* ── RADIUS ── */
+  --r-xs:  4px;   --r-sm: 6px;   --r-md: 8px;    --r-lg: 10px;   --r-xl: 14px;
+  --r-2xl: 18px;  --r-pill: 9999px;
+
+  /* ── SHADOWS (미세) ── */
+  --sh-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --sh-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --sh-md: 0 2px 6px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --sh-lg: 0 8px 16px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --sh-xl: 0 16px 32px rgba(15, 23, 42, 0.08), 0 4px 8px rgba(15, 23, 42, 0.05);
+  --ring-primary: 0 0 0 3px rgba(79, 111, 184, 0.22);
+  --ring-error:   0 0 0 3px rgba(220, 38, 38, 0.18);
+
+  /* ── LAYOUT (1440px desktop) ── */
+  --sidebar-w:           240px;
+  --sidebar-w-collapsed: 72px;
+  --header-h:            60px;
+  --content-max-w:       1440px;
+  --content-pad-x:       28px;
+  --content-pad-y:       24px;
+
+  --t-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  --t-base: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --t-slow: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── CONTROL HEIGHTS — 일관된 컨트롤 높이 ──
+     액션 버튼·인풋·셀렉트는 모두 같은 높이로 정렬되어야 함 */
+  --ctl-h:        36px;   /* 기본 액션/인풋 — 페이지 헤더, 폼, 모달 */
+  --ctl-h-sm:     28px;   /* 인라인 / 테이블 액션 */
+  --ctl-h-xs:     24px;   /* 칩 / 작은 토글 */
+  --ctl-h-lg:     44px;   /* 회원가입 큰 CTA */
+
+  /* ── CARD PADDING ── */
+  --card-pad:        20px;   /* 표준 카드 안쪽 여백 */
+  --card-pad-tight:  16px;   /* 작은 패널·미니카드 */
+  --card-pad-loose:  24px;   /* 모달 본문 */
+}
+
+* { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+html {
+  background: var(--color-bg-page, #F6F6F6);
+  color-scheme: light;
+  /* 페이지 콘텐츠 길이가 달라도 항상 스크롤바 자리(15~17px) 를 예약해서
+     좌우 정렬 픽셀이 흔들리지 않게 함 (4개 챕터 헤더가 같은 X 좌표에서 시작) */
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line);
+  font-weight: var(--text-body-weight);
+  color: var(--color-text);
+  background: var(--color-bg-page, #F6F6F6);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font-family: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+input, button, textarea, select { font: inherit; color: inherit; }
+input:disabled, select:disabled, textarea:disabled, button:disabled { cursor: not-allowed; }
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-strong);
+  line-height: var(--lh-tight);
+}
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+::selection {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-faint);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-xs);
+  transition: box-shadow var(--t-base);
+}
+.card:hover { box-shadow: var(--sh-sm); }
+.card--ghost {
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--r-xl);
+  box-shadow: none;
+}
+.card--elevated {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-md);
+}
+
+.input {
+  width: 100%;
+  height: var(--ctl-h);
+  padding: 0 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--r-md);
+  background: var(--color-bg);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.input:hover { border-color: var(--color-text-faint); }
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--ring-primary);
+}
+.input::placeholder {
+  color: var(--color-text-placeholder);
+  font-weight: var(--fw-regular);
+}
+
+.input:disabled {
+  background: var(--color-bg-input);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+.brand-text {
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--fw-extra);
+  color: var(--color-text-strong);
+}
+.brand-accent { color: var(--color-brand-red); }
+
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* ───────────────────────────────────────────── *
+ * Text Field (TF) — unified design system
+ *  Filled (default) / Outlined / Underline + Error variants
+ *  caret-color = teal  · focus border = teal
+ * ───────────────────────────────────────────── */
+
+:root {
+  --tf-caret:        #007AFF;
+  --tf-focus:        #007AFF;
+  --tf-error:        #F44336;
+  --tf-fill-bg:      #F2F2F2;
+  --tf-fill-bg-hover:#EBEBEB;
+  --tf-outline:      #D0D0D0;
+  --tf-text:         #1f1d1b;
+  --tf-placeholder:  #9C9A95;
+}
+
+/* All input elements get the same caret color */
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  caret-color: var(--tf-caret);
+}
+
+/* TF — common base */
+.tf {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+.tf__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+.tf__field {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--tf-text);
+  outline: none;
+  transition: background-color 0.15s, border-color 0.15s;
+  box-sizing: border-box;
+  background: var(--tf-fill-bg);
+  border: 1.5px solid transparent;
+}
+.tf__field::placeholder { color: var(--tf-placeholder); }
+.tf__field:hover { background: var(--tf-fill-bg-hover); }
+.tf__field:focus {
+  background: #FFFFFF;
+  border-color: var(--tf-focus);
+}
+.tf__helper {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  letter-spacing: -0.01em;
+}
+
+/* Outlined variant */
+.tf__field--outlined {
+  background: #FFFFFF;
+  border: 1.5px solid var(--tf-outline);
+}
+.tf__field--outlined:hover {
+  background: #FFFFFF;
+  border-color: #B0B0B0;
+}
+.tf__field--outlined:focus {
+  background: #FFFFFF;
+  border-color: var(--tf-focus);
+}
+
+/* Underline variant */
+.tf__field--underline {
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--tf-outline);
+  border-radius: 0;
+  padding: 0 0 6px 0;
+  height: 28px;
+}
+.tf__field--underline:hover { background: transparent; border-bottom-color: #B0B0B0; }
+.tf__field--underline:focus { background: transparent; border-bottom-color: var(--tf-focus); }
+
+/* Error variant */
+.tf--error .tf__label   { color: var(--tf-error); }
+.tf--error .tf__helper  { color: var(--tf-error); }
+.tf--error .tf__field   { border-color: var(--tf-error); }
+.tf--error .tf__field--outlined { border-color: var(--tf-error); }
+.tf--error .tf__field--underline {
+  border: 0;
+  border-bottom: 1.5px solid var(--tf-error);
+}
+.tf--error .tf__field:focus,
+.tf--error .tf__field--outlined:focus { border-color: var(--tf-error); }
+.tf--error .tf__field--underline:focus { border-bottom-color: var(--tf-error); }
+
+
+
+/* ─────────────────────────────────────────────
+ * 검색 필드 — 통일 디자인 (이미지 spec)
+ *  · pill (border-radius: 9999px)
+ *  · 흰 배경 + 옅은 hairline (#E5E5E8)
+ *  · 좌측 magnifier icon + placeholder "Search" 톤
+ *  · focus 시 보더 살짝 진해짐 (시안 대신 중성 그레이로 - 미니멀)
+ *  · 아이콘 없는 단독 입력(.set-card__search) 도 같은 pill 모양
+ * ───────────────────────────────────────────── */
+.topbar__search,
+.team-list__search,
+.sl-search,
+.recruit__search,
+.team-foremen-aside__search,
+.team-list__filters .team-list__search {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 32px !important;
+  padding: 0 14px !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E5E5E8 !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.topbar__search:focus-within,
+.team-list__search:focus-within,
+.sl-search:focus-within {
+  border-color: #B5B5BB !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04) !important;
+}
+/* 좌측 돋보기 아이콘 */
+.topbar__search > svg,
+.team-list__search > svg,
+.sl-search > svg {
+  color: #1A1A1A !important;
+  flex-shrink: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+/* 내부 input — 보더 제거하고 평문처럼 */
+.topbar__search input,
+.team-list__search input,
+.sl-search input,
+.team-list__search-input,
+.topbar__search-input {
+  flex: 1 !important;
+  min-width: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+.topbar__search input::placeholder,
+.team-list__search input::placeholder,
+.sl-search input::placeholder,
+.team-list__search-input::placeholder,
+.topbar__search-input::placeholder {
+  color: #1A1A1A !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+/* clear 버튼 (있는 경우) — pill 안에 자연스럽게 */
+.sl-search__clear {
+  background: transparent !important;
+  border: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 9999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  color: #9CA3AF !important;
+  cursor: pointer !important;
+  transition: background-color 0.12s, color 0.12s;
+}
+.sl-search__clear:hover {
+  background: #F3F4F6 !important;
+  color: #1A1A1A !important;
+}
+
+/* 아이콘 없는 단독 input — pill 모양만 적용 */
+.set-card__search {
+  height: 32px !important;
+  padding: 0 16px !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E5E5E8 !important;
+  border-radius: 9999px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.set-card__search::placeholder {
+  color: #1A1A1A !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+.set-card__search:focus {
+  border-color: #B5B5BB !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ─────────────────────────────────────────────
+ * Text Field — 통일 디자인 (이미지 spec)
+ *  · 흰 배경 / 12px 코너 / hairline #E5E5E8
+ *  · 미세 그림자 (떠 있는 듯한 톤) 0 1px 2px rgba 0.04
+ *  · focus 시 보더 #B5B5BB + 그림자 살짝 강해짐
+ *  · 기존 .tf__field / .med__input / 일반 input[type=text|tel|email] 모두 적용
+ *  · 단, .tf__field--underline / .ymp__select / .num-stepper / 검색 pill / 토글 등 특수 변형은 예외
+ * ───────────────────────────────────────────── */
+.tf__field,
+.med__input,
+.field__input,
+.fa-dialog__input,
+.recruit__input,
+input[type="text"]:not(.team-list__search-input):not(.topbar__search-input):not(.set-card__search):not(.num-stepper__input):not(.ymp__select):not(.tf__field--underline):not(.srd-wiz__input):not(.sl-search__input),
+input[type="tel"]:not(.team-list__search-input):not(.topbar__search-input):not(.set-card__search):not(.num-stepper__input):not(.srd-wiz__input):not(.sl-search__input),
+input[type="email"]:not(.team-list__search-input):not(.topbar__search-input):not(.set-card__search):not(.num-stepper__input):not(.srd-wiz__input):not(.sl-search__input),
+textarea {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E5E8 !important;
+  border-radius: 12px !important;
+  padding: 0 14px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  outline: none !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.02) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+  caret-color: #007AFF !important;
+  font-family: inherit !important;
+  letter-spacing: -0.01em !important;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: auto !important;
+  min-height: 80px !important;
+  padding: 10px 14px !important;
+  line-height: 1.5 !important;
+  resize: vertical;
+}
+
+.tf__field::placeholder,
+.med__input::placeholder,
+input[type="text"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+  color: #9CA3AF !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+}
+
+.tf__field:hover:not(:disabled):not(:focus),
+.med__input:hover:not(:disabled):not(:focus),
+input[type="text"]:hover:not(:disabled):not(:focus):not(.team-list__search-input):not(.topbar__search-input):not(.set-card__search):not(.num-stepper__input):not(.ymp__select):not(.tf__field--underline):not(.srd-wiz__input):not(.sl-search__input),
+input[type="tel"]:hover:not(:disabled):not(:focus):not(.srd-wiz__input):not(.sl-search__input),
+input[type="email"]:hover:not(:disabled):not(:focus):not(.srd-wiz__input):not(.sl-search__input),
+textarea:hover:not(:disabled):not(:focus) {
+  border-color: #D1D1D6 !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+.tf__field:focus,
+.med__input:focus,
+.field__input:focus,
+input[type="text"]:focus:not(.team-list__search-input):not(.topbar__search-input):not(.set-card__search):not(.num-stepper__input):not(.ymp__select):not(.tf__field--underline):not(.srd-wiz__input):not(.sl-search__input),
+input[type="tel"]:focus:not(.sl-search__input),
+input[type="email"]:focus:not(.sl-search__input),
+textarea:focus {
+  border-color: #B5B5BB !important;
+  box-shadow:
+    0 0 0 3px rgba(0, 122, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ─────────────────────────────────────────────
+ * input[type="time"] / input[type="date"] —
+ *   macOS Sequoia Popup Button 톤 (translucent gray pill + 우측 native picker icon)
+ *   기존 흰 배경 + hairline 보더는 위 글로벌 룰을 override.
+ * ───────────────────────────────────────────── */
+input[type="time"]:not(.num-stepper__input),
+input[type="date"]:not(.num-stepper__input) {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  padding: 0 10px 0 14px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  font-family: inherit !important;
+  letter-spacing: -0.01em !important;
+  font-variant-numeric: tabular-nums !important;
+  caret-color: #007AFF !important;
+  transition: background-color 0.12s, box-shadow 0.15s !important;
+  cursor: pointer;
+  outline: none !important;
+}
+input[type="time"]:not(.num-stepper__input):hover:not(:disabled),
+input[type="date"]:not(.num-stepper__input):hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.07) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+input[type="time"]:focus,
+input[type="date"]:focus {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border: 0 !important;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.20) !important;
+}
+input[type="time"]:disabled,
+input[type="date"]:disabled {
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: #9CA3AF !important;
+  cursor: not-allowed;
+}
+/* WebKit native clock/calendar picker indicator — 컴팩트하게 다크 톤 */
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  filter: brightness(0.4);
+  transition: opacity 0.12s;
+  margin-left: 4px;
+  padding: 0;
+}
+input[type="time"]::-webkit-calendar-picker-indicator:hover,
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.tf__field:disabled,
+.med__input:disabled,
+input:disabled,
+textarea:disabled {
+  background: #F5F5F5 !important;
+  color: #9CA3AF !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* select 도 같은 톤으로 */
+select:not(.ymp__select):not(.num-stepper__input) {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E5E8 !important;
+  border-radius: 12px !important;
+  padding: 0 14px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  outline: none !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.02) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+}
+select:not(.ymp__select):not(.num-stepper__input):hover {
+  border-color: #D1D1D6 !important;
+}
+select:not(.ymp__select):not(.num-stepper__input):focus {
+  border-color: #B5B5BB !important;
+  box-shadow:
+    0 0 0 3px rgba(0, 122, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ─────────────────────────────────────────────
+ * Scrollbar — 이미지 spec (얇은 light gray pill)
+ *  · Webkit (Chrome/Edge/Safari) : 6px thumb, #C5C5C8, pill, hover 시 진해짐
+ *  · Firefox : scrollbar-width thin + thumb color 동일
+ *  · 트랙은 투명 (배경에 녹아드는 느낌)
+ * ───────────────────────────────────────────── */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+*::-webkit-scrollbar-thumb {
+  background: #C5C5C8;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  min-height: 24px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #A8A8AC;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:active {
+  background: #8E8E93;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C5C5C8 #FAFAFA;
+}
+*:hover {
+  scrollbar-color: #A8A8AC #FAFAFA;
+}
+
+/* ─────────────────────────────────────────────
+ * 체크박스 / 라디오 — iOS 시스템 블루 톤 (네이티브 + accent-color)
+ *  · accent-color 로 색만 바꿔 native shape 유지 (사이즈/모양 깨지지 않음)
+ * ───────────────────────────────────────────── */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #007AFF;
+  cursor: pointer;
+}
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ─────────────────────────────────────────────
+ * Toggle Switch — iOS 스타일 pill 토글
+ *  HTML: <label class="toggle"><input type="checkbox" /><span class="toggle__track"><span class="toggle__knob" /></span></label>
+ *  또는 단독 .toggle 클래스를 가진 button/checkbox
+ * ───────────────────────────────────────────── */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.toggle > input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.toggle__track {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 26px;
+  background: #E5E5EA;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+.toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* on 상태 */
+.toggle > input:checked ~ .toggle__track {
+  background: #34C759;
+}
+.toggle > input:checked ~ .toggle__track > .toggle__knob,
+.toggle.is-on .toggle__track > .toggle__knob {
+  transform: translateX(18px);
+}
+.toggle.is-on .toggle__track {
+  background: #34C759;
+}
+.toggle > input:disabled ~ .toggle__track,
+.toggle.is-disabled .toggle__track {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.toggle > input:focus-visible ~ .toggle__track {
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+}
+/* sm 변형 */
+.toggle--sm .toggle__track { width: 36px; height: 22px; }
+.toggle--sm .toggle__knob { width: 18px; height: 18px; }
+.toggle--sm > input:checked ~ .toggle__track > .toggle__knob,
+.toggle--sm.is-on .toggle__track > .toggle__knob {
+  transform: translateX(14px);
+}
+
+/* 기존 safety__toggle 도 같은 톤으로 — 색만 시스템 그린 */
+.safety__toggle {
+  background: #E5E5EA !important;
+}
+.safety__toggle.is-on {
+  background: #34C759 !important;
+}
+
+/* ─────────────────────────────────────────────
+ * 리스트·테이블 헤더 — 이미지 2 spec
+ *  · 텍스트 + 우측 chevron + 하단 hairline (전체 행 너비)
+ *  · 정렬 가능한 sortable column header / 섹션 헤더에 적용
+ * ───────────────────────────────────────────── */
+
+/* 테이블 헤더 — 정렬 화살표를 chevron 으로, 하단 라인 strong */
+.team-table thead th,
+table thead th {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  border-bottom: 1px solid #E5E5E8;
+  background: transparent;
+  text-align: center;
+  padding: 10px 12px;
+}
+
+/* 정렬 가능한 컬럼 — chevron 표시 */
+.team-table__sort,
+th[data-sortable="true"] {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: color 0.12s;
+}
+.team-table__sort:hover,
+th[data-sortable="true"]:hover {
+  color: #007AFF;
+}
+
+/* 정렬 인디케이터 — chevron 모양 */
+.team-table__sort-ind {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 10px;
+  color: #9CA3AF;
+  vertical-align: middle;
+  transition: color 0.12s;
+}
+.team-table__sort.is-active .team-table__sort-ind {
+  color: #007AFF;
+}
+
+/* 리스트 / 섹션 헤더 — 텍스트 가운데 + chevron + 하단 line */
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid #E5E5E8;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.12s;
+}
+.list-header:hover {
+  color: #007AFF;
+}
+.list-header__chevron {
+  font-size: 11px;
+  color: #9CA3AF;
+  transition: transform 0.18s, color 0.12s;
+}
+.list-header.is-open .list-header__chevron {
+  transform: rotate(180deg);
+}
+.list-header:hover .list-header__chevron {
+  color: #007AFF;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+ * 전체 페이지 비주얼 통일 — TeamListPage(인력관리) 디자인을
+ * 17 개 페이지 루트에 동일 적용
+ *  · Wantedly 토큰 (시안 #3CC8C8 / hairline / shadow)
+ *  · 카드 (12px 라운드 / 흰 배경 / 미세 그림자)
+ *  · 페이지 헤더 타이포 (28px 700)
+ *  · native select 시각 통일 (chevron + 흰 pill)
+ * ───────────────────────────────────────────────────────────────── */
+
+/* 토큰 — 모든 페이지에서 사용 가능 */
+:root {
+  --wt-cyan:           #3CC8C8;
+  --wt-cyan-dark:      #00B5BC;
+  --wt-cyan-darker:    #008A91;
+  --wt-cyan-light:     #E0F5F5;
+  --wt-cyan-50:        #F2FCFC;
+  --wt-red:            #FF5252;
+  --wt-yellow:         #FFC107;
+  --wt-green:          #4CAF50;
+  --wt-bg:             #FAFAFA;
+  --wt-surface:        #FFFFFF;
+  --wt-border:         #E5E7EB;
+  --wt-border-strong:  #D1D5DB;
+  --wt-text:           #1A1A1A;
+  --wt-text-secondary: #6B7280;
+  --wt-text-tertiary:  #9CA3AF;
+  --wt-radius-sm:      6px;
+  --wt-radius-md:      8px;
+  --wt-radius-lg:      12px;
+  --wt-radius-pill:    9999px;
+  --wt-shadow-sm:      0 1px 2px rgba(0,0,0,0.04);
+  --wt-shadow-md:      0 1px 3px rgba(0,0,0,0.06);
+  --wt-shadow-lg:      0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* 페이지 헤더 타이포 — 모든 페이지 */
+.admin-shell__content .page-header__title {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  line-height: 32px !important;
+  letter-spacing: -0.02em !important;
+  color: #1A1A1A !important;
+}
+.admin-shell__content .page-header__subtitle {
+  font-size: 14px !important;
+  color: #6B7280 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* 카드 — 모든 페이지의 .card 통일 */
+.admin-shell__content .card {
+  background: #FFFFFF !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.02) !important;
+  transition: box-shadow 0.18s ease;
+}
+.admin-shell__content .card:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* native select — 시각 통일 (chevron SVG + pill) */
+.admin-shell__content select:not(.ymp__select):not(.num-stepper__input):not(.mac-select__trigger) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: #FFFFFF !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1.5 L5 4.5 L9 1.5' stroke='%236B7280' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 10px 6px !important;
+  border: 1px solid #E5E5E8 !important;
+  border-radius: 12px !important;
+  padding: 0 32px 0 14px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  outline: none !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  letter-spacing: -0.01em !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.02) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+.admin-shell__content select:not(.ymp__select):not(.num-stepper__input):not(.mac-select__trigger):hover {
+  border-color: #D1D1D6 !important;
+}
+.admin-shell__content select:not(.ymp__select):not(.num-stepper__input):not(.mac-select__trigger):focus {
+  border-color: #B5B5BB !important;
+  box-shadow:
+    0 0 0 3px rgba(0, 122, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ─────────────────────────────────────────────
+ * 전역 accent-color — 에머랄드 (#007AFF)
+ *  · native date/time picker 의 선택 날짜 색
+ *  · checkbox/radio
+ *  · range slider
+ *  · ::selection (텍스트 드래그)
+ * ───────────────────────────────────────────── */
+html, body, input, textarea, select, button {
+  accent-color: #007AFF;
+}
+::selection {
+  background: rgba(0, 122, 255, 0.20);
+  color: #1A1A1A;
+}

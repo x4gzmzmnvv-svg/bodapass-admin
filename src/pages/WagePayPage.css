@@ -1,0 +1,315 @@
+/* 노무비 지급 페이지 */
+
+.wp-page { display: flex; flex-direction: column; gap: 16px; }
+
+/* ─────────────────────────────────────────────
+ * 노무비 상세 팝업 — 합계 요약 4타일 (고정) + 근로자별 세부 표 (내부 스크롤)
+ *
+ * 동작 원리:
+ *  · 부모 .modal__body 를 flex column 으로 강제 → 자식 height 분배 가능
+ *  · .wp-detail 도 flex column + flex:1 → modal body 의 가용 높이를 모두 차지
+ *  · summary 는 flex-shrink:0 → 항상 자기 높이 유지 (스크롤 영향 X)
+ *  · table-wrap 은 flex:1 + overflow-y:auto → 남은 공간 안에서 자체 스크롤
+ *  · 결과: summary 는 항상 상단 고정, 표 행만 내부에서 스크롤
+ * ───────────────────────────────────────────── */
+.modal__body:has(.wp-detail) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.wp-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+/* 합계 카드 — 항상 자기 높이 유지 (스크롤 안 됨) */
+.wp-detail > .wp-detail__summary {
+  flex-shrink: 0;
+}
+/* 표 wrap — 남은 공간을 모두 차지하면서 내부에서 스크롤 */
+.wp-detail > .wp-detail__table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+.wp-detail__empty {
+  margin: 0;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* 합계 요약 — 4타일 가로 grid (대상 인원 / 총 지급액 / 공제 합계 / 실지급액) */
+.wp-detail__summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.wp-detail__summary-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 8px;
+  border-right: 1px solid #F0F0F2;
+}
+.wp-detail__summary-row:last-child {
+  border-right: 0;
+}
+.wp-detail__summary-row > span {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.wp-detail__summary-row > strong {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1A1A1A;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+/* 공제 합계 — 보라/앰버 톤 */
+.wp-detail__summary-row--ded > strong {
+  color: #92400E;
+}
+/* 실지급액 — 시스템 블루 강조 (가장 중요) */
+.wp-detail__summary-row--total > strong {
+  color: var(--accent);
+}
+
+/* 근로자별 세부 표 */
+/* table-wrap — 자체 스크롤 제거 (modal__body 가 단일 스크롤 컨테이너로 동작)
+ * 자체 max-height/overflow 가 있으면 thead sticky-top:0 이 wrap 기준이 되어
+ * 모달 스크롤 시 헤더가 본문 위에서 겹쳐 보이는 문제 발생 → 제거 */
+.wp-detail__table-wrap {
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 12px;
+  overflow: visible;
+}
+.wp-detail__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.wp-detail__table th,
+.wp-detail__table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #F0F0F2;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+/* 헤더 — 다른 표와 동일 톤 (불투명 회색 + 다크 텍스트 + bold + sticky)
+ * 모든 헤더 셀은 가운데 정렬 (제목만 가운데, 데이터는 컬럼별 정렬 유지)
+ * background 는 OPAQUE — sticky 시 아래 행들이 비치지 않도록 */
+.wp-detail__table thead th {
+  background: #F8F8FA;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+  text-align: center;
+  /* table-wrap 내부 스크롤 컨테이너 기준 sticky → 데이터 행만 스크롤되고 헤더 고정 */
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: inset 0 -1px 0 #E5E5EA;
+  border-bottom: 0;
+}
+.wp-detail__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.wp-detail__table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.wp-detail__th-no {
+  width: 36px;
+}
+/* 금액 컬럼 — 본문 셀은 오른쪽 정렬 (헤더는 위 thead th 의 center 가 우선) */
+.wp-detail__table tbody td.wp-detail__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.wp-detail__num--ded {
+  color: #92400E;
+}
+.wp-detail__table tbody td:first-child {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* 좁은 화면 fallback */
+@media (max-width: 720px) {
+  .wp-detail__summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .wp-detail__summary-row {
+    border-right: 0;
+    border-bottom: 1px solid #F0F0F2;
+    padding: 6px 8px;
+  }
+}
+
+/* 단계 흐름 */
+.wp-flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px;
+  padding: 8px 12px;
+  background: white; border: 1px solid #e5e7eb; border-radius: 10px;
+  font-size: 12px; color: #6b7280;
+}
+.wp-flow__step {
+  display: inline-flex; align-items: center;
+  padding: 4px 10px; border-radius: 999px;
+  background: #f3f4f6; color: #6b7280;
+  font-weight: 600; letter-spacing: -0.01em;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.wp-flow__step.is-current {
+  background: #eef2ff; color: var(--accent); border-color: rgba(0, 122, 255, 0.20);
+}
+.wp-flow__step--btn {
+  cursor: pointer; font-family: inherit; font-size: 12px;
+  border: 1px solid transparent;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.wp-flow__step--btn:hover {
+  background: #e0e7ff; color: var(--accent); border-color: #c7d2fe;
+}
+.wp-flow__arrow { color: #cbd5e1; font-weight: 500; font-size: 13px; }
+
+/* 필터 */
+.wp-filter {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 16px;
+  background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+}
+/* 외곽 타일 제거 — 히어로 아래 flat 으로 표시 */
+.wp-filter--flat {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 4px 12px !important;
+  border-bottom: 1px solid #E5E5EA !important;
+}
+/* 좌측 셀(해당월) 과 우측 버튼(노무비대장 출력) 사이 spacer — 우측 정렬 효과 */
+.wp-filter__spacer {
+  flex: 1 1 auto;
+}
+.wp-filter__cell { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.wp-filter__cell label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  writing-mode: horizontal-tb;
+}
+.wp-filter__cell input {
+  height: 32px; padding: 0 12px;
+  border: 1px solid #d1d5db; border-radius: 6px;
+  background: white; font-size: 13px; font-family: inherit;
+}
+
+/* KPI */
+.wp-kpi {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.wp-kpi__card {
+  background: white; border: 1px solid #e5e7eb; border-radius: 10px;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.wp-kpi__card--ok     { background: #f6fefa; border-color: #bbf7d0; }
+.wp-kpi__card--amber  { background: #fffbeb; border-color: #fde68a; }
+.wp-kpi__card--danger { background: #fef2f2; border-color: #fecaca; }
+.wp-kpi__card--gray   { background: #f8f9fb; }
+.wp-kpi__label {
+  font-size: 11.5px; color: #6b7280; font-weight: 600;
+}
+.wp-kpi__value {
+  font-size: 20px; font-weight: 800; color: #111827;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+}
+.wp-kpi__unit {
+  font-size: 12px; color: #6b7280; font-weight: 600; margin-left: 3px;
+}
+.wp-kpi__card--ok     .wp-kpi__value { color: var(--accent-hover); }
+.wp-kpi__card--amber  .wp-kpi__value { color: #b45309; }
+.wp-kpi__card--danger .wp-kpi__value { color: #b91c1c; }
+
+@media (max-width: 1180px) {
+  .wp-kpi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .wp-kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.wp-loading, .wp-empty {
+  padding: 40px 20px; text-align: center;
+  color: #6b7280; font-size: 13px;
+  background: white; border: 1px dashed #e5e7eb; border-radius: 12px;
+}
+
+/* 표 */
+.wp-table-wrap {
+  background: white; border: 1px solid #e5e7eb;
+  border-radius: 12px; overflow: hidden; overflow-x: auto;
+}
+.wp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.wp-table thead tr { background: #f8f9fb; border-bottom: 1px solid #e5e7eb; }
+.wp-table th {
+  text-align: right; padding: 10px 12px;
+  font-weight: 700; color: #6b7280; font-size: 11.5px;
+  white-space: nowrap;
+}
+.wp-table th.wp-th-name { text-align: left; }
+.wp-table tbody tr { border-top: 1px solid #e5e7eb; }
+.wp-table td { padding: 12px; vertical-align: middle; white-space: nowrap; }
+.wp-td-name { text-align: left; }
+.wp-td-num { text-align: right; font-variant-numeric: tabular-nums; }
+.wp-td-center { text-align: center; }
+.wp-td-actions { text-align: right; display: flex; gap: 4px; justify-content: flex-end; }
+
+/* 칩 */
+.wp-chip {
+  display: inline-flex; font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 999px; border: 1px solid transparent;
+}
+.wp-chip--ok   { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+.wp-chip--gray { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+
+.wp-status {
+  display: inline-flex; font-size: 11px; font-weight: 700;
+  padding: 2px 9px; border-radius: 999px; border: 1px solid transparent;
+}
+.wp-status--green { background: #ecfdf5; color: var(--accent-hover); border-color: #a7f3d0; }
+.wp-status--amber { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.wp-status--gray  { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+.wp-status--red   { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+
+/* 버튼 */
+.wp-btn {
+  height: 32px; padding: 0 14px;
+  background: white; border: 1px solid #d1d5db; border-radius: 6px;
+  font-size: 12.5px; font-weight: 600; color: #111827;
+  cursor: pointer; font-family: inherit;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+.wp-btn:hover { border-color: #4f6fb8; color: #4f6fb8; }
+.wp-btn--ghost { color: #6b7280; }
+.wp-btn--ok { border-color: #a7f3d0; color: var(--accent-hover); }
+.wp-btn--ok:hover { background: #ecfdf5; border-color: var(--accent-hover); }
+.wp-btn--sm { height: 26px; padding: 0 10px; font-size: 11.5px; }
