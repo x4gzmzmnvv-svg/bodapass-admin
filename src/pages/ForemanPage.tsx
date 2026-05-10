@@ -21,6 +21,7 @@ import type { InsuranceFlags, TeamMember } from '../api/team.types';
 import { getErrorMessage } from '../api/client';
 import { useAuth } from '../hooks/useAuth';
 import { getAvatarUrl } from '../utils/avatar';
+import { localDateStr } from '../utils/dateLocal';
 import { decideTrustTier, tierLabel } from '../utils/workerCode';
 import './ForemanPage.css';
 import { MacSelect } from '../components/MacSelect';
@@ -350,7 +351,7 @@ export function ForemanPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${fileLabel}-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `${fileLabel}-${localDateStr()}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -1207,11 +1208,11 @@ function presetToPermissions(p: ForemanPermissionPreset): ForemanPermissions {
 const ASSIGN_DEFAULT_HEADCOUNT = 5;
 const ASSIGN_DEFAULT_DAILY_WAGE = 280_000;
 
-function todayIso(): string { return new Date().toISOString().slice(0, 10); }
+function todayIso(): string { return localDateStr(); }
 function addDaysIso(iso: string, days: number): string {
   const d = new Date(iso);
   d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
+  return localDateStr(d);
 }
 
 const SPECIAL_TERMS = [

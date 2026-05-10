@@ -2264,25 +2264,25 @@ tr.is-focused .wage__per-site-detail {
 }
 
 .wage-month-picker__arrow {
-  background: white;
-  border: 1px solid var(--color-border-strong);
-  border-radius: 8px;
-  width: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  width: 24px;
   height: var(--ctl-h);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
-  color: var(--color-text);
+  color: var(--color-text-muted, #6b6b73);
   cursor: pointer;
   font-family: inherit;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 .wage-month-picker__arrow:hover {
-  background: var(--color-primary-light);
-  border-color: var(--color-primary);
-  color: var(--color-primary-dark);
+  background: transparent;
+  color: var(--color-primary, #007aff);
 }
 
 .wage-month-picker__sel {

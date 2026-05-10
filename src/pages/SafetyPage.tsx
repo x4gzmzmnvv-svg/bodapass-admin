@@ -14,6 +14,7 @@
  */
 
 import { useEffect, useMemo, useState } from 'react';
+import { localDateStr } from '../utils/dateLocal';
 import { Modal } from '../components/Modal';
 import { PageHeader } from '../components/PageHeader';
 import { Tooltip } from '../components/Tooltip';
@@ -106,7 +107,7 @@ export function SafetyPage() {
   }
   function setQuickPeriod(kind: 'TODAY' | 'WEEK' | 'MONTH' | 'ALL') {
     const now = new Date();
-    const today = now.toISOString().slice(0, 10);
+    const today = localDateStr(now);
     let from = '';
     let to = '';
     if (kind === 'TODAY') {
@@ -216,7 +217,7 @@ export function SafetyPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `safety-messages-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `safety-messages-${localDateStr()}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -237,7 +238,7 @@ export function SafetyPage() {
    *  · 미확인자 명단 (있는 경우)
    */
   function printReport() {
-    const todayStr = new Date().toISOString().slice(0, 10);
+    const todayStr = localDateStr();
     const periodLabel = applied.from && applied.to
       ? `${applied.from} ~ ${applied.to}`
       : applied.from
@@ -1004,7 +1005,7 @@ function OutboxTab(props: {
   } = props;
 
   // 어떤 빠른 기간이 활성인지 판별 (시각 강조용)
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr();
   const isQuickToday = filterFrom === todayStr && filterTo === todayStr;
   const isQuickMonth = filterFrom === todayStr.slice(0, 7) + '-01' && filterTo === todayStr;
   const isQuickAll = !filterFrom && !filterTo;
@@ -1984,7 +1985,7 @@ function WeekDayChips({
   ];
 
   const now = new Date();
-  const todayStr = now.toISOString().slice(0, 10);
+  const todayStr = localDateStr(now);
   const weekStart = (() => {
     const day = now.getDay();
     const diff = day === 0 ? 6 : day - 1;
@@ -1998,7 +1999,7 @@ function WeekDayChips({
     const offsetFromMon = targetIdx === 0 ? 6 : targetIdx - 1;
     const d = new Date(weekStart);
     d.setDate(weekStart.getDate() + offsetFromMon);
-    return d.toISOString().slice(0, 10);
+    return localDateStr(d);
   }
 
   // 현재 선택된 단일 요일 (from === to 인 경우만 인식)

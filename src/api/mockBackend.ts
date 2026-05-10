@@ -104,7 +104,7 @@ type Handler = (req: MockReq) => MockResult | Promise<MockResult>;
 const STORAGE_KEY = 'ilgampack_admin:mockdb';
 const SEED_VERSION_KEY = 'ilgampack_admin:mockdb:version';
 /** 시드를 변경할 때 이 버전을 올리면 사용자 브라우저의 캐시가 자동으로 갱신됩니다. */
-const SEED_VERSION = '2026-05-11-v41-test-busan20workers-deploy';
+const SEED_VERSION = '2026-05-11-v45-2sites-10workers-clean';
 const DELAY_MS = 300;
 const wait = (ms = DELAY_MS) => new Promise((r) => setTimeout(r, ms));
 
@@ -147,7 +147,7 @@ function buildSeed() {
     // ─── 부산 (시공중) — 5명 근로자가 일하는 곳 ───
     { id: 'S-2026-1043', name: '부산 해운대 마린시티 그랜드 오피스타워 복합 재개발 신축공사', city: '부산', addr: '부산 해운대구 우동 1408-1', client: '(주)마린시티개발', clientType: '민간', mgr: '김홍길', mgrPhone: '010-3676-9960', amount: 18_500_000_000, start: '2024-10-20', end: '2026-08-31', progress: 35, status: 'IN_PROGRESS', ownerCompanyId: 'C-001' },
     // ─── 대전 (준공) ───
-    { id: 'S-2026-1057', name: '대전 유성구 R&D 센터 신축', city: '대전', addr: '대전 유성구 용산동 524', client: '대전테크노파크', clientType: '공공', mgr: '이재훈', mgrPhone: '010-4421-9830', amount: 9_800_000_000, start: '2025-06-15', end: '2026-04-30', progress: 100, status: 'COMPLETED', ownerCompanyId: 'C-001' },
+    { id: 'S-2026-1057', name: '대전 유성구 R&D 센터 신축', city: '대전', addr: '대전 유성구 용산동 524', client: '대전테크노파크', clientType: '공공', mgr: '이재훈', mgrPhone: '010-4421-9830', amount: 9_800_000_000, start: '2025-06-15', end: '2027-06-30', progress: 55, status: 'IN_PROGRESS', ownerCompanyId: 'C-001' },
   ];
 
   const sites: Site[] = SITE_DEFS.map((d) => ({
@@ -319,49 +319,45 @@ function buildSeed() {
   }
   // (v40 — 부산 현장 외에 다른 현장 없음. 임시반장 시드 제거)
 
-  // ───────── 20명 근로자 (v41: 부산 현장, 데모 풍부화) ─────────
+  // ───────── 10명 근로자 (v45: 부산 5명 + 대전 5명) ─────────
   // joinedAt 분포:
-  //  · 17명: 2026-04-01 (1년 미만 — 공제회 부금 대상)
-  //  · 1명 :  2025-06-15 (1년 임박 — D-30 이내, 노란 경고 발생)
-  //  · 2명 :  2025-04-01 / 2024-12-01 (1년 이상 — 법정퇴직금 대상)
+  //  · 8명: 2026-04-01 (1년 미만 — 공제회 부금 대상)
+  //  · 1명: 2025-06-15 (1년 임박 — D-30 이내 경고)
+  //  · 1명: 2025-04-01 (1년 이상 — 법정퇴직금 대상)
   // 한 명은 외국인(idType=2) 으로 다양성 확보.
-  const busanSite = sites[0];  // S-2026-1043 부산 IN_PROGRESS
-  // FACE/MANUAL 분류는 seedAttendance 의 \"M-NNN 번호 % 5 != 0\" 규칙으로 처리됨 (대부분 FACE).
+  // 사이트 분배: 부산(siteIdx=0) 5명, 대전(siteIdx=1) 5명.
+  const busanSite = sites[0];   // S-2026-1043 부산
+  const daejeonSite = sites[1]; // S-2026-1057 대전
+  // FACE/MANUAL 분류는 seedAttendance 의 멤버 번호 규칙으로 처리됨
+  // v45 — 7명 FACE / 3명 MANUAL = 70/30%
   const MEMBER_DEFS: Array<{
     id: string; name: string; role: string; dailyWage: number; foremanIdx: number;
-    joinedAt: string; isForeign?: boolean;
+    joinedAt: string; siteIdx: 0 | 1; isForeign?: boolean;
   }> = [
-    { id: 'M-001', name: '한동현',       role: '형틀공',     dailyWage: 200_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-002', name: '오성준',       role: '철근공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-003', name: '서동현',       role: '콘크리트공', dailyWage: 240_000, foremanIdx: 1, joinedAt: '2026-04-01' },
-    { id: 'M-004', name: '신성준',       role: '미장공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-005', name: '권동현',       role: '도장공',     dailyWage: 280_000, foremanIdx: 1, joinedAt: '2026-04-01' },
-    { id: 'M-006', name: 'Rajesh Kumar', role: '타일공',     dailyWage: 230_000, foremanIdx: 0, joinedAt: '2026-04-01', isForeign: true },
-    { id: 'M-007', name: '전도현',       role: '용접공',     dailyWage: 270_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-008', name: '문동현',       role: '형틀공',     dailyWage: 200_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-009', name: '배민호',       role: '미장공',     dailyWage: 250_000, foremanIdx: 1, joinedAt: '2026-04-01' },
-    { id: 'M-010', name: '유동현',       role: '타일공',     dailyWage: 230_000, foremanIdx: 1, joinedAt: '2026-04-01' },
-    { id: 'M-011', name: '송도현',       role: '전기공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-012', name: '홍동현',       role: '도배공',     dailyWage: 220_000, foremanIdx: 1, joinedAt: '2026-04-01' },
-    { id: 'M-013', name: '양민호',       role: '철근공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-014', name: '백동현',       role: '도장공',     dailyWage: 280_000, foremanIdx: 1, joinedAt: '2026-04-01' },
-    { id: 'M-015', name: '남태우',       role: '전기공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-016', name: '황도현',       role: '방수공',     dailyWage: 240_000, foremanIdx: 1, joinedAt: '2025-04-01' }, // 1년 이상 — LEGAL
-    { id: 'M-017', name: '류동현',       role: '설비공',     dailyWage: 230_000, foremanIdx: 0, joinedAt: '2024-12-01' }, // 1년 이상 — LEGAL
-    { id: 'M-018', name: '고도현',       role: '보조',       dailyWage: 180_000, foremanIdx: 0, joinedAt: '2026-04-01' },
-    { id: 'M-019', name: '손동현',       role: '콘크리트공', dailyWage: 240_000, foremanIdx: 1, joinedAt: '2025-06-15' }, // 1년 임박 — D-30 이내 경고
-    { id: 'M-020', name: '허민호',       role: '방수공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01' },
+    // 부산 현장 (5명)
+    { id: 'M-001', name: '한동현',       role: '형틀공',     dailyWage: 200_000, foremanIdx: 0, joinedAt: '2026-04-01', siteIdx: 0 },
+    { id: 'M-002', name: '오성준',       role: '철근공',     dailyWage: 220_000, foremanIdx: 0, joinedAt: '2026-04-01', siteIdx: 0 },
+    { id: 'M-003', name: '서동현',       role: '콘크리트공', dailyWage: 240_000, foremanIdx: 1, joinedAt: '2026-04-01', siteIdx: 0 },
+    { id: 'M-004', name: '신성준',       role: '미장공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01', siteIdx: 0 },
+    { id: 'M-005', name: '권동현',       role: '도장공',     dailyWage: 280_000, foremanIdx: 1, joinedAt: '2025-04-01', siteIdx: 0 }, // 1년 이상
+    // 대전 현장 (5명)
+    { id: 'M-006', name: 'Rajesh Kumar', role: '타일공',     dailyWage: 230_000, foremanIdx: 0, joinedAt: '2026-04-01', siteIdx: 1, isForeign: true },
+    { id: 'M-007', name: '전도현',       role: '용접공',     dailyWage: 270_000, foremanIdx: 0, joinedAt: '2026-04-01', siteIdx: 1 },
+    { id: 'M-008', name: '문동현',       role: '형틀공',     dailyWage: 200_000, foremanIdx: 0, joinedAt: '2025-06-15', siteIdx: 1 }, // 1년 임박
+    { id: 'M-009', name: '배민호',       role: '미장공',     dailyWage: 250_000, foremanIdx: 1, joinedAt: '2026-04-01', siteIdx: 1 },
+    { id: 'M-010', name: '송도현',       role: '전기공',     dailyWage: 260_000, foremanIdx: 0, joinedAt: '2026-04-01', siteIdx: 1 },
   ];
   const members: TeamMember[] = MEMBER_DEFS.map((m, idx) => {
     const acct = accountOf(idx);
     const idPair = idOf(idx, m.isForeign);
     const assignedForeman = foremen[m.foremanIdx];
+    const targetSite = m.siteIdx === 1 ? daejeonSite : busanSite;
     return {
       id: m.id,
       name: m.name,
       phone: phoneOf(100 + idx),
       role: m.role,
-      siteId: busanSite.id,
+      siteId: targetSite.id,
       siteCompanyId: assignedForeman?.siteCompanyId,
       foremanId: assignedForeman?.id,
       assignedToSiteManager: false,
@@ -1643,6 +1639,10 @@ function closedResponse(date: string): MockResult {
     },
   };
 }
+/** 로컬 시간대 기준 YYYY-MM-DD — toISOString() 은 UTC 라서 한국 새벽엔 어제 날짜를 반환. */
+function localDateStr(d: Date): string {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
 function deterministicRandom(seed: string): number {
   let h = 2166136261;
   for (let i = 0; i < seed.length; i++) {
@@ -1663,13 +1663,8 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
   const geofence = site?.geofence;
   const [yStr, mStr] = yearMonth.split('-');
   const year = Number(yStr); const month = Number(mStr);
-  // v40 — 출역 시드는 2026-04 / 2026-05 만 생성. 그 외 월은 빈 캘린더.
-  // v41 — 2024-12 ~ 2026-05 출역 시드 허용 (1년 이상 근로자 데이터 표시)
-  const SEED_ALLOWED_MONTHS = new Set([
-    '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06',
-    '2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12',
-    '2026-01', '2026-02', '2026-03', '2026-04', '2026-05',
-  ]);
+  // v42 — 2026-04 / 2026-05 만. 4·5월 데이터로 일일/월별 출역을 비교 시연.
+  const SEED_ALLOWED_MONTHS = new Set(['2026-04', '2026-05']);
   if (!SEED_ALLOWED_MONTHS.has(yearMonth)) {
     return { records: {}, audit: [], yearMonth, siteId };
   }
@@ -1679,6 +1674,15 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
   const todayDay = today.getDate();
   const records: Record<string, AttendanceRecord> = {};
   const audit: AuditLogEntry[] = [];
+  // v42 — 오늘 출근할 10명 결정 (해시 기반 결정적 선택)
+  //  · 시드 멤버(M-NNN)만 후보, status=PENDING 제외
+  //  · 오늘 날짜를 시드로 score 계산 → score 낮은 순 10명만 오늘 출근
+  const todayKey = localDateStr(today);
+  // v45 — 10명 전원 오늘 출근 (사이트 무관 전체 명단)
+  const todayAttendeeIds = new Set(
+    members.filter((m) => m.status !== 'PENDING' && /^M-\d{3}$/.test(m.id)).map((m) => m.id),
+  );
+
   for (const m of members) {
     // PENDING 상태(가입 대기·미소속) 워커는 아직 출역 시작 X — 출근 데이터 생성 스킵
     if (m.status === 'PENDING') continue;
@@ -1687,14 +1691,16 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
     // 결과: 새로 등록한 팀원은 캘린더가 빈 상태로 시작, 관리자가 수동으로 입력해야 함.
     const isSeedMember = /^M-\d{3}$/.test(m.id);
     if (!isSeedMember) continue;
-    // ─── 워커별 출근율 변동 ───
-    // 만근(21일) 일률 적용 X. memberId 해시로 출근율 계산해서 사람마다 일수가 다르게.
-    //  · 출근율 67~92% 범위 (대략 14일~22일/월)
-    //  · 토요일 출근 확률도 워커별 다름 (20~80%)
+    // ─── 워커별 출근율 변동 (v42) ───
+    // 16일 cap 안에서 자연스럽게 분포되도록 출근율 하향 조정
+    //  · 출근율 50~75% → 평일 22일 기준 11~16일 (16일 cap 도달자 일부)
+    //  · 토요일은 출근 확률 더 낮춤 (10~40%)
     let mh = 0;
     for (const c of m.id) mh = (mh * 33 + c.charCodeAt(0)) >>> 0;
-    const attendanceRate = 0.67 + ((mh % 26) / 100);   // 0.67 ~ 0.92
-    const satRate = 0.20 + (((mh >> 7) % 61) / 100);   // 0.20 ~ 0.80
+    const attendanceRate = 0.55 + ((mh % 26) / 100);   // 0.55 ~ 0.80
+    const satRate = 0.15 + (((mh >> 7) % 41) / 100);   // 0.15 ~ 0.55
+    let attendedDays = 0;
+    const MAX_ATTENDED_DAYS = 18;
 
     // 멤버의 입사일 — 입사 전 날짜는 출석 시드 X
     const memberJoinDate = m.joinedAt ? new Date(m.joinedAt + 'T00:00:00') : null;
@@ -1708,8 +1714,11 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
       if (memberJoinDate && date < memberJoinDate) continue;
       // 토요일 — 워커별 satRate 만큼만 출근
       if (dow === 6 && deterministicRandom(m.id + '-' + dateStr + '-sat') > satRate) continue;
-      // 결석 — 워커별 attendanceRate 의 보수치 (1 - attendanceRate)
-      if (deterministicRandom(m.id + '-' + dateStr + '-abs') > attendanceRate) {
+      const isToday = isCurrentMonth && d === todayDay;
+      const isTodayGuaranteedAttendee = isToday && todayAttendeeIds.has(m.id);
+
+      // 오늘 (현재 월·현재 일) 선정된 10명이 아니면 → 결석 처리
+      if (isToday && !isTodayGuaranteedAttendee) {
         const r: AttendanceRecord = {
           id: 'R-' + m.id + '-' + dateStr, date: dateStr,
           memberId: m.id, memberName: m.name, role: m.role, siteId,
@@ -1722,6 +1731,39 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
         records[m.id + '|' + dateStr] = r;
         continue;
       }
+
+      // 「오늘 출근 10명」은 16일 cap·결석 랜덤 체크를 모두 건너뛴다 — 확정 출근
+      if (!isTodayGuaranteedAttendee) {
+        // 16일 cap — 이미 16일 채웠으면 결석 처리 (월 출역일 상한)
+        if (attendedDays >= MAX_ATTENDED_DAYS) {
+          const r: AttendanceRecord = {
+            id: 'R-' + m.id + '-' + dateStr, date: dateStr,
+            memberId: m.id, memberName: m.name, role: m.role, siteId,
+            checkInAt: null, checkOutAt: null,
+            checkInMethod: null, checkOutMethod: null,
+            checkInScore: null, checkOutScore: null,
+            status: 'ABSENT', workedMinutes: 0, gongsu: 0,
+            dailyWage: m.dailyWage, payAmount: 0,
+          };
+          records[m.id + '|' + dateStr] = r;
+          continue;
+        }
+        // 결석 — 워커별 attendanceRate 의 보수치 (1 - attendanceRate)
+        if (deterministicRandom(m.id + '-' + dateStr + '-abs') > attendanceRate) {
+          const r: AttendanceRecord = {
+            id: 'R-' + m.id + '-' + dateStr, date: dateStr,
+            memberId: m.id, memberName: m.name, role: m.role, siteId,
+            checkInAt: null, checkOutAt: null,
+            checkInMethod: null, checkOutMethod: null,
+            checkInScore: null, checkOutScore: null,
+            status: 'ABSENT', workedMinutes: 0, gongsu: 0,
+            dailyWage: m.dailyWage, payAmount: 0,
+          };
+          records[m.id + '|' + dateStr] = r;
+          continue;
+        }
+      }
+      attendedDays++;
       // 출근시간 분포 — 현장 근로자 대다수는 7:00 이전 도착 (5~20분 일찍).
       //  · 이전: -10~+35 → 78% 지각 (비현실적)
       //  · 수정: -20~+5 → 약 80% 정시·조기 출근, 20% 만 지각 (5분 이내 미세 지각 포함)
@@ -1739,10 +1781,10 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
       const outH = Math.floor(outBase / 60);
       const outM = outBase % 60;
       const checkOutAt = new Date(year, month - 1, d, outH, outM).toISOString();
-      // v41 — 멤버 번호 5의 배수만 MANUAL (M-005, M-010, M-015, M-020) — 나머지 16명은 FACE
+      // v45 — M-008/M-009/M-010 = MANUAL (3명), 나머지 7명은 FACE → 70/30%
       const memNumMatch = m.id.match(/M-(\d+)/);
       const memNum = memNumMatch ? Number(memNumMatch[1]) : 0;
-      const manual = memNum > 0 && memNum % 5 === 0;
+      const manual = memNum >= 8 && memNum <= 10;
       const inMethod = manual ? 'MANUAL' : 'FACE';
       const outMethod = manual ? 'MANUAL' : 'FACE';
       const reason = manual ? '카메라 일시 장애로 반장이 직접 처리' : undefined;
@@ -1977,7 +2019,7 @@ route('get', /^\/attendance\/today$/, async (req) => {
   const siteId = (req.params?.siteId as string) ?? '';
   if (!siteId) return { status: 400, data: { message: 'siteId가 필요합니다.' } };
   const now = new Date();
-  const todayStr = now.toISOString().slice(0, 10);
+  const todayStr = localDateStr(now);
   const yearMonth = todayStr.slice(0, 7);
   const bucket = loadAttendanceBucket(siteId, yearMonth);
   const db = loadDb();
@@ -2046,7 +2088,7 @@ route('post', /^\/attendance\/manual-check$/, async (req) => {
   const db = loadDb();
   const member = (db.members ?? []).find((m) => m.id === body.memberId);
   if (!member) return { status: 404, data: { message: '팀원을 찾을 수 없습니다.' } };
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr(new Date());
   const yearMonth = todayStr.slice(0, 7);
   const bucket = loadAttendanceBucket(member.siteId, yearMonth);
   if (isDateClosed(bucket, todayStr)) return closedResponse(todayStr);
@@ -2093,7 +2135,7 @@ route('post', /^\/attendance\/bulk-check-out$/, async (req) => {
     return { status: 400, data: { message: '대상과 5자 이상 사유가 필요합니다.' } };
   }
   const db = loadDb();
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr(new Date());
   const yearMonth = todayStr.slice(0, 7);
   const at = new Date().toISOString();
   const records: BulkCheckOutResponse['records'] = [];
@@ -2154,7 +2196,7 @@ route('post', /^\/attendance\/bulk-set-gongsu$/, async (req) => {
   if (!allowed.includes(body.gongsu)) {
     return { status: 400, data: { message: '공수는 0/0.5/1.0/1.5/2.0 중 하나여야 합니다.' } };
   }
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr(new Date());
   const filteredDates = body.dates.filter((d) => d <= todayStr);
   if (filteredDates.length === 0) {
     return { status: 400, data: { message: '미래 일자는 입력할 수 없습니다.' } };
@@ -2233,7 +2275,7 @@ route('post', /^\/attendance\/set-gongsu$/, async (req) => {
   if (!allowed.includes(body.gongsu)) {
     return { status: 400, data: { message: '공수는 0/0.5/1.0/1.5/2.0 중 하나여야 합니다.' } };
   }
-  if (body.date > new Date().toISOString().slice(0, 10)) {
+  if (body.date > localDateStr(new Date())) {
     return { status: 400, data: { message: '미래 일자는 입력할 수 없습니다.' } };
   }
   const db = loadDb();
@@ -3101,7 +3143,7 @@ route('post', /^\/safety\/messages$/, async (req) => {
 
     if (body.audienceFilter === 'WORKING_TODAY') {
       // 오늘 출근한 팀원만 — 출퇴근 데이터 사용
-      const today = new Date().toISOString().slice(0, 10);
+      const today = localDateStr(new Date());
       const allMembers = db.members.filter((m: any) => targetSiteIds.has(m.siteId));
       // mock — 시연용으로 약 70% 출근으로 가정 (실제 데이터 부재 fallback)
       const workingIds = new Set(

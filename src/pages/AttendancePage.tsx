@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { WorkCloseHeader } from '../components/WorkCloseHeader';
 import { computeWorkCloseProgress } from '../utils/workCloseProgress';
+import { localDateStr } from '../utils/dateLocal';
 import { Modal } from '../components/Modal';
 import { TeamRegisterPage } from './TeamRegisterPage';
 import { Tooltip } from '../components/Tooltip';
@@ -250,7 +251,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
   const [authDatePreset, setAuthDatePreset] = useState<AuthDatePreset>('today');
   /** 「이번 주」 활성 여부 — true 면 월~일 요일 칩이 인라인 노출 */
   const [authWeekModeActive, setAuthWeekModeActive] = useState<boolean>(false);
-  const [authStartDate, setAuthStartDate] = useState<string>(() => new Date().toISOString().slice(0, 10));
+  const [authStartDate, setAuthStartDate] = useState<string>(() => localDateStr());
   /**
    * 인증관리 — 처리(승인·반려·확인)된 record ID 추적.
    *  · 현장별 보기 : 이 set 에 들어간 record 는 화면에서 사라짐 (큐 모드)
@@ -292,7 +293,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
     setAuthToast(msg);
     setTimeout(() => setAuthToast(null), 1800);
   }
-  const [authEndDate, setAuthEndDate] = useState<string>(() => new Date().toISOString().slice(0, 10));
+  const [authEndDate, setAuthEndDate] = useState<string>(() => localDateStr());
   function applyAuthDatePreset(preset: AuthDatePreset, startOverride?: string, endOverride?: string) {
     setAuthDatePreset(preset);
     if (preset === 'custom') {
@@ -301,7 +302,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
       return;
     }
     const today = new Date();
-    const iso = (d: Date) => d.toISOString().slice(0, 10);
+    const iso = (d: Date) => localDateStr(d);
     if (preset === 'today') {
       const t = iso(today);
       setAuthStartDate(t); setAuthEndDate(t);
@@ -365,7 +366,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
   const [requestLogBump, setRequestLogBump] = useState(0);
   /** 엑셀 업로드 모달 — 양식 선택 + 파일 업로드 (입력양식 / 노임대장) */
   const [uploadOpen, setUploadOpen] = useState(false);
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr();
   const todayClosed = closedDates.has(todayStr);
   const [manualOpen, setManualOpen] = useState<{ memberId: string } | null>(null);
   const [gongsuOpen, setGongsuOpen] = useState<{
@@ -474,7 +475,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
       setToday(mergeTodays(todays));
       // 인증관리/일일확정 — 사이트별 today 매핑 (auth-tab + new daily-tab 모두 사용)
       // 「오늘」 record 만 추출하여 사이트 ID 키로 매핑
-      const todayIso = new Date().toISOString().slice(0, 10);
+      const todayIso = localDateStr();
       const bySite: Record<string, any> = {};
       fetchIds.forEach((sid, i) => {
         const t = allTodays[i];
@@ -572,7 +573,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
   useEffect(() => {
     if (!month) return;
     if (selectedDate) return; // 이미 설정돼 있으면 유지
-    const today = new Date().toISOString().slice(0, 10);
+    const today = localDateStr();
     if (today.startsWith(yearMonth)) {
       setSelectedDate(today);
       return;
@@ -1224,7 +1225,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
         const visibleSites = sites.filter((s) => s.status !== 'COMPLETED');
         const sourceSites = (siteId === 'ALL' ? visibleSites : visibleSites.filter((s) => s.id === siteId));
         // 기간 내 records 가져오기 — 단일 today 면 todayBySiteAuth, 그 외엔 month.rows 에서 추출
-        const todayIso = new Date().toISOString().slice(0, 10);
+        const todayIso = localDateStr();
         const isSingleToday = authStartDate === todayIso && authEndDate === todayIso;
         function buildRecordsForSite(s: any): any[] {
           if (isSingleToday) {
@@ -3526,7 +3527,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
                         </p>
                         <ul className="att-monthly-pool__list">
                           {pool.slice(0, 50).map((m) => {
-                            const targetDate = selectedDate ?? new Date().toISOString().slice(0, 10);
+                            const targetDate = selectedDate ?? localDateStr();
                             return (
                               <li key={m.id} className="att-monthly-pool__item">
                                 <strong>{m.name}</strong>
@@ -3906,7 +3907,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
                 setRightView('DAILY');
                 // DAILY 진입 시 selectedDate 가 없으면 오늘 또는 최근 데이터 일자 자동 선택
                 if (!selectedDate && month) {
-                  const today = new Date().toISOString().slice(0, 10);
+                  const today = localDateStr();
                   if (today.startsWith(yearMonth)) {
                     setSelectedDate(today);
                   } else {
@@ -3965,7 +3966,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
             // 일자별 — 그날 출석자 리스트 (선택된 일자가 없으면 오늘로 폴백)
             <DateAttendanceList
               rows={month.rows}
-              date={selectedDate ?? new Date().toISOString().slice(0, 10)}
+              date={selectedDate ?? localDateStr()}
               ownMemberIds={ownMemberIds}
               subMemberIds={subMemberIds}
               memberSpecialty={memberSpecialty}
@@ -3978,7 +3979,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
               }
               onPickMember={(id) => {
                 const r = month.rows.find((x) => x.memberId === id);
-                const d = selectedDate ?? new Date().toISOString().slice(0, 10);
+                const d = selectedDate ?? localDateStr();
                 if (!r) return;
                 const rec = r.daily[d];
                 openGongsuDialog({
@@ -4049,7 +4050,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
               try {
                 const memName = allMembers.find((m) => m.id === memberId)?.name ?? memberId;
                 await teamApi.update(memberId, { siteId });
-                const today = new Date().toISOString().slice(0, 10);
+                const today = localDateStr();
                 try {
                   await attendanceApi.setGongsu({
                     memberId,
@@ -4124,7 +4125,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
             allMembers={allMembers}
             currentSiteId={siteId}
             onReturnToPool={async (memberId: string) => {
-              const today = new Date().toISOString().slice(0, 10);
+              const today = localDateStr();
               const memName = allMembers.find((m) => m.id === memberId)?.name ?? memberId;
               const todayRec = month?.rows
                 .find((r) => r.memberId === memberId)?.daily?.[today];
@@ -4156,7 +4157,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
               // 「오늘 출역(공수>0)이 있는 모든 사람」 제외 — FACE·MANUAL 모두 포함.
               // 풀은 「오늘 아직 일 안 한 사람」 = 배정 가능한 인력만 노출.
               const set = new Set<string>();
-              const todayStr = new Date().toISOString().slice(0, 10);
+              const todayStr = localDateStr();
               // 1) today.members (FACE 출근 + 일부 MANUAL)
               if (today) for (const m of today.members) {
                 if (m.record && (m.record.gongsu ?? 0) > 0) {
@@ -5314,7 +5315,7 @@ function DailyAttendanceCalendar({
   }
   while (cells.length < 42) cells.push({ date: null, day: null });
 
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr();
   const dows = ['일', '월', '화', '수', '목', '금', '토'];
 
   // 일자별 집계 ─ 출석명수 + 총 공수 + 출석자 이름
@@ -5535,7 +5536,7 @@ function MemberCalendar({
   }
   while (cells.length < 42) cells.push({ date: null, day: null });
 
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr();
   const dows = ['일', '월', '화', '수', '목', '금', '토'];
 
   // ───────── 드래그 선택 상태 ─────────

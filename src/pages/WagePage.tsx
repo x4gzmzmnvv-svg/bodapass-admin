@@ -262,7 +262,7 @@ export function WagePage({ defaultTab = 'wage' }: { defaultTab?: Tab } = {}) {
         actions={isWageCloseRoute ? <WorkCloseHeader active="wage" siteId={siteId} progress={computeWorkCloseProgress({ today: null, monthClose })} /> : undefined}
       />
 
-      {!isWageCloseRoute && (
+      {!isWageCloseRoute && tab !== 'severance' && (
         <div className="wage__actions wage__actions--bar">
             <MonthPicker value={yearMonth} onChange={setYearMonth} />
           </div>
@@ -345,7 +345,43 @@ export function WagePage({ defaultTab = 'wage' }: { defaultTab?: Tab } = {}) {
           const compareSiteId = focusedSiteId ?? (siteId === 'ALL' ? null : siteId);
           return (
             <>
-              {siteRow}
+              <SeveranceHero data={sev} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '12px 0', flexWrap: 'wrap' }}>
+                <div style={{ minWidth: 220, maxWidth: 360 }}>
+                  <MacSelect
+                    value={siteId}
+                    onChange={(v) => setSiteId(String(v))}
+                    options={[
+                      { value: 'ALL', label: <>전체 현장</> },
+                      ...sites.map((s) => ({ value: s.id, label: <>{s.name}</> })),
+                    ]}
+                  />
+                </div>
+                <MonthPicker value={yearMonth} onChange={setYearMonth} />
+                {siteId !== 'ALL' && monthClose && (
+                  <span
+                    className={'wage__close-bar ' + (isMonthClosed ? 'is-closed' : 'is-open')}
+                    style={{ marginLeft: 'auto' }}
+                    title={
+                      isMonthClosed
+                        ? `${yearMonth} 월마감 — ${monthClose.closedByName ?? ''}${monthClose.closedAt ? ' · ' + monthClose.closedAt.slice(0, 16).replace('T', ' ') : ''}`
+                        : `${yearMonth} 미마감 — 출퇴근 현황에서 월마감 후 진행`
+                    }
+                  >
+                    {isMonthClosed ? (
+                      <>
+                        🔒 <strong>{yearMonth}</strong> 월마감 완료
+                        {monthClose.closedByName && <> · {monthClose.closedByName}</>}
+                        {' · 발행 가능'}
+                      </>
+                    ) : (
+                      <>
+                        🔓 <strong>{yearMonth}</strong> 미마감 — 월마감 후 발행
+                      </>
+                    )}
+                  </span>
+                )}
+              </div>
               <SeveranceTab data={sev} />
               <ElectronicCardCompare
                 siteId={compareSiteId}
@@ -1861,6 +1897,65 @@ function PayslipIssueDialog({
   );
 }
 
+/* ────────────────── 퇴직공제 히어로 (KPI 4타일) ────────────────── */
+
+function SeveranceHero({ data }: { data: SeveranceMonthSummary | null }) {
+  if (!data) return null;
+
+  const fundDaily = loadFundDaily();
+  const refDate = new Date(data.year, data.month, 0);
+
+  let mutualCount = 0, legalCount = 0, approachingCount = 0;
+  let mutualTotal = 0, legalTotal = 0;
+  for (const r of data.rows) {
+    const cls = classifyForSeverance(r.joinedAt, refDate);
+    if (cls.group === 'LEGAL') {
+      legalCount++;
+      legalTotal += legalSeverance({ avgDailyWage: r.dailyWage, serviceDays: cls.tenure.totalDays });
+    } else {
+      mutualCount++;
+      mutualTotal += mutualAidAccrued({ workDays: r.totalWorkDays, fundDaily });
+      if (cls.tenure.isApproachingOneYear) approachingCount++;
+    }
+  }
+
+  const tiles = ([
+    { key: 'today',  label: '당일 출력 인원',     raw: <><b>{data.attendedToday}</b>명</>,                          tone: 'plain' as const },
+    { key: 'mutual', label: '공제회 부금 누적',   raw: <><b>{krw(mutualTotal)}</b> · {mutualCount}명</>,           tone: 'info'  as const },
+    { key: 'legal',  label: '법정퇴직금 대상',    raw: <><b>{legalCount}</b>명 · {krw(legalTotal)}</>,             tone: 'ok'    as const },
+    { key: 'soon',   label: '1년 임박 (≤30일)',  raw: <><b>{approachingCount}</b>명</>,                            tone: 'plain' as const },
+  ]);
+
+  return (
+    <div className="att-daily-kpi att-daily-kpi--notif">
+      {tiles.map((s, i) => (
+        <button key={i} type="button" className={'att-hero__tile att-hero__tile--' + s.tone}>
+          <span className="att-hero__icon" aria-hidden>
+            <svg viewBox="0 0 36 36" width="36" height="36">
+              <rect x="0.5" y="0.5" width="35" height="35" rx="8" fill="#FAFAFA" stroke="#E5E7EB" />
+              <g stroke="#D1D5DB" strokeWidth="0.5">
+                <line x1="0" y1="9"  x2="36" y2="9" />
+                <line x1="0" y1="18" x2="36" y2="18" />
+                <line x1="0" y1="27" x2="36" y2="27" />
+                <line x1="9"  y1="0" x2="9"  y2="36" />
+                <line x1="18" y1="0" x2="18" y2="36" />
+                <line x1="27" y1="0" x2="27" y2="36" />
+              </g>
+              <circle cx="18" cy="18" r="6" fill="none" stroke="#9CA3AF" strokeWidth="0.6" />
+              <circle cx="18" cy="18" r="1.2" fill="#9CA3AF" />
+            </svg>
+          </span>
+          <span className="att-hero__body">
+            <strong className="att-hero__title">{s.label}</strong>
+            <span className="att-hero__sub">{s.raw}</span>
+          </span>
+          <span className="att-hero__time">월</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function SeveranceTab({ data }: { data: SeveranceMonthSummary | null }) {
   if (!data) return null;
   if (data.rows.length === 0) {
@@ -1906,38 +2001,6 @@ function SeveranceTab({ data }: { data: SeveranceMonthSummary | null }) {
 
   return (
     <>
-      <div className="att-daily-kpi att-daily-kpi--notif">
-        {([
-          { key: 'today',   label: '당일 출력 인원',     raw: <><b>{data.attendedToday}</b>명</>,                          tone: 'plain' as const },
-          { key: 'mutual',  label: '공제회 부금 누적',   raw: <><b>{krw(mutualTotal)}</b> · {mutualRows.length}명</>,      tone: 'info'  as const },
-          { key: 'legal',   label: '법정퇴직금 대상',     raw: <><b>{legalRows.length}</b>명 · {krw(legalTotal)}</>,       tone: 'ok'    as const },
-          { key: 'soon',    label: '1년 임박 (≤30일)',  raw: <><b>{approachingRows.length}</b>명</>,                       tone: approachingRows.length > 0 ? ('plain' as const) : ('plain' as const) },
-        ]).map((s, i) => (
-          <button key={i} type="button" className={'att-hero__tile att-hero__tile--' + s.tone}>
-            <span className="att-hero__icon" aria-hidden>
-              <svg viewBox="0 0 36 36" width="36" height="36">
-                <rect x="0.5" y="0.5" width="35" height="35" rx="8" fill="#FAFAFA" stroke="#E5E7EB" />
-                <g stroke="#D1D5DB" strokeWidth="0.5">
-                  <line x1="0" y1="9"  x2="36" y2="9" />
-                  <line x1="0" y1="18" x2="36" y2="18" />
-                  <line x1="0" y1="27" x2="36" y2="27" />
-                  <line x1="9"  y1="0" x2="9"  y2="36" />
-                  <line x1="18" y1="0" x2="18" y2="36" />
-                  <line x1="27" y1="0" x2="27" y2="36" />
-                </g>
-                <circle cx="18" cy="18" r="6" fill="none" stroke="#9CA3AF" strokeWidth="0.6" />
-                <circle cx="18" cy="18" r="1.2" fill="#9CA3AF" />
-              </svg>
-            </span>
-            <span className="att-hero__body">
-              <strong className="att-hero__title">{s.label}</strong>
-              <span className="att-hero__sub">{s.raw}</span>
-            </span>
-            <span className="att-hero__time">월</span>
-          </button>
-        ))}
-      </div>
-
       {approachingRows.length > 0 && (
         <section
           className="card"

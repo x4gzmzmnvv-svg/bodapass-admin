@@ -19,6 +19,7 @@ import { safetyApi } from '../api/safety';
 import type { SafetyMessage } from '../api/safety.types';
 import { getErrorMessage } from '../api/client';
 import { getDispatchLogs, type DispatchLog } from '../utils/messageTemplates';
+import { localDateStr } from '../utils/dateLocal';
 import { getAvatarUrl } from '../utils/avatar';
 import { useAuth } from '../hooks/useAuth';
 import { displayPhone } from '../utils/phone';
@@ -117,7 +118,7 @@ export function DashboardPage() {
       setAllMembers(visibleMembers);
       // 각 visible site 의 일/월 마감 상태 병렬 fetch
       const ymStr = new Date().toISOString().slice(0, 7);
-      const todayStr = new Date().toISOString().slice(0, 10);
+      const todayStr = localDateStr();
       try {
         const closeResults = await Promise.all(
           visibleSites.map((s) =>
@@ -1417,7 +1418,7 @@ function SafetyAlertCard() {
   }, [reload]);
 
   // 오늘 발송 메시지 통계
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateStr();
   const todayMessages = messages.filter((m) => m.sentAt.slice(0, 10) === todayStr);
   const todayCount = todayMessages.length;
   const todayTotalRecipients = todayMessages.reduce((s, m) => s + m.recipients.length, 0);
@@ -1772,7 +1773,7 @@ function DailyOpsStrip({
     setLoading(true);
     try {
       const ymStr = new Date().toISOString().slice(0, 7);
-      const todayStr = new Date().toISOString().slice(0, 10);
+      const todayStr = localDateStr();
       const [t, cs] = await Promise.all([
         attendanceApi.today(siteId),
         attendanceApi.closeStatus(siteId, ymStr).catch(() => null),
@@ -2356,7 +2357,7 @@ function OpsStripDrillModal({
     return n.toLocaleString('ko-KR') + '원';
   }
   function fmtDate(iso: string | null) {
-    if (!iso) return new Date().toISOString().slice(0, 10);
+    if (!iso) return localDateStr();
     return iso.slice(0, 10);
   }
   function handleAction(
