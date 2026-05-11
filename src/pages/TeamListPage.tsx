@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { localDateStr } from '../utils/dateLocal';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { SearchIcon } from '../components/Icon';
@@ -1225,7 +1226,7 @@ async function downloadExcelTemplate() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `근로자내역서_양식_${new Date().toISOString().slice(0, 10)}.xls`;
+  a.download = `근로자내역서_양식_${localDateStr()}.xls`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -1255,7 +1256,7 @@ function downloadTeamReport(
     return;
   }
 
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateStr();
   const siteName = (id: string) => sites.find((s) => s.id === id)?.name ?? '-';
   const foremanName = (id?: string) =>
     foremen.find((f) => f.id === id)?.name ?? '미배정';
@@ -1629,10 +1630,10 @@ function RecruitmentRequestDialog({
   const [siteId, setSiteId] = useState<string>(inProgressSites[0]?.id ?? '');
   const [role, setRole] = useState<string>('철근공');
   const [wage, setWage] = useState<string>('250000');
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateStr();
   const oneMonthLater = (() => {
     const d = new Date(); d.setMonth(d.getMonth() + 1);
-    return d.toISOString().slice(0, 10);
+    return localDateStr(d);
   })();
   const [startDate, setStartDate] = useState<string>(today);
   const [endDate, setEndDate] = useState<string>(oneMonthLater);

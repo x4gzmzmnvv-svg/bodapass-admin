@@ -1,5 +1,6 @@
 // FILE_VERSION 1777629000
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { localDateStr } from '../utils/dateLocal';
 import { useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { PhoneInput } from '../components/PhoneInput';
@@ -578,7 +579,7 @@ function AccountPanel() {
     const id = 'A-' + Date.now().toString(36);
     const next: AccountRow[] = [
       ...rows,
-      { ...a, id, createdAt: new Date().toISOString().slice(0, 10), permissions: defaultPermissions() },
+      { ...a, id, createdAt: localDateStr(), permissions: defaultPermissions() },
     ];
     setRows(next);
     saveAccounts(next);
@@ -917,7 +918,7 @@ function CompanyInfoPanel() {
     }
     const next: CompanyInfo = {
       ...draft,
-      createdAt: draft.createdAt || new Date().toISOString().slice(0, 10),
+      createdAt: draft.createdAt || localDateStr(),
     };
     setInfo(next);
     saveCompany(next);

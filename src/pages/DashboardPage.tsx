@@ -19,7 +19,7 @@ import { safetyApi } from '../api/safety';
 import type { SafetyMessage } from '../api/safety.types';
 import { getErrorMessage } from '../api/client';
 import { getDispatchLogs, type DispatchLog } from '../utils/messageTemplates';
-import { localDateStr } from '../utils/dateLocal';
+import { localDateStr, localYearMonth } from '../utils/dateLocal';
 import { getAvatarUrl } from '../utils/avatar';
 import { useAuth } from '../hooks/useAuth';
 import { displayPhone } from '../utils/phone';
@@ -117,7 +117,7 @@ export function DashboardPage() {
       setAllForemen(visibleForemen);
       setAllMembers(visibleMembers);
       // 각 visible site 의 일/월 마감 상태 병렬 fetch
-      const ymStr = new Date().toISOString().slice(0, 7);
+      const ymStr = localYearMonth();
       const todayStr = localDateStr();
       try {
         const closeResults = await Promise.all(
@@ -169,7 +169,7 @@ export function DashboardPage() {
       // 현장별 이번 달 노임 요약 — 「월 누적/공제/실지급」 단일 진실 소스
       try {
         const inProgressSites = visibleSites.filter((x) => x.status !== 'COMPLETED');
-        const ymForWage = new Date().toISOString().slice(0, 7);
+        const ymForWage = localYearMonth();
         const wageResults = await Promise.all(
           inProgressSites.map((s) =>
             wageApi.monthSummary({ siteId: s.id, yearMonth: ymForWage })
@@ -1772,7 +1772,7 @@ function DailyOpsStrip({
   const reload = useCallback(async () => {
     setLoading(true);
     try {
-      const ymStr = new Date().toISOString().slice(0, 7);
+      const ymStr = localYearMonth();
       const todayStr = localDateStr();
       const [t, cs] = await Promise.all([
         attendanceApi.today(siteId),
@@ -2878,7 +2878,7 @@ const BOARD_KEY = 'ilgampack_admin:board';
 function seedBoardPosts(siteId: string, siteName: string): BoardPost[] {
   const today = new Date();
   const d = (offset: number) =>
-    new Date(today.getTime() - offset * 86_400_000).toISOString().slice(0, 10);
+    localDateStr(new Date(today.getTime() - offset * 86_400_000));
   return [
     { id: `${siteId}-1`, siteId, category: '공지', title: `${siteName.split(' ').slice(0, 2).join(' ')} 1차 자재 검수 일정 안내`, author: '김홍길', date: d(0) },
     { id: `${siteId}-2`, siteId, category: '안전', title: '주말 근무자 안전모 착용 의무', author: '이안전', date: d(1) },

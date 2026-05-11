@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { localYearMonth } from '../utils/dateLocal';
 import { PageHeader } from '../components/PageHeader';
 import { MacDatePicker } from '../components/MacDatePicker';
 import { Modal } from '../components/Modal';
@@ -43,7 +44,7 @@ interface PayRow {
 export function WagePayPage() {
   const { viewMode, assignedSiteId, user } = useAuth();
   const [sites, setSites] = useState<Site[]>([]);
-  const [yearMonth, setYearMonth] = useState(() => new Date().toISOString().slice(0, 7));
+  const [yearMonth, setYearMonth] = useState(() => localYearMonth());
   const [wageBySite, setWageBySite] = useState<Record<string, WageMonthSummary>>({});
   const [statusBySite, setStatusBySite] = useState<Record<string, PayStatus>>(() => {
     try {

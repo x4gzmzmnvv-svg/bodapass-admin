@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { localYearMonth } from '../utils/dateLocal';
 import { PageHeader } from '../components/PageHeader';
 import { siteApi } from '../api/site';
 import { wageApi } from '../api/wage';
@@ -23,7 +24,7 @@ import { Modal } from '../components/Modal';
 export function TaxManagementPage() {
   const { viewMode, assignedSiteId } = useAuth();
   const [sites, setSites] = useState<Site[]>([]);
-  const [yearMonth, setYearMonth] = useState(() => new Date().toISOString().slice(0, 7));
+  const [yearMonth, setYearMonth] = useState(() => localYearMonth());
   const [wageBySite, setWageBySite] = useState<Record<string, WageMonthSummary>>({});
   const [loading, setLoading] = useState(false);
   // 노무비 상세 팝업 — 클릭한 현장의 세금 상세 내역 표시

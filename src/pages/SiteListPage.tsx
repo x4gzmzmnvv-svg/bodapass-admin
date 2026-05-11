@@ -1,5 +1,6 @@
 // FILE_VERSION 1777680002
 import type { ReactNode } from 'react';
+import { localDateStr } from '../utils/dateLocal';
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
@@ -1998,7 +1999,7 @@ function CompletionDialog({
   onConfirm: (siteId: string, dateISO: string) => void;
 }) {
   const [siteId, setSiteId] = useState<string>(defaultSiteId || sites[0]?.id || '');
-  const [date, setDate] = useState<string>(new Date().toISOString().slice(0, 10));
+  const [date, setDate] = useState<string>(localDateStr());
 
   // ── 결산 요약 계산 ──────────────────────────────────────
   // 임금 ≈ 도급금액 × 35% (인건비 비율, WagePage 와 동일 모형)

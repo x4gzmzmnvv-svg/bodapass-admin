@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { localYearMonth } from '../utils/dateLocal';
 import { PageHeader } from '../components/PageHeader';
 import { siteApi } from '../api/site';
 import { teamApi } from '../api/team';
@@ -24,7 +25,7 @@ type SiteWageItem = { site: Site; wage: WageMonthSummary; monthClosed: boolean }
 
 export function ReportsPage() {
   const { user } = useAuth();
-  const [yearMonth, setYearMonth] = useState(() => new Date().toISOString().slice(0, 7));
+  const [yearMonth, setYearMonth] = useState(() => localYearMonth());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sites, setSites] = useState<Site[]>([]);

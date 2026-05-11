@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { WorkCloseHeader } from '../components/WorkCloseHeader';
 import { computeWorkCloseProgress } from '../utils/workCloseProgress';
-import { localDateStr } from '../utils/dateLocal';
+import { localDateStr, localYearMonth } from '../utils/dateLocal';
 import { Modal } from '../components/Modal';
 import { TeamRegisterPage } from './TeamRegisterPage';
 import { Tooltip } from '../components/Tooltip';
@@ -98,7 +98,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
     }, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [querySiteId]);
-  const [yearMonth, setYearMonth] = useState(() => new Date().toISOString().slice(0, 7));
+  const [yearMonth, setYearMonth] = useState(() => localYearMonth());
   const [month, setMonth] = useState<AttendanceMonth | null>(null);
   const [today, setToday] = useState<TodayAttendance | null>(null);
   const [audit, setAudit] = useState<AuditLogEntry[]>([]);
@@ -1162,7 +1162,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
           const ymDate = new Date(yearMonth + '-01');
           const daysInMonth = new Date(ymDate.getFullYear(), ymDate.getMonth() + 1, 0).getDate();
           const todayDay = new Date().getDate();
-          const todayYM = new Date().toISOString().slice(0, 7);
+          const todayYM = localYearMonth();
           const denomDays = yearMonth === todayYM ? todayDay : daysInMonth;
           const closedCount = closedDates.size;
           const dailyPct = denomDays > 0 ? Math.round((closedCount / denomDays) * 100) : 0;
@@ -2498,7 +2498,7 @@ export function AttendancePage({ forceTab }: { forceTab?: 'auth' | 'daily' } = {
         }
         const ymDate = new Date(yearMonth + '-01');
         const daysInMonth = new Date(ymDate.getFullYear(), ymDate.getMonth() + 1, 0).getDate();
-        const todayYM = new Date().toISOString().slice(0, 7);
+        const todayYM = localYearMonth();
         const todayDay = new Date().getDate();
         const passedDays = yearMonth === todayYM ? todayDay : daysInMonth;
 

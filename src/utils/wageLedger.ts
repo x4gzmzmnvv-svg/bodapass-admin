@@ -10,6 +10,7 @@
  */
 
 import * as XLSX from 'xlsx';
+import { localYearMonth } from './dateLocal';
 import ExcelJS from 'exceljs';
 import type { WageMonthSummary } from '../api/wage.types';
 import type { Site } from '../api/site.types';
@@ -252,7 +253,7 @@ export async function parseLedgerFile(file: File): Promise<LedgerDoc> {
   const ymMatch = titleRaw.match(/(\d{2})년\s*(\d{2})월/);
   const yearMonth = ymMatch
     ? `20${ymMatch[1]}-${ymMatch[2]}`
-    : new Date().toISOString().slice(0, 7);
+    : localYearMonth();
 
   const siteName = String(getCell(ws, 'V1') ?? '');
   const periodStart = parseYmdLabel(String(getCell(ws, 'O1') ?? ''), yearMonth, '01');

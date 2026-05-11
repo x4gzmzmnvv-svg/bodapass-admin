@@ -23,6 +23,7 @@
  */
 
 import ExcelJS from 'exceljs';
+import { localDateStr } from './dateLocal';
 import type { TeamMember } from '../api/team.types';
 import type { Site } from '../api/site.types';
 
@@ -70,7 +71,7 @@ export async function buildAttendanceTemplateWorkbook(args: BuildArgs): Promise<
   ws.mergeCells(2, 5, 2, 8);
   metaRow.getCell(5).value = companyName ? `발행처: ${companyName}` : '';
   ws.mergeCells(2, 9, 2, 7 + days + 1);
-  metaRow.getCell(9).value = `발행일: ${new Date().toISOString().slice(0, 10)}  ·  대상 인원: ${members.length}명`;
+  metaRow.getCell(9).value = `발행일: ${localDateStr()}  ·  대상 인원: ${members.length}명`;
   [1, 5, 9].forEach((c) => {
     metaRow.getCell(c).font = { name: '맑은 고딕', size: 10, color: { argb: 'FF475569' } };
     metaRow.getCell(c).alignment = { horizontal: 'left', vertical: 'middle' };

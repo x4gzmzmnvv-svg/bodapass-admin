@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { localYearMonth } from '../utils/dateLocal';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { WorkCloseHeader } from '../components/WorkCloseHeader';
@@ -79,7 +80,7 @@ export function WagePage({ defaultTab = 'wage' }: { defaultTab?: Tab } = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [querySiteId]);
   const [yearMonth, setYearMonth] = useState(() =>
-    new Date().toISOString().slice(0, 7),
+    localYearMonth(),
   );
 
   const [wage, setWage] = useState<WageMonthSummary | null>(null);
@@ -2256,7 +2257,7 @@ function MonthPicker({
   }
   function toThisMonth() {
     const now = new Date();
-    onChange(now.toISOString().slice(0, 7));
+    onChange(localYearMonth(now));
   }
 
   const isThisMonth = (() => {

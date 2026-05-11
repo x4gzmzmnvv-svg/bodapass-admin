@@ -93,6 +93,7 @@ import type {
   WageCloseStage,
 } from './attendance.types';
 import { calcGongsu, isEarly, isLate } from '../utils/gongsu';
+import { localYearMonth } from '../utils/dateLocal';
 import { calcWageBreakdown } from '../utils/wageCalc';
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
@@ -104,7 +105,7 @@ type Handler = (req: MockReq) => MockResult | Promise<MockResult>;
 const STORAGE_KEY = 'ilgampack_admin:mockdb';
 const SEED_VERSION_KEY = 'ilgampack_admin:mockdb:version';
 /** 시드를 변경할 때 이 버전을 올리면 사용자 브라우저의 캐시가 자동으로 갱신됩니다. */
-const SEED_VERSION = '2026-05-11-v45-2sites-10workers-clean';
+const SEED_VERSION = '2026-05-12-v46-bugfix-utc-cap-cache';
 const DELAY_MS = 300;
 const wait = (ms = DELAY_MS) => new Promise((r) => setTimeout(r, ms));
 
@@ -289,7 +290,7 @@ function buildSeed() {
   // F-001 은 부산 현장에도 「임시반장」으로 1건 추가하여 다대다 관계 시연.
   const foremanSites: ForemanSite[] = [];
   const TODAY = new Date();
-  const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+  const isoDate = (d: Date) => localDateStr(d);
   const addDays = (d: Date, days: number) => {
     const x = new Date(d);
     x.setDate(x.getDate() + days);
@@ -548,11 +549,16 @@ function loadDb(): DB {
       }
     } else {
       localStorage.removeItem(STORAGE_KEY);
-      // 시드 버전이 바뀌었을 때 — 출퇴근 버킷, 캐시된 user/token 도 함께 비운다.
+      // 시드 버전이 바뀌었을 때 — 출퇴근 버킷, 토큰, 새 prefix 의 영속 데이터 모두 정리.
       // 옛 user 캐시에는 assignedSiteId 가 없어서 viewMode 가 항상 HQ 로 계산되는 문제 방지.
+      // bodapass_admin:* — severance_fund_daily / wage_ledger_archive / contract_company 등
+      //   옛 시드의 site/member id 를 참조하는 데이터가 살아남으면 stale 위험.
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const k = localStorage.key(i);
-        if (k && k.startsWith('att:')) localStorage.removeItem(k);
+        if (!k) continue;
+        if (k.startsWith('att:') || k.startsWith('bodapass_admin:')) {
+          localStorage.removeItem(k);
+        }
       }
       localStorage.removeItem('ilgampack_admin:user');
       localStorage.removeItem('ilgampack_admin:accessToken');
@@ -575,11 +581,15 @@ function currentUserOf(db: DB): AdminUser | null {
 }
 
 export function resetMockDb() {
-  // mockdb·버전·토큰·출퇴근 버킷 모두 정리
+  // mockdb·버전·토큰·출퇴근 버킷·신 prefix 영속 데이터 모두 정리
   for (let i = localStorage.length - 1; i >= 0; i--) {
     const k = localStorage.key(i);
     if (!k) continue;
-    if (k.startsWith('ilgampack_admin:') || k.startsWith('att:')) {
+    if (
+      k.startsWith('ilgampack_admin:') ||
+      k.startsWith('att:') ||
+      k.startsWith('bodapass_admin:')
+    ) {
       localStorage.removeItem(k);
     }
   }
@@ -1036,8 +1046,8 @@ route('post', /^\/foreman-sites$/, async (req) => {
     role: body.role ?? '주반장',
     permissionPreset: body.permissionPreset ?? 'STANDARD',
     permissions: body.permissions,
-    startDate: body.startDate ?? new Date().toISOString().slice(0, 10),
-    endDate: body.endDate ?? new Date(Date.now() + 86_400_000 * 30).toISOString().slice(0, 10),
+    startDate: body.startDate ?? localDateStr(),
+    endDate: body.endDate ?? localDateStr(new Date(Date.now() + 86_400_000 * 30)),
     dailyWage: body.dailyWage,
     headcount: body.headcount,
     isPrimary: !!body.isPrimary,
@@ -1265,7 +1275,7 @@ route('post', /^\/team\/members$/, async (req) => {
     bankName: body.bankName, accountMasked: maskAccount(body.accountNumber),
     accountNumberRaw: body.accountNumber,
     registrationMode: body.mode, status: 'ACTIVE',
-    joinedAt: new Date().toISOString().slice(0, 10),
+    joinedAt: localDateStr(),
     insurance: body.insurance ?? { pension: false, health: false, employment: true, accident: true },
     safetyEduCompleted: body.safetyEduCompleted ?? false,
   };
@@ -1377,7 +1387,7 @@ route('get', /^\/wage\/month$/, async (req) => {
   const db = loadDb();
   const params = req.params ?? {};
   const siteId = (params.siteId as string) ?? db.sites?.[0]?.id ?? '';
-  const yearMonth = (params.yearMonth as string) ?? new Date().toISOString().slice(0, 7);
+  const yearMonth = (params.yearMonth as string) ?? localYearMonth();
   const [yStr, mStr] = yearMonth.split('-');
   const year = Number(yStr); const month = Number(mStr);
   const members = (db.members ?? []).filter((m) => m.siteId === siteId);
@@ -1429,7 +1439,7 @@ route('get', /^\/severance\/month$/, async (req) => {
   const db = loadDb();
   const params = req.params ?? {};
   const siteId = (params.siteId as string) ?? db.sites?.[0]?.id ?? '';
-  const yearMonth = (params.yearMonth as string) ?? new Date().toISOString().slice(0, 7);
+  const yearMonth = (params.yearMonth as string) ?? localYearMonth();
   const [yStr, mStr] = yearMonth.split('-');
   const year = Number(yStr); const month = Number(mStr);
   const members = (db.members ?? []).filter((m) => m.siteId === siteId);
@@ -1640,7 +1650,7 @@ function closedResponse(date: string): MockResult {
   };
 }
 /** 로컬 시간대 기준 YYYY-MM-DD — toISOString() 은 UTC 라서 한국 새벽엔 어제 날짜를 반환. */
-function localDateStr(d: Date): string {
+function localDateStr(d: Date = new Date()): string {
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 }
 function deterministicRandom(seed: string): number {
@@ -1717,7 +1727,7 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
       const isToday = isCurrentMonth && d === todayDay;
       const isTodayGuaranteedAttendee = isToday && todayAttendeeIds.has(m.id);
 
-      // 오늘 (현재 월·현재 일) 선정된 10명이 아니면 → 결석 처리
+      // 오늘 (현재 월·현재 일) 선정 외 워커 → 결석 처리
       if (isToday && !isTodayGuaranteedAttendee) {
         const r: AttendanceRecord = {
           id: 'R-' + m.id + '-' + dateStr, date: dateStr,
@@ -1732,23 +1742,24 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
         continue;
       }
 
-      // 「오늘 출근 10명」은 16일 cap·결석 랜덤 체크를 모두 건너뛴다 — 확정 출근
+      // v45-fix: 18일 cap 은 「오늘 보장 출근자」도 함께 지킴.
+      // 이미 cap 도달한 워커는 오늘이라도 ABSENT 처리 (cap 위반 방지).
+      if (attendedDays >= MAX_ATTENDED_DAYS) {
+        const r: AttendanceRecord = {
+          id: 'R-' + m.id + '-' + dateStr, date: dateStr,
+          memberId: m.id, memberName: m.name, role: m.role, siteId,
+          checkInAt: null, checkOutAt: null,
+          checkInMethod: null, checkOutMethod: null,
+          checkInScore: null, checkOutScore: null,
+          status: 'ABSENT', workedMinutes: 0, gongsu: 0,
+          dailyWage: m.dailyWage, payAmount: 0,
+        };
+        records[m.id + '|' + dateStr] = r;
+        continue;
+      }
+
+      // 보장 출근자는 랜덤 결석 체크 우회 — 「오늘」은 확정 출근
       if (!isTodayGuaranteedAttendee) {
-        // 16일 cap — 이미 16일 채웠으면 결석 처리 (월 출역일 상한)
-        if (attendedDays >= MAX_ATTENDED_DAYS) {
-          const r: AttendanceRecord = {
-            id: 'R-' + m.id + '-' + dateStr, date: dateStr,
-            memberId: m.id, memberName: m.name, role: m.role, siteId,
-            checkInAt: null, checkOutAt: null,
-            checkInMethod: null, checkOutMethod: null,
-            checkInScore: null, checkOutScore: null,
-            status: 'ABSENT', workedMinutes: 0, gongsu: 0,
-            dailyWage: m.dailyWage, payAmount: 0,
-          };
-          records[m.id + '|' + dateStr] = r;
-          continue;
-        }
-        // 결석 — 워커별 attendanceRate 의 보수치 (1 - attendanceRate)
         if (deterministicRandom(m.id + '-' + dateStr + '-abs') > attendanceRate) {
           const r: AttendanceRecord = {
             id: 'R-' + m.id + '-' + dateStr, date: dateStr,
@@ -1971,7 +1982,7 @@ function seedAttendance(siteId: string, yearMonth: string): AttendanceCacheBucke
 route('get', /^\/attendance\/month$/, async (req) => {
   const params = req.params ?? {};
   const siteId = (params.siteId as string) ?? '';
-  const yearMonth = (params.yearMonth as string) ?? new Date().toISOString().slice(0, 7);
+  const yearMonth = (params.yearMonth as string) ?? localYearMonth();
   if (!siteId) return { status: 400, data: { message: 'siteId가 필요합니다.' } };
   const bucket = loadAttendanceBucket(siteId, yearMonth);
   const db = loadDb();
@@ -2534,7 +2545,7 @@ route('post', /^\/attendance\/face-checkout$/, async (req) => {
 route('get', /^\/attendance\/close-status$/, async (req) => {
   const params = req.params ?? {};
   const siteId = (params.siteId as string) ?? '';
-  const yearMonth = (params.yearMonth as string) ?? new Date().toISOString().slice(0, 7);
+  const yearMonth = (params.yearMonth as string) ?? localYearMonth();
   if (!siteId) return { status: 400, data: { message: 'siteId가 필요합니다.' } };
   const bucket = loadAttendanceBucket(siteId, yearMonth);
   const monthClose: MonthClose = normalizeMonthClose(bucket.monthClose ?? {
@@ -2969,7 +2980,7 @@ route('post', /^\/attendance\/month-sub-verify$/, async (req) => {
 route('get', /^\/attendance\/audit-log$/, async (req) => {
   const params = req.params ?? {};
   const siteId = (params.siteId as string) ?? '';
-  const yearMonth = (params.yearMonth as string) ?? new Date().toISOString().slice(0, 7);
+  const yearMonth = (params.yearMonth as string) ?? localYearMonth();
   const limit = Number(params.limit ?? 50);
   if (!siteId) return { status: 400, data: { message: 'siteId가 필요합니다.' } };
   const db = loadDb();

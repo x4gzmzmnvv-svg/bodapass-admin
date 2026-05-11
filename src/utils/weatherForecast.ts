@@ -15,6 +15,8 @@
  *     뇌우 / 태풍.  배너에서 「전날 17시 / 당일 06시」 자동 예약 옵션 노출.
  */
 
+import { localDateStr } from './dateLocal';
+
 export type WeatherSeverity = 'INFO' | 'CAUTION' | 'CRITICAL';
 
 export type WeatherAlertKind =
@@ -189,7 +191,7 @@ function mockForecast(): WeatherDayForecast[] {
   for (let i = 0; i < recipes.length; i++) {
     const d = new Date(today);
     d.setDate(today.getDate() + i);
-    const ds = d.toISOString().slice(0, 10);
+    const ds = localDateStr(d);
     const r = recipes[i];
     const cls = classify(r.code);
     days.push({

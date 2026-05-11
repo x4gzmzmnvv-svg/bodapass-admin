@@ -119,7 +119,7 @@ export function SafetyPage() {
       const diff = day === 0 ? 6 : day - 1;
       const monday = new Date(now);
       monday.setDate(now.getDate() - diff);
-      from = monday.toISOString().slice(0, 10);
+      from = localDateStr(monday);
       to = today;
       setWeekModeActive(true);
     } else if (kind === 'MONTH') {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { localYearMonth } from '../utils/dateLocal';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { WorkCloseHeader } from '../components/WorkCloseHeader';
@@ -64,7 +65,7 @@ export function GongsuClosePage() {
       ? assignedSiteId
       : querySiteId ?? 'ALL',
   );
-  const [yearMonth, setYearMonth] = useState(() => new Date().toISOString().slice(0, 7));
+  const [yearMonth, setYearMonth] = useState(() => localYearMonth());
 
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [wage, setWage] = useState<WageMonthSummary | null>(null);

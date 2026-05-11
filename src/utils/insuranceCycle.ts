@@ -14,6 +14,8 @@
  *      (다음 달에는 처음부터 다시 누적 시작 — 1개월 단위 룰)
  */
 
+import { localDateStr } from './dateLocal';
+
 import type {
   InsuranceCycle,
   InsuranceFilingTask,
@@ -143,7 +145,7 @@ function nextMonthDeadline(date: string): string {
   const d = new Date(date + 'T00:00:00');
   d.setMonth(d.getMonth() + 1);
   d.setDate(15);
-  return d.toISOString().slice(0, 10);
+  return localDateStr(d);
 }
 
 /** 3) localStorage 보관 — 신고 완료 표시 */
